@@ -34,9 +34,9 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "backgroundColor": "#e0e0e0",
+          "image": "./assets/images/shuhari-engine-logo__01.png",
+          "imageWidth": 470
         }
       ]
     ],
