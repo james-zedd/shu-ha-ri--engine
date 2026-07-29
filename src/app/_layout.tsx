@@ -2,13 +2,13 @@ import {
   NotoSansJP_400Regular,
   NotoSansJP_900Black,
   useFonts,
-} from '@expo-google-fonts/noto-sans-jp';
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+} from "@expo-google-fonts/noto-sans-jp";
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useColorScheme } from "react-native";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import { useTheme } from '@/hooks/use-theme';
+import { AnimatedSplashOverlay } from "@/components/animated-icon";
+import { useTheme } from "@/hooks/use-theme";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,16 +23,19 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <AnimatedSplashOverlay />
       <Stack
         screenOptions={{
           headerTintColor: theme.text,
           headerStyle: { backgroundColor: theme.background },
-        }}>
+          headerBackButtonDisplayMode: "minimal",
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="training" options={{ title: 'Training' }} />
-        <Stack.Screen name="storage" options={{ title: 'Storage Data' }} />
+        <Stack.Screen name="training" options={{ title: "Training" }} />
+        <Stack.Screen name="storage" options={{ title: "Storage Data" }} />
+        <Stack.Screen name="about" options={{ title: "About" }} />
       </Stack>
     </ThemeProvider>
   );

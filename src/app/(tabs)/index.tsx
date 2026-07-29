@@ -30,10 +30,33 @@ export default function HomeScreen() {
             <Pressable style={({ pressed }) => pressed && styles.pressed}>
               <ThemedView
                 type="backgroundElement"
-                style={styles.secondaryButton}
+                style={[
+                  styles.secondaryButton,
+                  { borderWidth: 1, borderColor: "#cccccc" },
+                ]}
               >
                 <ThemedText style={styles.buttonLabel}>
                   See Storage Data
+                </ThemedText>
+              </ThemedView>
+            </Pressable>
+          </Link>
+
+          <Link href="/about" asChild>
+            <Pressable style={({ pressed }) => pressed && styles.pressed}>
+              <ThemedView
+                type="backgroundElement"
+                style={[
+                  styles.tertiaryButton,
+                  {
+                    backgroundColor: "transparent",
+                    borderWidth: 1,
+                    borderColor: "gray",
+                  },
+                ]}
+              >
+                <ThemedText style={styles.buttonLabel}>
+                  About Shu Ha Ri
                 </ThemedText>
               </ThemedView>
             </Pressable>
@@ -72,6 +95,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   secondaryButton: {
+    paddingVertical: Spacing.three,
+    borderRadius: Spacing.three,
+    alignItems: "center",
+  },
+  tertiaryButton: {
     paddingVertical: Spacing.three,
     borderRadius: Spacing.three,
     alignItems: "center",
