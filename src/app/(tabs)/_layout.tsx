@@ -1,5 +1,5 @@
-import AppTabs from '@/components/app-tabs';
+import HomeScreen from "@/app/(tabs)/index";
 
 export default function TabsLayout() {
-  return <AppTabs />;
+  return <HomeScreen />;
 }
