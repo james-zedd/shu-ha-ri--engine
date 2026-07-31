@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "J7JC4QKINqDBDFvK",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "variables-scoping",
+    "difficulty": 1,
+    "prompt": "What is logged?\n\nconsole.log(x);\nvar x = 5;",
+    "choices": [
+      "5",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "gNG3DoImGwxNDTDJ",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "variables-scoping",
+    "difficulty": 1,
+    "prompt": "Which keyword allows reassignment but not redeclaration in the same scope, and is block-scoped?",
+    "choices": [
+      "var",
+      "let",
+      "const",
+      "function"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "Yh1iwZDVBe1LG1dr",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "variables-scoping",
+    "difficulty": 2,
+    "prompt": "What happens here?\n\nconsole.log(y);\nlet y = 10;",
+    "choices": [
+      "10",
+      "undefined",
+      "ReferenceError due to the temporal dead zone",
+      "SyntaxError"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "SP0P9sy564hC6IqV",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "variables-scoping",
+    "difficulty": 2,
+    "prompt": "What is the scope of a variable declared with var inside a for-loop block { } inside a function?",
+    "choices": [
+      "Block scope only",
+      "Function scope (accessible outside the block)",
+      "Module scope",
+      "Global scope always"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "A66jkMIDUI66DIw7",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "variables-scoping",
+    "difficulty": 3,
+    "prompt": "What does the following log?\n\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}",
+    "choices": [
+      "0 1 2",
+      "3 3 3",
+      "0 0 0",
+      "undefined undefined undefined"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "aM8sVes2QHXqAK46",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "closures",
+    "difficulty": 1,
+    "prompt": "A closure is:",
+    "choices": [
+      "A function bundled together with references to its surrounding state",
+      "A loop that never ends",
+      "A synchronous version of a promise",
+      "A way to close a file handle"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "kcH5MTf9TDhX57fS",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "closures",
+    "difficulty": 2,
+    "prompt": "What does this log?\n\nfunction counter() {\n  let count = 0;\n  return () => ++count;\n}\nconst c = counter();\nconsole.log(c(), c(), c());",
+    "choices": [
+      "1 1 1",
+      "1 2 3",
+      "0 1 2",
+      "undefined undefined undefined"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "AdnNuO5i2eUYtpxC",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "closures",
+    "difficulty": 2,
+    "prompt": "The classic \"var in a loop with setTimeout\" closure bug can be fixed by:",
+    "choices": [
+      "Replacing var with let",
+      "Adding async/await",
+      "Using == instead of ===",
+      "Wrapping it in a try/catch"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "E7mTgFkeocrPfsy6",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "closures",
+    "difficulty": 3,
+    "prompt": "What does this log?\n\nfunction makeAdders() {\n  const adders = [];\n  for (let i = 0; i < 3; i++) {\n    adders.push(x => x + i);\n  }\n  return adders;\n}\nconst [add0, add1, add2] = makeAdders();\nconsole.log(add0(10), add1(10), add2(10));",
+    "choices": [
+      "10 10 10",
+      "10 11 12",
+      "12 12 12",
+      "NaN NaN NaN"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "JeZc6bhkL3R6yIw8",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "closures",
+    "difficulty": 3,
+    "prompt": "Which statement about closures and memory is true?",
+    "choices": [
+      "Closures can prevent garbage collection of variables they still reference",
+      "Closures are always garbage collected immediately after the outer function returns",
+      "Closures cannot access variables from an outer function once it has returned",
+      "Closures only work with arrow functions"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "G3K8WmBlu4w4FZvr",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "this-and-context",
+    "difficulty": 1,
+    "prompt": "In a regular (non-arrow) function called as a plain function in non-strict mode, `this` refers to:",
+    "choices": [
+      "undefined",
+      "the global object",
+      "the function itself",
+      "null"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "Vn4vpnh5EJjvYD1F",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "this-and-context",
+    "difficulty": 2,
+    "prompt": "Arrow functions differ from regular functions in that they:",
+    "choices": [
+      "Do not have their own `this`; they inherit it from the enclosing scope",
+      "Always bind `this` to the global object",
+      "Cannot be used as callbacks",
+      "Require the `new` keyword"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "7XZMwBUEA5en40De",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "this-and-context",
+    "difficulty": 2,
+    "prompt": "What does this log?\n\nconst obj = {\n  value: 42,\n  getValue: function () {\n    return (() => this.value)();\n  },\n};\nconsole.log(obj.getValue());",
+    "choices": [
+      "42",
+      "undefined",
+      "ReferenceError",
+      "NaN"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "i29dcREctKDJfs5R",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "this-and-context",
+    "difficulty": 2,
+    "prompt": "Which method explicitly sets `this` for a function call and invokes it immediately?",
+    "choices": [
+      "Function.prototype.call",
+      "Function.prototype.toString",
+      "Object.freeze",
+      "Array.prototype.map"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "kxz0ROcScpzGSFw4",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "this-and-context",
+    "difficulty": 3,
+    "prompt": "Why does `this.seconds++` fail to update the class instance here?\n\nclass Timer {\n  seconds = 0;\n  start() {\n    setInterval(function () {\n      this.seconds++;\n    }, 1000);\n  }\n}",
+    "choices": [
+      "The regular function callback loses the class instance's `this` binding",
+      "setInterval doesn't support class methods",
+      "seconds is not writable",
+      "Class fields cannot be numbers"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "AOCfoiiRTg5MBdOS",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "prototypes-oop",
+    "difficulty": 1,
+    "prompt": "Every JS object has an internal link to another object called its:",
+    "choices": [
+      "prototype",
+      "constructor",
+      "descriptor",
+      "interface"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "3ktnyYj5QooFZFBJ",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "prototypes-oop",
+    "difficulty": 2,
+    "prompt": "What does `Object.create(proto)` do?",
+    "choices": [
+      "Creates a new object with `proto` as its prototype",
+      "Clones proto's own properties into a new object",
+      "Freezes proto",
+      "Converts proto into a class"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "zGnWtD28mtYj4OKl",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "prototypes-oop",
+    "difficulty": 2,
+    "prompt": "In `class Dog extends Animal {}`, which built-in mechanism does `extends` use under the hood?",
+    "choices": [
+      "Prototype chaining",
+      "Object.assign copying",
+      "JSON serialization",
+      "Closures"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "4C5uxsmp1C5I6vee",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "prototypes-oop",
+    "difficulty": 2,
+    "prompt": "What does the `instanceof` operator check?",
+    "choices": [
+      "Whether an object's prototype chain includes the constructor's prototype",
+      "Whether two objects have identical own properties",
+      "Whether a variable's typeof matches a string",
+      "Whether an object is frozen"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "XleJuaqMH6w2Sm4E",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "prototypes-oop",
+    "difficulty": 3,
+    "prompt": "What is logged?\n\nfunction Animal(name) { this.name = name; }\nAnimal.prototype.speak = function () { return `${this.name} makes a noise.`; };\nconst a = new Animal('Rex');\ndelete a.speak;\nconsole.log(a.speak());",
+    "choices": [
+      "'Rex makes a noise.'",
+      "TypeError: a.speak is not a function",
+      "undefined",
+      "'undefined makes a noise.'"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "zAXWgvdFJeUPD4rc",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "async-promises",
+    "difficulty": 1,
+    "prompt": "A Promise can be in one of three states:",
+    "choices": [
+      "pending, fulfilled, rejected",
+      "waiting, done, error",
+      "start, running, stop",
+      "open, closed, aborted"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "1HEHrCeOAdiQJYTj",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "async-promises",
+    "difficulty": 2,
+    "prompt": "What does `await` do inside an `async` function?",
+    "choices": [
+      "Pauses execution of that function until the awaited promise settles",
+      "Blocks the entire JS engine synchronously",
+      "Converts a promise into a callback",
+      "Cancels the promise"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "DxXdv98G6RcAE9ir",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "async-promises",
+    "difficulty": 2,
+    "prompt": "What is logged, and in what order?\n\nconsole.log('A');\nPromise.resolve().then(() => console.log('B'));\nconsole.log('C');",
+    "choices": [
+      "A B C",
+      "A C B",
+      "B A C",
+      "C A B"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "3vQ7gxi99NS6KDgo",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "async-promises",
+    "difficulty": 3,
+    "prompt": "What is the order of logged output?\n\nconsole.log('start');\nsetTimeout(() => console.log('timeout'), 0);\nPromise.resolve().then(() => console.log('promise'));\nconsole.log('end');",
+    "choices": [
+      "start end promise timeout",
+      "start end timeout promise",
+      "start promise end timeout",
+      "start timeout end promise"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "F0I5GSpp8xZXYF78",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "async-promises",
+    "difficulty": 3,
+    "prompt": "What does `Promise.allSettled` return, compared to `Promise.all`?",
+    "choices": [
+      "An array of result objects for every promise, regardless of rejection, instead of rejecting on the first failure",
+      "The same thing as Promise.race",
+      "A single resolved value only",
+      "Nothing, it behaves identically to Promise.all"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "DlwOT3gyaNYXVpjL",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "event-loop",
+    "difficulty": 2,
+    "prompt": "Which queue is processed first after the current synchronous code finishes: the microtask queue or the macrotask (timer) queue?",
+    "choices": [
+      "Microtask queue",
+      "Macrotask queue",
+      "They run simultaneously",
+      "Whichever was registered first, regardless of type"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "1jl7DmZ0lc4J9iID",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "event-loop",
+    "difficulty": 1,
+    "prompt": "`setTimeout(fn, 0)` guarantees:",
+    "choices": [
+      "fn runs on the next available macrotask tick, not immediately",
+      "fn runs synchronously right away",
+      "fn never runs",
+      "fn runs before any Promise callbacks"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "rKnpiyqY78bL139e",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "event-loop",
+    "difficulty": 2,
+    "prompt": "Which of these schedules a microtask?",
+    "choices": [
+      "`Promise.prototype.then`",
+      "`setTimeout`",
+      "`setInterval`",
+      "`requestAnimationFrame`"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "tBgHBWhgQdBdigJy",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "event-loop",
+    "difficulty": 3,
+    "prompt": "Why can a long, purely synchronous loop block UI updates and timer callbacks in a single-threaded JS runtime?",
+    "choices": [
+      "The event loop cannot process the callback/microtask queues until the current call stack is empty",
+      "Timers run on the same thread and always execute exactly on schedule regardless of blocking code",
+      "Synchronous code always runs after all callbacks",
+      "JS automatically pauses loops longer than 1 second"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "VnRUGtXbCSPwFlcE",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "event-loop",
+    "difficulty": 2,
+    "prompt": "What best describes the \"call stack\" in the JS runtime model?",
+    "choices": [
+      "A LIFO structure tracking function calls currently executing",
+      "A queue of pending network requests",
+      "The list of all variables in global scope",
+      "A cache of previously resolved promises"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "DFS6MCJpweVALD9R",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "arrays-methods",
+    "difficulty": 1,
+    "prompt": "Which array method creates a new array with the results of calling a function on every element?",
+    "choices": [
+      "map",
+      "forEach",
+      "filter",
+      "reduce"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "keGn0wuOIkZtgmOC",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "arrays-methods",
+    "difficulty": 1,
+    "prompt": "Which method returns a new array containing only the elements that satisfy a condition?",
+    "choices": [
+      "filter",
+      "map",
+      "some",
+      "find"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "7W0rDclT9URiERjh",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "arrays-methods",
+    "difficulty": 2,
+    "prompt": "What does `[1, 2, 3].reduce((acc, n) => acc + n, 0)` evaluate to?",
+    "choices": [
+      "6",
+      "0",
+      "[1, 2, 3]",
+      "NaN"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "rJzSgUaSJVEzqHUm",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "arrays-methods",
+    "difficulty": 2,
+    "prompt": "What's the key difference between `forEach` and `map`?",
+    "choices": [
+      "map returns a new array; forEach returns undefined",
+      "forEach is always faster",
+      "map mutates the original array; forEach does not",
+      "There is no difference"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "EnKK5syK3kx5RTwl",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "arrays-methods",
+    "difficulty": 3,
+    "prompt": "What does this log?\n\nconsole.log([1, [2, 3], [4, [5, 6]]].flat(Infinity));",
+    "choices": [
+      "[1, 2, 3, 4, 5, 6]",
+      "[1, 2, 3, 4, [5, 6]]",
+      "[1, [2, 3], [4, [5, 6]]]",
+      "Error: flat requires a numeric argument"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "3TsCPOFCjPkPRkt2",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "objects-destructuring",
+    "difficulty": 1,
+    "prompt": "What does the following produce?\n\nconst { a, b } = { a: 1, b: 2 };",
+    "choices": [
+      "a is 1 and b is 2",
+      "a and b are both undefined",
+      "SyntaxError",
+      "a is { a: 1, b: 2 }"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "XDpldpXdxPvt7IFJ",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "objects-destructuring",
+    "difficulty": 2,
+    "prompt": "What does `const { a, ...rest } = { a: 1, b: 2, c: 3 };` assign to `rest`?",
+    "choices": [
+      "{ b: 2, c: 3 }",
+      "{ a: 1 }",
+      "[2, 3]",
+      "undefined"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "SmA1rF80x75ikisz",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "objects-destructuring",
+    "difficulty": 2,
+    "prompt": "How do you destructure `obj.name`, binding it to a local variable `n`?",
+    "choices": [
+      "const { name: n } = obj;",
+      "const { n: name } = obj;",
+      "const n = obj{name};",
+      "const { name as n } = obj;"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "wlbaVlwDQE1tcd7c",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "objects-destructuring",
+    "difficulty": 2,
+    "prompt": "What does `Object.freeze(obj)` do?",
+    "choices": [
+      "Prevents adding, removing, or reassigning obj's own properties (shallowly)",
+      "Deep-clones obj",
+      "Converts obj to JSON",
+      "Makes obj iterable"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "izZqAlqyNjAhTS9X",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "objects-destructuring",
+    "difficulty": 3,
+    "prompt": "What is logged?\n\nconst obj = { a: 1, nested: { b: 2 } };\nconst frozen = Object.freeze(obj);\nfrozen.nested.b = 99;\nconsole.log(frozen.nested.b);",
+    "choices": [
+      "99",
+      "2",
+      "undefined",
+      "TypeError"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "ICCXYt3oWyB0GSJm",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "es6-features",
+    "difficulty": 1,
+    "prompt": "What does the spread operator do in `const arr2 = [...arr1, 4, 5];`?",
+    "choices": [
+      "Copies arr1's elements into a new array, followed by 4 and 5",
+      "Merges arr1 and arr2 by reference",
+      "Throws if arr1 is empty",
+      "Converts arr1 to a string"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "pGun9IQoMU9P1cEL",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "es6-features",
+    "difficulty": 1,
+    "prompt": "Template literals are delimited by:",
+    "choices": [
+      "Backticks (`)",
+      "Single quotes (')",
+      "Double quotes (\")",
+      "Curly braces ({ })"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "yWpqVGbb8UDM8Yda",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "es6-features",
+    "difficulty": 2,
+    "prompt": "What value does `name` take here?\n\nfunction greet(name = 'World') { return `Hello ${name}`; }\ngreet(undefined);",
+    "choices": [
+      "'Hello World' (the default is used)",
+      "'Hello undefined'",
+      "TypeError",
+      "'Hello '"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "1yAmCHsWAVUz89oM",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "es6-features",
+    "difficulty": 2,
+    "prompt": "What does the rest parameter syntax do here?\n\nfunction sum(...nums) {\n  return nums.reduce((a, b) => a + b, 0);\n}",
+    "choices": [
+      "Collects all remaining arguments into an array called nums",
+      "Requires exactly one argument",
+      "Spreads nums into individual parameters",
+      "Is only valid for object destructuring"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "mXKlsWEDxB2DYLRD",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "es6-features",
+    "difficulty": 3,
+    "prompt": "What is a key difference between `Object.entries(obj)` and using a `for...in` loop directly on obj?",
+    "choices": [
+      "for...in also iterates inherited enumerable properties from the prototype chain, while Object.entries only includes own enumerable properties",
+      "for...in is faster in all engines",
+      "Object.entries cannot be used with arrays",
+      "There is no functional difference"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "GZvMP2AY09NpuIsr",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "equality-coercion",
+    "difficulty": 1,
+    "prompt": "What does `'5' == 5` evaluate to?",
+    "choices": [
+      "true",
+      "false",
+      "TypeError",
+      "undefined"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "NkFkpdbRFqi8pw4C",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "equality-coercion",
+    "difficulty": 1,
+    "prompt": "What does `'5' === 5` evaluate to?",
+    "choices": [
+      "false",
+      "true",
+      "TypeError",
+      "NaN"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "YrCmDYTV57Vr7zDf",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "equality-coercion",
+    "difficulty": 2,
+    "prompt": "What does `NaN === NaN` evaluate to, and what should you use instead to check for NaN?",
+    "choices": [
+      "false; use Number.isNaN(x)",
+      "true; use isNaN(x) only",
+      "false; there is no way to check for NaN",
+      "true; NaN always equals itself"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "tr1clCMIjsWP3nwP",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "equality-coercion",
+    "difficulty": 2,
+    "prompt": "What does `[] == false` evaluate to?",
+    "choices": [
+      "true",
+      "false",
+      "TypeError",
+      "undefined"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "kSgLK2s7sNXGMo8R",
+    "type": "multiple-choice",
+    "language": "javascript",
+    "category": "equality-coercion",
+    "difficulty": 3,
+    "prompt": "What does `Object.is(NaN, NaN)` return, and how does it differ from `===` regarding `-0` and `+0`?",
+    "choices": [
+      "true for NaN, and Object.is distinguishes -0 from +0 (unlike ===)",
+      "false for NaN, identical to === in every case",
+      "true for NaN, but treats -0 and +0 as unequal only when using ===",
+      "Object.is does not exist in JavaScript"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "KEoSrwsSQmaDmofL",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "basic-types",
+    "difficulty": 1,
+    "prompt": "Which TypeScript type represents any JavaScript value with no type checking at all (opts out of type safety)?",
+    "choices": [
+      "any",
+      "unknown",
+      "never",
+      "void"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "arIsCivao5MQvcgv",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "basic-types",
+    "difficulty": 1,
+    "prompt": "What must you do before using a value's properties when its type is `unknown`, unlike `any`?",
+    "choices": [
+      "Perform a type check or type assertion to narrow it first",
+      "Nothing, it behaves exactly like any",
+      "Always cast it to never",
+      "It can only hold string values"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "Ad6sQJGzBzc9fNDU",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "basic-types",
+    "difficulty": 2,
+    "prompt": "What type would you give a function that never returns normally (e.g. it always throws)?",
+    "choices": [
+      "never",
+      "void",
+      "undefined",
+      "unknown"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "6iBHUn3dsN80s1Oy",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "basic-types",
+    "difficulty": 2,
+    "prompt": "What is the difference between `void` and `undefined` as a function return type?",
+    "choices": [
+      "void means the return value should be ignored; undefined means the function explicitly returns the value undefined",
+      "They are functionally different keywords for numbers",
+      "void can only be used on classes",
+      "There is no difference at all"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "AkECnVMMAApKfDI1",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "basic-types",
+    "difficulty": 3,
+    "prompt": "Given `let x: unknown = 'hello';`, which of the following compiles without a type assertion or narrowing first?",
+    "choices": [
+      "console.log(typeof x)",
+      "console.log(x.toUpperCase())",
+      "x.length",
+      "x + 1"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "XCZSOXQEc45X24k6",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "interfaces-vs-types",
+    "difficulty": 1,
+    "prompt": "Which keyword defines a named object shape that supports declaration merging (multiple declarations combining)?",
+    "choices": [
+      "interface",
+      "type",
+      "class",
+      "enum"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "J6WLepT45OCjb6HA",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "interfaces-vs-types",
+    "difficulty": 2,
+    "prompt": "Can a `type` alias represent a union of primitive types (e.g. `string | number`)?",
+    "choices": [
+      "Yes, type aliases support unions directly; interfaces cannot",
+      "No, only interfaces support unions",
+      "No, unions require classes",
+      "Yes, but interfaces support it identically"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "Gkjy2NaHx2pudIzg",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "interfaces-vs-types",
+    "difficulty": 2,
+    "prompt": "How do you extend an interface to add more properties?",
+    "choices": [
+      "interface B extends A { }",
+      "interface B implements A { }",
+      "type B = A & extends { }",
+      "interface B : A { }"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "uSrW4gOFtmAzKRvI",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "interfaces-vs-types",
+    "difficulty": 2,
+    "prompt": "What does declaration merging allow you to do with two `interface Foo` declarations in the same scope?",
+    "choices": [
+      "Their members are automatically combined into one interface",
+      "The second declaration throws a duplicate identifier error",
+      "Only the second declaration is used, the first is ignored",
+      "TypeScript requires renaming one of them"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "MtqV7UZ8mSXM3WZA",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "interfaces-vs-types",
+    "difficulty": 3,
+    "prompt": "What's the idiomatic way to combine two object types with `type` (since `extends` isn't available on type aliases)?",
+    "choices": [
+      "Intersection: type C = A & B;",
+      "Union: type C = A | B;",
+      "type C = A extends B;",
+      "type C = merge(A, B);"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "JCkPt5gI20NDzitR",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "generics",
+    "difficulty": 1,
+    "prompt": "What is the purpose of a generic type parameter like `<T>` in `function identity<T>(arg: T): T`?",
+    "choices": [
+      "It lets the function work with any type while preserving type information through input and output",
+      "It forces the function to only accept numbers",
+      "It disables type checking for the function",
+      "It marks the function as asynchronous"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "xlG6mYCJGKNpLPdg",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "generics",
+    "difficulty": 2,
+    "prompt": "What does `T extends U` mean in a generic constraint like `function f<T extends { id: number }>(arg: T)`?",
+    "choices": [
+      "T must be a type that is assignable to (has at least the shape of) U",
+      "T must literally equal U",
+      "T inherits U's runtime methods",
+      "T can never be U's subtype"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "U0rxlFvaHyHKSnot",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "generics",
+    "difficulty": 2,
+    "prompt": "Given `function firstElement<T>(arr: T[]): T | undefined { return arr[0]; }`, what does calling `firstElement([1, 2, 3])` infer `T` as?",
+    "choices": [
+      "number",
+      "any",
+      "unknown",
+      "T is left unresolved and must be specified manually"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "qHMlNGpHB9CVRQ5C",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "generics",
+    "difficulty": 3,
+    "prompt": "What does this generic function signature describe?\n\nfunction wrap<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}",
+    "choices": [
+      "It returns the type of the property at key K on object type T, ensuring key is a valid key of T",
+      "It always returns type T regardless of key",
+      "It throws a compile error because keyof cannot be used in generics",
+      "It converts obj into an array of its keys"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "FOZGlgEDPOy5SLOW",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "generics",
+    "difficulty": 3,
+    "prompt": "What will TypeScript infer as the return type when this is called as `pair<string, number>('a', 1)`?\n\nfunction pair<A, B>(a: A, b: B): [A, B] {\n  return [a, b];\n}",
+    "choices": [
+      "[string, number]",
+      "[A, B]",
+      "any[]",
+      "TypeError at runtime"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "rVVPcSOd2sUnYOHr",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "union-intersection",
+    "difficulty": 1,
+    "prompt": "What does the union type `string | number` mean for a variable's allowed values?",
+    "choices": [
+      "The variable can hold either a string or a number",
+      "The variable must hold both a string and a number simultaneously",
+      "The variable can only hold string values",
+      "It's invalid syntax"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "w6RmMMIdPxsLmWca",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "union-intersection",
+    "difficulty": 2,
+    "prompt": "What does the intersection type `A & B` require of a value?",
+    "choices": [
+      "It must satisfy the members of both A and B simultaneously",
+      "It must satisfy either A or B",
+      "It converts A into B at runtime",
+      "It is only valid for primitive types"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "4D6PXcDbbtUD8a5Y",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "union-intersection",
+    "difficulty": 2,
+    "prompt": "Given `type Status = 'idle' | 'loading' | 'success' | 'error';`, what is this pattern called?",
+    "choices": [
+      "A string literal union type",
+      "An enum declaration",
+      "A tuple type",
+      "A mapped type"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "Zec5216yhzp2MHqN",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "union-intersection",
+    "difficulty": 2,
+    "prompt": "What happens with the following?\n\ntype A = { x: number };\ntype B = { y: string };\nconst value: A & B = { x: 1, y: 'hi' };",
+    "choices": [
+      "No error — value must have both x (number) and y (string)",
+      "Error — A and B cannot be intersected",
+      "Error — intersections require identical shapes",
+      "No error, but value is typed as never"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "KpAGQBBanPaOpL7W",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "union-intersection",
+    "difficulty": 3,
+    "prompt": "Why does `type Impossible = { a: string } & { a: number };` result in the property `a` having type `never`?",
+    "choices": [
+      "Because the intersection requires a to satisfy both string and number simultaneously, which no value can, so TypeScript resolves it to never",
+      "Because TypeScript disallows intersecting object types entirely",
+      "Because a is renamed automatically",
+      "Because string and number are considered identical types"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "TfvJ78ucN1Za6cH9",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "type-narrowing",
+    "difficulty": 1,
+    "prompt": "What does the `typeof` check let TypeScript do inside the if-block here?\n\nfunction format(value: string | number) {\n  if (typeof value === 'string') {\n    return value.toUpperCase();\n  }\n  return value.toFixed(2);\n}",
+    "choices": [
+      "Narrow value's type to string inside the if-block, enabling string methods",
+      "Nothing, typeof has no effect on TypeScript's type checking",
+      "Convert value into a string at runtime",
+      "Throw a compile error because value is a union type"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "CeorO7yLf5HbHwzO",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "type-narrowing",
+    "difficulty": 2,
+    "prompt": "What TypeScript feature narrows `pet` to the `Fish` type here?\n\ntype Fish = { swim: () => void };\ntype Bird = { fly: () => void };\nfunction move(pet: Fish | Bird) {\n  if ('swim' in pet) {\n    pet.swim();\n  }\n}",
+    "choices": [
+      "The `in` operator narrowing",
+      "Type assertion via `as`",
+      "Generic constraints",
+      "Enum discrimination"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "ufaXmEtv8onmqe3h",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "type-narrowing",
+    "difficulty": 2,
+    "prompt": "What pattern is used to narrow the union safely here?\n\ntype Shape =\n  | { kind: 'circle'; radius: number }\n  | { kind: 'square'; side: number };\n\nfunction area(s: Shape) {\n  if (s.kind === 'circle') return Math.PI * s.radius ** 2;\n  return s.side ** 2;\n}",
+    "choices": [
+      "Discriminated union narrowing via a common literal tag property",
+      "Structural duck typing with no compile-time checks",
+      "Type erasure",
+      "Generic inference"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "F80cwmU6zTk8n7rt",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "type-narrowing",
+    "difficulty": 3,
+    "prompt": "What does this user-defined type guard enable?\n\nfunction isString(value: unknown): value is string {\n  return typeof value === 'string';\n}",
+    "choices": [
+      "Calling isString(x) narrows x's type to string in the branch where it returns true",
+      "It converts any value into a string",
+      "It only works on arrays",
+      "It disables type checking for value"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "cFMS8Cojii2OyPhd",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "type-narrowing",
+    "difficulty": 3,
+    "prompt": "Given `function assertIsNumber(val: unknown): asserts val is number { if (typeof val !== 'number') throw new Error(); }`, what happens to val's type after a call to this function that doesn't throw?",
+    "choices": [
+      "TypeScript narrows val's type to number for the rest of that scope",
+      "Nothing, assertion functions don't affect types, only runtime behavior",
+      "It converts val into a string",
+      "It only works inside generic functions"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "UI4puHc6cmA3RM2n",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "utility-types",
+    "difficulty": 1,
+    "prompt": "Which built-in utility type makes all properties of a type optional?",
+    "choices": [
+      "Partial<T>",
+      "Required<T>",
+      "Readonly<T>",
+      "Record<K, T>"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "CoVBviCKHNlhT151",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "utility-types",
+    "difficulty": 1,
+    "prompt": "Which utility type makes all properties of a type required, even if originally optional?",
+    "choices": [
+      "Required<T>",
+      "Partial<T>",
+      "Pick<T, K>",
+      "Omit<T, K>"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "I4fgpjOFWncgx75r",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "utility-types",
+    "difficulty": 2,
+    "prompt": "What does `Pick<T, 'a' | 'b'>` produce?",
+    "choices": [
+      "A type with only the properties a and b from T",
+      "A type with all properties of T except a and b",
+      "An array of T's keys",
+      "A type identical to T"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "fZKwr3C1BMxorT2n",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "utility-types",
+    "difficulty": 2,
+    "prompt": "What does `Omit<T, 'a'>` produce?",
+    "choices": [
+      "A type with all of T's properties except a",
+      "A type with only property a",
+      "A type where a is optional",
+      "A type where a becomes readonly"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "UDrByc2FB6ItBoBU",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "utility-types",
+    "difficulty": 3,
+    "prompt": "What does `Record<'a' | 'b', number>` produce?",
+    "choices": [
+      "{ a: number; b: number }",
+      "['a', 'b'][]",
+      "A number that is either a or b",
+      "A type error, Record cannot take a union"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "vEttQk58whRBW97r",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "enums",
+    "difficulty": 1,
+    "prompt": "What does a numeric TypeScript enum default its member values to, if not explicitly assigned?",
+    "choices": [
+      "Auto-incrementing integers starting at 0",
+      "Random unique numbers",
+      "Always 1",
+      "undefined for every member"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "BQXGeZYZ1o7WCjwD",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "enums",
+    "difficulty": 2,
+    "prompt": "What is a key difference between a `const enum` and a regular `enum`?",
+    "choices": [
+      "const enum members are fully inlined at compile time and produce no runtime object",
+      "const enum values can be reassigned at runtime",
+      "const enum only supports string values",
+      "There is no difference"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "KEaXGqlPi1F6QcUJ",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "enums",
+    "difficulty": 2,
+    "prompt": "What do string enums provide that numeric enums don't?",
+    "choices": [
+      "More meaningful, self-documenting runtime values instead of arbitrary numbers, with no reverse mapping generated",
+      "Automatic incrementing of unrelated values",
+      "Faster runtime performance in all cases",
+      "The ability to mix types within the same member"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "9PCTC4P8pSJDJtF0",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "enums",
+    "difficulty": 3,
+    "prompt": "Given `enum Direction { Up, Down }`, what does the compiled JavaScript's reverse mapping allow?",
+    "choices": [
+      "Looking up the member name from its numeric value at runtime (e.g. Direction[0] === 'Up')",
+      "Converting the enum into a string enum automatically",
+      "Preventing any runtime access to enum values",
+      "Making the enum immutable by default"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "QP2HuqGAucnuVHLi",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "enums",
+    "difficulty": 3,
+    "prompt": "Why do many TypeScript style guides recommend a union of string literals (e.g. `type Direction = 'up' | 'down'`) over enums in some cases?",
+    "choices": [
+      "Literal unions have no runtime footprint and avoid enum-specific quirks like reverse mappings, while still providing type safety",
+      "Because enums are deprecated and no longer supported",
+      "Because literal unions support more values than enums",
+      "Because enums cannot be used in switch statements"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "5eQvj8AIH2LIAZv4",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "classes-access-modifiers",
+    "difficulty": 1,
+    "prompt": "Which access modifier restricts a class member to being visible only within the declaring class itself?",
+    "choices": [
+      "private",
+      "public",
+      "protected",
+      "readonly"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "R9sBlzzKUxy8mETB",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "classes-access-modifiers",
+    "difficulty": 1,
+    "prompt": "Which access modifier allows a member to be accessed by the declaring class and its subclasses, but not from outside?",
+    "choices": [
+      "protected",
+      "private",
+      "public",
+      "static"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "clrDPWHxuD1Ru8vO",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "classes-access-modifiers",
+    "difficulty": 2,
+    "prompt": "What does the `readonly` modifier on a class property enforce?",
+    "choices": [
+      "The property can only be assigned once (typically in the constructor) and not reassigned afterward",
+      "The property cannot be read outside the class",
+      "The property must always be a primitive",
+      "The property is automatically static"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "jy0NLfa2Aq3bMyuV",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "classes-access-modifiers",
+    "difficulty": 2,
+    "prompt": "What is TypeScript's shorthand for declaring and assigning a class property directly in the constructor's parameter list, as shown here?\n\nclass Point {\n  constructor(private x: number, private y: number) {}\n}",
+    "choices": [
+      "Parameter property shorthand",
+      "Generic constraint syntax",
+      "Interface merging",
+      "Access modifier inference"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "A1Rigd6E7kWHDXED",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "classes-access-modifiers",
+    "difficulty": 3,
+    "prompt": "What is the difference between an `abstract class` and a regular class, regarding instantiation?",
+    "choices": [
+      "An abstract class cannot be instantiated directly and may declare methods without implementations that subclasses must implement",
+      "Abstract classes can only contain static methods",
+      "Abstract classes are identical to interfaces in every way, including at runtime",
+      "Abstract classes cannot be extended"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "s3trBWII7isvdw6T",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "functions-typing",
+    "difficulty": 1,
+    "prompt": "How do you type a function parameter as optional in TypeScript?",
+    "choices": [
+      "function f(name?: string) {}",
+      "function f(name: string?) {}",
+      "function f(name: optional string) {}",
+      "function f(name: string | null!) {}"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "bAcRIz2sjzZ9WSxD",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "functions-typing",
+    "difficulty": 2,
+    "prompt": "What does a function overload signature let you express that a single generic signature can't easily?",
+    "choices": [
+      "Different parameter/return type combinations for the same function name, each checked independently",
+      "Multiple runtime implementations executed simultaneously",
+      "Automatic currying of the function",
+      "That the function is asynchronous"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "xPnwOyvv9YvwYEuH",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "functions-typing",
+    "difficulty": 2,
+    "prompt": "What does typing a callback parameter as `(value: number) => void` communicate?",
+    "choices": [
+      "The callback takes a number argument and its return value is ignored",
+      "The callback must return a number",
+      "The callback is optional",
+      "The callback runs asynchronously"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "x7UesOK3Zau1aUyA",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "functions-typing",
+    "difficulty": 3,
+    "prompt": "What is the purpose of these function overload signatures?\n\nfunction reverse(value: string): string;\nfunction reverse<T>(value: T[]): T[];\nfunction reverse(value: any): any {\n  // implementation\n}",
+    "choices": [
+      "To give callers precise, type-specific return types (string in, string out; T[] in, T[] out) while sharing one implementation",
+      "To allow the function to accept unlimited argument counts",
+      "To make the function generic only for arrays",
+      "To disable type checking on the implementation signature"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "ndMsxAtP4RC6a5Rd",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "functions-typing",
+    "difficulty": 3,
+    "prompt": "What does the `this` parameter do in the following interface method signature?\n\ninterface Button {\n  onClick(this: HTMLButtonElement, event: MouseEvent): void;\n}",
+    "choices": [
+      "It documents and type-checks what `this` should be when the method is called, without being a real runtime parameter",
+      "It declares a real parameter that callers must pass explicitly",
+      "It is ignored entirely by the compiler",
+      "It makes the method static"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "zFe4BcyiR7ZayIn8",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "advanced-types",
+    "difficulty": 2,
+    "prompt": "What does the `keyof` operator produce when applied to a type?",
+    "choices": [
+      "A union of the type's property names as string (or symbol) literal types",
+      "An array of the type's values",
+      "The number of properties on the type",
+      "A new empty type"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "zCalFj4rMzcoNeSs",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "advanced-types",
+    "difficulty": 2,
+    "prompt": "What does `typeof` do when used in a type position (not a value position), e.g. `type T = typeof someVariable`?",
+    "choices": [
+      "Extracts the static type of someVariable for reuse as a type",
+      "Returns the runtime string 'object' or similar",
+      "Converts someVariable into a string",
+      "Is invalid syntax in TypeScript"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "5MJZpEa8ovVCwJw4",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "advanced-types",
+    "difficulty": 3,
+    "prompt": "What does this mapped type produce for a given object type T?\n\ntype ReadonlyVersion<T> = {\n  readonly [K in keyof T]: T[K];\n};",
+    "choices": [
+      "A version of T with every property marked readonly, otherwise identical",
+      "A version of T with every property removed",
+      "A version of T where all values become strings",
+      "An error, mapped types cannot use readonly"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "RA6Cqu8AkCpZj4e4",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "advanced-types",
+    "difficulty": 3,
+    "prompt": "What does this conditional type resolve to?\n\ntype IsString<T> = T extends string ? true : false;\ntype A = IsString<'hello'>;\ntype B = IsString<42>;",
+    "choices": [
+      "A is true, B is false",
+      "A is false, B is true",
+      "Both A and B are true",
+      "Both A and B are never"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "YGzbawnjzyK0Y43g",
+    "type": "multiple-choice",
+    "language": "typescript",
+    "category": "advanced-types",
+    "difficulty": 3,
+    "prompt": "What does `infer` do inside a conditional type, as shown here?\n\ntype ReturnTypeOf<T> = T extends (...args: any[]) => infer R ? R : never;",
+    "choices": [
+      "It captures and extracts a type (here, the function's return type) for use within the conditional type's true branch",
+      "It forces T to be inferred as any",
+      "It only works on array types",
+      "It declares a new generic constraint that T must extend"
+    ],
+    "correctIndex": 0
+  }
+]
