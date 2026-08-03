@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useState } from "react";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MultipleChoiceModule } from '@/components/question-modules/multiple-choice';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { MaxContentWidth, Spacing } from '@/constants/theme';
-import { filterQuestions, Question } from '@/data/questions';
+import { CodeTerminal, splitPrompt } from "@/components/code-terminal";
+import { MultipleChoiceModule } from "@/components/question-modules/multiple-choice";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { MaxContentWidth, Spacing } from "@/constants/theme";
+import { filterQuestions, Question } from "@/data/questions";
 
 type SessionParams = {
   language?: string;
@@ -38,10 +39,14 @@ function QuestionModule({
   onAnswer: (choiceIndex: number) => void;
 }) {
   switch (question.type) {
-    case 'multiple-choice':
+    case "multiple-choice":
       return <MultipleChoiceModule question={question} onAnswer={onAnswer} />;
     default:
-      return <ThemedText themeColor="textSecondary">Unsupported question type.</ThemedText>;
+      return (
+        <ThemedText themeColor="textSecondary">
+          Unsupported question type.
+        </ThemedText>
+      );
   }
 }
 
@@ -52,8 +57,12 @@ export default function SessionScreen() {
   const [sessionQuestions] = useState<Question[]>(() => {
     const matches = filterQuestions({
       language: params.language,
-      difficulties: params.difficulties ? params.difficulties.split(',').map(Number) : [],
-      categories: params.categories ? params.categories.split(',').filter(Boolean) : [],
+      difficulties: params.difficulties
+        ? params.difficulties.split(",").map(Number)
+        : [],
+      categories: params.categories
+        ? params.categories.split(",").filter(Boolean)
+        : [],
     });
     const count = params.count ? Number(params.count) : matches.length;
     return shuffle(matches).slice(0, count);
@@ -72,7 +81,10 @@ export default function SessionScreen() {
     if (!current || revealed) return;
     setAnswers((prev) => ({
       ...prev,
-      [current.id]: { choiceIndex, correct: choiceIndex === current.correctIndex },
+      [current.id]: {
+        choiceIndex,
+        correct: choiceIndex === current.correctIndex,
+      },
     }));
     setRevealed(true);
   }
@@ -90,9 +102,15 @@ export default function SessionScreen() {
           <ThemedText themeColor="textSecondary">
             No questions matched the filters you selected.
           </ThemedText>
-          <Pressable onPress={() => router.back()} style={({ pressed }) => pressed && styles.pressed}>
+          <Pressable
+            onPress={() => router.back()}
+            style={({ pressed }) => pressed && styles.pressed}
+          >
             <ThemedView type="text" style={styles.actionButton}>
-              <ThemedText themeColor="background" style={styles.actionButtonLabel}>
+              <ThemedText
+                themeColor="background"
+                style={styles.actionButtonLabel}
+              >
                 Back to Training
               </ThemedText>
             </ThemedView>
@@ -110,9 +128,15 @@ export default function SessionScreen() {
           <ThemedText themeColor="textSecondary">
             You scored {score} out of {total}
           </ThemedText>
-          <Pressable onPress={() => router.back()} style={({ pressed }) => pressed && styles.pressed}>
+          <Pressable
+            onPress={() => router.back()}
+            style={({ pressed }) => pressed && styles.pressed}
+          >
             <ThemedView type="text" style={styles.actionButton}>
-              <ThemedText themeColor="background" style={styles.actionButtonLabel}>
+              <ThemedText
+                themeColor="background"
+                style={styles.actionButtonLabel}
+              >
                 Back to Training
               </ThemedText>
             </ThemedView>
@@ -124,56 +148,80 @@ export default function SessionScreen() {
 
   const answer = answers[current.id];
   const isLastQuestion = index === total - 1;
+  const { prose, code } = splitPrompt(current.prompt);
 
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea} edges={['bottom']}>
-        <ThemedText themeColor="textSecondary" type="small">
-          Question {index + 1} of {total}
-        </ThemedText>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+          <ThemedText themeColor="textSecondary" type="small">
+            Question {index + 1} of {total}
+          </ThemedText>
 
-        <View style={styles.questionArea}>
-          {revealed && answer ? (
-            <View style={styles.feedback}>
-              <ThemedText type="subtitle">{current.prompt}</ThemedText>
-              <ThemedView
-                type={answer.correct ? 'backgroundSelected' : 'backgroundElement'}
-                style={styles.feedbackBanner}
-              >
-                <ThemedText type="smallBold">
-                  {answer.correct
-                    ? 'Correct!'
-                    : `Incorrect — correct answer: ${current.choices[current.correctIndex]}`}
+          <View style={styles.questionArea}>
+            {revealed && answer ? (
+              <View style={styles.feedback}>
+                <ThemedText style={styles.prompt}>{prose}</ThemedText>
+                {code && <CodeTerminal code={code} />}
+                <ThemedView
+                  type={
+                    answer.correct ? "backgroundSelected" : "backgroundElement"
+                  }
+                  style={styles.feedbackBanner}
+                >
+                  <ThemedText type="smallBold">
+                    {answer.correct ? "Correct!" : "Incorrect — correct answer:"}
+                  </ThemedText>
+                  {!answer.correct && (
+                    <CodeTerminal code={current.choices[current.correctIndex]} />
+                  )}
+                </ThemedView>
+              </View>
+            ) : (
+              <QuestionModule question={current} onAnswer={handleAnswer} />
+            )}
+          </View>
+
+          {revealed && (
+            <Pressable
+              onPress={handleNext}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
+              <ThemedView type="text" style={styles.actionButton}>
+                <ThemedText
+                  themeColor="background"
+                  style={styles.actionButtonLabel}
+                >
+                  {isLastQuestion ? "Finish" : "Next Question"}
                 </ThemedText>
               </ThemedView>
-            </View>
-          ) : (
-            <QuestionModule question={current} onAnswer={handleAnswer} />
+            </Pressable>
           )}
-        </View>
-
-        {revealed && (
-          <Pressable onPress={handleNext} style={({ pressed }) => pressed && styles.pressed}>
-            <ThemedView type="text" style={styles.actionButton}>
-              <ThemedText themeColor="background" style={styles.actionButtonLabel}>
-                {isLastQuestion ? 'Finish' : 'Next Question'}
-              </ThemedText>
-            </ThemedView>
-          </Pressable>
-        )}
-      </SafeAreaView>
+        </SafeAreaView>
+      </ScrollView>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    width: "100%",
+  },
+  scrollContent: {
+    flexGrow: 1,
+    alignItems: "flex-start",
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "flex-start",
   },
   safeArea: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     maxWidth: MaxContentWidth,
     paddingHorizontal: Spacing.three,
     paddingTop: Spacing.three,
@@ -181,16 +229,20 @@ const styles = StyleSheet.create({
   },
   centeredSafeArea: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     maxWidth: MaxContentWidth,
     paddingHorizontal: Spacing.three,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.three,
   },
   questionArea: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "flex-start",
+  },
+  prompt: {
+    fontSize: 18,
+    lineHeight: 22,
   },
   feedback: {
     gap: Spacing.four,
@@ -199,15 +251,17 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,
+    gap: Spacing.two,
   },
   actionButton: {
     paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.six,
     borderRadius: Spacing.three,
-    alignItems: 'center',
+    alignItems: "center",
   },
   actionButtonLabel: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   pressed: {
     opacity: 0.7,
