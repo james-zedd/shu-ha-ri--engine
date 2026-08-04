@@ -1,9 +1,9 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { CodeTerminal, splitPrompt } from "@/components/code-terminal";
+import { FormattedText } from "@/components/code-terminal";
 import { MultipleChoiceModule } from "@/components/question-modules/multiple-choice";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -31,16 +31,33 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
+function shuffleChoices(question: Question): Question {
+  const order = shuffle(question.choices.map((_, i) => i));
+  return {
+    ...question,
+    choices: order.map((i) => question.choices[i]),
+    correctIndex: order.indexOf(question.correctIndex),
+  };
+}
+
 function QuestionModule({
   question,
-  onAnswer,
+  selectedIndex,
+  onSelect,
 }: {
   question: Question;
-  onAnswer: (choiceIndex: number) => void;
+  selectedIndex: number | null;
+  onSelect: (choiceIndex: number) => void;
 }) {
   switch (question.type) {
     case "multiple-choice":
-      return <MultipleChoiceModule question={question} onAnswer={onAnswer} />;
+      return (
+        <MultipleChoiceModule
+          question={question}
+          selectedIndex={selectedIndex}
+          onSelect={onSelect}
+        />
+      );
     default:
       return (
         <ThemedText themeColor="textSecondary">
@@ -65,25 +82,26 @@ export default function SessionScreen() {
         : [],
     });
     const count = params.count ? Number(params.count) : matches.length;
-    return shuffle(matches).slice(0, count);
+    return shuffle(matches).slice(0, count).map(shuffleChoices);
   });
 
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [revealed, setRevealed] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const total = sessionQuestions.length;
   const current = sessionQuestions[index];
   const isFinished = total > 0 && index >= total;
   const score = Object.values(answers).filter((a) => a.correct).length;
 
-  function handleAnswer(choiceIndex: number) {
-    if (!current || revealed) return;
+  function handleSubmit() {
+    if (!current || revealed || selectedIndex === null) return;
     setAnswers((prev) => ({
       ...prev,
       [current.id]: {
-        choiceIndex,
-        correct: choiceIndex === current.correctIndex,
+        choiceIndex: selectedIndex,
+        correct: selectedIndex === current.correctIndex,
       },
     }));
     setRevealed(true);
@@ -91,6 +109,7 @@ export default function SessionScreen() {
 
   function handleNext() {
     setRevealed(false);
+    setSelectedIndex(null);
     setIndex((i) => i + 1);
   }
 
@@ -148,24 +167,30 @@ export default function SessionScreen() {
 
   const answer = answers[current.id];
   const isLastQuestion = index === total - 1;
-  const { prose, code } = splitPrompt(current.prompt);
 
   return (
     <ThemedView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
-          <ThemedText themeColor="textSecondary" type="small">
-            Question {index + 1} of {total}
-          </ThemedText>
+      <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <View style={styles.header}>
+            <ThemedText themeColor="textSecondary" type="small">
+              Question {index + 1} of {total}
+            </ThemedText>
+            <ThemedText themeColor="textSecondary" type="small">
+              {current.language.charAt(0).toUpperCase() +
+                current.language.slice(1)}{" "}
+              Question
+            </ThemedText>
+          </View>
 
           <View style={styles.questionArea}>
             {revealed && answer ? (
               <View style={styles.feedback}>
-                <ThemedText style={styles.prompt}>{prose}</ThemedText>
-                {code && <CodeTerminal code={code} />}
+                <FormattedText text={current.prompt} style={styles.prompt} />
+
                 <ThemedView
                   type={
                     answer.correct ? "backgroundSelected" : "backgroundElement"
@@ -173,35 +198,85 @@ export default function SessionScreen() {
                   style={styles.feedbackBanner}
                 >
                   <ThemedText type="smallBold">
-                    {answer.correct ? "Correct!" : "Incorrect — correct answer:"}
+                    {answer.correct ? "Correct!" : "Incorrect"}
                   </ThemedText>
-                  {!answer.correct && (
-                    <CodeTerminal code={current.choices[current.correctIndex]} />
-                  )}
                 </ThemedView>
+
+                <View style={styles.feedbackSection}>
+                  <ThemedText type="smallBold">Your answer</ThemedText>
+                  <FormattedText text={current.choices[answer.choiceIndex]} />
+                </View>
+
+                {!answer.correct && (
+                  <View style={styles.feedbackSection}>
+                    <ThemedText type="smallBold">Correct answer</ThemedText>
+                    <FormattedText
+                      text={current.choices[current.correctIndex]}
+                    />
+                  </View>
+                )}
+
+                <View style={styles.feedbackSection}>
+                  <ThemedText type="smallBold">Explanation</ThemedText>
+                  <ThemedText themeColor="textSecondary">
+                    {current.explanation}
+                  </ThemedText>
+                </View>
+
+                <View style={styles.feedbackSection}>
+                  <ThemedText type="smallBold">Reference</ThemedText>
+                  <Pressable onPress={() => Linking.openURL(current.source)}>
+                    <ThemedText type="linkPrimary">{current.source}</ThemedText>
+                  </Pressable>
+                </View>
               </View>
             ) : (
-              <QuestionModule question={current} onAnswer={handleAnswer} />
+              <QuestionModule
+                question={current}
+                selectedIndex={selectedIndex}
+                onSelect={setSelectedIndex}
+              />
             )}
           </View>
+        </ScrollView>
 
-          {revealed && (
-            <Pressable
-              onPress={handleNext}
-              style={({ pressed }) => pressed && styles.pressed}
+        {revealed ? (
+          <Pressable
+            onPress={handleNext}
+            style={({ pressed }) => pressed && styles.pressed}
+          >
+            <ThemedView type="text" style={styles.actionButton}>
+              <ThemedText
+                themeColor="background"
+                style={styles.actionButtonLabel}
+              >
+                {isLastQuestion ? "Finish" : "Next Question"}
+              </ThemedText>
+            </ThemedView>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={handleSubmit}
+            disabled={selectedIndex === null}
+            style={({ pressed }) => pressed && styles.pressed}
+          >
+            <ThemedView
+              type="text"
+              style={[
+                styles.actionButton,
+                selectedIndex === null && styles.actionButtonDisabled,
+              ]}
             >
-              <ThemedView type="text" style={styles.actionButton}>
-                <ThemedText
-                  themeColor="background"
-                  style={styles.actionButtonLabel}
-                >
-                  {isLastQuestion ? "Finish" : "Next Question"}
-                </ThemedText>
-              </ThemedView>
-            </Pressable>
-          )}
-        </SafeAreaView>
-      </ScrollView>
+              <ThemedText
+                themeColor="background"
+                style={styles.actionButtonLabel}
+              >
+                Submit
+              </ThemedText>
+            </ThemedView>
+          </Pressable>
+        )}
+      </SafeAreaView>
     </ThemedView>
   );
 }
@@ -236,6 +311,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: Spacing.three,
   },
+  header: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    paddingBottom: Spacing.two,
+  },
   questionArea: {
     flex: 1,
     justifyContent: "flex-start",
@@ -246,11 +329,15 @@ const styles = StyleSheet.create({
   },
   feedback: {
     gap: Spacing.four,
+    paddingVertical: Spacing.four,
   },
   feedbackBanner: {
+    alignSelf: "flex-start",
     borderRadius: Spacing.two,
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.three,
+  },
+  feedbackSection: {
     gap: Spacing.two,
   },
   actionButton: {
@@ -258,6 +345,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.six,
     borderRadius: Spacing.three,
     alignItems: "center",
+  },
+  actionButtonDisabled: {
+    opacity: 0.4,
   },
   actionButtonLabel: {
     fontSize: 16,
