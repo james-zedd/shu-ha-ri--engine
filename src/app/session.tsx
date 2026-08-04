@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,6 +9,7 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
 import { filterQuestions, Question } from "@/data/questions";
+import { useDayCounter } from "@/hooks/use-day-counter";
 
 type SessionParams = {
   language?: string;
@@ -89,11 +90,18 @@ export default function SessionScreen() {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [revealed, setRevealed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { recordSession } = useDayCounter();
 
   const total = sessionQuestions.length;
   const current = sessionQuestions[index];
   const isFinished = total > 0 && index >= total;
   const score = Object.values(answers).filter((a) => a.correct).length;
+
+  useEffect(() => {
+    if (isFinished) {
+      recordSession();
+    }
+  }, [isFinished, recordSession]);
 
   function handleSubmit() {
     if (!current || revealed || selectedIndex === null) return;
