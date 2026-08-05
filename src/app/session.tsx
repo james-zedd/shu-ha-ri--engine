@@ -5,6 +5,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FormattedText } from "@/components/code-terminal";
 import { MultipleChoiceModule } from "@/components/question-modules/multiple-choice";
+import {
+  isCorrectTextAnswer,
+  TextAnswerModule,
+} from "@/components/question-modules/text-answer";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
@@ -18,10 +22,9 @@ type SessionParams = {
   count?: string;
 };
 
-type Answer = {
-  choiceIndex: number;
-  correct: boolean;
-};
+type Answer =
+  | { type: "multiple-choice"; choiceIndex: number; correct: boolean }
+  | { type: "text-answer"; text: string; correct: boolean };
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -33,6 +36,7 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function shuffleChoices(question: Question): Question {
+  if (question.type !== "multiple-choice") return question;
   const order = shuffle(question.choices.map((_, i) => i));
   return {
     ...question,
@@ -41,14 +45,34 @@ function shuffleChoices(question: Question): Question {
   };
 }
 
+function getAnswerText(question: Question, answer: Answer): string {
+  if (question.type === "multiple-choice" && answer.type === "multiple-choice") {
+    return question.choices[answer.choiceIndex];
+  }
+  if (question.type === "text-answer" && answer.type === "text-answer") {
+    return answer.text;
+  }
+  return "";
+}
+
+function getCorrectAnswerText(question: Question): string {
+  return question.type === "multiple-choice"
+    ? question.choices[question.correctIndex]
+    : question.correctAnswer;
+}
+
 function QuestionModule({
   question,
   selectedIndex,
   onSelect,
+  textValue,
+  onTextChange,
 }: {
   question: Question;
   selectedIndex: number | null;
   onSelect: (choiceIndex: number) => void;
+  textValue: string;
+  onTextChange: (value: string) => void;
 }) {
   switch (question.type) {
     case "multiple-choice":
@@ -57,6 +81,14 @@ function QuestionModule({
           question={question}
           selectedIndex={selectedIndex}
           onSelect={onSelect}
+        />
+      );
+    case "text-answer":
+      return (
+        <TextAnswerModule
+          question={question}
+          value={textValue}
+          onChange={onTextChange}
         />
       );
     default:
@@ -90,6 +122,7 @@ export default function SessionScreen() {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [revealed, setRevealed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [textValue, setTextValue] = useState("");
   const { recordSession } = useDayCounter();
 
   const total = sessionQuestions.length;
@@ -104,12 +137,29 @@ export default function SessionScreen() {
   }, [isFinished, recordSession]);
 
   function handleSubmit() {
-    if (!current || revealed || selectedIndex === null) return;
+    if (!current || revealed) return;
+
+    if (current.type === "multiple-choice") {
+      if (selectedIndex === null) return;
+      setAnswers((prev) => ({
+        ...prev,
+        [current.id]: {
+          type: "multiple-choice",
+          choiceIndex: selectedIndex,
+          correct: selectedIndex === current.correctIndex,
+        },
+      }));
+      setRevealed(true);
+      return;
+    }
+
+    if (!textValue.trim()) return;
     setAnswers((prev) => ({
       ...prev,
       [current.id]: {
-        choiceIndex: selectedIndex,
-        correct: selectedIndex === current.correctIndex,
+        type: "text-answer",
+        text: textValue,
+        correct: isCorrectTextAnswer(current, textValue),
       },
     }));
     setRevealed(true);
@@ -118,6 +168,7 @@ export default function SessionScreen() {
   function handleNext() {
     setRevealed(false);
     setSelectedIndex(null);
+    setTextValue("");
     setIndex((i) => i + 1);
   }
 
@@ -175,6 +226,10 @@ export default function SessionScreen() {
 
   const answer = answers[current.id];
   const isLastQuestion = index === total - 1;
+  const isSubmitDisabled =
+    current.type === "multiple-choice"
+      ? selectedIndex === null
+      : textValue.trim().length === 0;
 
   return (
     <ThemedView style={styles.container}>
@@ -212,23 +267,22 @@ export default function SessionScreen() {
 
                 <View style={styles.feedbackSection}>
                   <ThemedText type="smallBold">Your answer</ThemedText>
-                  <FormattedText text={current.choices[answer.choiceIndex]} />
+                  <FormattedText text={getAnswerText(current, answer)} />
                 </View>
 
                 {!answer.correct && (
                   <View style={styles.feedbackSection}>
                     <ThemedText type="smallBold">Correct answer</ThemedText>
-                    <FormattedText
-                      text={current.choices[current.correctIndex]}
-                    />
+                    <FormattedText text={getCorrectAnswerText(current)} />
                   </View>
                 )}
 
                 <View style={styles.feedbackSection}>
                   <ThemedText type="smallBold">Explanation</ThemedText>
-                  <ThemedText themeColor="textSecondary">
-                    {current.explanation}
-                  </ThemedText>
+                  <FormattedText
+                    text={current.explanation}
+                    themeColor="textSecondary"
+                  />
                 </View>
 
                 <View style={styles.feedbackSection}>
@@ -243,6 +297,8 @@ export default function SessionScreen() {
                 question={current}
                 selectedIndex={selectedIndex}
                 onSelect={setSelectedIndex}
+                textValue={textValue}
+                onTextChange={setTextValue}
               />
             )}
           </View>
@@ -265,14 +321,14 @@ export default function SessionScreen() {
         ) : (
           <Pressable
             onPress={handleSubmit}
-            disabled={selectedIndex === null}
+            disabled={isSubmitDisabled}
             style={({ pressed }) => pressed && styles.pressed}
           >
             <ThemedView
               type="text"
               style={[
                 styles.actionButton,
-                selectedIndex === null && styles.actionButtonDisabled,
+                isSubmitDisabled && styles.actionButtonDisabled,
               ]}
             >
               <ThemedText
