@@ -2,8 +2,7 @@ import { Fragment, ReactNode } from "react";
 import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
-import { Fonts, Spacing } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
+import { Fonts, Spacing, ThemeColor } from "@/constants/theme";
 
 export type PromptSegment =
   | { type: "text"; content: string }
@@ -51,18 +50,17 @@ export function CodeTerminal({ code }: { code: string }) {
 }
 
 function InlineCode({ content }: { content: string }) {
-  const theme = useTheme();
-  return (
-    <Text style={[styles.inlineCode, { color: theme.text }]}>{content}</Text>
-  );
+  return <Text style={styles.inlineCode}>{content}</Text>;
 }
 
 export function FormattedText({
   text,
   style,
+  themeColor,
 }: {
   text: string;
   style?: StyleProp<TextStyle>;
+  themeColor?: ThemeColor;
 }) {
   const segments = parseSegments(text);
 
@@ -72,7 +70,7 @@ export function FormattedText({
   function flushParagraph() {
     if (paragraph.length === 0) return;
     blocks.push(
-      <ThemedText key={blocks.length} style={style}>
+      <ThemedText key={blocks.length} themeColor={themeColor} style={style}>
         {paragraph.map((segment, i) =>
           segment.type === "inline-code" ? (
             <InlineCode key={i} content={segment.content} />

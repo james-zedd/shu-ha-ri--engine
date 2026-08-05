@@ -1,12 +1,16 @@
 import raw from './questions.json';
 
 import type { MultipleChoiceQuestion } from '@/components/question-modules/multiple-choice';
+import type { TextAnswerQuestion } from '@/components/question-modules/text-answer';
 
-export type Question = MultipleChoiceQuestion & {
-  language: string;
+type QuestionMeta = {
   category: string;
   difficulty: number;
 };
+
+export type Question =
+  | (MultipleChoiceQuestion & QuestionMeta)
+  | (TextAnswerQuestion & QuestionMeta);
 
 export const questions = raw as Question[];
 
