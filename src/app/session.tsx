@@ -14,6 +14,7 @@ import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
 import { filterQuestions, Question } from "@/data/questions";
 import { useDayCounter } from "@/hooks/use-day-counter";
+import { useTheme } from "@/hooks/use-theme";
 
 type SessionParams = {
   language?: string;
@@ -103,6 +104,7 @@ function QuestionModule({
 export default function SessionScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<SessionParams>();
+  const theme = useTheme();
 
   const [sessionQuestions] = useState<Question[]>(() => {
     const matches = filterQuestions({
@@ -255,10 +257,15 @@ export default function SessionScreen() {
                 <FormattedText text={current.prompt} style={styles.prompt} />
 
                 <ThemedView
-                  type={
-                    answer.correct ? "backgroundSelected" : "backgroundElement"
-                  }
-                  style={styles.feedbackBanner}
+                  type={answer.correct ? "success" : "error"}
+                  style={[
+                    styles.feedbackBanner,
+                    {
+                      borderColor: answer.correct
+                        ? theme.successBorder
+                        : theme.errorBorder,
+                    },
+                  ]}
                 >
                   <ThemedText type="smallBold">
                     {answer.correct ? "Correct!" : "Incorrect"}
@@ -398,6 +405,7 @@ const styles = StyleSheet.create({
   feedbackBanner: {
     alignSelf: "flex-start",
     borderRadius: Spacing.two,
+    borderWidth: 1,
     paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.three,
   },
