@@ -1,0 +1,2809 @@
+{
+  "id": "js-ts-fundamentals",
+  "name": "JavaScript & TypeScript Fundamentals",
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "updatedAt": "2026-08-07",
+  "questions": [
+    {
+      "id": "J7JC4QKINqDBDFvK",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 1,
+      "prompt": "What is logged? <pre>console.log(x);\nvar x = 5;</pre>",
+      "choices": [
+        "5",
+        "undefined",
+        "ReferenceError",
+        "null"
+      ],
+      "correctIndex": 1,
+      "explanation": "var declarations are hoisted to the top of their scope and initialized to undefined; only the assignment (x = 5) stays in place. So console.log(x) runs after the hoisted declaration but before the assignment, logging undefined rather than throwing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting"
+    },
+    {
+      "id": "gNG3DoImGwxNDTDJ",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 1,
+      "prompt": "Which keyword allows reassignment but not redeclaration in the same scope, and is block-scoped?",
+      "choices": [
+        "var",
+        "let",
+        "const",
+        "function"
+      ],
+      "correctIndex": 1,
+      "explanation": "let creates a block-scoped binding that can be reassigned but not redeclared in the same scope, unlike var (function-scoped, redeclarable) and const (block-scoped but not reassignable).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let"
+    },
+    {
+      "id": "Yh1iwZDVBe1LG1dr",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 2,
+      "prompt": "What happens here? <pre>console.log(y);\nlet y = 10;</pre>",
+      "choices": [
+        "10",
+        "undefined",
+        "ReferenceError due to the temporal dead zone",
+        "SyntaxError"
+      ],
+      "correctIndex": 2,
+      "explanation": "let and const bindings exist in the 'temporal dead zone' from the start of their block until their declaration is evaluated; accessing them before that point throws a ReferenceError instead of returning undefined.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz"
+    },
+    {
+      "id": "SP0P9sy564hC6IqV",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 2,
+      "prompt": "What is the scope of a variable declared with var inside a for-loop block { } inside a function?",
+      "choices": [
+        "Block scope only",
+        "Function scope (accessible outside the block)",
+        "Module scope",
+        "Global scope always"
+      ],
+      "correctIndex": 1,
+      "explanation": "var is function-scoped (or global-scoped), not block-scoped, so a var declared inside a for-loop's { } is hoisted to the enclosing function and remains accessible after the loop block ends.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var"
+    },
+    {
+      "id": "A66jkMIDUI66DIw7",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 3,
+      "prompt": "What does the following log? <pre>for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}</pre>",
+      "choices": [
+        "0 1 2",
+        "3 3 3",
+        "0 0 0",
+        "undefined undefined undefined"
+      ],
+      "correctIndex": 1,
+      "explanation": "var creates a single binding shared across all loop iterations, so by the time the setTimeout callbacks run (after the loop has finished), i has already reached its final value of 3 in every callback.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake"
+    },
+    {
+      "id": "aM8sVes2QHXqAK46",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 1,
+      "prompt": "A closure is:",
+      "choices": [
+        "A function bundled together with references to its surrounding state",
+        "A loop that never ends",
+        "A synchronous version of a promise",
+        "A way to close a file handle"
+      ],
+      "correctIndex": 0,
+      "explanation": "A closure is a function combined with references to its surrounding lexical scope, letting it read and update variables from an outer function even after that function has returned.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "kcH5MTf9TDhX57fS",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 2,
+      "prompt": "What does this log? <pre>function counter() {\n  let count = 0;\n  return () => ++count;\n}\nconst c = counter();\nconsole.log(c(), c(), c());</pre>",
+      "choices": [
+        "1 1 1",
+        "1 2 3",
+        "0 1 2",
+        "undefined undefined undefined"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each call to counter() creates a new count variable captured by the returned arrow function's closure. ++count increments and returns the value, so three sequential calls log 1, 2, 3 in the order the console.log arguments are evaluated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "AdnNuO5i2eUYtpxC",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 2,
+      "prompt": "The classic \"var in a loop with setTimeout\" closure bug can be fixed by:",
+      "choices": [
+        "Replacing var with let",
+        "Adding async/await",
+        "Using == instead of ===",
+        "Wrapping it in a try/catch"
+      ],
+      "correctIndex": 0,
+      "explanation": "Replacing var with let gives the loop a fresh, block-scoped binding of i for every iteration, so each setTimeout callback closes over its own copy instead of sharing one variable.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake"
+    },
+    {
+      "id": "E7mTgFkeocrPfsy6",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 3,
+      "prompt": "What does this log? <pre>function makeAdders() {\n  const adders = [];\n  for (let i = 0; i < 3; i++) {\n    adders.push(x => x + i);\n  }\n  return adders;\n}\nconst [add0, add1, add2] = makeAdders();\nconsole.log(add0(10), add1(10), add2(10));</pre>",
+      "choices": [
+        "10 10 10",
+        "10 11 12",
+        "12 12 12",
+        "NaN NaN NaN"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because the loop uses let, each iteration gets its own binding of i, so each arrow function pushed into adders closes over a different value (0, 1, 2), producing 10, 11, 12 when called with 10.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake"
+    },
+    {
+      "id": "JeZc6bhkL3R6yIw8",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 3,
+      "prompt": "Which statement about closures and memory is true?",
+      "choices": [
+        "Closures can prevent garbage collection of variables they still reference",
+        "Closures are always garbage collected immediately after the outer function returns",
+        "Closures cannot access variables from an outer function once it has returned",
+        "Closures only work with arrow functions"
+      ],
+      "correctIndex": 0,
+      "explanation": "As long as a closure still references a variable from its outer scope, that variable can't be garbage collected even after the outer function has returned — closures keep their captured environment alive.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "G3K8WmBlu4w4FZvr",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 1,
+      "prompt": "In a regular (non-arrow) function called as a plain function in non-strict mode, <code>this</code> refers to:",
+      "choices": [
+        "undefined",
+        "the global object",
+        "the function itself",
+        "null"
+      ],
+      "correctIndex": 1,
+      "explanation": "In non-strict mode, calling a regular function without an explicit receiver sets this to the global object (globalThis / window in browsers); strict mode would instead leave it undefined.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"
+    },
+    {
+      "id": "Vn4vpnh5EJjvYD1F",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 2,
+      "prompt": "Arrow functions differ from regular functions in that they:",
+      "choices": [
+        "Do not have their own <code>this</code>; they inherit it from the enclosing scope",
+        "Always bind <code>this</code> to the global object",
+        "Cannot be used as callbacks",
+        "Require the <code>new</code> keyword"
+      ],
+      "correctIndex": 0,
+      "explanation": "Arrow functions don't have their own this binding; they lexically capture this from the enclosing scope at the time they're defined, which is why they're commonly used to preserve this inside callbacks.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
+    },
+    {
+      "id": "7XZMwBUEA5en40De",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 2,
+      "prompt": "What does this log? <pre>const obj = {\n  value: 42,\n  getValue: function () {\n    return (() => this.value)();\n  },\n};\nconsole.log(obj.getValue());</pre>",
+      "choices": [
+        "42",
+        "undefined",
+        "ReferenceError",
+        "NaN"
+      ],
+      "correctIndex": 0,
+      "explanation": "The arrow function () => this.value has no this of its own, so it inherits this from getValue's enclosing execution — which is obj, since getValue is called as obj.getValue(). That makes this.value resolve to 42.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
+    },
+    {
+      "id": "i29dcREctKDJfs5R",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 2,
+      "prompt": "Which method explicitly sets <code>this</code> for a function call and invokes it immediately?",
+      "choices": [
+        "Function.prototype.call",
+        "Function.prototype.toString",
+        "Object.freeze",
+        "Array.prototype.map"
+      ],
+      "correctIndex": 0,
+      "explanation": "Function.prototype.call invokes the function immediately with a given this value and individually listed arguments, unlike bind (which returns a new function) or apply (which takes arguments as an array).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"
+    },
+    {
+      "id": "kxz0ROcScpzGSFw4",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 3,
+      "prompt": "Why does <code>this.seconds++</code> fail to update the class instance here? <pre>class Timer {\n  seconds = 0;\n  start() {\n    setInterval(function () {\n      this.seconds++;\n    }, 1000);\n  }\n}</pre>",
+      "choices": [
+        "The regular function callback loses the class instance's <code>this</code> binding",
+        "setInterval doesn't support class methods",
+        "seconds is not writable",
+        "Class fields cannot be numbers"
+      ],
+      "correctIndex": 0,
+      "explanation": "The callback passed to setInterval is a regular function invoked without a receiver, so its own this is not the Timer instance — it defaults to the global object (or undefined in strict mode), which has no seconds property.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"
+    },
+    {
+      "id": "AOCfoiiRTg5MBdOS",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 1,
+      "prompt": "Every JS object has an internal link to another object called its:",
+      "choices": [
+        "prototype",
+        "constructor",
+        "descriptor",
+        "interface"
+      ],
+      "correctIndex": 0,
+      "explanation": "Every JS object carries an internal link, [[Prototype]] (exposed via Object.getPrototypeOf or the deprecated __proto__), to another object it inherits properties from — its prototype.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain"
+    },
+    {
+      "id": "3ktnyYj5QooFZFBJ",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 2,
+      "prompt": "What does <code>Object.create(proto)</code> do?",
+      "choices": [
+        "Creates a new object with <code>proto</code> as its prototype",
+        "Clones proto's own properties into a new object",
+        "Freezes proto",
+        "Converts proto into a class"
+      ],
+      "correctIndex": 0,
+      "explanation": "Object.create(proto) builds a brand-new object whose [[Prototype]] is set to proto, without copying proto's own properties onto it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create"
+    },
+    {
+      "id": "zGnWtD28mtYj4OKl",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 2,
+      "prompt": "In <code>class Dog extends Animal {}</code>, which built-in mechanism does <code>extends</code> use under the hood?",
+      "choices": [
+        "Prototype chaining",
+        "Object.assign copying",
+        "JSON serialization",
+        "Closures"
+      ],
+      "correctIndex": 0,
+      "explanation": "class ... extends sets up prototype chaining under the hood: Dog.prototype's [[Prototype]] becomes Animal.prototype, so Dog instances inherit Animal's methods through the prototype chain.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends"
+    },
+    {
+      "id": "4C5uxsmp1C5I6vee",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 2,
+      "prompt": "What does the <code>instanceof</code> operator check?",
+      "choices": [
+        "Whether an object's prototype chain includes the constructor's prototype",
+        "Whether two objects have identical own properties",
+        "Whether a variable's typeof matches a string",
+        "Whether an object is frozen"
+      ],
+      "correctIndex": 0,
+      "explanation": "a instanceof B checks whether B.prototype appears anywhere in a's prototype chain, not whether a and B share identical own properties.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof"
+    },
+    {
+      "id": "XleJuaqMH6w2Sm4E",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 3,
+      "prompt": "What is logged? <pre>function Animal(name) { this.name = name; }\nAnimal.prototype.speak = function () { return `${this.name} makes a noise.`; };\nconst a = new Animal('Rex');\ndelete a.speak;\nconsole.log(a.speak());</pre>",
+      "choices": [
+        "'Rex makes a noise.'",
+        "TypeError: a.speak is not a function",
+        "undefined",
+        "'undefined makes a noise.'"
+      ],
+      "correctIndex": 0,
+      "explanation": "delete a.speak only removes the own property speak from a — speak still exists on Animal.prototype, so property lookup falls through the prototype chain and finds it there, logging 'Rex makes a noise.'",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain"
+    },
+    {
+      "id": "zAXWgvdFJeUPD4rc",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 1,
+      "prompt": "A Promise can be in one of three states:",
+      "choices": [
+        "pending, fulfilled, rejected",
+        "waiting, done, error",
+        "start, running, stop",
+        "open, closed, aborted"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Promise is always in exactly one of three states — pending (not yet settled), fulfilled (resolved with a value), or rejected (failed with a reason) — and can only transition from pending to one of the other two, once.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+    },
+    {
+      "id": "1HEHrCeOAdiQJYTj",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 2,
+      "prompt": "What does <code>await</code> do inside an <code>async</code> function?",
+      "choices": [
+        "Pauses execution of that function until the awaited promise settles",
+        "Blocks the entire JS engine synchronously",
+        "Converts a promise into a callback",
+        "Cancels the promise"
+      ],
+      "correctIndex": 0,
+      "explanation": "await suspends execution of the enclosing async function until the awaited promise settles, without blocking the rest of the JS runtime — other code can still run via the event loop in the meantime.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await"
+    },
+    {
+      "id": "DxXdv98G6RcAE9ir",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 2,
+      "prompt": "What is logged, and in what order? <pre>console.log('A');\nPromise.resolve().then(() => console.log('B'));\nconsole.log('C');</pre>",
+      "choices": [
+        "A B C",
+        "A C B",
+        "B A C",
+        "C A B"
+      ],
+      "correctIndex": 1,
+      "explanation": "All synchronous code runs first, so 'A' and 'C' log before the microtask queued by .then() is processed after the current call stack empties — giving the order A, C, B.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises"
+    },
+    {
+      "id": "3vQ7gxi99NS6KDgo",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 3,
+      "prompt": "What is the order of logged output? <pre>console.log('start');\nsetTimeout(() => console.log('timeout'), 0);\nPromise.resolve().then(() => console.log('promise'));\nconsole.log('end');</pre>",
+      "choices": [
+        "start end promise timeout",
+        "start end timeout promise",
+        "start promise end timeout",
+        "start timeout end promise"
+      ],
+      "correctIndex": 0,
+      "explanation": "Synchronous code ('start', 'end') runs first; then, once the call stack is empty, the microtask queue (the Promise .then callback) is fully drained before the macrotask queue (the setTimeout callback) runs — giving start, end, promise, timeout.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"
+    },
+    {
+      "id": "F0I5GSpp8xZXYF78",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 3,
+      "prompt": "What does <code>Promise.allSettled</code> return, compared to <code>Promise.all</code>?",
+      "choices": [
+        "An array of result objects for every promise, regardless of rejection, instead of rejecting on the first failure",
+        "The same thing as Promise.race",
+        "A single resolved value only",
+        "Nothing, it behaves identically to Promise.all"
+      ],
+      "correctIndex": 0,
+      "explanation": "Promise.allSettled waits for every promise to settle and resolves with an array of {status, value|reason} results for each one, whereas Promise.all rejects immediately as soon as any single promise rejects.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"
+    },
+    {
+      "id": "DlwOT3gyaNYXVpjL",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "Which queue is processed first after the current synchronous code finishes: the microtask queue or the macrotask (timer) queue?",
+      "choices": [
+        "Microtask queue",
+        "Macrotask queue",
+        "They run simultaneously",
+        "Whichever was registered first, regardless of type"
+      ],
+      "correctIndex": 0,
+      "explanation": "Once the current synchronous code finishes, the JS runtime fully drains the microtask queue (promise callbacks, queueMicrotask) before moving on to the next macrotask (timers, I/O).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"
+    },
+    {
+      "id": "1jl7DmZ0lc4J9iID",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 1,
+      "prompt": "<code>setTimeout(fn, 0)</code> guarantees:",
+      "choices": [
+        "fn runs on the next available macrotask tick, not immediately",
+        "fn runs synchronously right away",
+        "fn never runs",
+        "fn runs before any Promise callbacks"
+      ],
+      "correctIndex": 0,
+      "explanation": "setTimeout(fn, 0) doesn't run fn immediately — it schedules fn as a macrotask for the next tick of the event loop, which only happens after the current call stack (and any pending microtasks) finish.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout"
+    },
+    {
+      "id": "rKnpiyqY78bL139e",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "Which of these schedules a microtask?",
+      "choices": [
+        "<code>Promise.prototype.then</code>",
+        "<code>setTimeout</code>",
+        "<code>setInterval</code>",
+        "<code>requestAnimationFrame</code>"
+      ],
+      "correctIndex": 0,
+      "explanation": "Promise.prototype.then schedules its callback as a microtask, run after the current synchronous code and before the next macrotask; setTimeout, setInterval, and requestAnimationFrame all schedule macrotask-style callbacks instead.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"
+    },
+    {
+      "id": "tBgHBWhgQdBdigJy",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 3,
+      "prompt": "Why can a long, purely synchronous loop block UI updates and timer callbacks in a single-threaded JS runtime?",
+      "choices": [
+        "The event loop cannot process the callback/microtask queues until the current call stack is empty",
+        "Timers run on the same thread and always execute exactly on schedule regardless of blocking code",
+        "Synchronous code always runs after all callbacks",
+        "JS automatically pauses loops longer than 1 second"
+      ],
+      "correctIndex": 0,
+      "explanation": "The event loop can only pull the next callback off the microtask/macrotask queues once the call stack is completely empty, so a long synchronous loop keeps the stack busy and blocks all pending timers, promise callbacks, and UI updates until it finishes.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"
+    },
+    {
+      "id": "VnRUGtXbCSPwFlcE",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "What best describes the \"call stack\" in the JS runtime model?",
+      "choices": [
+        "A LIFO structure tracking function calls currently executing",
+        "A queue of pending network requests",
+        "The list of all variables in global scope",
+        "A cache of previously resolved promises"
+      ],
+      "correctIndex": 0,
+      "explanation": "The call stack is a LIFO (last-in, first-out) structure that tracks the currently executing function calls, pushing a new frame on each call and popping it off when that function returns.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop#stack"
+    },
+    {
+      "id": "DFS6MCJpweVALD9R",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 1,
+      "prompt": "Which array method creates a new array with the results of calling a function on every element?",
+      "choices": [
+        "map",
+        "forEach",
+        "filter",
+        "reduce"
+      ],
+      "correctIndex": 0,
+      "explanation": "Array.prototype.map calls a function on every element and returns a new array of the results, leaving the original array unchanged.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+    },
+    {
+      "id": "keGn0wuOIkZtgmOC",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 1,
+      "prompt": "Which method returns a new array containing only the elements that satisfy a condition?",
+      "choices": [
+        "filter",
+        "map",
+        "some",
+        "find"
+      ],
+      "correctIndex": 0,
+      "explanation": "Array.prototype.filter returns a new array containing only the elements for which the callback returns a truthy value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+    },
+    {
+      "id": "7W0rDclT9URiERjh",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 2,
+      "prompt": "What does <code>[1, 2, 3].reduce((acc, n) => acc + n, 0)</code> evaluate to?",
+      "choices": [
+        "6",
+        "0",
+        "[1, 2, 3]",
+        "NaN"
+      ],
+      "correctIndex": 0,
+      "explanation": "reduce runs the callback for each element, carrying an accumulator forward: starting at 0, it computes 0+1=1, 1+2=3, 3+3=6, so the final result is 6.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"
+    },
+    {
+      "id": "rJzSgUaSJVEzqHUm",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 2,
+      "prompt": "What's the key difference between <code>forEach</code> and <code>map</code>?",
+      "choices": [
+        "map returns a new array; forEach returns undefined",
+        "forEach is always faster",
+        "map mutates the original array; forEach does not",
+        "There is no difference"
+      ],
+      "correctIndex": 0,
+      "explanation": "map returns a brand-new array built from the callback's return values, while forEach always returns undefined and is used purely for side effects; neither method mutates the original array.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
+    },
+    {
+      "id": "EnKK5syK3kx5RTwl",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 3,
+      "prompt": "What does this log? <pre>console.log([1, [2, 3], [4, [5, 6]]].flat(Infinity));</pre>",
+      "choices": [
+        "[1, 2, 3, 4, 5, 6]",
+        "[1, 2, 3, 4, [5, 6]]",
+        "[1, [2, 3], [4, [5, 6]]]",
+        "Error: flat requires a numeric argument"
+      ],
+      "correctIndex": 0,
+      "explanation": "flat(depth) flattens nested arrays up to the given depth; passing Infinity flattens arbitrarily deep nesting, so every nested array collapses into a single flat array [1, 2, 3, 4, 5, 6].",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+    },
+    {
+      "id": "3TsCPOFCjPkPRkt2",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 1,
+      "prompt": "What does the following produce? <pre>const { a, b } = { a: 1, b: 2 };</pre>",
+      "choices": [
+        "a is 1 and b is 2",
+        "a and b are both undefined",
+        "SyntaxError",
+        "a is { a: 1, b: 2 }"
+      ],
+      "correctIndex": 0,
+      "explanation": "Object destructuring const { a, b } = obj pulls the a and b properties off the right-hand object and binds them to local variables of the same name, so a is 1 and b is 2.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    },
+    {
+      "id": "XDpldpXdxPvt7IFJ",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "What does <code>const { a, ...rest } = { a: 1, b: 2, c: 3 };</code> assign to <code>rest</code>?",
+      "choices": [
+        "{ b: 2, c: 3 }",
+        "{ a: 1 }",
+        "[2, 3]",
+        "undefined"
+      ],
+      "correctIndex": 0,
+      "explanation": "The rest pattern (...rest) in a destructuring assignment collects whatever own enumerable properties weren't already destructured into a new object, so rest becomes { b: 2, c: 3 }.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring"
+    },
+    {
+      "id": "SmA1rF80x75ikisz",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "How do you destructure <code>obj.name</code>, binding it to a local variable <code>n</code>?",
+      "choices": [
+        "const { name: n } = obj;",
+        "const { n: name } = obj;",
+        "const n = obj{name};",
+        "const { name as n } = obj;"
+      ],
+      "correctIndex": 0,
+      "explanation": "const { name: n } = obj destructures the name property but binds it to a local variable called n instead of name — the syntax reads as 'property: localName'.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#assigning_to_new_variable_names"
+    },
+    {
+      "id": "wlbaVlwDQE1tcd7c",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "What does <code>Object.freeze(obj)</code> do?",
+      "choices": [
+        "Prevents adding, removing, or reassigning obj's own properties (shallowly)",
+        "Deep-clones obj",
+        "Converts obj to JSON",
+        "Makes obj iterable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Object.freeze(obj) prevents adding new properties, removing existing ones, and reassigning existing property values on obj — but only shallowly, at the top level.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"
+    },
+    {
+      "id": "izZqAlqyNjAhTS9X",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 3,
+      "prompt": "What is logged? <pre>const obj = { a: 1, nested: { b: 2 } };\nconst frozen = Object.freeze(obj);\nfrozen.nested.b = 99;\nconsole.log(frozen.nested.b);</pre>",
+      "choices": [
+        "99",
+        "2",
+        "undefined",
+        "TypeError"
+      ],
+      "correctIndex": 0,
+      "explanation": "Object.freeze only freezes an object's own top-level properties, not nested objects it references. Since nested is a separate object, frozen.nested.b = 99 succeeds and logs 99.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#examples"
+    },
+    {
+      "id": "ICCXYt3oWyB0GSJm",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 1,
+      "prompt": "What does the spread operator do in <code>const arr2 = [...arr1, 4, 5];</code>?",
+      "choices": [
+        "Copies arr1's elements into a new array, followed by 4 and 5",
+        "Merges arr1 and arr2 by reference",
+        "Throws if arr1 is empty",
+        "Converts arr1 to a string"
+      ],
+      "correctIndex": 0,
+      "explanation": "The spread operator (...arr1) expands arr1's elements in place, so [...arr1, 4, 5] builds a brand-new array containing arr1's elements followed by 4 and 5.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax"
+    },
+    {
+      "id": "pGun9IQoMU9P1cEL",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 1,
+      "prompt": "Template literals are delimited by:",
+      "choices": [
+        "Backticks (`)",
+        "Single quotes (')",
+        "Double quotes (\")",
+        "Curly braces ({ })"
+      ],
+      "correctIndex": 0,
+      "explanation": "Template literals are delimited by backticks (`), which also enable ${...} interpolation and multi-line strings — unlike single or double quotes.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals"
+    },
+    {
+      "id": "yWpqVGbb8UDM8Yda",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 2,
+      "prompt": "What value does <code>name</code> take here? <pre>function greet(name = 'World') { return `Hello ${name}`; }\ngreet(undefined);</pre>",
+      "choices": [
+        "'Hello World' (the default is used)",
+        "'Hello undefined'",
+        "TypeError",
+        "'Hello '"
+      ],
+      "correctIndex": 0,
+      "explanation": "Default parameter values are used whenever the argument is undefined — either omitted entirely or explicitly passed as undefined — so greet(undefined) uses the default 'World'.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters"
+    },
+    {
+      "id": "1yAmCHsWAVUz89oM",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 2,
+      "prompt": "What does the rest parameter syntax do here? <pre>function sum(...nums) {\n  return nums.reduce((a, b) => a + b, 0);\n}</pre>",
+      "choices": [
+        "Collects all remaining arguments into an array called nums",
+        "Requires exactly one argument",
+        "Spreads nums into individual parameters",
+        "Is only valid for object destructuring"
+      ],
+      "correctIndex": 0,
+      "explanation": "The rest parameter syntax (...nums) gathers all remaining arguments passed to the function into a single real array called nums.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters"
+    },
+    {
+      "id": "mXKlsWEDxB2DYLRD",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 3,
+      "prompt": "What is a key difference between <code>Object.entries(obj)</code> and using a <code>for...in</code> loop directly on obj?",
+      "choices": [
+        "for...in also iterates inherited enumerable properties from the prototype chain, while Object.entries only includes own enumerable properties",
+        "for...in is faster in all engines",
+        "Object.entries cannot be used with arrays",
+        "There is no functional difference"
+      ],
+      "correctIndex": 0,
+      "explanation": "for...in walks every enumerable property key, including ones inherited from the prototype chain, while Object.entries(obj) only returns the object's own enumerable [key, value] pairs.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in"
+    },
+    {
+      "id": "GZvMP2AY09NpuIsr",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 1,
+      "prompt": "What does <code>'5' == 5</code> evaluate to?",
+      "choices": [
+        "true",
+        "false",
+        "TypeError",
+        "undefined"
+      ],
+      "correctIndex": 0,
+      "explanation": "== performs type coercion before comparing, so '5' is converted to the number 5, making '5' == 5 evaluate to true.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality"
+    },
+    {
+      "id": "NkFkpdbRFqi8pw4C",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 1,
+      "prompt": "What does <code>'5' === 5</code> evaluate to?",
+      "choices": [
+        "false",
+        "true",
+        "TypeError",
+        "NaN"
+      ],
+      "correctIndex": 0,
+      "explanation": "=== (strict equality) never coerces types, so a string and a number are always unequal regardless of their apparent value — '5' === 5 is false.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality"
+    },
+    {
+      "id": "YrCmDYTV57Vr7zDf",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 2,
+      "prompt": "What does <code>NaN === NaN</code> evaluate to, and what should you use instead to check for NaN?",
+      "choices": [
+        "false; use Number.isNaN(x)",
+        "true; use isNaN(x) only",
+        "false; there is no way to check for NaN",
+        "true; NaN always equals itself"
+      ],
+      "correctIndex": 0,
+      "explanation": "NaN is the only JS value that is never equal to itself, so NaN === NaN is false; Number.isNaN(x) (unlike the coercing global isNaN) reliably checks for NaN without false positives on non-numeric values.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN"
+    },
+    {
+      "id": "tr1clCMIjsWP3nwP",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 2,
+      "prompt": "What does <code>[] == false</code> evaluate to?",
+      "choices": [
+        "true",
+        "false",
+        "TypeError",
+        "undefined"
+      ],
+      "correctIndex": 0,
+      "explanation": "With ==, [] is coerced to a primitive first (via toString → ''), then '' and false are both coerced to the number 0 for comparison, so [] == false evaluates to true.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality"
+    },
+    {
+      "id": "kSgLK2s7sNXGMo8R",
+      "type": "multiple-choice",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 3,
+      "prompt": "What does <code>Object.is(NaN, NaN)</code> return, and how does it differ from <code>===</code> regarding <code>-0</code> and <code>+0</code>?",
+      "choices": [
+        "true for NaN, and Object.is distinguishes -0 from +0 (unlike ===)",
+        "false for NaN, identical to === in every case",
+        "true for NaN, but treats -0 and +0 as unequal only when using ===",
+        "Object.is does not exist in JavaScript"
+      ],
+      "correctIndex": 0,
+      "explanation": "Object.is(NaN, NaN) returns true (unlike ===, which treats NaN as unequal to itself), and it also distinguishes -0 from +0, whereas === considers -0 === +0 to be true.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is"
+    },
+    {
+      "id": "KEoSrwsSQmaDmofL",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 1,
+      "prompt": "Which TypeScript type represents any JavaScript value with no type checking at all (opts out of type safety)?",
+      "choices": [
+        "any",
+        "unknown",
+        "never",
+        "void"
+      ],
+      "correctIndex": 0,
+      "explanation": "any disables type checking entirely for a value — you can assign it anything and access any property or method on it without the compiler complaining, unlike unknown, which still requires narrowing.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"
+    },
+    {
+      "id": "arIsCivao5MQvcgv",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 1,
+      "prompt": "What must you do before using a value's properties when its type is <code>unknown</code>, unlike <code>any</code>?",
+      "choices": [
+        "Perform a type check or type assertion to narrow it first",
+        "Nothing, it behaves exactly like any",
+        "Always cast it to never",
+        "It can only hold string values"
+      ],
+      "correctIndex": 0,
+      "explanation": "unknown is the type-safe counterpart to any: TypeScript won't let you access properties, call methods, or otherwise operate on an unknown value until you've narrowed it with a type guard or assertion.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#unknown"
+    },
+    {
+      "id": "Ad6sQJGzBzc9fNDU",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 2,
+      "prompt": "What type would you give a function that never returns normally (e.g. it always throws)?",
+      "choices": [
+        "never",
+        "void",
+        "undefined",
+        "unknown"
+      ],
+      "correctIndex": 0,
+      "explanation": "never represents a value that can't occur — it's the correct return type for a function that always throws or otherwise never completes normally, since it never actually produces a return value.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#never"
+    },
+    {
+      "id": "6iBHUn3dsN80s1Oy",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 2,
+      "prompt": "What is the difference between <code>void</code> and <code>undefined</code> as a function return type?",
+      "choices": [
+        "void means the return value should be ignored; undefined means the function explicitly returns the value undefined",
+        "They are functionally different keywords for numbers",
+        "void can only be used on classes",
+        "There is no difference at all"
+      ],
+      "correctIndex": 0,
+      "explanation": "void means a function's return value is meaningless and callers shouldn't rely on it (even if it technically returns undefined), whereas a return type of undefined asserts the function explicitly returns that literal value.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#void"
+    },
+    {
+      "id": "AkECnVMMAApKfDI1",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 3,
+      "prompt": "Given <code>let x: unknown = 'hello';</code>, which of the following compiles without a type assertion or narrowing first?",
+      "choices": [
+        "console.log(typeof x)",
+        "console.log(x.toUpperCase())",
+        "x.length",
+        "x + 1"
+      ],
+      "correctIndex": 0,
+      "explanation": "typeof works on any value regardless of its static type, so typeof x compiles fine on an unknown. Accessing x.toUpperCase(), x.length, or doing arithmetic on x all require narrowing unknown to a more specific type first.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#unknown"
+    },
+    {
+      "id": "XCZSOXQEc45X24k6",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 1,
+      "prompt": "Which keyword defines a named object shape that supports declaration merging (multiple declarations combining)?",
+      "choices": [
+        "interface",
+        "type",
+        "class",
+        "enum"
+      ],
+      "correctIndex": 0,
+      "explanation": "interface defines a named object shape and, unlike type, supports declaration merging — multiple interface declarations with the same name are automatically combined into one.",
+      "source": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html"
+    },
+    {
+      "id": "J6WLepT45OCjb6HA",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "Can a <code>type</code> alias represent a union of primitive types (e.g. <code>string | number</code>)?",
+      "choices": [
+        "Yes, type aliases support unions directly; interfaces cannot",
+        "No, only interfaces support unions",
+        "No, unions require classes",
+        "Yes, but interfaces support it identically"
+      ],
+      "correctIndex": 0,
+      "explanation": "type aliases can represent any type, including unions like string | number, directly; interfaces can only describe object (and function/constructor) shapes, not unions of primitives.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases"
+    },
+    {
+      "id": "Gkjy2NaHx2pudIzg",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "How do you extend an interface to add more properties?",
+      "choices": [
+        "interface B extends A { }",
+        "interface B implements A { }",
+        "type B = A & extends { }",
+        "interface B : A { }"
+      ],
+      "correctIndex": 0,
+      "explanation": "interface B extends A { } makes B inherit all of A's members, adding whatever additional members are declared in B's own body.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types"
+    },
+    {
+      "id": "uSrW4gOFtmAzKRvI",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "What does declaration merging allow you to do with two <code>interface Foo</code> declarations in the same scope?",
+      "choices": [
+        "Their members are automatically combined into one interface",
+        "The second declaration throws a duplicate identifier error",
+        "Only the second declaration is used, the first is ignored",
+        "TypeScript requires renaming one of them"
+      ],
+      "correctIndex": 0,
+      "explanation": "Declaration merging means multiple interface Foo declarations in the same scope aren't errors or overwrites — TypeScript automatically merges their members into a single combined interface.",
+      "source": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces"
+    },
+    {
+      "id": "MtqV7UZ8mSXM3WZA",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 3,
+      "prompt": "What's the idiomatic way to combine two object types with <code>type</code> (since <code>extends</code> isn't available on type aliases)?",
+      "choices": [
+        "Intersection: type C = A & B;",
+        "Union: type C = A | B;",
+        "type C = A extends B;",
+        "type C = merge(A, B);"
+      ],
+      "correctIndex": 0,
+      "explanation": "Since type aliases can't use extends, the idiomatic way to combine two object types is an intersection (type C = A & B), which produces a type that has all the members of both A and B.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "JCkPt5gI20NDzitR",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 1,
+      "prompt": "What is the purpose of a generic type parameter like <code><T></code> in <code>function identity<T>(arg: T): T</code>?",
+      "choices": [
+        "It lets the function work with any type while preserving type information through input and output",
+        "It forces the function to only accept numbers",
+        "It disables type checking for the function",
+        "It marks the function as asynchronous"
+      ],
+      "correctIndex": 0,
+      "explanation": "A generic type parameter like <T> lets a function work with whatever type is passed in while preserving that exact type through to the return value, instead of widening it to any or a fixed type.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "xlG6mYCJGKNpLPdg",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 2,
+      "prompt": "What does <code>T extends U</code> mean in a generic constraint like <code>function f<T extends { id: number }>(arg: T)</code>?",
+      "choices": [
+        "T must be a type that is assignable to (has at least the shape of) U",
+        "T must literally equal U",
+        "T inherits U's runtime methods",
+        "T can never be U's subtype"
+      ],
+      "correctIndex": 0,
+      "explanation": "T extends U in a generic constraint restricts T to types that are structurally assignable to U — i.e. T must have at least the shape U requires — not that T must be exactly U.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints"
+    },
+    {
+      "id": "U0rxlFvaHyHKSnot",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 2,
+      "prompt": "Given <code>function firstElement<T>(arr: T[]): T | undefined { return arr[0]; }</code>, what does calling <code>firstElement([1, 2, 3])</code> infer <code>T</code> as?",
+      "choices": [
+        "number",
+        "any",
+        "unknown",
+        "T is left unresolved and must be specified manually"
+      ],
+      "correctIndex": 0,
+      "explanation": "TypeScript infers generic type arguments from how a function is called. Passing [1, 2, 3] (a number[]) lets it infer T as number, so the return type becomes number | undefined.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "qHMlNGpHB9CVRQ5C",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 3,
+      "prompt": "What does this generic function signature describe? <pre>function wrap<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}</pre>",
+      "choices": [
+        "It returns the type of the property at key K on object type T, ensuring key is a valid key of T",
+        "It always returns type T regardless of key",
+        "It throws a compile error because keyof cannot be used in generics",
+        "It converts obj into an array of its keys"
+      ],
+      "correctIndex": 0,
+      "explanation": "K extends keyof T constrains key to only the valid property names of T, and the indexed access type T[K] then gives the precise type of that property — so wrap returns exactly the type of obj[key].",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html"
+    },
+    {
+      "id": "FOZGlgEDPOy5SLOW",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 3,
+      "prompt": "What will TypeScript infer as the return type when this is called as <code>pair<string, number>('a', 1)</code>? <pre>function pair<A, B>(a: A, b: B): [A, B] {\n  return [a, b];\n}</pre>",
+      "choices": [
+        "[string, number]",
+        "[A, B]",
+        "any[]",
+        "TypeError at runtime"
+      ],
+      "correctIndex": 0,
+      "explanation": "Explicit type arguments pair<string, number>('a', 1) substitute A = string and B = number directly into the return type [A, B], giving a concrete tuple return type of [string, number].",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "rVVPcSOd2sUnYOHr",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 1,
+      "prompt": "What does the union type <code>string | number</code> mean for a variable's allowed values?",
+      "choices": [
+        "The variable can hold either a string or a number",
+        "The variable must hold both a string and a number simultaneously",
+        "The variable can only hold string values",
+        "It's invalid syntax"
+      ],
+      "correctIndex": 0,
+      "explanation": "A union type string | number means a value must be one type or the other (though not necessarily known which until it's narrowed) — it does not mean both simultaneously.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types"
+    },
+    {
+      "id": "w6RmMMIdPxsLmWca",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 2,
+      "prompt": "What does the intersection type <code>A & B</code> require of a value?",
+      "choices": [
+        "It must satisfy the members of both A and B simultaneously",
+        "It must satisfy either A or B",
+        "It converts A into B at runtime",
+        "It is only valid for primitive types"
+      ],
+      "correctIndex": 0,
+      "explanation": "An intersection type A & B requires a value to satisfy the members of both A and B at the same time, effectively combining their properties into one type.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "4D6PXcDbbtUD8a5Y",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 2,
+      "prompt": "Given <code>type Status = 'idle' | 'loading' | 'success' | 'error';</code>, what is this pattern called?",
+      "choices": [
+        "A string literal union type",
+        "An enum declaration",
+        "A tuple type",
+        "A mapped type"
+      ],
+      "correctIndex": 0,
+      "explanation": "'idle' | 'loading' | 'success' | 'error' is a union of string literal types — each member is a specific, exact string value rather than the general string type.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types"
+    },
+    {
+      "id": "Zec5216yhzp2MHqN",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 2,
+      "prompt": "What happens with the following? <pre>type A = { x: number };\ntype B = { y: string };\nconst value: A & B = { x: 1, y: 'hi' };</pre>",
+      "choices": [
+        "No error — value must have both x (number) and y (string)",
+        "Error — A and B cannot be intersected",
+        "Error — intersections require identical shapes",
+        "No error, but value is typed as never"
+      ],
+      "correctIndex": 0,
+      "explanation": "A & B is an intersection, so a value assigned to it must satisfy both A and B at once — it needs both an x: number and a y: string — which { x: 1, y: 'hi' } does, so this compiles without error.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "KpAGQBBanPaOpL7W",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 3,
+      "prompt": "Why does <code>type Impossible = { a: string } & { a: number };</code> result in the property <code>a</code> having type <code>never</code>?",
+      "choices": [
+        "Because the intersection requires a to satisfy both string and number simultaneously, which no value can, so TypeScript resolves it to never",
+        "Because TypeScript disallows intersecting object types entirely",
+        "Because a is renamed automatically",
+        "Because string and number are considered identical types"
+      ],
+      "correctIndex": 0,
+      "explanation": "Intersecting { a: string } & { a: number } requires a to be assignable to both string and number simultaneously. No value satisfies both, so TypeScript resolves that property's type to never — the type with no possible values.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "TfvJ78ucN1Za6cH9",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 1,
+      "prompt": "What does the <code>typeof</code> check let TypeScript do inside the if-block here? <pre>function format(value: string | number) {\n  if (typeof value === 'string') {\n    return value.toUpperCase();\n  }\n  return value.toFixed(2);\n}</pre>",
+      "choices": [
+        "Narrow value's type to string inside the if-block, enabling string methods",
+        "Nothing, typeof has no effect on TypeScript's type checking",
+        "Convert value into a string at runtime",
+        "Throw a compile error because value is a union type"
+      ],
+      "correctIndex": 0,
+      "explanation": "TypeScript recognizes typeof value === 'string' as a type guard and narrows value's static type to string for the rest of that block, so calling value.toUpperCase() type-checks.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+    },
+    {
+      "id": "CeorO7yLf5HbHwzO",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 2,
+      "prompt": "What TypeScript feature narrows <code>pet</code> to the <code>Fish</code> type here? <pre>type Fish = { swim: () => void };\ntype Bird = { fly: () => void };\nfunction move(pet: Fish | Bird) {\n  if ('swim' in pet) {\n    pet.swim();\n  }\n}</pre>",
+      "choices": [
+        "The <code>in</code> operator narrowing",
+        "Type assertion via <code>as</code>",
+        "Generic constraints",
+        "Enum discrimination"
+      ],
+      "correctIndex": 0,
+      "explanation": "The in operator, used as a type guard ('swim' in pet), lets TypeScript narrow pet to whichever union member actually has that property — here, Fish — inside the if-block.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing"
+    },
+    {
+      "id": "ufaXmEtv8onmqe3h",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 2,
+      "prompt": "What pattern is used to narrow the union safely here? <pre>type Shape =\n  | { kind: 'circle'; radius: number }\n  | { kind: 'square'; side: number };\n\nfunction area(s: Shape) {\n  if (s.kind === 'circle') return Math.PI * s.radius ** 2;\n  return s.side ** 2;\n}</pre>",
+      "choices": [
+        "Discriminated union narrowing via a common literal tag property",
+        "Structural duck typing with no compile-time checks",
+        "Type erasure",
+        "Generic inference"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shape is a discriminated union: each member shares a common literal 'tag' property (kind) with a distinct value, letting TypeScript narrow to the exact member based on a check like s.kind === 'circle'.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions"
+    },
+    {
+      "id": "F80cwmU6zTk8n7rt",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 3,
+      "prompt": "What does this user-defined type guard enable? <pre>function isString(value: unknown): value is string {\n  return typeof value === 'string';\n}</pre>",
+      "choices": [
+        "Calling isString(x) narrows x's type to string in the branch where it returns true",
+        "It converts any value into a string",
+        "It only works on arrays",
+        "It disables type checking for value"
+      ],
+      "correctIndex": 0,
+      "explanation": "A function with a `value is Type` return type is a user-defined type guard. When isString(x) returns true, TypeScript narrows x's type to string within that branch, just like a built-in typeof check.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates"
+    },
+    {
+      "id": "cFMS8Cojii2OyPhd",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 3,
+      "prompt": "Given <code>function assertIsNumber(val: unknown): asserts val is number { if (typeof val !== 'number') throw new Error(); }</code>, what happens to val's type after a call to this function that doesn't throw?",
+      "choices": [
+        "TypeScript narrows val's type to number for the rest of that scope",
+        "Nothing, assertion functions don't affect types, only runtime behavior",
+        "It converts val into a string",
+        "It only works inside generic functions"
+      ],
+      "correctIndex": 0,
+      "explanation": "An assertion function declared with `asserts val is number` tells TypeScript that, if the call returns without throwing, val can be narrowed to number for the rest of the enclosing scope.",
+      "source": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions"
+    },
+    {
+      "id": "UI4puHc6cmA3RM2n",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 1,
+      "prompt": "Which built-in utility type makes all properties of a type optional?",
+      "choices": [
+        "Partial<T>",
+        "Required<T>",
+        "Readonly<T>",
+        "Record<K, T>"
+      ],
+      "correctIndex": 0,
+      "explanation": "Partial<T> produces a new type with every property of T made optional, useful for representing partial updates to an object.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
+    },
+    {
+      "id": "CoVBviCKHNlhT151",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 1,
+      "prompt": "Which utility type makes all properties of a type required, even if originally optional?",
+      "choices": [
+        "Required<T>",
+        "Partial<T>",
+        "Pick<T, K>",
+        "Omit<T, K>"
+      ],
+      "correctIndex": 0,
+      "explanation": "Required<T> is the opposite of Partial<T> — it produces a type where every property of T is mandatory, even ones originally declared optional.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype"
+    },
+    {
+      "id": "I4fgpjOFWncgx75r",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 2,
+      "prompt": "What does <code>Pick<T, 'a' | 'b'></code> produce?",
+      "choices": [
+        "A type with only the properties a and b from T",
+        "A type with all properties of T except a and b",
+        "An array of T's keys",
+        "A type identical to T"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pick<T, K> constructs a new type containing only the properties named in the union K, so Pick<T, 'a' | 'b'> keeps just a and b from T.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
+    },
+    {
+      "id": "fZKwr3C1BMxorT2n",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 2,
+      "prompt": "What does <code>Omit<T, 'a'></code> produce?",
+      "choices": [
+        "A type with all of T's properties except a",
+        "A type with only property a",
+        "A type where a is optional",
+        "A type where a becomes readonly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Omit<T, K> is the inverse of Pick — it constructs a type with all of T's properties except the ones named in K, so Omit<T, 'a'> keeps everything but a.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+    },
+    {
+      "id": "UDrByc2FB6ItBoBU",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 3,
+      "prompt": "What does <code>Record<'a' | 'b', number></code> produce?",
+      "choices": [
+        "{ a: number; b: number }",
+        "['a', 'b'][]",
+        "A number that is either a or b",
+        "A type error, Record cannot take a union"
+      ],
+      "correctIndex": 0,
+      "explanation": "Record<K, T> builds an object type whose keys are the members of union K, each mapped to type T, so Record<'a' | 'b', number> is equivalent to { a: number; b: number }.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
+    },
+    {
+      "id": "vEttQk58whRBW97r",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 1,
+      "prompt": "What does a numeric TypeScript enum default its member values to, if not explicitly assigned?",
+      "choices": [
+        "Auto-incrementing integers starting at 0",
+        "Random unique numbers",
+        "Always 1",
+        "undefined for every member"
+      ],
+      "correctIndex": 0,
+      "explanation": "In a numeric enum, members without an explicit value default to auto-incrementing integers starting at 0 for the first member.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#numeric-enums"
+    },
+    {
+      "id": "BQXGeZYZ1o7WCjwD",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 2,
+      "prompt": "What is a key difference between a <code>const enum</code> and a regular <code>enum</code>?",
+      "choices": [
+        "const enum members are fully inlined at compile time and produce no runtime object",
+        "const enum values can be reassigned at runtime",
+        "const enum only supports string values",
+        "There is no difference"
+      ],
+      "correctIndex": 0,
+      "explanation": "const enum members are inlined directly at their usage sites during compilation and don't generate a runtime lookup object at all, unlike a regular enum, which compiles to an actual JS object.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#const-enums"
+    },
+    {
+      "id": "KEaXGqlPi1F6QcUJ",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 2,
+      "prompt": "What do string enums provide that numeric enums don't?",
+      "choices": [
+        "More meaningful, self-documenting runtime values instead of arbitrary numbers, with no reverse mapping generated",
+        "Automatic incrementing of unrelated values",
+        "Faster runtime performance in all cases",
+        "The ability to mix types within the same member"
+      ],
+      "correctIndex": 0,
+      "explanation": "String enum members must be initialized with string literals, giving each member a meaningful, self-documenting runtime value — and unlike numeric enums, string enums don't generate a reverse mapping.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#string-enums"
+    },
+    {
+      "id": "9PCTC4P8pSJDJtF0",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 3,
+      "prompt": "Given <code>enum Direction { Up, Down }</code>, what does the compiled JavaScript's reverse mapping allow?",
+      "choices": [
+        "Looking up the member name from its numeric value at runtime (e.g. Direction[0] === 'Up')",
+        "Converting the enum into a string enum automatically",
+        "Preventing any runtime access to enum values",
+        "Making the enum immutable by default"
+      ],
+      "correctIndex": 0,
+      "explanation": "Numeric enums compile with a reverse mapping, so you can look up a member's name from its numeric value at runtime — e.g. Direction[0] evaluates to the string 'Up'.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings"
+    },
+    {
+      "id": "QP2HuqGAucnuVHLi",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 3,
+      "prompt": "Why do many TypeScript style guides recommend a union of string literals (e.g. <code>type Direction = 'up' | 'down'</code>) over enums in some cases?",
+      "choices": [
+        "Literal unions have no runtime footprint and avoid enum-specific quirks like reverse mappings, while still providing type safety",
+        "Because enums are deprecated and no longer supported",
+        "Because literal unions support more values than enums",
+        "Because enums cannot be used in switch statements"
+      ],
+      "correctIndex": 0,
+      "explanation": "A union of string literals compiles away entirely — it has zero runtime footprint — and sidesteps enum-specific quirks like numeric reverse mappings, while TypeScript still enforces that only the listed values are valid.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#objects-vs-enums"
+    },
+    {
+      "id": "5eQvj8AIH2LIAZv4",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 1,
+      "prompt": "Which access modifier restricts a class member to being visible only within the declaring class itself?",
+      "choices": [
+        "private",
+        "public",
+        "protected",
+        "readonly"
+      ],
+      "correctIndex": 0,
+      "explanation": "private restricts a class member so it's only accessible from within the declaring class itself — not from subclasses and not from outside code.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#private"
+    },
+    {
+      "id": "R9sBlzzKUxy8mETB",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 1,
+      "prompt": "Which access modifier allows a member to be accessed by the declaring class and its subclasses, but not from outside?",
+      "choices": [
+        "protected",
+        "private",
+        "public",
+        "static"
+      ],
+      "correctIndex": 0,
+      "explanation": "protected allows a member to be accessed from the declaring class and any of its subclasses, but not from outside the class hierarchy — a middle ground between private and public.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#protected"
+    },
+    {
+      "id": "clrDPWHxuD1Ru8vO",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 2,
+      "prompt": "What does the <code>readonly</code> modifier on a class property enforce?",
+      "choices": [
+        "The property can only be assigned once (typically in the constructor) and not reassigned afterward",
+        "The property cannot be read outside the class",
+        "The property must always be a primitive",
+        "The property is automatically static"
+      ],
+      "correctIndex": 0,
+      "explanation": "readonly enforces that a property can only be assigned once — typically in the constructor — after which any further assignment is a compile-time error.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly"
+    },
+    {
+      "id": "jy0NLfa2Aq3bMyuV",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 2,
+      "prompt": "What is TypeScript's shorthand for declaring and assigning a class property directly in the constructor's parameter list, as shown here? <pre>class Point {\n  constructor(private x: number, private y: number) {}\n}</pre>",
+      "choices": [
+        "Parameter property shorthand",
+        "Generic constraint syntax",
+        "Interface merging",
+        "Access modifier inference"
+      ],
+      "correctIndex": 0,
+      "explanation": "Adding an access modifier (like private) directly to a constructor parameter is TypeScript's parameter property shorthand — it both declares the class property and assigns it from the argument in one step.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties"
+    },
+    {
+      "id": "A1Rigd6E7kWHDXED",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 3,
+      "prompt": "What is the difference between an <code>abstract class</code> and a regular class, regarding instantiation?",
+      "choices": [
+        "An abstract class cannot be instantiated directly and may declare methods without implementations that subclasses must implement",
+        "Abstract classes can only contain static methods",
+        "Abstract classes are identical to interfaces in every way, including at runtime",
+        "Abstract classes cannot be extended"
+      ],
+      "correctIndex": 0,
+      "explanation": "An abstract class can't be instantiated directly with new — it exists to be subclassed — and it may declare abstract methods with no implementation that concrete subclasses are required to implement.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members"
+    },
+    {
+      "id": "s3trBWII7isvdw6T",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 1,
+      "prompt": "How do you type a function parameter as optional in TypeScript?",
+      "choices": [
+        "function f(name?: string) {}",
+        "function f(name: string?) {}",
+        "function f(name: optional string) {}",
+        "function f(name: string | null!) {}"
+      ],
+      "correctIndex": 0,
+      "explanation": "Appending ? after a parameter name, as in function f(name?: string) {}, marks that parameter as optional, meaning callers may omit it entirely.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#optional-parameters"
+    },
+    {
+      "id": "bAcRIz2sjzZ9WSxD",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 2,
+      "prompt": "What does a function overload signature let you express that a single generic signature can't easily?",
+      "choices": [
+        "Different parameter/return type combinations for the same function name, each checked independently",
+        "Multiple runtime implementations executed simultaneously",
+        "Automatic currying of the function",
+        "That the function is asynchronous"
+      ],
+      "correctIndex": 0,
+      "explanation": "Overload signatures let you declare several distinct parameter/return type combinations for the same function name, each checked independently by callers, which a single generic signature often can't express precisely.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads"
+    },
+    {
+      "id": "xPnwOyvv9YvwYEuH",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 2,
+      "prompt": "What does typing a callback parameter as <code>(value: number) => void</code> communicate?",
+      "choices": [
+        "The callback takes a number argument and its return value is ignored",
+        "The callback must return a number",
+        "The callback is optional",
+        "The callback runs asynchronously"
+      ],
+      "correctIndex": 0,
+      "explanation": "A function type (value: number) => void describes a callback that must accept a number argument and whose return value is expected to be ignored by the caller.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-type-expressions"
+    },
+    {
+      "id": "x7UesOK3Zau1aUyA",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 3,
+      "prompt": "What is the purpose of these function overload signatures? <pre>function reverse(value: string): string;\nfunction reverse<T>(value: T[]): T[];\nfunction reverse(value: any): any {\n  // implementation\n}</pre>",
+      "choices": [
+        "To give callers precise, type-specific return types (string in, string out; T[] in, T[] out) while sharing one implementation",
+        "To allow the function to accept unlimited argument counts",
+        "To make the function generic only for arrays",
+        "To disable type checking on the implementation signature"
+      ],
+      "correctIndex": 0,
+      "explanation": "These overload signatures give callers precise, input-specific return types — a string argument yields a string return, and a T[] argument yields a T[] return — while a single, loosely-typed implementation signature handles both cases at runtime.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads"
+    },
+    {
+      "id": "ndMsxAtP4RC6a5Rd",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 3,
+      "prompt": "What does the <code>this</code> parameter do in the following interface method signature? <pre>interface Button {\n  onClick(this: HTMLButtonElement, event: MouseEvent): void;\n}</pre>",
+      "choices": [
+        "It documents and type-checks what <code>this</code> should be when the method is called, without being a real runtime parameter",
+        "It declares a real parameter that callers must pass explicitly",
+        "It is ignored entirely by the compiler",
+        "It makes the method static"
+      ],
+      "correctIndex": 0,
+      "explanation": "A this parameter in a function/method signature is a compile-time-only construct that documents and type-checks what this must be when the method is invoked; it is erased during compilation and isn't a real parameter callers pass.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#declaring-this-in-a-function"
+    },
+    {
+      "id": "zFe4BcyiR7ZayIn8",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 2,
+      "prompt": "What does the <code>keyof</code> operator produce when applied to a type?",
+      "choices": [
+        "A union of the type's property names as string (or symbol) literal types",
+        "An array of the type's values",
+        "The number of properties on the type",
+        "A new empty type"
+      ],
+      "correctIndex": 0,
+      "explanation": "keyof T produces a union of all of T's property names as string (or symbol/number) literal types, which is commonly used to constrain generic key parameters.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html"
+    },
+    {
+      "id": "zCalFj4rMzcoNeSs",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 2,
+      "prompt": "What does <code>typeof</code> do when used in a type position (not a value position), e.g. <code>type T = typeof someVariable</code>?",
+      "choices": [
+        "Extracts the static type of someVariable for reuse as a type",
+        "Returns the runtime string 'object' or similar",
+        "Converts someVariable into a string",
+        "Is invalid syntax in TypeScript"
+      ],
+      "correctIndex": 0,
+      "explanation": "Used in a type position, typeof someVariable extracts the static TypeScript type that was inferred for someVariable, letting you reuse it as a type elsewhere — this is distinct from the runtime typeof operator.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/typeof-types.html"
+    },
+    {
+      "id": "5MJZpEa8ovVCwJw4",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 3,
+      "prompt": "What does this mapped type produce for a given object type T? <pre>type ReadonlyVersion<T> = {\n  readonly [K in keyof T]: T[K];\n};</pre>",
+      "choices": [
+        "A version of T with every property marked readonly, otherwise identical",
+        "A version of T with every property removed",
+        "A version of T where all values become strings",
+        "An error, mapped types cannot use readonly"
+      ],
+      "correctIndex": 0,
+      "explanation": "This mapped type iterates every key K in keyof T and re-declares each property with the readonly modifier while keeping its original type T[K], producing a fully read-only version of T.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/mapped-types.html"
+    },
+    {
+      "id": "RA6Cqu8AkCpZj4e4",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 3,
+      "prompt": "What does this conditional type resolve to? <pre>type IsString<T> = T extends string ? true : false;\ntype A = IsString<'hello'>;\ntype B = IsString<42>;</pre>",
+      "choices": [
+        "A is true, B is false",
+        "A is false, B is true",
+        "Both A and B are true",
+        "Both A and B are never"
+      ],
+      "correctIndex": 0,
+      "explanation": "Conditional types evaluate T extends string ? true : false per type argument: 'hello' is assignable to string, so A is true; 42 is not, so B is false.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html"
+    },
+    {
+      "id": "YGzbawnjzyK0Y43g",
+      "type": "multiple-choice",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 3,
+      "prompt": "What does <code>infer</code> do inside a conditional type, as shown here? <pre>type ReturnTypeOf<T> = T extends (...args: any[]) => infer R ? R : never;</pre>",
+      "choices": [
+        "It captures and extracts a type (here, the function's return type) for use within the conditional type's true branch",
+        "It forces T to be inferred as any",
+        "It only works on array types",
+        "It declares a new generic constraint that T must extend"
+      ],
+      "correctIndex": 0,
+      "explanation": "infer introduces a new type variable (here R) that TypeScript infers from matching the checked type's structure — capturing a function's return type — for use within the conditional type's true branch.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types"
+    },
+    {
+      "id": "3MznyKgR8lnEmax8",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 1,
+      "prompt": "Which keyword declares a variable that cannot be reassigned after initialization?",
+      "correctAnswer": "const",
+      "explanation": "<code>const</code> creates a block-scoped binding that cannot be reassigned; note that objects/arrays assigned to a <code>const</code> can still have their contents mutated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const"
+    },
+    {
+      "id": "XP9Romeee25mfZx9",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 1,
+      "prompt": "<pre>console.log(x);\nvar x;</pre> What is logged?",
+      "correctAnswer": "undefined",
+      "explanation": "<code>var</code> declarations are hoisted and initialized to <code>undefined</code> before execution reaches the assignment, so reading it before assignment logs <code>undefined</code> rather than throwing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting"
+    },
+    {
+      "id": "wO212lNm60NRGsaa",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 2,
+      "prompt": "Which keyword declares a function-scoped (not block-scoped) variable?",
+      "correctAnswer": "var",
+      "explanation": "<code>var</code> is scoped to the nearest enclosing function (or the global scope), unlike <code>let</code>/<code>const</code>, which are block-scoped.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var"
+    },
+    {
+      "id": "WPOaBLt5sl1RbNqc",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 2,
+      "prompt": "What is the term for JavaScript moving variable and function declarations to the top of their scope before code executes?",
+      "correctAnswer": "hoisting",
+      "explanation": "Hoisting is the behavior where declarations are processed before any code runs, which is why <code>var</code> variables and function declarations are usable (though not necessarily initialized) before their literal position in the source.",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting"
+    },
+    {
+      "id": "GchuaZYcyVJOvYVS",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "variables-scoping",
+      "difficulty": 3,
+      "prompt": "What is the name of the period during which a <code>let</code> or <code>const</code> variable exists but cannot be accessed before its declaration line runs?",
+      "correctAnswer": "temporal dead zone",
+      "explanation": "The temporal dead zone (TDZ) spans from the start of the block to the point of declaration; accessing the variable in that window throws a <code>ReferenceError</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz"
+    },
+    {
+      "id": "IhzZ7ab8SJ5EWWV9",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 1,
+      "prompt": "What do you call a function that retains access to variables from its enclosing scope even after that scope has finished executing?",
+      "correctAnswer": "closure",
+      "explanation": "A closure bundles a function together with references to the surrounding state it was created in, letting it keep reading/writing those variables later.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "wA7WTcNt1Uw0steV",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 2,
+      "prompt": "<pre>function outer() {\n  let count = 0;\n  return function () {\n    return ++count;\n  };\n}\nconst inc = outer();\nconsole.log(inc());</pre> What is logged?",
+      "correctAnswer": "1",
+      "explanation": "The returned function closes over <code>count</code>. The first call increments it from 0 to 1 and returns 1.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "Q9ASxcGc9E2TruRG",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 2,
+      "prompt": "<pre>function makeCounter() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    get: () => count,\n  };\n}\nconst counter = makeCounter();\ncounter.increment();\ncounter.increment();\nconsole.log(counter.get());</pre> What is logged?",
+      "correctAnswer": "2",
+      "explanation": "Both closures returned from <code>makeCounter</code> share the same <code>count</code> binding, so two calls to <code>increment</code> bring it to 2 before <code>get</code> reads it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "cUW1GVZECoQzxfuL",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 2,
+      "prompt": "Which keyword, used in a for-loop instead of <code>var</code>, gives each iteration's closure its own independent binding of the loop variable?",
+      "correctAnswer": "let",
+      "explanation": "<code>let</code> creates a fresh binding per iteration, so closures created inside the loop each capture their own copy of the variable instead of one shared <code>var</code> binding.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake"
+    },
+    {
+      "id": "DfpZYUbf8HY3UNIs",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "closures",
+      "difficulty": 3,
+      "prompt": "True or false: a variable referenced by an active closure can be garbage collected while the closure still exists.",
+      "correctAnswer": "false",
+      "explanation": "As long as a closure still references a variable from its outer scope, that variable stays reachable and cannot be garbage collected.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    },
+    {
+      "id": "KOHyhytbYlzWXyJm",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 1,
+      "prompt": "<pre>function Person(name) {\n  this.name = name;\n}\nconst p = new Person('Ada');\nconsole.log(p.name);</pre> What is logged?",
+      "correctAnswer": "Ada",
+      "explanation": "Calling a function with <code>new</code> creates a new object and binds <code>this</code> to it, so <code>this.name = name</code> assigns <code>'Ada'</code> onto the new instance.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"
+    },
+    {
+      "id": "Mhx8ct5P5hWZaQt6",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 1,
+      "prompt": "Which method invokes a function immediately with a given <code>this</code> value and arguments passed individually (not as an array)?",
+      "correctAnswer": "call",
+      "explanation": "<code>Function.prototype.call</code> invokes the function right away with the supplied <code>this</code> and a comma-separated argument list.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"
+    },
+    {
+      "id": "YKqhcFrqn7c1bL2E",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 2,
+      "prompt": "Which method invokes a function immediately with a given <code>this</code> value and arguments passed as an array?",
+      "correctAnswer": "apply",
+      "explanation": "<code>Function.prototype.apply</code> behaves like <code>call</code> but takes its arguments bundled into a single array.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"
+    },
+    {
+      "id": "RsJqI52F9Jq3zi5h",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 2,
+      "prompt": "Which method permanently binds a function's <code>this</code> value and returns a new function without invoking it immediately?",
+      "correctAnswer": "bind",
+      "explanation": "<code>Function.prototype.bind</code> returns a new function with <code>this</code> (and optionally leading arguments) permanently fixed, ready to be called later.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind"
+    },
+    {
+      "id": "qoT92XHYMEHkJVQI",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "this-and-context",
+      "difficulty": 3,
+      "prompt": "<pre>const obj = {\n  value: 10,\n  getValue: () => this.value,\n};\nconsole.log(obj.getValue());</pre> What is logged?",
+      "correctAnswer": "undefined",
+      "explanation": "Arrow functions don't have their own <code>this</code> — <code>getValue</code> inherits <code>this</code> from the surrounding (module/global) scope, not from <code>obj</code>, so <code>this.value</code> is <code>undefined</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
+    },
+    {
+      "id": "V7OEW4yVTZ5XcOeY",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 1,
+      "prompt": "Which method, written as <code>Object.methodName</code>, creates a new object using a given object as its prototype?",
+      "correctAnswer": "Object.create",
+      "explanation": "<code>Object.create(proto)</code> builds a new object whose internal <code>[[Prototype]]</code> is set to <code>proto</code>, without copying <code>proto</code>'s own properties.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create"
+    },
+    {
+      "id": "GzpXymJABUYvLNp9",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 1,
+      "prompt": "What is the name of the internal mechanism by which one object can inherit properties from another?",
+      "correctAnswer": "prototype chain",
+      "explanation": "Every object has an internal link to another object (its prototype); property lookups walk this chain until a match is found or the chain ends.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain"
+    },
+    {
+      "id": "vMoOiSZKpTT6hZA5",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 2,
+      "prompt": "Which operator checks whether an object's prototype chain includes a given constructor's prototype?",
+      "correctAnswer": "instanceof",
+      "explanation": "<code>a instanceof B</code> checks whether <code>B.prototype</code> appears anywhere in <code>a</code>'s prototype chain.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof"
+    },
+    {
+      "id": "LEVs6Z4YPaJEAmPh",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 2,
+      "prompt": "Which method, written as <code>Object.methodName</code>, prevents any changes to an object's existing own properties?",
+      "correctAnswer": "Object.freeze",
+      "explanation": "<code>Object.freeze(obj)</code> prevents adding, removing, or reassigning <code>obj</code>'s own properties (shallowly).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"
+    },
+    {
+      "id": "HUOszlwMI1rx79Fi",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "prototypes-oop",
+      "difficulty": 3,
+      "prompt": "<pre>function Animal() {}\nAnimal.prototype.speak = () => 'noise';\nconst a = new Animal();\nconsole.log(a.speak());</pre> What is logged?",
+      "correctAnswer": "noise",
+      "explanation": "<code>a</code> doesn't have its own <code>speak</code> property, so the lookup falls through the prototype chain to <code>Animal.prototype.speak</code>, which returns <code>'noise'</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain"
+    },
+    {
+      "id": "pQ58eclzVpZh7zJu",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 1,
+      "prompt": "Which Promise state means the operation completed successfully?",
+      "correctAnswer": "fulfilled",
+      "explanation": "A promise is always pending, fulfilled (resolved with a value), or rejected (failed with a reason).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+    },
+    {
+      "id": "UBJwIAmLeIEOeZz8",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 1,
+      "prompt": "Which keyword pauses execution inside an <code>async</code> function until a Promise settles?",
+      "correctAnswer": "await",
+      "explanation": "<code>await</code> suspends the enclosing async function until the awaited promise settles, without blocking the rest of the JS runtime.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await"
+    },
+    {
+      "id": "oql3mdoAwrpBPtaU",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 2,
+      "prompt": "Which Promise method, written as <code>Promise.methodName</code>, resolves when every promise in an array fulfills, but rejects immediately if any one rejects?",
+      "correctAnswer": "Promise.all",
+      "explanation": "<code>Promise.all</code> waits for all promises to fulfill and resolves with an array of their values, short-circuiting to reject as soon as any promise rejects.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"
+    },
+    {
+      "id": "8uzaM9I4MxpuWn0O",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 2,
+      "prompt": "Which Promise method, written as <code>Promise.methodName</code>, resolves with a result for every promise regardless of whether each one fulfilled or rejected?",
+      "correctAnswer": "Promise.allSettled",
+      "explanation": "<code>Promise.allSettled</code> never short-circuits — it waits for every promise to settle and resolves with an array of <code>{status, value|reason}</code> objects.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"
+    },
+    {
+      "id": "4Wxoyazu8AfURn3z",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "async-promises",
+      "difficulty": 3,
+      "prompt": "<pre>console.log('A');\nPromise.resolve().then(() => console.log('B'));\nconsole.log('C');</pre> What is the last value logged?",
+      "correctAnswer": "B",
+      "explanation": "Synchronous code runs first ('A', then 'C'); the <code>.then</code> callback is queued as a microtask and runs only after the current synchronous code finishes, so 'B' logs last.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises"
+    },
+    {
+      "id": "83twCaHMx0Ww0IyO",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 1,
+      "prompt": "What is the name of the JS runtime structure that tracks the currently executing function calls in last-in-first-out order?",
+      "correctAnswer": "call stack",
+      "explanation": "The call stack pushes a new frame each time a function is called and pops it when that function returns.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop#stack"
+    },
+    {
+      "id": "KNP68czfc5GgV9nu",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "What is the term for the queue that holds callbacks like Promise <code>.then</code> handlers, which is fully drained before the next macrotask runs?",
+      "correctAnswer": "microtask queue",
+      "explanation": "Once the current synchronous code finishes, the JS runtime fully drains the microtask queue before moving on to the next macrotask (timers, I/O).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"
+    },
+    {
+      "id": "TdYiwObQNYNeEYyQ",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "Which global function schedules a callback to run as a macrotask after a minimum delay in milliseconds?",
+      "correctAnswer": "setTimeout",
+      "explanation": "<code>setTimeout(fn, ms)</code> schedules <code>fn</code> to run on a future macrotask tick, at minimum after <code>ms</code> milliseconds — never immediately.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout"
+    },
+    {
+      "id": "chHhkW2oIytiooMg",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 2,
+      "prompt": "Which global function queues a callback to run as a microtask as soon as possible?",
+      "correctAnswer": "queueMicrotask",
+      "explanation": "<code>queueMicrotask</code> schedules a callback on the microtask queue directly, without needing a Promise.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask"
+    },
+    {
+      "id": "sk8peS8qlFWjmj93",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "event-loop",
+      "difficulty": 3,
+      "prompt": "<pre>console.log(1);\nsetTimeout(() => console.log(2), 0);\nPromise.resolve().then(() => console.log(3));\nconsole.log(4);</pre> What is the 3rd value logged?",
+      "correctAnswer": "3",
+      "explanation": "Synchronous code runs first (1, then 4), then the microtask queue drains (3), and only then does the macrotask from <code>setTimeout</code> run (2) — giving the order 1, 4, 3, 2.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop"
+    },
+    {
+      "id": "zDq0eiz99N2PWrQM",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 1,
+      "prompt": "Which array method adds one or more elements to the end of an array and returns the new length?",
+      "correctAnswer": "push",
+      "explanation": "<code>Array.prototype.push</code> mutates the array in place, appending elements and returning the resulting length.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push"
+    },
+    {
+      "id": "2ObiyUygkBRh88Cp",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 1,
+      "prompt": "Which array method removes the last element from an array and returns it?",
+      "correctAnswer": "pop",
+      "explanation": "<code>Array.prototype.pop</code> mutates the array, removing and returning its last element (or <code>undefined</code> if empty).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop"
+    },
+    {
+      "id": "LPb3NCDqanbwkZFk",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 2,
+      "prompt": "Which array method returns a new array containing only the elements that satisfy a test function?",
+      "correctAnswer": "filter",
+      "explanation": "<code>Array.prototype.filter</code> returns a new array with only the elements for which the callback returns a truthy value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+    },
+    {
+      "id": "TIKNhwOuF09ILLgY",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 2,
+      "prompt": "Which array method returns the first element that satisfies a given test function, or <code>undefined</code> if none match?",
+      "correctAnswer": "find",
+      "explanation": "<code>Array.prototype.find</code> stops at the first matching element and returns it directly, rather than an array of matches.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
+    },
+    {
+      "id": "24sxmm4GSbtH6g1Y",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "arrays-methods",
+      "difficulty": 3,
+      "prompt": "<pre>console.log([1, 2, 3].reduce((a, b) => a + b, 0));</pre> What is logged?",
+      "correctAnswer": "6",
+      "explanation": "<code>reduce</code> carries an accumulator through each element: 0+1=1, 1+2=3, 3+3=6, giving a final result of 6.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"
+    },
+    {
+      "id": "m4EdYF8T2aVBeKBi",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 1,
+      "prompt": "<pre>const { a } = { a: 5, b: 6 };\nconsole.log(a);</pre> What is logged?",
+      "correctAnswer": "5",
+      "explanation": "Object destructuring pulls the <code>a</code> property off the right-hand object and binds it to a local variable of the same name.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    },
+    {
+      "id": "YfGz4v45wxxdUu2v",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "Which method, written as <code>Object.methodName</code>, returns an array of a given object's own enumerable [key, value] pairs?",
+      "correctAnswer": "Object.entries",
+      "explanation": "<code>Object.entries(obj)</code> returns an array of <code>[key, value]</code> pairs for <code>obj</code>'s own enumerable properties.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
+    },
+    {
+      "id": "fynVzSau4GTn8th6",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "Which method, written as <code>Object.methodName</code>, returns an array of a given object's own enumerable property names?",
+      "correctAnswer": "Object.keys",
+      "explanation": "<code>Object.keys(obj)</code> returns an array containing just <code>obj</code>'s own enumerable property names.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"
+    },
+    {
+      "id": "dGSrgARXosdS8pXd",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 2,
+      "prompt": "<pre>const { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(Object.keys(rest).length);</pre> What is logged?",
+      "correctAnswer": "2",
+      "explanation": "The rest pattern collects whatever properties weren't already destructured, so <code>rest</code> is <code>{ b: 2, c: 3 }</code>, which has 2 keys.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring"
+    },
+    {
+      "id": "IS5yqvqeJzft0rOE",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "objects-destructuring",
+      "difficulty": 3,
+      "prompt": "Which method, written as <code>Object.methodName</code>, copies all enumerable own properties from one or more source objects into a target object?",
+      "correctAnswer": "Object.assign",
+      "explanation": "<code>Object.assign(target, ...sources)</code> copies enumerable own properties from each source object onto <code>target</code>, returning <code>target</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"
+    },
+    {
+      "id": "3KsCXrDVHwmc3koH",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 1,
+      "prompt": "What three-character symbol is used to spread the elements of an array or object?",
+      "correctAnswer": "...",
+      "explanation": "The spread syntax (<code>...</code>) expands an iterable's elements (or an object's own enumerable properties) in place.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax"
+    },
+    {
+      "id": "6BE4TS6swPZo2Wpm",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 1,
+      "prompt": "What is the name (singular) of the character used to delimit template literals?",
+      "correctAnswer": "backtick",
+      "explanation": "Template literals are delimited by backticks (`), which also enable <code>${...}</code> interpolation and multi-line strings.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals"
+    },
+    {
+      "id": "14NS3Sk51hN7pcoQ",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 2,
+      "prompt": "<pre>function greet(name = 'World') {\n  return `Hi ${name}`;\n}\nconsole.log(greet());</pre> What is logged?",
+      "correctAnswer": "Hi World",
+      "explanation": "Default parameters are used whenever the argument is <code>undefined</code> — since <code>greet()</code> is called with no argument, <code>name</code> falls back to <code>'World'</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters"
+    },
+    {
+      "id": "HqlHbUEA0V22kdQI",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 2,
+      "prompt": "What is the term for the <code>...</code> syntax when used in a function's parameter list to collect all remaining arguments into an array?",
+      "correctAnswer": "rest parameters",
+      "explanation": "Rest parameters (<code>...nums</code>) gather all remaining arguments passed to the function into a single real array.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters"
+    },
+    {
+      "id": "qPAajxaPO405fkXW",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "es6-features",
+      "difficulty": 3,
+      "prompt": "Which two-character operator returns its right-hand value only when the left-hand value is <code>null</code> or <code>undefined</code>?",
+      "correctAnswer": "??",
+      "explanation": "The nullish coalescing operator (<code>??</code>) falls back to its right-hand operand only for <code>null</code>/<code>undefined</code>, unlike <code>||</code>, which also falls back on any falsy value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing"
+    },
+    {
+      "id": "EVAxr2RW5kiLu0xf",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 1,
+      "prompt": "<pre>console.log('5' == 5);</pre> What is logged?",
+      "correctAnswer": "true",
+      "explanation": "<code>==</code> coerces types before comparing, converting <code>'5'</code> to the number <code>5</code>, so the comparison is <code>true</code>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality"
+    },
+    {
+      "id": "G3bQM6P7ze96Urev",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 1,
+      "prompt": "<pre>console.log('5' === 5);</pre> What is logged?",
+      "correctAnswer": "false",
+      "explanation": "<code>===</code> never coerces types, so a string and a number are always unequal regardless of apparent value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality"
+    },
+    {
+      "id": "knIeJ3Lo3huu8Gfb",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 2,
+      "prompt": "Which method reliably checks whether a value is <code>NaN</code>, without first coercing non-number values?",
+      "correctAnswer": "Number.isNaN",
+      "explanation": "Unlike the global <code>isNaN</code>, <code>Number.isNaN</code> returns <code>true</code> only for the actual <code>NaN</code> value, with no coercion.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN"
+    },
+    {
+      "id": "7ELM7VxvWLSLGwwj",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 2,
+      "prompt": "<pre>console.log(typeof NaN);</pre> What is logged?",
+      "correctAnswer": "number",
+      "explanation": "<code>NaN</code> is, perhaps surprisingly, a value of type <code>number</code> in JavaScript — it represents an invalid numeric result.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN"
+    },
+    {
+      "id": "PDVMx8VlXfWVOW3A",
+      "type": "text-answer",
+      "language": "javascript",
+      "category": "equality-coercion",
+      "difficulty": 3,
+      "prompt": "Which method, written as <code>Object.methodName</code>, correctly distinguishes <code>-0</code> from <code>+0</code> and treats <code>NaN</code> as equal to itself, unlike <code>===</code>?",
+      "correctAnswer": "Object.is",
+      "explanation": "<code>Object.is(NaN, NaN)</code> returns <code>true</code> and <code>Object.is(-0, 0)</code> returns <code>false</code> — both differ from <code>===</code>'s behavior.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is"
+    },
+    {
+      "id": "UVu47ZY2YqAcwhx1",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 1,
+      "prompt": "Which type represents any JavaScript value and completely disables type checking on it?",
+      "correctAnswer": "any",
+      "explanation": "<code>any</code> opts a value out of type safety entirely — you can assign it anything and access any property without the compiler complaining.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"
+    },
+    {
+      "id": "VnUuzN26ana8Fn09",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 1,
+      "prompt": "Which type is the type-safe counterpart to <code>any</code>, requiring you to narrow it before using the value?",
+      "correctAnswer": "unknown",
+      "explanation": "TypeScript won't let you access properties or call methods on an <code>unknown</code> value until you've narrowed it with a type guard or assertion.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#unknown"
+    },
+    {
+      "id": "cHnRgC1Umgr4Yr1e",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 2,
+      "prompt": "Which type represents a value that can never occur, typically used as the return type of a function that always throws?",
+      "correctAnswer": "never",
+      "explanation": "<code>never</code> is the correct return type for a function that never completes normally, since it never actually produces a return value.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#never"
+    },
+    {
+      "id": "yyiG6Y7kAsBVikjh",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 2,
+      "prompt": "Which type describes the absence of a meaningful return value from a function?",
+      "correctAnswer": "void",
+      "explanation": "<code>void</code> means a function's return value is meaningless and callers shouldn't rely on it, even if it technically returns <code>undefined</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#void"
+    },
+    {
+      "id": "aNMR7WVQoXrH0z3v",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "basic-types",
+      "difficulty": 3,
+      "prompt": "<pre>let x: unknown = 'hi';\nconsole.log(typeof x);</pre> What is logged?",
+      "correctAnswer": "string",
+      "explanation": "<code>typeof</code> is a runtime operator unaffected by TypeScript's static <code>unknown</code> type — at runtime <code>x</code> is still a string.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#unknown"
+    },
+    {
+      "id": "HhEA4Qs3K2vzJkEd",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 1,
+      "prompt": "Which keyword defines a named object shape and supports declaration merging (multiple declarations combining automatically)?",
+      "correctAnswer": "interface",
+      "explanation": "Unlike <code>type</code>, multiple <code>interface</code> declarations with the same name in the same scope are automatically merged into one.",
+      "source": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html"
+    },
+    {
+      "id": "12BwtOrV9cuX37EX",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "Which keyword lets you assign a name to any type, including unions and primitives, but does not support declaration merging?",
+      "correctAnswer": "type",
+      "explanation": "A <code>type</code> alias can represent any type — object shapes, unions, primitives — but two aliases with the same name conflict rather than merge.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases"
+    },
+    {
+      "id": "5o6MMlvG0BcWSBib",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "Which keyword lets one <code>interface</code> inherit the members of another?",
+      "correctAnswer": "extends",
+      "explanation": "<code>interface B extends A {}</code> makes <code>B</code> inherit all of <code>A</code>'s members, plus whatever it adds itself.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types"
+    },
+    {
+      "id": "ciNHwD7WhiMzp51l",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 2,
+      "prompt": "Which operator combines two object types into one requiring the members of both, commonly used with <code>type</code> aliases since they can't use <code>extends</code>?",
+      "correctAnswer": "&",
+      "explanation": "An intersection (<code>A & B</code>) is the idiomatic way to combine two <code>type</code> aliases, since <code>extends</code> is only available on <code>interface</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "MldybN17z7mZuS1t",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "interfaces-vs-types",
+      "difficulty": 3,
+      "prompt": "What is the name for TypeScript automatically combining the members of multiple <code>interface</code> declarations that share the same name?",
+      "correctAnswer": "declaration merging",
+      "explanation": "Declaration merging means repeated <code>interface Foo</code> declarations aren't errors — their members are combined into a single interface.",
+      "source": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces"
+    },
+    {
+      "id": "ZFiDuSg29BVY2Vxk",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 1,
+      "prompt": "<pre>function identity<T>(arg: T): T {\n  return arg;\n}</pre> What is the name for the <code>T</code> placeholder?",
+      "correctAnswer": "type parameter",
+      "explanation": "<code>T</code> is a type parameter — it lets the function work with any type while preserving that exact type through input and output.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "CPNQVfZdpUIplb0H",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 2,
+      "prompt": "<pre>function f<T extends U>(arg: T) {}</pre> What keyword restricts <code>T</code> to types assignable to <code>U</code>?",
+      "correctAnswer": "extends",
+      "explanation": "A generic constraint (<code>T extends U</code>) requires <code>T</code> to be structurally assignable to <code>U</code>, not identical to it.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints"
+    },
+    {
+      "id": "eZaTfKrX1WDScPnH",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 2,
+      "prompt": "<pre>function wrap<T, K extends keyof T>(obj: T, key: K): ___ {\n  return obj[key];\n}</pre> What return type expression (using T and K) gives the exact type of <code>obj[key]</code>?",
+      "correctAnswer": "T[K]",
+      "explanation": "The indexed access type <code>T[K]</code> gives the precise type of the property at key <code>K</code> on <code>T</code>, so <code>wrap</code> returns exactly the type of <code>obj[key]</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html"
+    },
+    {
+      "id": "BOcXmpNHh4P3rEJF",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 3,
+      "prompt": "<pre>function firstElement<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\nconst result = firstElement([1, 2, 3]);</pre> What type does TypeScript infer for <code>result</code>?",
+      "correctAnswer": "number | undefined",
+      "explanation": "TypeScript infers <code>T</code> as <code>number</code> from the array argument, so the return type becomes <code>number | undefined</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "ZujXX1UACfzbRSzQ",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "generics",
+      "difficulty": 1,
+      "prompt": "What is the conventional single-letter name most commonly used for the first generic type parameter in TypeScript code?",
+      "correctAnswer": "T",
+      "explanation": "By convention (borrowed from other typed languages), <code>T</code> is the go-to name for a generic type parameter, with <code>U</code>, <code>K</code>, <code>V</code> often following.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+    },
+    {
+      "id": "oaFxcT1fDUkzPqPT",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 1,
+      "prompt": "What single-character symbol combines two types so a value can be either type?",
+      "correctAnswer": "|",
+      "explanation": "A union type (<code>string | number</code>) means a value must be one of the listed types.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types"
+    },
+    {
+      "id": "hbXBWGRdANP8uBKJ",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 1,
+      "prompt": "What single-character symbol combines two object types so a value must satisfy both simultaneously?",
+      "correctAnswer": "&",
+      "explanation": "An intersection type (<code>A & B</code>) requires a value to satisfy the members of both <code>A</code> and <code>B</code> at once.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "27B9F8xcvFjMJKDA",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 2,
+      "prompt": "<pre>type A = { x: number };\ntype B = { y: string };\nconst value: A & B = { x: 1, y: 'hi' };\nconsole.log(value.x);</pre> What is logged?",
+      "correctAnswer": "1",
+      "explanation": "<code>value</code> satisfies both <code>A</code> and <code>B</code>, so it has both an <code>x</code> and a <code>y</code>; logging <code>value.x</code> gives <code>1</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "R9U5yRwgupQR4Qz6",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 3,
+      "prompt": "<pre>type Impossible = { a: string } & { a: number };</pre> What type does TypeScript infer for property <code>a</code>?",
+      "correctAnswer": "never",
+      "explanation": "Intersecting <code>{ a: string } & { a: number }</code> requires <code>a</code> to satisfy both types simultaneously, which no value can, so TypeScript resolves it to <code>never</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
+    },
+    {
+      "id": "mGk4ybCZidPGLnCX",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "union-intersection",
+      "difficulty": 2,
+      "prompt": "What two-word term describes a type like <code>string | number</code>, which allows a value to be one of several specified types?",
+      "correctAnswer": "union type",
+      "explanation": "A union type lists several possible types a value may take, joined with <code>|</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types"
+    },
+    {
+      "id": "90YJ6dr0Xje0dmHP",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 1,
+      "prompt": "Which JS operator, checked inside an <code>if</code> statement, lets TypeScript narrow a union type based on its runtime type string (e.g. <code>'string'</code>, <code>'number'</code>)?",
+      "correctAnswer": "typeof",
+      "explanation": "A <code>typeof value === 'string'</code> check is recognized by TypeScript as a type guard, narrowing <code>value</code>'s type inside that branch.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+    },
+    {
+      "id": "3IPNUcT0hGfhu7vj",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 2,
+      "prompt": "Which operator, used as <code>'prop' in obj</code>, lets TypeScript narrow a union based on whether a property exists?",
+      "correctAnswer": "in",
+      "explanation": "The <code>in</code> operator, used as a type guard, narrows a union to whichever member actually has the checked property.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing"
+    },
+    {
+      "id": "QhjrIkkwRCEc2NEM",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 2,
+      "prompt": "<pre>function isString(value: unknown): value is string {\n  return typeof value === 'string';\n}</pre> What two-word term describes this kind of function, which narrows a type based on its boolean return value?",
+      "correctAnswer": "type guard",
+      "explanation": "A function with a <code>value is Type</code> return type is a user-defined type guard, narrowing the argument's type in branches where it returns true.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates"
+    },
+    {
+      "id": "gszbYYn1gLlWzsBL",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 3,
+      "prompt": "<pre>function assertIsNumber(val: unknown): asserts val is number {\n  if (typeof val !== 'number') throw new Error();\n}</pre> What two-word term (starting with 'assertion') describes this kind of function?",
+      "correctAnswer": "assertion function",
+      "explanation": "An assertion function tells TypeScript that if the call returns without throwing, the argument can be narrowed for the rest of the enclosing scope.",
+      "source": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions"
+    },
+    {
+      "id": "V0uag28aVLpVCMC6",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "type-narrowing",
+      "difficulty": 1,
+      "prompt": "<pre>function format(value: string | number) {\n  if (typeof value === 'string') {\n    return value.toUpperCase();\n  }\n  return value.toFixed(2);\n}</pre> What type is <code>value</code> narrowed to inside the if-block?",
+      "correctAnswer": "string",
+      "explanation": "The <code>typeof value === 'string'</code> check narrows <code>value</code>'s type to <code>string</code> for the rest of that block, enabling string methods like <code>toUpperCase</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+    },
+    {
+      "id": "6pv1YBPRhyD1NNf6",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 1,
+      "prompt": "Which built-in utility type (name only, no generic brackets) makes every property of a type optional?",
+      "correctAnswer": "Partial",
+      "explanation": "<code>Partial<T></code> produces a new type with every property of <code>T</code> made optional.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
+    },
+    {
+      "id": "FESn3p6EPLG9s8pQ",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 1,
+      "prompt": "Which built-in utility type (name only, no generic brackets) makes every property of a type required?",
+      "correctAnswer": "Required",
+      "explanation": "<code>Required<T></code> is the opposite of <code>Partial<T></code> — every property becomes mandatory, even ones originally optional.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype"
+    },
+    {
+      "id": "03nYvyTyeQggV1Fe",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 2,
+      "prompt": "Which built-in utility type (name only, no generic brackets) constructs a type with only the specified keys of another type?",
+      "correctAnswer": "Pick",
+      "explanation": "<code>Pick<T, K></code> keeps only the properties named in <code>K</code> from <code>T</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
+    },
+    {
+      "id": "9JTS951ER8aTCVBD",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 2,
+      "prompt": "Which built-in utility type (name only, no generic brackets) constructs a type with all properties of another type except the specified keys?",
+      "correctAnswer": "Omit",
+      "explanation": "<code>Omit<T, K></code> is the inverse of <code>Pick</code> — it keeps everything except the properties named in <code>K</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+    },
+    {
+      "id": "bH2Z2CfHlqVzV7zz",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "utility-types",
+      "difficulty": 3,
+      "prompt": "Which built-in utility type (name only, no generic brackets) constructs an object type whose keys come from a union, each mapped to a given type?",
+      "correctAnswer": "Record",
+      "explanation": "<code>Record<K, T></code> builds an object type whose keys are the members of union <code>K</code>, each mapped to type <code>T</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
+    },
+    {
+      "id": "UEpYGfJ6MtlXdn8r",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 1,
+      "prompt": "<pre>enum Direction { Up, Down }</pre> In a numeric enum with no explicit values, what number does the first member default to?",
+      "correctAnswer": "0",
+      "explanation": "Numeric enum members without an explicit value default to auto-incrementing integers starting at 0 for the first member.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#numeric-enums"
+    },
+    {
+      "id": "KhCPlcxDA3b31w5y",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 2,
+      "prompt": "Which enum variant, written as two keywords (a modifier plus 'enum'), is fully inlined at compile time with no runtime object generated?",
+      "correctAnswer": "const enum",
+      "explanation": "<code>const enum</code> members are inlined directly at their usage sites during compilation and don't generate a runtime lookup object.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#const-enums"
+    },
+    {
+      "id": "88pPgGyJkvQR5kpM",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 2,
+      "prompt": "Which enum variant, written as two words (a modifier plus 'enum'), requires each member to be initialized with a string literal?",
+      "correctAnswer": "string enum",
+      "explanation": "String enums give each member a meaningful, self-documenting runtime value instead of an arbitrary number, and generate no reverse mapping.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#string-enums"
+    },
+    {
+      "id": "zRiGbT8wL0HXXvH1",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 3,
+      "prompt": "<pre>enum Direction { Up, Down }</pre> What does <code>Direction[0]</code> evaluate to at runtime?",
+      "correctAnswer": "Up",
+      "explanation": "Numeric enums compile with a reverse mapping, so you can look up a member's name from its numeric value: <code>Direction[0]</code> is <code>'Up'</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings"
+    },
+    {
+      "id": "yCKF5O7YMFfPC9mF",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "enums",
+      "difficulty": 2,
+      "prompt": "What two-word term describes looking up an enum member's name from its numeric value at runtime, e.g. <code>Direction[0]</code>?",
+      "correctAnswer": "reverse mapping",
+      "explanation": "Reverse mapping is the compiler-generated ability to go from a numeric enum's value back to its member name.",
+      "source": "https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings"
+    },
+    {
+      "id": "mHTmaTbcPn750UkT",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 1,
+      "prompt": "Which access modifier restricts a class member to being visible only within the declaring class itself?",
+      "correctAnswer": "private",
+      "explanation": "<code>private</code> members can't be accessed from subclasses or from outside code — only from within the declaring class.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#private"
+    },
+    {
+      "id": "s80cY7PvcjPAQbxT",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 1,
+      "prompt": "Which access modifier allows a member to be accessed by the declaring class and its subclasses, but not from outside?",
+      "correctAnswer": "protected",
+      "explanation": "<code>protected</code> is a middle ground between <code>private</code> and <code>public</code> — visible to the class and its subclasses only.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#protected"
+    },
+    {
+      "id": "Tm5DAw0KFueKteXq",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 2,
+      "prompt": "Which modifier on a class property enforces that it can only be assigned once, typically in the constructor?",
+      "correctAnswer": "readonly",
+      "explanation": "<code>readonly</code> allows assignment once (usually in the constructor) and flags any further assignment as a compile-time error.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly"
+    },
+    {
+      "id": "yySk2vRBdiUfonmN",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 2,
+      "prompt": "Which keyword marks a class so it cannot be instantiated directly with <code>new</code> and may declare methods without implementations?",
+      "correctAnswer": "abstract",
+      "explanation": "An <code>abstract class</code> exists to be subclassed and can declare abstract methods that concrete subclasses are required to implement.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members"
+    },
+    {
+      "id": "5RrStgnqi8IWYgOU",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "classes-access-modifiers",
+      "difficulty": 3,
+      "prompt": "<pre>class Point {\n  constructor(private x: number, private y: number) {}\n}</pre> What two-word term (singular) describes this constructor-parameter shorthand?",
+      "correctAnswer": "parameter property",
+      "explanation": "Adding an access modifier directly to a constructor parameter is TypeScript's parameter property shorthand — it declares and assigns the class property in one step.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties"
+    },
+    {
+      "id": "5J5zhnOJmpr0flSz",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 1,
+      "prompt": "What single character, placed after a parameter name, marks a function parameter as optional?",
+      "correctAnswer": "?",
+      "explanation": "<code>function f(name?: string) {}</code> marks <code>name</code> as optional, so callers may omit it entirely.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#optional-parameters"
+    },
+    {
+      "id": "8C10G9YYXX41IcAA",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 2,
+      "prompt": "What one word describes multiple type signatures declared for the same function name, each checked independently by callers?",
+      "correctAnswer": "overloads",
+      "explanation": "Overload signatures let you express different parameter/return type combinations for the same function name, sharing one implementation.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads"
+    },
+    {
+      "id": "epyvYT96BCnKlHTQ",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 2,
+      "prompt": "What return type would you give a callback whose return value the caller doesn't use?",
+      "correctAnswer": "void",
+      "explanation": "A callback typed as <code>(value: number) => void</code> communicates that its return value is expected to be ignored.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#function-type-expressions"
+    },
+    {
+      "id": "27Rv6nOvOrP9hQJG",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 3,
+      "prompt": "<pre>interface Button {\n  onClick(this: HTMLButtonElement, event: MouseEvent): void;\n}</pre> What two-word term describes this <code>this</code> parameter, which documents the expected <code>this</code> type without being a real runtime argument?",
+      "correctAnswer": "this parameter",
+      "explanation": "A <code>this</code> parameter is compile-time-only — it type-checks what <code>this</code> should be when the method is called, and is erased during compilation.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#declaring-this-in-a-function"
+    },
+    {
+      "id": "tAy9xOQZrGX3JVWf",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "functions-typing",
+      "difficulty": 1,
+      "prompt": "What return type would you give a function that always throws and never returns normally?",
+      "correctAnswer": "never",
+      "explanation": "<code>never</code> is the correct return type for a function that never completes normally, since it never actually produces a value.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/functions.html#never"
+    },
+    {
+      "id": "pAxipqMbeEIhm47X",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 1,
+      "prompt": "Which operator produces a union of a type's property names as string literal types?",
+      "correctAnswer": "keyof",
+      "explanation": "<code>keyof T</code> produces a union of all of <code>T</code>'s property names, often used to constrain generic key parameters.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html"
+    },
+    {
+      "id": "GZhg6QLvwWJIOsJ9",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 2,
+      "prompt": "Which operator, used in a type position like <code>type T = typeof someVariable</code>, extracts the static type of a value?",
+      "correctAnswer": "typeof",
+      "explanation": "Used in a type position, <code>typeof</code> extracts the static TypeScript type inferred for a variable, distinct from the runtime <code>typeof</code> operator.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/typeof-types.html"
+    },
+    {
+      "id": "eetA1OGK0FnMJrpg",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 2,
+      "prompt": "<pre>type ReadonlyVersion<T> = {\n  readonly [K in keyof T]: T[K];\n};</pre> What two-word term describes this kind of type?",
+      "correctAnswer": "mapped type",
+      "explanation": "A mapped type iterates every key in <code>keyof T</code> and re-declares each property, here adding <code>readonly</code> to produce a fully read-only version of <code>T</code>.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/mapped-types.html"
+    },
+    {
+      "id": "4MJXQwsR4bUnPo8z",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 3,
+      "prompt": "<pre>type IsString<T> = T extends string ? true : false;\ntype A = IsString<'hello'>;</pre> What does <code>A</code> resolve to?",
+      "correctAnswer": "true",
+      "explanation": "<code>'hello'</code> is assignable to <code>string</code>, so the conditional type resolves to its true branch.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html"
+    },
+    {
+      "id": "dDMhaZNS6nJT0XFg",
+      "type": "text-answer",
+      "language": "typescript",
+      "category": "advanced-types",
+      "difficulty": 3,
+      "prompt": "Which keyword, used inside a conditional type, captures and extracts a type (such as a function's return type) for use in the true branch?",
+      "correctAnswer": "infer",
+      "explanation": "<code>infer</code> introduces a new type variable that TypeScript infers by matching the checked type's structure, for use within the conditional type's true branch.",
+      "source": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types"
+    }
+  ]
+}
