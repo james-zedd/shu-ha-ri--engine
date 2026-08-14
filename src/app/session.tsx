@@ -392,6 +392,7 @@ const styles = StyleSheet.create({
   },
   questionArea: {
     flex: 1,
+    width: "100%",
     justifyContent: "flex-start",
   },
   prompt: {
@@ -399,6 +400,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   feedback: {
+    width: "100%",
     gap: Spacing.four,
     paddingVertical: Spacing.four,
   },
