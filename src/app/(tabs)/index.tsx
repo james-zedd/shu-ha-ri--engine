@@ -36,7 +36,7 @@ export default function HomeScreen() {
                 ]}
               >
                 <ThemedText style={styles.buttonLabel}>
-                  See Storage Data
+                  Storage Data and Settings
                 </ThemedText>
               </ThemedView>
             </Pressable>
