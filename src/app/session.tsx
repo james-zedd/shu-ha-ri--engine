@@ -14,6 +14,7 @@ import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
 import { filterQuestions, Question } from "@/data/questions";
 import { useDayCounter } from "@/hooks/use-day-counter";
+import { useImmediateFeedback } from "@/hooks/use-immediate-feedback";
 import { useTheme } from "@/hooks/use-theme";
 
 type SessionParams = {
@@ -47,7 +48,10 @@ function shuffleChoices(question: Question): Question {
 }
 
 function getAnswerText(question: Question, answer: Answer): string {
-  if (question.type === "multiple-choice" && answer.type === "multiple-choice") {
+  if (
+    question.type === "multiple-choice" &&
+    answer.type === "multiple-choice"
+  ) {
     return question.choices[answer.choiceIndex];
   }
   if (question.type === "text-answer" && answer.type === "text-answer") {
@@ -126,6 +130,7 @@ export default function SessionScreen() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [textValue, setTextValue] = useState("");
   const { recordSession } = useDayCounter();
+  const { immediateFeedback } = useImmediateFeedback();
 
   const total = sessionQuestions.length;
   const current = sessionQuestions[index];
@@ -138,40 +143,44 @@ export default function SessionScreen() {
     }
   }, [isFinished, recordSession]);
 
+  function goToNextQuestion() {
+    setSelectedIndex(null);
+    setTextValue("");
+    setIndex((i) => i + 1);
+  }
+
   function handleSubmit() {
     if (!current || revealed) return;
 
+    let answer: Answer;
     if (current.type === "multiple-choice") {
       if (selectedIndex === null) return;
-      setAnswers((prev) => ({
-        ...prev,
-        [current.id]: {
-          type: "multiple-choice",
-          choiceIndex: selectedIndex,
-          correct: selectedIndex === current.correctIndex,
-        },
-      }));
-      setRevealed(true);
-      return;
-    }
-
-    if (!textValue.trim()) return;
-    setAnswers((prev) => ({
-      ...prev,
-      [current.id]: {
+      answer = {
+        type: "multiple-choice",
+        choiceIndex: selectedIndex,
+        correct: selectedIndex === current.correctIndex,
+      };
+    } else {
+      if (!textValue.trim()) return;
+      answer = {
         type: "text-answer",
         text: textValue,
         correct: isCorrectTextAnswer(current, textValue),
-      },
-    }));
-    setRevealed(true);
+      };
+    }
+
+    setAnswers((prev) => ({ ...prev, [current.id]: answer }));
+
+    if (immediateFeedback ?? true) {
+      setRevealed(true);
+    } else {
+      goToNextQuestion();
+    }
   }
 
   function handleNext() {
     setRevealed(false);
-    setSelectedIndex(null);
-    setTextValue("");
-    setIndex((i) => i + 1);
+    goToNextQuestion();
   }
 
   if (total === 0) {
@@ -203,11 +212,72 @@ export default function SessionScreen() {
   if (isFinished) {
     return (
       <ThemedView style={styles.container}>
-        <SafeAreaView style={styles.centeredSafeArea}>
-          <ThemedText type="subtitle">Session Complete!</ThemedText>
-          <ThemedText themeColor="textSecondary">
-            You scored {score} out of {total}
-          </ThemedText>
+        <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollContent}
+          >
+            <View style={styles.resultsHeader}>
+              <ThemedText type="subtitle">Session Complete!</ThemedText>
+              <ThemedText themeColor="textSecondary">
+                You scored {score} out of {total}
+              </ThemedText>
+            </View>
+
+            <View style={styles.reviewList}>
+              {sessionQuestions.map((question, i) => {
+                const answer = answers[question.id];
+                if (!answer) return null;
+
+                return (
+                  <ThemedView
+                    key={question.id}
+                    type={answer.correct ? "success" : "error"}
+                    style={styles.reviewCard}
+                  >
+                    <View style={styles.reviewCardHeader}>
+                      <ThemedText themeColor="textSecondary" type="small">
+                        Question {i + 1}
+                      </ThemedText>
+                      <ThemedView
+                        type={answer.correct ? "success" : "error"}
+                        style={[
+                          styles.feedbackBanner,
+                          {
+                            borderColor: answer.correct
+                              ? theme.successBorder
+                              : theme.errorBorder,
+                          },
+                        ]}
+                      >
+                        <ThemedText type="smallBold">
+                          {answer.correct ? "Correct" : "Incorrect"}
+                        </ThemedText>
+                      </ThemedView>
+                    </View>
+
+                    <FormattedText
+                      text={question.prompt}
+                      style={styles.prompt}
+                    />
+
+                    <View style={styles.feedbackSection}>
+                      <ThemedText type="smallBold">Your answer</ThemedText>
+                      <FormattedText text={getAnswerText(question, answer)} />
+                    </View>
+
+                    {!answer.correct && (
+                      <View style={styles.feedbackSection}>
+                        <ThemedText type="smallBold">Correct answer</ThemedText>
+                        <FormattedText text={getCorrectAnswerText(question)} />
+                      </View>
+                    )}
+                  </ThemedView>
+                );
+              })}
+            </View>
+          </ScrollView>
+
           <Pressable
             onPress={() => router.back()}
             style={({ pressed }) => pressed && styles.pressed}
@@ -360,6 +430,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     alignItems: "flex-start",
+    gap: Spacing.three,
   },
   container: {
     flex: 1,
@@ -394,6 +465,29 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     justifyContent: "flex-start",
+  },
+  resultsHeader: {
+    width: "100%",
+    gap: Spacing.one,
+  },
+  reviewList: {
+    width: "100%",
+    gap: Spacing.three,
+    paddingBottom: Spacing.three,
+  },
+  reviewCard: {
+    width: "100%",
+    borderRadius: Spacing.two,
+    padding: Spacing.three,
+    gap: Spacing.three,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderStyle: "solid",
+  },
+  reviewCardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   prompt: {
     fontSize: 18,
