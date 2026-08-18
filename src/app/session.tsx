@@ -272,6 +272,25 @@ export default function SessionScreen() {
                         <FormattedText text={getCorrectAnswerText(question)} />
                       </View>
                     )}
+
+                    <View style={styles.feedbackSection}>
+                      <ThemedText type="smallBold">Explanation</ThemedText>
+                      <FormattedText
+                        text={question.explanation}
+                        themeColor="textSecondary"
+                      />
+                    </View>
+
+                    <View style={styles.feedbackSection}>
+                      <ThemedText type="smallBold">Reference</ThemedText>
+                      <Pressable
+                        onPress={() => Linking.openURL(question.source)}
+                      >
+                        <ThemedText type="linkPrimary">
+                          {question.source}
+                        </ThemedText>
+                      </Pressable>
+                    </View>
                   </ThemedView>
                 );
               })}
