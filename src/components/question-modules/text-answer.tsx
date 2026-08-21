@@ -14,8 +14,19 @@ export type TextAnswerQuestion = {
   source: string;
 };
 
+const PUNCTUATION_REPLACEMENTS: [RegExp, string][] = [
+  [/…/g, "..."], // ellipsis → three periods
+  [/[‘’]/g, "'"], // curly single quotes → straight
+  [/[“”]/g, '"'], // curly double quotes → straight
+  [/[–—]/g, "-"], // en/em dash → hyphen
+];
+
 function normalizeAnswer(value: string): string {
-  return value.trim().toLowerCase().replace(/\s+/g, " ");
+  const folded = PUNCTUATION_REPLACEMENTS.reduce(
+    (result, [pattern, replacement]) => result.replace(pattern, replacement),
+    value,
+  );
+  return folded.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 export function isCorrectTextAnswer(
