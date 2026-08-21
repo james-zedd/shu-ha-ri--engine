@@ -187,7 +187,7 @@ export default function SessionScreen() {
     return (
       <ThemedView style={styles.container}>
         <SafeAreaView style={styles.centeredSafeArea}>
-          <ThemedText type="subtitle">No questions found</ThemedText>
+          <ThemedText type="title">No questions found</ThemedText>
           <ThemedText themeColor="textSecondary">
             No questions matched the filters you selected.
           </ThemedText>
@@ -218,7 +218,7 @@ export default function SessionScreen() {
             contentContainerStyle={styles.scrollContent}
           >
             <View style={styles.resultsHeader}>
-              <ThemedText type="subtitle">Session Complete!</ThemedText>
+              <ThemedText type="title">Session Complete!</ThemedText>
               <ThemedText themeColor="textSecondary">
                 You scored {score} out of {total}
               </ThemedText>

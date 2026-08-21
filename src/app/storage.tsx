@@ -16,7 +16,7 @@ export default function StorageScreen() {
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedText type="subtitle">Activity</ThemedText>
+        <ThemedText type="title">Activity</ThemedText>
 
         <ThemedView type="backgroundElement" style={styles.table}>
           <View style={styles.row}>
@@ -25,7 +25,7 @@ export default function StorageScreen() {
           </View>
         </ThemedView>
 
-        <ThemedText type="subtitle">Settings</ThemedText>
+        <ThemedText type="title">Settings</ThemedText>
 
         <ThemedView type="backgroundElement" style={styles.table}>
           <View style={styles.row}>

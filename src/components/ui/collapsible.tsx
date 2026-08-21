@@ -17,23 +17,19 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
       <Pressable
         style={({ pressed }) => [styles.heading, pressed && styles.pressedHeading]}
         onPress={() => setIsOpen((value) => !value)}>
-        <ThemedView type="backgroundElement" style={styles.button}>
-          <SymbolView
-            name={{ ios: 'chevron.right', android: 'chevron_right', web: 'chevron_right' }}
-            size={14}
-            weight="bold"
-            tintColor={theme.text}
-            style={{ transform: [{ rotate: isOpen ? '-90deg' : '90deg' }] }}
-          />
-        </ThemedView>
+        <ThemedText type="subtitle" style={styles.title}>{title}</ThemedText>
 
-        <ThemedText type="small">{title}</ThemedText>
+        <SymbolView
+          name={{ ios: 'chevron.right', android: 'chevron_right', web: 'chevron_right' }}
+          size={16}
+          weight="bold"
+          tintColor={theme.text}
+          style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
+        />
       </Pressable>
       {isOpen && (
-        <Animated.View entering={FadeIn.duration(200)}>
-          <ThemedView type="backgroundElement" style={styles.content}>
-            {children}
-          </ThemedView>
+        <Animated.View entering={FadeIn.duration(200)} style={styles.content}>
+          {children}
         </Animated.View>
       )}
     </ThemedView>
@@ -44,22 +40,17 @@ const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: Spacing.two,
   },
   pressedHeading: {
     opacity: 0.7,
   },
-  button: {
-    width: Spacing.four,
-    height: Spacing.four,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
+  title: {
+    flexShrink: 1,
   },
   content: {
     marginTop: Spacing.three,
-    borderRadius: Spacing.three,
-    marginLeft: Spacing.four,
-    padding: Spacing.four,
+    gap: Spacing.two,
   },
 });
