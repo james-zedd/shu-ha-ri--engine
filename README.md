@@ -4,19 +4,31 @@ An adaptable educational tool.
 
 ## Concept and Explanation
 
-Shu Ha Ri is a Japanese learning concept and discipline. The earliest attribution of Shu Ha Ri is given to Sen No Rikyū, a 16th century Japanese tea ceremony master and poet.
+Shu Ha Ri is a Japanese concept that describes three separate stages of learning. Widely attributed to Japanese tea ceremony master Sen no Rikyū, the concept has been applied to various disciplines, including martial arts, software development, SCRUM practices, and other areas of skill acquisition. The term is often used to describe the progression of a student from beginner to advanced to formless/intuitive.
 
 Shu Ha Ri embodies the idea that learning comes in three stages:
 
-Shu (守) - Fundamentals, traditional wisdom, heuristics
+Shu (守) - The student learns the fundamentals and adheres to the rules and teachings of tradition. The focus is on imitation and repetition, with an emphasis on core principles.
 
-Ha (破) - Detachment from traditional rules, finding new approaches, application in new ways
+Ha (破) - The student begins to break away from strict adherence to tradition and starts to explore their own understanding and interpretation of the teachings. This is more of a scientific approach to learning - focusing on experimentation and innovation while still respecting the core principles.
 
-Ri (離) - No fundamentals, no rules, everything is a natural response
+Ri (離) - The student has reached a level of understanding that no longer requires adherence or experimentation. The student has internalized the teachings and can now express their own unique style and approach, transcending the traditional forms and rules.
 
 ## Goals
 
-This application should be used in tandem with a JSON file that will have questions and/or challenges for the user. It is recommended to make the most of this, the user should open the application daily and complete an assignment they define for their learning.
+This app is designed to help you practice and improve any area of study or skill. It utilizes the Shu Ha Ri approach to learning, but this approach is not mandated. You ultimately determine your own path to learning and understanding.
+
+## Uploading Questions
+
+You can upload your own questions to the app by creating a JSON file that follows the structure of the example questions provided in the app. The JSON file should contain an array of question objects, each with a question, answer, and optional metadata such as category, difficulty, and language. Once you have created your JSON file, you can upload it to the app in the Storage Data and Settings section. (To be implemented).
+
+## Privacy
+
+This app was designed with a privacy-first approach. It does not collect any personal data or track your usage. All data is stored locally on your device, and you have full control over your data and settings.
+
+The app does not require an internet connection to function, and all features are available offline. You can use the app without creating an account or providing any personal information.
+
+This app is provided free of charge. There is no user registration, no ads, in-app purchases, or subscriptions. Education and learning should be accessible to everyone.
 
 ## Runtime Environment
 

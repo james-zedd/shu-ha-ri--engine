@@ -16,14 +16,13 @@ export default function AboutScreen() {
         >
           <Collapsible title="About Shu Ha Ri">
             <ThemedText type="default">
-              Shu Ha Ri is a Japanese concept that describes the stages of
-              learning and mastery. Widely attributed to Japanese tea ceremony
+              Shu Ha Ri is a Japanese concept that describes three separate
+              stages of learning. Widely attributed to Japanese tea ceremony
               master Sen no Rikyū, the concept has been applied to various
               disciplines, including martial arts, software development, SCRUM
-              practies and ceremonies, and other areas of skill acquisition. The
-              term is often used to describe the progression of a student from
-              beginner to advanced to without form, and it can be applied to
-              both technical and non-technical skills.
+              practices, and other areas of skill acquisition. The term is often
+              used to describe the progression of a student from beginner to
+              advanced to formless/intuitive.
             </ThemedText>
             <ThemedText type="default">
               The three stages of Shu Ha Ri are:
@@ -32,15 +31,15 @@ export default function AboutScreen() {
             <ThemedText type="default">
               In the Shu stage, the student learns the fundamentals and adheres
               to the rules and teachings of tradition. The focus is on imitation
-              and repetition, with an emphasis on mastering the basics.
+              and repetition, with an emphasis on core principles.
             </ThemedText>
             <ThemedText type="subtitle">Ha (破)</ThemedText>
             <ThemedText type="default">
               In the Ha stage, the student begins to break away from strict
               adherence to tradition and starts to explore their own
-              understanding and interpretation of the teachings. This is a
-              scientific approach to learning, focusing on experimentation and
-              innovation, while still respecting the core principles.
+              understanding and interpretation of the teachings. This is more of
+              a scientific approach to learning - focusing on experimentation
+              and innovation while still respecting the core principles.
             </ThemedText>
             <ThemedText type="subtitle">Ri (離)</ThemedText>
             <ThemedText type="default">
