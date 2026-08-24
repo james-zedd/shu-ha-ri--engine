@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { FormattedText } from "@/components/code-terminal";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 
 export type MultipleChoiceQuestion = {
   id: string;
@@ -26,25 +27,32 @@ export function MultipleChoiceModule({
   selectedIndex,
   onSelect,
 }: MultipleChoiceModuleProps) {
+  const theme = useTheme();
+
   return (
     <View style={styles.container}>
       <FormattedText text={question.prompt} style={styles.prompt} />
 
       <View style={styles.choices}>
-        {question.choices.map((choice, index) => (
-          <Pressable key={index} onPress={() => onSelect(index)}>
-            <ThemedView
-              type={
-                selectedIndex === index
-                  ? "backgroundSelected"
-                  : "backgroundElement"
-              }
-              style={styles.choice}
-            >
-              <FormattedText text={choice} />
-            </ThemedView>
-          </Pressable>
-        ))}
+        {question.choices.map((choice, index) => {
+          const isSelected = selectedIndex === index;
+
+          return (
+            <Pressable key={index} onPress={() => onSelect(index)}>
+              <ThemedView
+                type={isSelected ? "selected" : "backgroundElement"}
+                style={[
+                  styles.choice,
+                  isSelected && {
+                    borderColor: theme.selectedBorder,
+                  },
+                ]}
+              >
+                <FormattedText text={choice} />
+              </ThemedView>
+            </Pressable>
+          );
+        })}
       </View>
     </View>
   );
@@ -64,6 +72,8 @@ const styles = StyleSheet.create({
   },
   choice: {
     borderRadius: Spacing.two,
+    borderWidth: 1,
+    borderColor: "transparent",
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,
   },
