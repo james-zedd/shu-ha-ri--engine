@@ -3,6 +3,7 @@ import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
 import { Fonts, Spacing, ThemeColor } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 
 export type PromptSegment =
   | { type: "text"; content: string }
@@ -40,8 +41,18 @@ export function parseSegments(input: string): PromptSegment[] {
 }
 
 export function CodeTerminal({ code }: { code: string }) {
+  const theme = useTheme();
+
   return (
-    <View style={styles.terminal}>
+    <View
+      style={[
+        styles.terminal,
+        {
+          backgroundColor: theme.backgroundElement,
+          borderColor: theme.textSecondary,
+        },
+      ]}
+    >
       <ThemedText type="code" style={styles.terminalCode}>
         {code}
       </ThemedText>
@@ -50,7 +61,21 @@ export function CodeTerminal({ code }: { code: string }) {
 }
 
 function InlineCode({ content }: { content: string }) {
-  return <Text style={styles.inlineCode}>{content}</Text>;
+  const theme = useTheme();
+
+  return (
+    <Text
+      style={[
+        styles.inlineCode,
+        {
+          backgroundColor: theme.backgroundElement,
+          color: theme.text,
+        },
+      ]}
+    >
+      {content}
+    </Text>
+  );
 }
 
 export function FormattedText({
@@ -102,14 +127,15 @@ const styles = StyleSheet.create({
   },
   inlineCode: {
     fontFamily: Fonts.mono,
+    fontSize: 14,
+    borderRadius: Spacing.half,
   },
   terminal: {
-    backgroundColor: "#1e1e1e",
     borderRadius: Spacing.two,
+    borderWidth: 1,
     overflow: "hidden",
   },
   terminalCode: {
-    color: "#f0f0f0",
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.three,
     fontSize: 14,
