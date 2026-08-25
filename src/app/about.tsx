@@ -80,9 +80,10 @@ export default function AboutScreen() {
               and settings.
             </ThemedText>
             <ThemedText type="default">
-              The app does not require an internet connection to function, and
-              all features are available offline. You can use the app without
-              creating an account or providing any personal information.
+              The app only requires an internet connection to download,
+              initialize and/or update questions. All other functionality is
+              available offline. You can use the app without creating an account
+              or providing any personal information.
             </ThemedText>
             <ThemedText type="default">
               This app is provided free of charge. There is no user
