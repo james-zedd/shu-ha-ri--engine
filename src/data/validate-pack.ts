@@ -1,6 +1,10 @@
 import type { MultipleChoiceQuestion } from "@/components/question-modules/multiple-choice";
 import type { TextAnswerQuestion } from "@/components/question-modules/text-answer";
 import type { Question } from "@/data/questions";
+import {
+  sanitizeString,
+  stripControlAndSpoofingChars,
+} from "@/data/sanitize-string";
 
 export type Pack = {
   id: string;
@@ -55,12 +59,43 @@ function validateQuestion(
   const q = value as Record<string, unknown>;
 
   if (!isNonEmptyString(q.id)) return { reason: "missing or empty id" };
-  if (seenIds.has(q.id)) return { reason: `duplicate id "${q.id}"` };
-  if (!isNonEmptyString(q.prompt)) return { reason: "missing or empty prompt" };
+  const id = stripControlAndSpoofingChars(q.id).trim();
+  if (!id || /[<>]/.test(id)) {
+    return { reason: "id must be a plain string with no markup" };
+  }
+  if (seenIds.has(id)) return { reason: `duplicate id "${id}"` };
+
   if (!isNonEmptyString(q.language)) return { reason: "missing or empty language" };
+  const language = stripControlAndSpoofingChars(q.language).trim();
+  if (!language || /[<>]/.test(language)) {
+    return { reason: "language must be a plain string with no markup" };
+  }
+
   if (!isNonEmptyString(q.category)) return { reason: "missing or empty category" };
-  if (!isNonEmptyString(q.explanation)) return { reason: "missing or empty explanation" };
-  if (!isHttpUrl(q.source)) return { reason: "source must be a valid http(s) url" };
+  const category = stripControlAndSpoofingChars(q.category).trim();
+  if (!category || /[<>]/.test(category)) {
+    return { reason: "category must be a plain string with no markup" };
+  }
+
+  if (!isNonEmptyString(q.prompt)) return { reason: "missing or empty prompt" };
+  const prompt = sanitizeString(q.prompt);
+  if (!prompt) return { reason: "prompt was empty after sanitization" };
+
+  if (!isNonEmptyString(q.explanation)) {
+    return { reason: "missing or empty explanation" };
+  }
+  const explanation = sanitizeString(q.explanation);
+  if (!explanation) return { reason: "explanation was empty after sanitization" };
+
+  const cleanedSource =
+    typeof q.source === "string"
+      ? stripControlAndSpoofingChars(q.source).trim()
+      : q.source;
+  if (!isHttpUrl(cleanedSource)) {
+    return { reason: "source must be a valid http(s) url" };
+  }
+  const source = cleanedSource as string;
+
   if (
     typeof q.difficulty !== "number" ||
     !KNOWN_DIFFICULTIES.includes(q.difficulty)
@@ -69,6 +104,7 @@ function validateQuestion(
       reason: `difficulty must be one of ${KNOWN_DIFFICULTIES.join(", ")}`,
     };
   }
+  const difficulty = q.difficulty;
 
   if (q.type === "multiple-choice") {
     if (!Array.isArray(q.choices) || q.choices.length < MIN_CHOICES) {
@@ -79,11 +115,17 @@ function validateQuestion(
     if (!q.choices.every(isNonEmptyString)) {
       return { reason: "all choices must be non-empty strings" };
     }
+    const choices = (q.choices as string[]).map((choice) =>
+      sanitizeString(choice),
+    );
+    if (!choices.every((choice) => choice.length > 0)) {
+      return { reason: "a choice was empty after sanitization" };
+    }
     if (
       typeof q.correctIndex !== "number" ||
       !Number.isInteger(q.correctIndex) ||
       q.correctIndex < 0 ||
-      q.correctIndex >= q.choices.length
+      q.correctIndex >= choices.length
     ) {
       return { reason: "correctIndex must be a valid index into choices" };
     }
@@ -92,16 +134,16 @@ function validateQuestion(
       category: string;
       difficulty: number;
     } = {
-      id: q.id,
+      id,
       type: "multiple-choice",
-      prompt: q.prompt,
-      choices: q.choices as string[],
+      prompt,
+      choices,
       correctIndex: q.correctIndex,
-      language: q.language,
-      explanation: q.explanation,
-      source: q.source,
-      category: q.category,
-      difficulty: q.difficulty,
+      language,
+      explanation,
+      source,
+      category,
+      difficulty,
     };
     return { question };
   }
@@ -110,20 +152,24 @@ function validateQuestion(
     if (!isNonEmptyString(q.correctAnswer)) {
       return { reason: "missing or empty correctAnswer" };
     }
+    const correctAnswer = sanitizeString(q.correctAnswer);
+    if (!correctAnswer) {
+      return { reason: "correctAnswer was empty after sanitization" };
+    }
 
     const question: TextAnswerQuestion & {
       category: string;
       difficulty: number;
     } = {
-      id: q.id,
+      id,
       type: "text-answer",
-      prompt: q.prompt,
-      correctAnswer: q.correctAnswer,
-      language: q.language,
-      explanation: q.explanation,
-      source: q.source,
-      category: q.category,
-      difficulty: q.difficulty,
+      prompt,
+      correctAnswer,
+      language,
+      explanation,
+      source,
+      category,
+      difficulty,
     };
     return { question };
   }
@@ -148,6 +194,13 @@ export function validatePack(raw: unknown): PackValidationResult {
   }
   if (!isNonEmptyString(p.name)) {
     return { valid: false, reason: "pack is missing a valid name" };
+  }
+  const name = stripControlAndSpoofingChars(p.name).trim();
+  if (!name || /[<>]/.test(name)) {
+    return {
+      valid: false,
+      reason: "pack name must be a plain string with no markup",
+    };
   }
   if (!Array.isArray(p.questions) || p.questions.length === 0) {
     return {
@@ -184,7 +237,7 @@ export function validatePack(raw: unknown): PackValidationResult {
     valid: true,
     pack: {
       id: p.id,
-      name: p.name,
+      name,
       schemaVersion: typeof p.schemaVersion === "number" ? p.schemaVersion : 1,
       version: isNonEmptyString(p.version) ? p.version : "0.0.0",
       updatedAt: isNonEmptyString(p.updatedAt)
