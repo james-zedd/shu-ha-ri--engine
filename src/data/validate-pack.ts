@@ -5,6 +5,7 @@ import {
   sanitizeString,
   stripControlAndSpoofingChars,
 } from "@/data/sanitize-string";
+import { compareSemver, isSemver } from "@/data/semver";
 
 export type Pack = {
   id: string;
@@ -249,20 +250,66 @@ export function validatePack(raw: unknown): PackValidationResult {
   };
 }
 
-export function validatePackFile(jsonText: string): PackValidationResult {
+function parsePackJson(
+  jsonText: string,
+): { parsed: unknown } | { reason: string } {
   if (jsonText.length === 0) {
-    return { valid: false, reason: "file is empty" };
+    return { reason: "file is empty" };
   }
   if (jsonText.length > MAX_PACK_FILE_SIZE) {
-    return { valid: false, reason: "file is too large" };
+    return { reason: "file is too large" };
   }
-
-  let parsed: unknown;
   try {
-    parsed = JSON.parse(jsonText);
+    return { parsed: JSON.parse(jsonText) };
   } catch {
-    return { valid: false, reason: "file is not valid JSON" };
+    return { reason: "file is not valid JSON" };
+  }
+}
+
+export function validatePackFile(jsonText: string): PackValidationResult {
+  const result = parsePackJson(jsonText);
+  if ("reason" in result) return { valid: false, reason: result.reason };
+  return validatePack(result.parsed);
+}
+
+/**
+ * Validates an incoming pack as a replacement for an already-installed pack.
+ * Unlike validatePack (used for first-time imports, which accept whatever
+ * semver string is given), this additionally requires the new pack's version
+ * to be valid semver and strictly greater than the installed version, so an
+ * update can never silently downgrade or reapply the same pack.
+ */
+export function validatePackUpdate(
+  raw: unknown,
+  installedVersion: string,
+): PackValidationResult {
+  const result = validatePack(raw);
+  if (!result.valid) return result;
+
+  if (!isSemver(result.pack.version)) {
+    return {
+      valid: false,
+      reason: `pack version "${result.pack.version}" is not a valid semver version`,
+    };
+  }
+  if (
+    !isSemver(installedVersion) ||
+    compareSemver(result.pack.version, installedVersion) <= 0
+  ) {
+    return {
+      valid: false,
+      reason: `pack version ${result.pack.version} is not newer than the installed version ${installedVersion}`,
+    };
   }
 
-  return validatePack(parsed);
+  return result;
+}
+
+export function validatePackUpdateFile(
+  jsonText: string,
+  installedVersion: string,
+): PackValidationResult {
+  const result = parsePackJson(jsonText);
+  if ("reason" in result) return { valid: false, reason: result.reason };
+  return validatePackUpdate(result.parsed, installedVersion);
 }
