@@ -250,7 +250,7 @@ export function validatePack(raw: unknown): PackValidationResult {
   };
 }
 
-function parsePackJson(
+export function parsePackJson(
   jsonText: string,
 ): { parsed: unknown } | { reason: string } {
   if (jsonText.length === 0) {
@@ -273,11 +273,37 @@ export function validatePackFile(jsonText: string): PackValidationResult {
 }
 
 /**
+ * Requires pack.version to be valid semver and strictly greater than
+ * installedVersion, so an update can never silently downgrade or reapply
+ * the same pack. Assumes pack already passed validatePack.
+ */
+export function requireNewerVersion(
+  pack: Pack,
+  installedVersion: string,
+): { ok: true } | { ok: false; reason: string } {
+  if (!isSemver(pack.version)) {
+    return {
+      ok: false,
+      reason: `pack version "${pack.version}" is not a valid semver version`,
+    };
+  }
+  if (
+    !isSemver(installedVersion) ||
+    compareSemver(pack.version, installedVersion) <= 0
+  ) {
+    return {
+      ok: false,
+      reason: `pack version ${pack.version} is not newer than the installed version ${installedVersion}`,
+    };
+  }
+  return { ok: true };
+}
+
+/**
  * Validates an incoming pack as a replacement for an already-installed pack.
  * Unlike validatePack (used for first-time imports, which accept whatever
  * semver string is given), this additionally requires the new pack's version
- * to be valid semver and strictly greater than the installed version, so an
- * update can never silently downgrade or reapply the same pack.
+ * to be valid semver and strictly greater than the installed version.
  */
 export function validatePackUpdate(
   raw: unknown,
@@ -286,21 +312,8 @@ export function validatePackUpdate(
   const result = validatePack(raw);
   if (!result.valid) return result;
 
-  if (!isSemver(result.pack.version)) {
-    return {
-      valid: false,
-      reason: `pack version "${result.pack.version}" is not a valid semver version`,
-    };
-  }
-  if (
-    !isSemver(installedVersion) ||
-    compareSemver(result.pack.version, installedVersion) <= 0
-  ) {
-    return {
-      valid: false,
-      reason: `pack version ${result.pack.version} is not newer than the installed version ${installedVersion}`,
-    };
-  }
+  const versionCheck = requireNewerVersion(result.pack, installedVersion);
+  if (!versionCheck.ok) return { valid: false, reason: versionCheck.reason };
 
   return result;
 }
