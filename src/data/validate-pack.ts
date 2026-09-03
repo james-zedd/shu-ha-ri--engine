@@ -30,10 +30,24 @@ export const MAX_PACK_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const KNOWN_DIFFICULTIES = [1, 2, 3];
 const MIN_CHOICES = 2;
+const MAX_CHOICES = 6;
+const MAX_QUESTIONS_PER_PACK = 1500;
+const MAX_STRING_LENGTH = 2048;
+const MAX_PROMPT_LENGTH = 5000;
+const MAX_ID_LENGTH = 100;
+const MAX_SCHEMA_VERSION = 1000;
 const SAFE_ID_PATTERN = /^[a-zA-Z0-9_-]+$/;
+
+// Reserved property names that would collide with Object.prototype if a pack
+// id ever ends up used as a plain-object key (e.g. a packs-by-id lookup).
+const RESERVED_PACK_IDS = new Set(["__proto__", "constructor", "prototype"]);
 
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function isBoundedString(value: unknown, maxLength: number): value is string {
+  return isNonEmptyString(value) && value.length <= maxLength;
 }
 
 function isHttpUrl(value: unknown): value is string {
@@ -47,7 +61,11 @@ function isHttpUrl(value: unknown): value is string {
 }
 
 export function isSafePackId(id: string): boolean {
-  return SAFE_ID_PATTERN.test(id);
+  return (
+    SAFE_ID_PATTERN.test(id) &&
+    id.length <= MAX_ID_LENGTH &&
+    !RESERVED_PACK_IDS.has(id)
+  );
 }
 
 function validateQuestion(
@@ -59,39 +77,66 @@ function validateQuestion(
   }
   const q = value as Record<string, unknown>;
 
-  if (!isNonEmptyString(q.id)) return { reason: "missing or empty id" };
+  if (!isBoundedString(q.id, MAX_ID_LENGTH)) {
+    return {
+      reason: `missing, empty, or too long (max ${MAX_ID_LENGTH} characters) id`,
+    };
+  }
   const id = stripControlAndSpoofingChars(q.id).trim();
   if (!id || /[<>]/.test(id)) {
     return { reason: "id must be a plain string with no markup" };
   }
   if (seenIds.has(id)) return { reason: `duplicate id "${id}"` };
 
-  if (!isNonEmptyString(q.language)) return { reason: "missing or empty language" };
+  if (!isBoundedString(q.language, MAX_STRING_LENGTH)) {
+    return {
+      reason: `missing, empty, or too long (max ${MAX_STRING_LENGTH} characters) language`,
+    };
+  }
   const language = stripControlAndSpoofingChars(q.language).trim();
   if (!language || /[<>]/.test(language)) {
     return { reason: "language must be a plain string with no markup" };
   }
 
-  if (!isNonEmptyString(q.category)) return { reason: "missing or empty category" };
+  if (!isBoundedString(q.category, MAX_STRING_LENGTH)) {
+    return {
+      reason: `missing, empty, or too long (max ${MAX_STRING_LENGTH} characters) category`,
+    };
+  }
   const category = stripControlAndSpoofingChars(q.category).trim();
   if (!category || /[<>]/.test(category)) {
     return { reason: "category must be a plain string with no markup" };
   }
 
-  if (!isNonEmptyString(q.prompt)) return { reason: "missing or empty prompt" };
+  if (!isBoundedString(q.prompt, MAX_PROMPT_LENGTH)) {
+    return {
+      reason: `missing, empty, or too long (max ${MAX_PROMPT_LENGTH} characters) prompt`,
+    };
+  }
   const prompt = sanitizeString(q.prompt);
   if (!prompt) return { reason: "prompt was empty after sanitization" };
 
-  if (!isNonEmptyString(q.explanation)) {
-    return { reason: "missing or empty explanation" };
+  if (!isBoundedString(q.explanation, MAX_STRING_LENGTH)) {
+    return {
+      reason: `missing, empty, or too long (max ${MAX_STRING_LENGTH} characters) explanation`,
+    };
   }
   const explanation = sanitizeString(q.explanation);
-  if (!explanation) return { reason: "explanation was empty after sanitization" };
+  if (!explanation)
+    return { reason: "explanation was empty after sanitization" };
 
   const cleanedSource =
     typeof q.source === "string"
       ? stripControlAndSpoofingChars(q.source).trim()
       : q.source;
+  if (
+    typeof cleanedSource === "string" &&
+    cleanedSource.length > MAX_STRING_LENGTH
+  ) {
+    return {
+      reason: `source exceeds max length of ${MAX_STRING_LENGTH} characters`,
+    };
+  }
   if (!isHttpUrl(cleanedSource)) {
     return { reason: "source must be a valid http(s) url" };
   }
@@ -108,13 +153,21 @@ function validateQuestion(
   const difficulty = q.difficulty;
 
   if (q.type === "multiple-choice") {
-    if (!Array.isArray(q.choices) || q.choices.length < MIN_CHOICES) {
+    if (
+      !Array.isArray(q.choices) ||
+      q.choices.length < MIN_CHOICES ||
+      q.choices.length > MAX_CHOICES
+    ) {
       return {
-        reason: `choices must be an array with at least ${MIN_CHOICES} entries`,
+        reason: `choices must be an array with between ${MIN_CHOICES} and ${MAX_CHOICES} entries`,
       };
     }
-    if (!q.choices.every(isNonEmptyString)) {
-      return { reason: "all choices must be non-empty strings" };
+    if (
+      !q.choices.every((choice) => isBoundedString(choice, MAX_STRING_LENGTH))
+    ) {
+      return {
+        reason: `all choices must be non-empty strings of ${MAX_STRING_LENGTH} characters or fewer`,
+      };
     }
     const choices = (q.choices as string[]).map((choice) =>
       sanitizeString(choice),
@@ -150,8 +203,10 @@ function validateQuestion(
   }
 
   if (q.type === "text-answer") {
-    if (!isNonEmptyString(q.correctAnswer)) {
-      return { reason: "missing or empty correctAnswer" };
+    if (!isBoundedString(q.correctAnswer, MAX_STRING_LENGTH)) {
+      return {
+        reason: `missing, empty, or too long (max ${MAX_STRING_LENGTH} characters) correctAnswer`,
+      };
     }
     const correctAnswer = sanitizeString(q.correctAnswer);
     if (!correctAnswer) {
@@ -190,11 +245,14 @@ export function validatePack(raw: unknown): PackValidationResult {
   if (!isSafePackId(p.id)) {
     return {
       valid: false,
-      reason: "pack id may only contain letters, numbers, hyphens, and underscores",
+      reason: `pack id may only contain letters, numbers, hyphens, and underscores, must be ${MAX_ID_LENGTH} characters or fewer, and may not be a reserved name`,
     };
   }
-  if (!isNonEmptyString(p.name)) {
-    return { valid: false, reason: "pack is missing a valid name" };
+  if (!isBoundedString(p.name, MAX_STRING_LENGTH)) {
+    return {
+      valid: false,
+      reason: `pack is missing a valid name (max ${MAX_STRING_LENGTH} characters)`,
+    };
   }
   const name = stripControlAndSpoofingChars(p.name).trim();
   if (!name || /[<>]/.test(name)) {
@@ -203,10 +261,40 @@ export function validatePack(raw: unknown): PackValidationResult {
       reason: "pack name must be a plain string with no markup",
     };
   }
-  if (!Array.isArray(p.questions) || p.questions.length === 0) {
+  if (typeof p.version === "string" && p.version.length > MAX_STRING_LENGTH) {
     return {
       valid: false,
-      reason: "pack must contain a non-empty questions array",
+      reason: `pack version exceeds max length of ${MAX_STRING_LENGTH} characters`,
+    };
+  }
+  if (
+    typeof p.updatedAt === "string" &&
+    p.updatedAt.length > MAX_STRING_LENGTH
+  ) {
+    return {
+      valid: false,
+      reason: `pack updatedAt exceeds max length of ${MAX_STRING_LENGTH} characters`,
+    };
+  }
+  if (
+    typeof p.schemaVersion === "number" &&
+    (!Number.isInteger(p.schemaVersion) ||
+      p.schemaVersion < 1 ||
+      p.schemaVersion > MAX_SCHEMA_VERSION)
+  ) {
+    return {
+      valid: false,
+      reason: `pack schemaVersion must be an integer between 1 and ${MAX_SCHEMA_VERSION}`,
+    };
+  }
+  if (
+    !Array.isArray(p.questions) ||
+    p.questions.length === 0 ||
+    p.questions.length > MAX_QUESTIONS_PER_PACK
+  ) {
+    return {
+      valid: false,
+      reason: `pack must contain between 1 and ${MAX_QUESTIONS_PER_PACK} questions`,
     };
   }
 
