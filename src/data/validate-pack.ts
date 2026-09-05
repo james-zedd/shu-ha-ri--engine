@@ -10,6 +10,7 @@ import { compareSemver, isSemver } from "@/data/semver";
 export type Pack = {
   id: string;
   name: string;
+  description: string;
   schemaVersion: number;
   version: string;
   updatedAt: string;
@@ -261,6 +262,19 @@ export function validatePack(raw: unknown): PackValidationResult {
       reason: "pack name must be a plain string with no markup",
     };
   }
+  if (!isBoundedString(p.description, MAX_STRING_LENGTH)) {
+    return {
+      valid: false,
+      reason: `pack is missing a valid description (max ${MAX_STRING_LENGTH} characters)`,
+    };
+  }
+  const description = stripControlAndSpoofingChars(p.description).trim();
+  if (!description || /[<>]/.test(description)) {
+    return {
+      valid: false,
+      reason: "pack description must be a plain string with no markup",
+    };
+  }
   if (typeof p.version === "string" && p.version.length > MAX_STRING_LENGTH) {
     return {
       valid: false,
@@ -327,6 +341,7 @@ export function validatePack(raw: unknown): PackValidationResult {
     pack: {
       id: p.id,
       name,
+      description,
       schemaVersion: typeof p.schemaVersion === "number" ? p.schemaVersion : 1,
       version: isNonEmptyString(p.version) ? p.version : "0.0.0",
       updatedAt: isNonEmptyString(p.updatedAt)
