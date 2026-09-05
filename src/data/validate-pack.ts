@@ -11,6 +11,7 @@ export type Pack = {
   id: string;
   name: string;
   description: string;
+  author: string;
   schemaVersion: number;
   version: string;
   updatedAt: string;
@@ -275,6 +276,19 @@ export function validatePack(raw: unknown): PackValidationResult {
       reason: "pack description must be a plain string with no markup",
     };
   }
+  if (!isBoundedString(p.author, MAX_STRING_LENGTH)) {
+    return {
+      valid: false,
+      reason: `pack is missing a valid author (max ${MAX_STRING_LENGTH} characters)`,
+    };
+  }
+  const author = stripControlAndSpoofingChars(p.author).trim();
+  if (!author || /[<>]/.test(author)) {
+    return {
+      valid: false,
+      reason: "pack author must be a plain string with no markup",
+    };
+  }
   if (typeof p.version === "string" && p.version.length > MAX_STRING_LENGTH) {
     return {
       valid: false,
@@ -342,6 +356,7 @@ export function validatePack(raw: unknown): PackValidationResult {
       id: p.id,
       name,
       description,
+      author,
       schemaVersion: typeof p.schemaVersion === "number" ? p.schemaVersion : 1,
       version: isNonEmptyString(p.version) ? p.version : "0.0.0",
       updatedAt: isNonEmptyString(p.updatedAt)
