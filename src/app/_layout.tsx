@@ -39,6 +39,7 @@ export default function RootLayout() {
           options={{ title: "Session", headerBackVisible: false }}
         />
         <Stack.Screen name="storage" options={{ title: "Storage Data" }} />
+        <Stack.Screen name="packs" options={{ title: "Packs" }} />
         <Stack.Screen name="about" options={{ title: "About" }} />
       </Stack>
     </ThemeProvider>
