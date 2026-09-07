@@ -12,6 +12,10 @@ export type InstallPackResult =
   | { installed: true; pack: Pack; skipped: PackValidationIssue[]; replaced: boolean }
   | { installed: false; reason: string };
 
+export type DeletePackResult =
+  | { deleted: true }
+  | { deleted: false; reason: string };
+
 function packsDirectory(): Directory {
   return new Directory(Paths.document, "packs");
 }
@@ -22,6 +26,47 @@ function readInstalledPack(file: File): Pack | null {
   } catch {
     return null;
   }
+}
+
+function isPackShaped(value: unknown): value is Pack {
+  if (typeof value !== "object" || value === null) return false;
+  const p = value as Record<string, unknown>;
+  return (
+    typeof p.id === "string" &&
+    typeof p.name === "string" &&
+    typeof p.version === "string" &&
+    Array.isArray(p.questions)
+  );
+}
+
+/**
+ * The installed pack with this id, or null when it isn't installed or its file
+ * can't be read. Used to compare an installed pack against the curated
+ * directory's version (#35) and to source a training session's questions.
+ */
+export function getInstalledPack(packId: string): Pack | null {
+  const file = new File(packsDirectory(), `${packId}.json`);
+  if (!file.exists) return null;
+  const pack = readInstalledPack(file);
+  return pack && isPackShaped(pack) ? pack : null;
+}
+
+/**
+ * Every pack currently on disk, sorted by name. A file that can't be read or
+ * parsed, or that no longer has a pack's basic shape, is skipped rather than
+ * throwing — one bad file must not break the training screen.
+ */
+export function listInstalledPacks(): Pack[] {
+  const dir = packsDirectory();
+  if (!dir.exists) return [];
+
+  const packs: Pack[] = [];
+  for (const entry of dir.list()) {
+    if (!(entry instanceof File) || entry.extension !== ".json") continue;
+    const pack = readInstalledPack(entry);
+    if (pack && isPackShaped(pack)) packs.push(pack);
+  }
+  return packs.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
@@ -57,4 +102,19 @@ export function installPack(jsonText: string): InstallPackResult {
   file.write(JSON.stringify(result.pack));
 
   return { installed: true, pack: result.pack, skipped: result.skipped, replaced };
+}
+
+/**
+ * Removes an installed pack's file. Destructive — the pack has to be
+ * re-downloaded to get it back — so callers should confirm with the user first.
+ */
+export function deletePack(packId: string): DeletePackResult {
+  const file = new File(packsDirectory(), `${packId}.json`);
+  if (!file.exists) return { deleted: false, reason: "pack is not installed" };
+  try {
+    file.delete();
+    return { deleted: true };
+  } catch {
+    return { deleted: false, reason: "could not remove the pack file" };
+  }
 }
