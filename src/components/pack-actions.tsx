@@ -65,6 +65,10 @@ export function PackActions({
 }) {
   const [state, setState] = useState<ActionState>({ phase: "idle" });
   const [confirmingDelete, setConfirmingDelete] = useState(false);
+  // Persists after a successful install/update when validatePack dropped some
+  // questions, so the (curating) user notices rather than silently shipping a
+  // short pack. Cleared when the next action starts.
+  const [notice, setNotice] = useState<string | null>(null);
   const mounted = useRef(true);
   useEffect(() => {
     return () => {
@@ -73,6 +77,7 @@ export function PackActions({
   }, []);
 
   async function runInstall(verb: "Install" | "Update") {
+    setNotice(null);
     setState({ phase: "working", verb });
 
     const fetched = await fetchPackContent(pack.url);
@@ -89,11 +94,18 @@ export function PackActions({
       return;
     }
 
+    const skipped = result.skipped.length;
+    setNotice(
+      skipped > 0
+        ? `${skipped} question${skipped === 1 ? "" : "s"} skipped as invalid.`
+        : null,
+    );
     setState({ phase: "idle" });
     onChanged();
   }
 
   function runDelete() {
+    setNotice(null);
     const result = deletePack(pack.id);
     if (!result.deleted) {
       setState({ phase: "error", verb: "Delete", reason: result.reason });
@@ -128,22 +140,32 @@ export function PackActions({
           </ThemedText>
         </View>
       ) : (
-        <View style={styles.row}>
-          {status === "not-installed" && (
-            <ActionButton
-              label="Install"
-              onPress={() => runInstall("Install")}
-            />
-          )}
-          {status === "update-available" && (
-            <ActionButton label="Update" onPress={() => runInstall("Update")} />
-          )}
-          {(status === "update-available" || status === "up-to-date") && (
-            <ActionButton
-              label="Delete"
-              danger
-              onPress={() => setConfirmingDelete(true)}
-            />
+        <View style={styles.column}>
+          <View style={styles.row}>
+            {status === "not-installed" && (
+              <ActionButton
+                label="Install"
+                onPress={() => runInstall("Install")}
+              />
+            )}
+            {status === "update-available" && (
+              <ActionButton
+                label="Update"
+                onPress={() => runInstall("Update")}
+              />
+            )}
+            {(status === "update-available" || status === "up-to-date") && (
+              <ActionButton
+                label="Delete"
+                danger
+                onPress={() => setConfirmingDelete(true)}
+              />
+            )}
+          </View>
+          {notice && (
+            <ThemedText type="small" themeColor="textSecondary">
+              {notice}
+            </ThemedText>
           )}
         </View>
       )}
