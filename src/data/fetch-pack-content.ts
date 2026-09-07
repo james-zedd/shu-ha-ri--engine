@@ -1,3 +1,4 @@
+import { isAllowedPackUrl } from "@/data/pack-url";
 import { MAX_PACK_FILE_SIZE } from "@/data/validate-pack";
 
 /**
@@ -15,18 +16,10 @@ export type FetchPackContentResult =
   | { ok: true; jsonText: string }
   | { ok: false; reason: string };
 
-function isHttpsUrl(value: string): boolean {
-  try {
-    return new URL(value).protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
 export async function fetchPackContent(
   url: string,
 ): Promise<FetchPackContentResult> {
-  if (!isHttpsUrl(url)) {
+  if (!isAllowedPackUrl(url)) {
     return { ok: false, reason: "This pack has an invalid download URL." };
   }
 

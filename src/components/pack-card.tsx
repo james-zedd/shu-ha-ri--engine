@@ -20,46 +20,51 @@ export type PackCardStatus =
 
 type StatusPresentation = {
   label: string;
-  background: ThemeColor;
   border: ThemeColor;
   text: ThemeColor;
+};
+
+// The card's whole surface takes on the status colour once a pack is
+// installed; "not installed" keeps the neutral element background.
+const CARD_BACKGROUND: Record<PackCardStatus, ThemeColor> = {
+  "not-installed": "backgroundElement",
+  "up-to-date": "success",
+  "update-available": "selected",
+  error: "error",
 };
 
 const STATUS_PRESENTATION: Record<PackCardStatus, StatusPresentation> = {
   "not-installed": {
     label: "Not installed",
-    background: "backgroundSelected",
     border: "backgroundSelected",
     text: "textSecondary",
   },
   "up-to-date": {
     label: "Installed, up to date",
-    background: "success",
     border: "successBorder",
     text: "text",
   },
   "update-available": {
     label: "Update available",
-    background: "selected",
     border: "selectedBorder",
     text: "text",
   },
   error: {
     label: "Error",
-    background: "error",
     border: "errorBorder",
     text: "text",
   },
 };
 
 function StatusBadge({ status }: { status: PackCardStatus }) {
-  const theme = useTheme();
   const presentation = STATUS_PRESENTATION[status];
 
   return (
     <ThemedView
-      type={presentation.background}
-      style={[styles.badge, { borderColor: theme[presentation.border] }]}
+      // Sits on the base background so the label stays legible against the
+      // card's now status-tinted surface.
+      type="background"
+      style={styles.badge}
     >
       <ThemedText type="smallBold" themeColor={presentation.text}>
         {presentation.label}
@@ -88,8 +93,14 @@ export function PackCard({
   status,
   children,
 }: PackCardProps) {
+  const theme = useTheme();
+  const presentation = STATUS_PRESENTATION[status];
+
   return (
-    <ThemedView type="backgroundElement" style={styles.card}>
+    <ThemedView
+      type={CARD_BACKGROUND[status]}
+      style={[styles.card, { borderColor: theme[presentation.border] }]}
+    >
       <View style={styles.header}>
         <ThemedText type="subtitle" style={styles.name}>
           {name}
@@ -113,6 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     padding: Spacing.three,
     gap: Spacing.two,
+    borderWidth: 1,
   },
   header: {
     flexDirection: "row",
@@ -125,7 +137,6 @@ const styles = StyleSheet.create({
   },
   badge: {
     borderRadius: Spacing.two,
-    borderWidth: 1,
     paddingVertical: Spacing.half,
     paddingHorizontal: Spacing.two,
   },
