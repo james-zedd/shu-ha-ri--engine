@@ -1,4 +1,5 @@
 import type { CuratedPack } from "@/data/curated-packs-list";
+import { isAllowedPackUrl } from "@/data/pack-url";
 import { stripControlAndSpoofingChars } from "@/data/sanitize-string";
 import { isSemver } from "@/data/semver";
 import { isSafePackId } from "@/data/validate-pack";
@@ -35,15 +36,6 @@ function cleanField(value: unknown): string | null {
   return cleaned;
 }
 
-function isHttpsUrl(value: unknown): value is string {
-  if (typeof value !== "string" || value.length === 0) return false;
-  try {
-    return new URL(value).protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
 function parseEntry(value: unknown): CuratedPack | null {
   if (typeof value !== "object" || value === null) return null;
   const entry = value as Record<string, unknown>;
@@ -56,7 +48,7 @@ function parseEntry(value: unknown): CuratedPack | null {
   const author = cleanField(entry.author);
   if (!name || !description || !author) return null;
 
-  if (!isHttpsUrl(entry.url)) return null;
+  if (!isAllowedPackUrl(entry.url)) return null;
   if (typeof entry.version !== "string" || !isSemver(entry.version)) return null;
 
   return { id, name, description, author, url: entry.url, version: entry.version };
