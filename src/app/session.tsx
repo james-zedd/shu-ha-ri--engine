@@ -12,12 +12,14 @@ import {
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
+import { getInstalledPack } from "@/data/install-pack";
 import { filterQuestions, Question } from "@/data/questions";
 import { useDayCounter } from "@/hooks/use-day-counter";
 import { useImmediateFeedback } from "@/hooks/use-immediate-feedback";
 import { useTheme } from "@/hooks/use-theme";
 
 type SessionParams = {
+  pack?: string;
   language?: string;
   difficulties?: string;
   categories?: string;
@@ -111,7 +113,8 @@ export default function SessionScreen() {
   const theme = useTheme();
 
   const [sessionQuestions] = useState<Question[]>(() => {
-    const matches = filterQuestions({
+    const pack = params.pack ? getInstalledPack(params.pack) : null;
+    const matches = filterQuestions(pack?.questions ?? [], {
       language: params.language,
       difficulties: params.difficulties
         ? params.difficulties.split(",").map(Number)
