@@ -1,20 +1,151 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { useRef, useState, type ReactNode } from "react";
+import {
+  Dimensions,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+  type LayoutChangeEvent,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { Collapsible } from "@/components/ui/collapsible";
 import { Spacing } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
+
+type SectionId = "concept" | "app-usage" | "contributing" | "privacy";
+
+const SECTIONS: { id: SectionId; title: string }[] = [
+  { id: "concept", title: "Concept" },
+  { id: "app-usage", title: "App Usage" },
+  { id: "contributing", title: "Contributing" },
+  { id: "privacy", title: "Privacy" },
+];
+
+// Breathing room left above a section's heading when it's scrolled to.
+const HEADER_OFFSET = Spacing.three;
+// Lets even the last section scroll up near the top of the viewport.
+const BOTTOM_SPACER = Dimensions.get("window").height * 0.7;
+
+function Section({
+  id,
+  title,
+  onMeasure,
+  children,
+}: {
+  id: SectionId;
+  title: string;
+  onMeasure: (id: SectionId, y: number) => void;
+  children: ReactNode;
+}) {
+  return (
+    <View
+      style={styles.section}
+      onLayout={(event: LayoutChangeEvent) =>
+        onMeasure(id, event.nativeEvent.layout.y)
+      }
+    >
+      <ThemedText type="title">{title}</ThemedText>
+      {children}
+    </View>
+  );
+}
 
 export default function AboutScreen() {
+  const theme = useTheme();
+  const scrollRef = useRef<ScrollView>(null);
+  const navRef = useRef<ScrollView>(null);
+  const sectionTops = useRef<Partial<Record<SectionId, number>>>({});
+  const chipOffsets = useRef<Partial<Record<SectionId, number>>>({});
+  const [activeId, setActiveId] = useState<SectionId>(SECTIONS[0].id);
+
+  function revealChip(id: SectionId) {
+    const x = chipOffsets.current[id];
+    if (x != null) {
+      navRef.current?.scrollTo({ x: Math.max(x - Spacing.three, 0), animated: true });
+    }
+  }
+
+  function goToSection(id: SectionId) {
+    const top = sectionTops.current[id];
+    if (top == null) return;
+    scrollRef.current?.scrollTo({
+      y: Math.max(top - HEADER_OFFSET, 0),
+      animated: true,
+    });
+    setActiveId(id);
+    revealChip(id);
+  }
+
+  function handleScroll(event: NativeSyntheticEvent<NativeScrollEvent>) {
+    const y = event.nativeEvent.contentOffset.y + HEADER_OFFSET + 1;
+    let current: SectionId = SECTIONS[0].id;
+    for (const { id } of SECTIONS) {
+      const top = sectionTops.current[id];
+      if (top != null && top <= y) current = id;
+    }
+    if (current !== activeId) {
+      setActiveId(current);
+      revealChip(current);
+    }
+  }
+
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+        <View
+          style={[styles.navBar, { borderBottomColor: theme.backgroundSelected }]}
+        >
+          <ScrollView
+            ref={navRef}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.navContent}
+          >
+            {SECTIONS.map((section) => {
+              const active = section.id === activeId;
+              return (
+                <Pressable
+                  key={section.id}
+                  accessibilityRole="button"
+                  onPress={() => goToSection(section.id)}
+                  onLayout={(event: LayoutChangeEvent) => {
+                    chipOffsets.current[section.id] = event.nativeEvent.layout.x;
+                  }}
+                  style={({ pressed }) => pressed && styles.pressed}
+                >
+                  <ThemedView
+                    type={active ? "backgroundSelected" : "backgroundElement"}
+                    style={styles.chip}
+                  >
+                    <ThemedText
+                      type="small"
+                      themeColor={active ? "text" : "textSecondary"}
+                    >
+                      {section.title}
+                    </ThemedText>
+                  </ThemedView>
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+        </View>
+
         <ScrollView
+          ref={scrollRef}
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
         >
-          <Collapsible title="About Shu Ha Ri">
+          <Section
+            id="concept"
+            title="Concept"
+            onMeasure={(id, y) => (sectionTops.current[id] = y)}
+          >
             <ThemedText type="default">
               Shu Ha Ri is a Japanese concept that describes three separate
               stages of learning. Widely attributed to Japanese tea ceremony
@@ -49,30 +180,50 @@ export default function AboutScreen() {
               unique style and approach, transcending the traditional forms and
               rules.
             </ThemedText>
-          </Collapsible>
+          </Section>
 
-          <Collapsible title="Goals of this App">
+          <Section
+            id="app-usage"
+            title="App Usage"
+            onMeasure={(id, y) => (sectionTops.current[id] = y)}
+          >
             <ThemedText type="default">
-              This app is designed to help you practice and improve any area of
-              study or skill. It utilizes the Shu Ha Ri approach to learning,
-              but this approach is not mandated. You ultimately determine your
-              own path to learning and understanding.
+              This app is designed to help you improve any area of study you
+              would like to improve upon. It utilizes the Shu Ha Ri approach to
+              learning, which is to practice the fundamentals and core
+              principles of a subject on a regular basis. There are no rewards
+              for consistent progress in this app, other than becoming more
+              fluent in your area of study. There are no streaks, no goals to
+              obtain, no trophies, and your correct or incorrect answers are not
+              recorded.
             </ThemedText>
-          </Collapsible>
-
-          <Collapsible title="Uploading Questions">
             <ThemedText type="default">
-              You can upload your own questions to the app by creating a JSON
-              file that follows the structure of the example questions provided
-              in the app. The JSON file should contain an array of question
-              objects, each with a question, answer, and optional metadata such
-              as category, difficulty, and language. Once you have created your
-              JSON file, you can upload it to the app in the Storage Data and
-              Settings section. (To be implemented).
+              A suggestion for success with this app is that you practice by
+              logging in once a day and practicing as much as you can that day.
             </ThemedText>
-          </Collapsible>
+          </Section>
 
-          <Collapsible title="Privacy">
+          <Section
+            id="contributing"
+            title="Contributing"
+            onMeasure={(id, y) => (sectionTops.current[id] = y)}
+          >
+            <ThemedText type="default">
+              To have your pack included in the list of curated packs, you can
+              create your own question pack and post it publicly on a github
+              gist. Afterward please submit a pull request to the
+              curated-packs-list.ts file in this repository. Please ensure that
+              your pack is well-tested and follows the guidelines for creating
+              question packs. A sample pack is included in the
+              curated-packs-list.ts file for reference.
+            </ThemedText>
+          </Section>
+
+          <Section
+            id="privacy"
+            title="Privacy"
+            onMeasure={(id, y) => (sectionTops.current[id] = y)}
+          >
             <ThemedText type="default">
               This app was designed with a privacy-first approach. It does not
               collect any personal data or track your usage. All data is stored
@@ -88,9 +239,10 @@ export default function AboutScreen() {
             <ThemedText type="default">
               This app is provided free of charge. There is no user
               registration, no ads, in-app purchases, or subscriptions.
-              Education and learning should be accessible to everyone.
             </ThemedText>
-          </Collapsible>
+          </Section>
+
+          <View style={{ height: BOTTOM_SPACER }} />
         </ScrollView>
       </SafeAreaView>
     </ThemedView>
@@ -103,14 +255,33 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+  },
+  navBar: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  navContent: {
+    flexDirection: "row",
     gap: Spacing.two,
     paddingHorizontal: Spacing.three,
-    marginBottom: Spacing.three,
+    paddingVertical: Spacing.two,
+  },
+  chip: {
+    borderRadius: Spacing.three,
+    paddingVertical: Spacing.one,
+    paddingHorizontal: Spacing.three,
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.three,
     gap: Spacing.three,
+  },
+  section: {
+    gap: Spacing.two,
+  },
+  pressed: {
+    opacity: 0.7,
   },
 });
