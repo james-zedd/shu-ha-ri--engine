@@ -26,6 +26,20 @@ export default function HomeScreen() {
             </Pressable>
           </Link>
 
+          <Link href="/packs" asChild>
+            <Pressable style={({ pressed }) => pressed && styles.pressed}>
+              <ThemedView
+                type="backgroundElement"
+                style={[
+                  styles.secondaryButton,
+                  { borderWidth: 1, borderColor: "#cccccc" },
+                ]}
+              >
+                <ThemedText style={styles.buttonLabel}>View Packs</ThemedText>
+              </ThemedView>
+            </Pressable>
+          </Link>
+
           <Link href="/storage" asChild>
             <Pressable style={({ pressed }) => pressed && styles.pressed}>
               <ThemedView
