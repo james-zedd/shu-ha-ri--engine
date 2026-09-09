@@ -1,5 +1,4 @@
-import { Link } from "expo-router";
-import { Pressable, StyleSheet, Switch, View } from "react-native";
+import { StyleSheet, Switch, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed-text";
@@ -25,18 +24,6 @@ export default function StorageScreen() {
             <ThemedText>{count ?? "—"}</ThemedText>
           </View>
         </ThemedView>
-
-        <ThemedText type="title">Packs</ThemedText>
-
-        <Link href="/packs" asChild style={styles.packsLink}>
-          <Pressable style={({ pressed }) => pressed && styles.pressed}>
-            <ThemedView type="backgroundElement" style={styles.packsButton}>
-              <ThemedText style={styles.packsButtonLabel}>
-                View all packs
-              </ThemedText>
-            </ThemedView>
-          </Pressable>
-        </Link>
 
         <ThemedText type="title">Settings</ThemedText>
 
@@ -78,22 +65,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.three,
     backgroundColor: "rgb(255, 255, 255)",
-  },
-  packsLink: {
-    marginBottom: Spacing.three,
-  },
-  packsButton: {
-    borderRadius: Spacing.two,
-    paddingVertical: Spacing.three,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.1)",
-  },
-  packsButtonLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  pressed: {
-    opacity: 0.7,
   },
 });
