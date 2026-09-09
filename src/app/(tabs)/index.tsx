@@ -26,6 +26,20 @@ export default function HomeScreen() {
             </Pressable>
           </Link>
 
+          <Link href="/packs" asChild>
+            <Pressable style={({ pressed }) => pressed && styles.pressed}>
+              <ThemedView
+                type="selected"
+                style={[
+                  styles.secondaryButton,
+                  { borderWidth: 1, borderColor: "#92aed7" },
+                ]}
+              >
+                <ThemedText style={styles.buttonLabel}>View Packs</ThemedText>
+              </ThemedView>
+            </Pressable>
+          </Link>
+
           <Link href="/storage" asChild>
             <Pressable style={({ pressed }) => pressed && styles.pressed}>
               <ThemedView
@@ -79,6 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.four,
     alignItems: "center",
     gap: Spacing.six,
+    paddingTop: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
   },
