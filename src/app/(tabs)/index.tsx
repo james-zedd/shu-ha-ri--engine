@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import { Link } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,6 +7,8 @@ import { Logo } from "@/components/logo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+
+const appVersion = Constants.expoConfig?.version;
 
 export default function HomeScreen() {
   return (
@@ -76,6 +79,17 @@ export default function HomeScreen() {
             </Pressable>
           </Link>
         </ThemedView>
+        {appVersion && (
+          <ThemedView style={styles.versionSection}>
+            <ThemedText
+              type="small"
+              themeColor="textDimmed"
+              style={styles.versionText}
+            >
+              v{appVersion}
+            </ThemedText>
+          </ThemedView>
+        )}
       </SafeAreaView>
     </ThemedView>
   );
@@ -96,9 +110,19 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
+    marginVertical: "auto",
   },
   heroSection: {
     alignItems: "center",
+  },
+  versionSection: {
+    alignItems: "center",
+    height: 20,
+    position: "absolute",
+    bottom: 0,
+  },
+  versionText: {
+    textAlign: "center",
   },
   actions: {
     alignSelf: "stretch",
