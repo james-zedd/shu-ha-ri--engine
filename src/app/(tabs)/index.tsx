@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 20,
     position: "absolute",
-    bottom: BottomTabInset,
+    bottom: 0,
   },
   versionText: {
     textAlign: "center",
