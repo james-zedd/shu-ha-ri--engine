@@ -1,6 +1,7 @@
 import { useRef, useState, type ReactNode } from "react";
 import {
   Dimensions,
+  Linking,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -17,6 +18,10 @@ import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 type SectionId = "concept" | "app-usage" | "contributing" | "privacy";
+
+const REPO_URL = "https://github.com/james-zedd/shu-ha-ri--engine";
+const GIST_URL =
+  "https://gist.github.com/james-zedd/8d9d605800b38f36e7a678a58ffc4511";
 
 const SECTIONS: { id: SectionId; title: string }[] = [
   { id: "concept", title: "Concept" },
@@ -54,6 +59,23 @@ function Section({
   );
 }
 
+function Step({ number, children }: { number: number; children: ReactNode }) {
+  return (
+    <View style={styles.step}>
+      <ThemedText
+        type="default"
+        themeColor="textSecondary"
+        style={styles.stepNumber}
+      >
+        {number}.
+      </ThemedText>
+      <ThemedText type="default" style={styles.stepText}>
+        {children}
+      </ThemedText>
+    </View>
+  );
+}
+
 export default function AboutScreen() {
   const theme = useTheme();
   const scrollRef = useRef<ScrollView>(null);
@@ -65,7 +87,10 @@ export default function AboutScreen() {
   function revealChip(id: SectionId) {
     const x = chipOffsets.current[id];
     if (x != null) {
-      navRef.current?.scrollTo({ x: Math.max(x - Spacing.three, 0), animated: true });
+      navRef.current?.scrollTo({
+        x: Math.max(x - Spacing.three, 0),
+        animated: true,
+      });
     }
   }
 
@@ -97,7 +122,10 @@ export default function AboutScreen() {
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
         <View
-          style={[styles.navBar, { borderBottomColor: theme.backgroundSelected }]}
+          style={[
+            styles.navBar,
+            { borderBottomColor: theme.backgroundSelected },
+          ]}
         >
           <ScrollView
             ref={navRef}
@@ -113,7 +141,8 @@ export default function AboutScreen() {
                   accessibilityRole="button"
                   onPress={() => goToSection(section.id)}
                   onLayout={(event: LayoutChangeEvent) => {
-                    chipOffsets.current[section.id] = event.nativeEvent.layout.x;
+                    chipOffsets.current[section.id] =
+                      event.nativeEvent.layout.x;
                   }}
                   style={({ pressed }) => pressed && styles.pressed}
                 >
@@ -209,13 +238,49 @@ export default function AboutScreen() {
             onMeasure={(id, y) => (sectionTops.current[id] = y)}
           >
             <ThemedText type="default">
-              To have your pack included in the list of curated packs, you can
-              create your own question pack and post it publicly on a github
-              gist. Afterward please submit a pull request to the
-              curated-packs-list.ts file in this repository. Please ensure that
-              your pack is well-tested and follows the guidelines for creating
-              question packs. A sample pack is included in the
-              curated-packs-list.ts file for reference.
+              Have a question pack you&apos;d like added to the curated list?
+              Here&apos;s how:
+            </ThemedText>
+            <Step number={1}>
+              Build your pack as a JSON file containing your questions — see{" "}
+              <ThemedText
+                type="linkPrimary"
+                onPress={() => Linking.openURL(GIST_URL)}
+              >
+                this example pack
+              </ThemedText>{" "}
+              for the exact format.
+            </Step>
+            <Step number={2}>
+              Once your pack is correctly formatted and quality checked, host it
+              somewhere public — a GitHub Gist works well.
+            </Step>
+            <Step number={3}>
+              Open a pull request adding an entry for your pack to
+              curated-packs-list.ts in the shu-ha-ri--engine repository.
+            </Step>
+            <Pressable
+              onPress={() => Linking.openURL(REPO_URL)}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
+              <ThemedView
+                type="backgroundElement"
+                style={[
+                  styles.repoButton,
+                  { borderWidth: 1, borderColor: theme.backgroundSelected },
+                ]}
+              >
+                <ThemedText type="linkPrimary">
+                  View Repository on GitHub
+                </ThemedText>
+              </ThemedView>
+            </Pressable>
+            <ThemedText type="default">
+              Please note that the process for adding a pack is not automated,
+              under development and subject to change. You may need to make
+              adjustments to your pack based on feedback from the repository
+              maintainers, and it may take some time for your pack to be
+              reviewed and added to the curated list.
             </ThemedText>
           </Section>
 
@@ -280,6 +345,24 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: Spacing.two,
+  },
+  step: {
+    flexDirection: "row",
+    gap: Spacing.two,
+  },
+  stepNumber: {
+    fontWeight: "700",
+  },
+  stepText: {
+    flex: 1,
+  },
+  repoButton: {
+    alignItems: "center",
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Spacing.three,
+    marginTop: Spacing.one,
+    width: "100%",
   },
   pressed: {
     opacity: 0.7,
