@@ -22,7 +22,13 @@ A suggestion for success with this app is that you practice by logging in once a
 
 ## Contributing Packs
 
-To have your pack included in the list of curated packs, you can create your own question pack and post it publicly on a GitHub gist. Afterward please submit a pull request to the `curated-packs-list.ts` file in this repository. Please ensure that your pack is well-tested and follows the guidelines for creating question packs. A sample pack is included in the `curated-packs-list.ts` file for reference.
+Have a question pack you'd like added to the curated list? Here's how:
+
+1. Build your pack as a JSON file containing your questions — see [this example pack](https://gist.github.com/james-zedd/8d9d605800b38f36e7a678a58ffc4511) for the exact format.
+2. Once your pack is correctly formatted and quality checked, host it somewhere public — a GitHub Gist works well.
+3. Open a pull request adding an entry for your pack to `curated-packs-list.ts` in the [shu-ha-ri--engine repository](https://github.com/james-zedd/shu-ha-ri--engine).
+
+Please note that the process for adding a pack is not automated, is under development, and is subject to change. You may need to make adjustments to your pack based on feedback from the repository maintainers, and it may take some time for your pack to be reviewed and added to the curated list.
 
 ## Privacy
 
