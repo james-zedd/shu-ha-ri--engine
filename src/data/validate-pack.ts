@@ -90,14 +90,17 @@ function validateQuestion(
   }
   if (seenIds.has(id)) return { reason: `duplicate id "${id}"` };
 
-  if (!isBoundedString(q.language, MAX_STRING_LENGTH)) {
-    return {
-      reason: `missing, empty, or too long (max ${MAX_STRING_LENGTH} characters) language`,
-    };
-  }
-  const language = stripControlAndSpoofingChars(q.language).trim();
-  if (!language || /[<>]/.test(language)) {
-    return { reason: "language must be a plain string with no markup" };
+  let language: string | undefined;
+  if (q.language !== undefined) {
+    if (!isBoundedString(q.language, MAX_STRING_LENGTH)) {
+      return {
+        reason: `language, if present, must be a non-empty string of ${MAX_STRING_LENGTH} characters or fewer`,
+      };
+    }
+    language = stripControlAndSpoofingChars(q.language).trim();
+    if (!language || /[<>]/.test(language)) {
+      return { reason: "language must be a plain string with no markup" };
+    }
   }
 
   if (!isBoundedString(q.category, MAX_STRING_LENGTH)) {
