@@ -9,7 +9,7 @@ export type TextAnswerQuestion = {
   type: "text-answer";
   prompt: string;
   correctAnswer: string;
-  language: string;
+  language?: string;
   explanation: string;
   source: string;
 };

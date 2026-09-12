@@ -10,6 +10,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
+      "supportsTablet": true,
       "bundleIdentifier": "com.zeddenterprises.shuhariengine",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false

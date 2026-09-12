@@ -337,8 +337,9 @@ export default function SessionScreen() {
               Question {index + 1} of {total}
             </ThemedText>
             <ThemedText themeColor="textSecondary" type="small">
-              {current.language.charAt(0).toUpperCase() +
-                current.language.slice(1)}{" "}
+              {current.language
+                ? `${current.language.charAt(0).toUpperCase()}${current.language.slice(1)} `
+                : ""}
               Question
             </ThemedText>
           </View>
