@@ -11,7 +11,7 @@ export type MultipleChoiceQuestion = {
   prompt: string;
   choices: string[];
   correctIndex: number;
-  language: string;
+  language?: string;
   explanation: string;
   source: string;
 };
