@@ -25,6 +25,21 @@ export function getCategories(questions: Question[]): string[] {
   return Array.from(new Set(questions.map((q) => q.category))).sort();
 }
 
+/**
+ * Distinct languages present in the given questions, sorted for display.
+ * Like getCategories, this is derived per-pack at runtime — a pack's
+ * questions aren't guaranteed to use any particular fixed set of languages.
+ */
+export function getLanguages(questions: Question[]): string[] {
+  return Array.from(
+    new Set(
+      questions
+        .map((q) => q.language)
+        .filter((language): language is string => language !== undefined),
+    ),
+  ).sort();
+}
+
 export function filterQuestions(
   questions: Question[],
   { language = "all", difficulties = [], categories = [] }: QuestionFilters = {},
