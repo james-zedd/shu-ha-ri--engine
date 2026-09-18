@@ -1,0 +1,2829 @@
+{
+  "id": "html-fundamentals",
+  "name": "HTML Fundamentals",
+  "description": "200 multiple-choice and text-answer questions covering core HTML: document structure, semantic elements, text formatting, lists, links, images and media, forms and validation, tables, global attributes, accessibility/ARIA, metadata, embedding, HTML5 interactive elements, character entities, deprecated markup, and HTML's history and versioning.",
+  "author": "James Zedd",
+  "schemaVersion": 1,
+  "version": "1.1.0",
+  "updatedAt": "2026-09-18",
+  "questions": [
+    {
+      "id": "OhbVrpoiVgRV5IfL",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "Which line must appear as the very first line of an HTML5 document?",
+      "choices": [
+        "A doctype declaration",
+        "The html element",
+        "The head element",
+        "A meta charset declaration"
+      ],
+      "correctIndex": 0,
+      "explanation": "The doctype declaration (an HTML5 doctype is just `<!DOCTYPE html>`) must be the first thing in the document so browsers render in standards mode instead of quirks mode.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "BcbfnoGMbJmTPSIA",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "Which two elements are the direct children of the html element in a standard document, in order?",
+      "choices": [
+        "head and body",
+        "title and body",
+        "head and title",
+        "meta and body"
+      ],
+      "correctIndex": 0,
+      "explanation": "A conforming HTML document's root html element contains exactly one head element followed by one body element.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/html"
+    },
+    {
+      "id": "oCLrZ3aWZkSBvrjn",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "Which element contains metadata about a document, such as its title and linked stylesheets, and is not displayed as page content? (one word)",
+      "correctAnswer": "head",
+      "explanation": "The head element holds machine-readable metadata: title, meta tags, links to stylesheets and scripts, none of which render as visible page content by default.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"
+    },
+    {
+      "id": "9Wvgfygw2wMqZcUD",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "Which element holds the visible content of an HTML page? (one word)",
+      "correctAnswer": "body",
+      "explanation": "Everything a browser renders on the page, text, images, forms, and so on, lives inside the body element.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body"
+    },
+    {
+      "id": "Ih7yfJs1ON43xKmT",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 2,
+      "prompt": "Which attribute on the html element tells assistive technology and browsers what language the page's text is written in? (one word, the attribute name only)",
+      "correctAnswer": "lang",
+      "explanation": "The lang global attribute (e.g. lang=\"en\") declares the primary language of the content, which screen readers use to choose pronunciation rules.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/lang"
+    },
+    {
+      "id": "ecQoXsf2o3gyrDO1",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 2,
+      "prompt": "Which attribute controls the base text direction of a document, such as right-to-left for Arabic or Hebrew?",
+      "choices": [
+        "lang",
+        "dir",
+        "direction",
+        "align"
+      ],
+      "correctIndex": 1,
+      "explanation": "The dir global attribute accepts ltr, rtl, or auto and sets the base directionality of the element's text.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/dir"
+    },
+    {
+      "id": "xkxwnQrS7RPeMOkI",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "Where should meta charset be placed for maximum reliability?",
+      "choices": [
+        "As early as possible inside head",
+        "At the very end of body",
+        "Inside html but outside head",
+        "It can only go in an external file"
+      ],
+      "correctIndex": 0,
+      "explanation": "Browsers only scan a limited number of bytes at the start of a document looking for the character encoding, so meta charset should be one of the first elements inside head.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+    },
+    {
+      "id": "UpkDyr7OSJoRu1XX",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 2,
+      "prompt": "What is the term for the browser rendering mode triggered by a missing or malformed doctype? (two words)",
+      "correctAnswer": "quirks mode",
+      "explanation": "Without a valid doctype, browsers fall back to quirks mode, which emulates old, inconsistent rendering behavior instead of following the modern CSS/HTML specifications.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "do0cZuzren68K4Tu",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 1,
+      "prompt": "What is the exact doctype declaration used to trigger standards mode in HTML5? (answer in lowercase with no trailing punctuation)",
+      "correctAnswer": "<!doctype html>",
+      "explanation": "HTML5 simplified the doctype down to a single, case-insensitive token: <!DOCTYPE html>.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "nPFz46PDjqipVJIq",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 3,
+      "prompt": "Why is meta charset usually written as UTF-8 rather than an older encoding like ISO-8859-1?",
+      "choices": [
+        "UTF-8 loads faster",
+        "UTF-8 can represent virtually every character from every writing system, avoiding mojibake",
+        "Older encodings are deprecated tags",
+        "Browsers ignore the charset attribute entirely"
+      ],
+      "correctIndex": 1,
+      "explanation": "UTF-8 is a superset encoding capable of representing the full Unicode character set, so it is the recommended default and avoids garbled text (mojibake) for international content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+    },
+    {
+      "id": "VLB5LzxoiGFfWd3h",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 2,
+      "prompt": "Which of these is valid, minimal, well-formed HTML5 document structure?",
+      "choices": [
+        "A document with only a body, no head",
+        "A document with doctype, html, head with title, and body",
+        "A document with two head elements",
+        "A document with body nested inside head"
+      ],
+      "correctIndex": 1,
+      "explanation": "A minimal conforming document needs a doctype, a single html root, one head (which should contain at least a title), and one body.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "jOkYRBMeyyMDHqJ3",
+      "type": "text-answer",
+      "language": "html",
+      "category": "document-structure",
+      "difficulty": 2,
+      "prompt": "Which element inside head controls the text shown in the browser tab and bookmarks? (one word)",
+      "correctAnswer": "title",
+      "explanation": "The title element's text is what browsers display in the tab, window title bar, history, and bookmarks; it is not rendered inside the page body.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/title"
+    },
+    {
+      "id": "8aRUhR4IWrXPvhsB",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element represents the dominant, unique content of a document, and should appear only once per page? (one word)",
+      "correctAnswer": "main",
+      "explanation": "The main element wraps the content unique to the current page, excluding repeated site furniture like navigation and footers; a document should have at most one visible main.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main"
+    },
+    {
+      "id": "kDa9U4UqGWlG6g3O",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element is best suited for a page's top banner containing a logo and site title?",
+      "choices": [
+        "header",
+        "head",
+        "top",
+        "section"
+      ],
+      "correctIndex": 0,
+      "explanation": "The header element represents introductory content or a group of navigational aids, commonly used for a page or section's heading area.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header"
+    },
+    {
+      "id": "t1OGMmjxWkI9X7H6",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element is intended for a set of navigation links, such as a primary menu? (one word)",
+      "correctAnswer": "nav",
+      "explanation": "The nav element marks up a section of major navigational links, helping assistive technology identify and let users skip to navigation.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"
+    },
+    {
+      "id": "aMuFbh7x41Ztpdp4",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element represents content that is tangentially related to the surrounding content, like a sidebar or pull quote?",
+      "choices": [
+        "section",
+        "aside",
+        "nav",
+        "footer"
+      ],
+      "correctIndex": 1,
+      "explanation": "aside represents content indirectly related to the main content, such as sidebars, callout boxes, or advertising.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/aside"
+    },
+    {
+      "id": "K8ffUF0eWIXiiQE8",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element is used for self-contained, independently distributable content, such as a blog post or news story? (one word)",
+      "correctAnswer": "article",
+      "explanation": "article represents a complete, self-contained composition that would make sense on its own, e.g. in a feed or when syndicated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"
+    },
+    {
+      "id": "JkqH3MB9n7IWUSmT",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "Which element groups a thematic set of content, typically with its own heading, without implying it is independently distributable?",
+      "choices": [
+        "article",
+        "section",
+        "div",
+        "aside"
+      ],
+      "correctIndex": 1,
+      "explanation": "section groups related content under a common theme, usually introduced by a heading, but unlike article it isn't meant to stand alone out of context.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section"
+    },
+    {
+      "id": "tzQPxC5HChpoevbL",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "When should a plain div be preferred over section or article?",
+      "choices": [
+        "When the grouping exists only for styling or scripting hooks, with no semantic meaning",
+        "Whenever the content has a heading",
+        "Whenever the content appears more than once on the page",
+        "Never, div is obsolete in HTML5"
+      ],
+      "correctIndex": 0,
+      "explanation": "div is a generic container with no semantic meaning; it should be used for styling/scripting grouping when none of the more specific sectioning elements fit.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div"
+    },
+    {
+      "id": "JoLoaeTOdoe5c3ve",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element typically holds copyright notices, related links, and author info at the bottom of a page or section?",
+      "choices": [
+        "footer",
+        "bottom",
+        "aside",
+        "section"
+      ],
+      "correctIndex": 0,
+      "explanation": "footer represents footer content for its nearest sectioning ancestor, commonly copyright, contact, and related-document links.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer"
+    },
+    {
+      "id": "GprQFnIiU74KKEpY",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "Which element wraps a self-contained piece of content like an image, diagram, or code listing, optionally paired with a caption? (one word)",
+      "correctAnswer": "figure",
+      "explanation": "figure groups media content with its figcaption, and the whole unit can be moved away from the main flow without affecting the document's meaning.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure"
+    },
+    {
+      "id": "EZAmggQBwBAD3UdR",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element provides the caption for the content inside a figure element?",
+      "choices": [
+        "caption",
+        "figcaption",
+        "summary",
+        "legend"
+      ],
+      "correctIndex": 1,
+      "explanation": "figcaption is the dedicated caption element for figure, and can appear as the first or last child of its figure.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figcaption"
+    },
+    {
+      "id": "PPgdzUvZ3gpmmICi",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "Which element is intended for contact information for its nearest article or body ancestor? (one word)",
+      "correctAnswer": "address",
+      "explanation": "address represents contact information (physical address, email, phone, etc.) for the author of the nearest enclosing article or the whole document.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/address"
+    },
+    {
+      "id": "BlrDp37eCZ32JgdP",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "Which element represents a specific period in time and can carry a machine-readable datetime attribute? (one word)",
+      "correctAnswer": "time",
+      "explanation": "time represents a specific date/time, and its datetime attribute lets you provide a machine-readable value alongside human-readable text.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/time"
+    },
+    {
+      "id": "I1af7W2pkAFEn3z5",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 3,
+      "prompt": "Can a page legitimately contain more than one nav element?",
+      "choices": [
+        "No, nav can only be used once per page",
+        "Yes, e.g. one for primary navigation and another for a table of contents or breadcrumb trail",
+        "Only inside an iframe",
+        "Only if each nav is hidden with the hidden attribute"
+      ],
+      "correctIndex": 1,
+      "explanation": "A document can have multiple nav elements, for example primary navigation, secondary navigation, and breadcrumbs, as long as each represents a major block of navigation links.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"
+    },
+    {
+      "id": "dkyayq7YYDsBS9UY",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 3,
+      "prompt": "A header element placed inside an article, rather than as a direct child of body, represents what?",
+      "choices": [
+        "The page's global site header",
+        "Introductory content scoped to that article, such as its title and byline",
+        "Nothing, header is invalid inside article",
+        "The article's footer content"
+      ],
+      "correctIndex": 1,
+      "explanation": "header and footer are scoped to their nearest sectioning content or sectioning root ancestor, so a header inside an article describes that article's own introductory content, not the whole page.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header"
+    },
+    {
+      "id": "JQTFjmsn9dLVIdVu",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 2,
+      "prompt": "Which heading levels should generally be avoided skipping, for both accessibility and semantics?",
+      "choices": [
+        "It's fine to skip from h1 straight to h4 for visual effect",
+        "Heading levels should form a logical outline without skipping levels",
+        "Only h1 matters, others are optional decoration",
+        "Heading order does not matter to assistive technology"
+      ],
+      "correctIndex": 1,
+      "explanation": "Screen reader users often navigate by heading level; skipping levels (e.g. h1 to h3) breaks the logical outline of the page even if it looks fine visually.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/h1"
+    },
+    {
+      "id": "ddLEG62Hkd9Gf2le",
+      "type": "text-answer",
+      "language": "html",
+      "category": "semantic-elements",
+      "difficulty": 1,
+      "prompt": "Which element is the generic inline counterpart to div, carrying no semantic meaning on its own? (one word)",
+      "correctAnswer": "span",
+      "explanation": "span is a generic inline container used for styling or scripting hooks when no semantic inline element applies, mirroring div's role at the block level.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span"
+    },
+    {
+      "id": "MeR3pzh84KpLMcNf",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which element represents an extended quotation set off from the surrounding text as its own block? (one word)",
+      "correctAnswer": "blockquote",
+      "explanation": "blockquote marks up a section quoted from another source, typically rendered as an indented block; a cite attribute can point to the source URL.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote"
+    },
+    {
+      "id": "AQLKHu7qnQTupqzi",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which element is used for a short, inline quotation rather than a block-level one?",
+      "choices": [
+        "blockquote",
+        "q",
+        "cite",
+        "small"
+      ],
+      "correctIndex": 1,
+      "explanation": "q wraps a short inline quotation; browsers typically add quotation marks around it automatically via CSS.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q"
+    },
+    {
+      "id": "QPtDu7W7eaDNKgeI",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "Which element marks up the title of a work, like a book or movie, being referenced? (one word)",
+      "correctAnswer": "cite",
+      "explanation": "cite represents the title of a creative work being referenced, and is commonly rendered in italics by default.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite"
+    },
+    {
+      "id": "nGqi7w4e4pxskC1I",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "Which element represents an abbreviation or acronym, and can carry a title attribute with the full expansion?",
+      "choices": [
+        "acronym",
+        "abbr",
+        "abbrev",
+        "span"
+      ],
+      "correctIndex": 1,
+      "explanation": "abbr marks up an abbreviation; its optional title attribute can hold the expanded form, which browsers often show as a tooltip.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/abbr"
+    },
+    {
+      "id": "TtNZPHaQ0Jt7Qg84",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which element highlights text as relevant or of special interest, commonly rendered with a yellow background? (one word)",
+      "correctAnswer": "mark",
+      "explanation": "mark represents text highlighted for reference purposes, such as search-term matches, and is distinct from strong (importance) or em (stress emphasis).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark"
+    },
+    {
+      "id": "iqh4gVJjrsMnTvnR",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "What is the key semantic difference between strong and b?",
+      "choices": [
+        "strong indicates strong importance; b is a stylistic bold with no semantic weight",
+        "b is deprecated and invalid in HTML5",
+        "strong changes text color; b changes font size",
+        "They are identical in every way"
+      ],
+      "correctIndex": 0,
+      "explanation": "strong conveys strong importance, seriousness, or urgency to assistive technology, while b simply offers stylistic bold text without implying extra importance.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong"
+    },
+    {
+      "id": "O2qGFq562dfOB1rc",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "What is the key semantic difference between em and i?",
+      "choices": [
+        "em is deprecated in favor of i",
+        "em indicates stress emphasis that changes meaning when read aloud; i marks text as being in an alternate voice or mood, like a technical term",
+        "i can only appear inside p elements",
+        "There is no difference"
+      ],
+      "correctIndex": 1,
+      "explanation": "em conveys stress emphasis (changing the sentence's meaning if read aloud), whereas i is used for text in an alternate voice, such as foreign words or taxonomic names, without implying emphasis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em"
+    },
+    {
+      "id": "avXiOqkVCJTBJahe",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which pair of elements together mark up text that was removed from, and text that was inserted into, a document (e.g. in a tracked revision)?",
+      "choices": [
+        "strike and add",
+        "del and ins",
+        "s and mark",
+        "del and new"
+      ],
+      "correctIndex": 1,
+      "explanation": "del represents deleted content and ins represents inserted content, commonly used to show document edits.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/del"
+    },
+    {
+      "id": "84S5jIc1xLJjBict",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which element renders text in a fixed-width font and preserves whitespace and line breaks exactly as written? (one word)",
+      "correctAnswer": "pre",
+      "explanation": "pre preserves whitespace and line breaks from the source, rendering in a monospace font by default, commonly used for code listings or ASCII art.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre"
+    },
+    {
+      "id": "x57Y3c5wnRpQgwXJ",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 1,
+      "prompt": "Which inline element marks up a short fragment of computer code within a sentence?",
+      "choices": [
+        "pre",
+        "code",
+        "kbd",
+        "samp"
+      ],
+      "correctIndex": 1,
+      "explanation": "code marks up a short inline span of computer code, rendered in a monospace font, without the whitespace-preservation of pre.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code"
+    },
+    {
+      "id": "43ANVj77p3kZZl4A",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "Which two-letter HTML element renders text as subscript, such as the 2 in a chemical formula like H2O? (one word)",
+      "correctAnswer": "sub",
+      "explanation": "sub renders its content as subscript text, positioned slightly below the baseline.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/sub"
+    },
+    {
+      "id": "blV7vY7AZQ3VZprk",
+      "type": "text-answer",
+      "language": "html",
+      "category": "text-content-formatting",
+      "difficulty": 2,
+      "prompt": "Which two-letter HTML element renders text as superscript, such as an exponent? (one word)",
+      "correctAnswer": "sup",
+      "explanation": "sup renders its content as superscript text, positioned slightly above the baseline.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/sup"
+    },
+    {
+      "id": "YSgy3c2Eom06Dwt0",
+      "type": "text-answer",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 1,
+      "prompt": "Which element creates an unordered (bulleted) list? (one word)",
+      "correctAnswer": "ul",
+      "explanation": "ul creates an unordered list, whose items are typically rendered with bullet markers rather than numbers.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"
+    },
+    {
+      "id": "Y3oobQmzvr3e9Xrw",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 1,
+      "prompt": "Which element creates an ordered (numbered) list?",
+      "choices": [
+        "ol",
+        "ul",
+        "li",
+        "dl"
+      ],
+      "correctIndex": 0,
+      "explanation": "ol creates an ordered list, rendering its items with sequential markers such as numbers or letters.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"
+    },
+    {
+      "id": "PGzR1Iv8bh4qlL9q",
+      "type": "text-answer",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 1,
+      "prompt": "Which element represents an individual item inside ul or ol? (one word)",
+      "correctAnswer": "li",
+      "explanation": "li marks up a single list item and is valid as a child of ul, ol, or menu.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"
+    },
+    {
+      "id": "cgMBwUYuBMGhy5Km",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 2,
+      "prompt": "Which attribute on ol changes the number that the list begins counting from?",
+      "choices": [
+        "start",
+        "value",
+        "begin",
+        "from"
+      ],
+      "correctIndex": 0,
+      "explanation": "The start attribute on ol sets the starting ordinal value for the list, overriding the default of 1.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"
+    },
+    {
+      "id": "qcTBaH7ZIRU8VVQm",
+      "type": "text-answer",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 2,
+      "prompt": "Which boolean attribute on ol displays the list numbers in descending order? (one word, the attribute name only)",
+      "correctAnswer": "reversed",
+      "explanation": "The reversed boolean attribute on ol numbers the list items in descending order instead of the default ascending order.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"
+    },
+    {
+      "id": "xBe8Q6vNuQ2hU5tG",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 2,
+      "prompt": "Which pair of elements together builds a description (definition) list of terms and their descriptions?",
+      "choices": [
+        "dt and dd, inside a dl",
+        "li and dl",
+        "dt and dl",
+        "term and desc"
+      ],
+      "correctIndex": 0,
+      "explanation": "dl is the description list container, whose children are dt (the term) and dd (the term's description), which can repeat in groups.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl"
+    },
+    {
+      "id": "tQAuzSsJimAQ8yRV",
+      "type": "text-answer",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 1,
+      "prompt": "Inside a dl element, which element wraps the term or name being defined? (one word)",
+      "correctAnswer": "dt",
+      "explanation": "dt wraps the term (name) in a name/value group within a description list.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dt"
+    },
+    {
+      "id": "5lNKtzJ1atsnBYLM",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "lists",
+      "difficulty": 3,
+      "prompt": "Are lists allowed to nest, e.g. a ul inside an li of another ul?",
+      "choices": [
+        "No, nested lists are invalid HTML",
+        "Yes, a full list is a valid child of a list item, producing a nested sublist",
+        "Only ol can nest inside ul, never the reverse",
+        "Only up to two levels of nesting are valid"
+      ],
+      "correctIndex": 1,
+      "explanation": "A ul or ol can be placed inside an li to create a nested sublist; there is no limit on nesting depth imposed by the spec.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"
+    },
+    {
+      "id": "PuDCCRnGEY59YVkQ",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 1,
+      "prompt": "Which attribute of the anchor element specifies the link's destination?",
+      "choices": [
+        "href",
+        "src",
+        "link",
+        "to"
+      ],
+      "correctIndex": 0,
+      "explanation": "href (hypertext reference) holds the URL that the anchor element points to.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "fsGQONvf08WpRtoZ",
+      "type": "text-answer",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 1,
+      "prompt": "Which value of the target attribute opens the link in a new browsing context, typically a new tab? (include the leading underscore)",
+      "correctAnswer": "_blank",
+      "explanation": "target=\"_blank\" instructs the browser to open the link in a new tab or window, rather than the current one.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "mjbcpEN2XeDA4OKm",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 2,
+      "prompt": "When using target=\"_blank\", which rel value should be added to prevent the new page from gaining a handle back to the opening window via window.opener?",
+      "choices": [
+        "noopener",
+        "nofollow",
+        "noreferrer only, noopener has no effect",
+        "external"
+      ],
+      "correctIndex": 0,
+      "explanation": "rel=\"noopener\" prevents the newly opened page from accessing window.opener, closing off a class of tab-napping attacks; modern browsers apply this behavior by default for target=_blank but it's still recommended to set explicitly for older engines.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "TSyFzpjPSa5W3X4g",
+      "type": "text-answer",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 2,
+      "prompt": "Which attribute on an anchor element makes the browser download the linked resource instead of navigating to it? (one word)",
+      "correctAnswer": "download",
+      "explanation": "The download attribute on a tells the browser to save the linked URL rather than navigate to it, and can optionally specify a suggested filename.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "XBolZ9SHDdJp62hD",
+      "type": "text-answer",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 1,
+      "prompt": "Which href URL scheme opens the user's email client with a prefilled recipient? (include the trailing colon, e.g. scheme:)",
+      "correctAnswer": "mailto:",
+      "explanation": "A mailto: URL scheme, e.g. href=\"mailto:someone@example.com\", opens the user's default mail client addressed to that recipient.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "iZDQHJMu8W5CN0U5",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 1,
+      "prompt": "Which href scheme creates a clickable link that dials a phone number on supporting devices?",
+      "choices": [
+        "phone:",
+        "tel:",
+        "call:",
+        "dial:"
+      ],
+      "correctIndex": 1,
+      "explanation": "The tel: URL scheme, e.g. href=\"tel:+15551234567\", lets supporting devices initiate a phone call when the link is activated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "GB16JC5kV3ECqWp1",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 2,
+      "prompt": "An href value of just \"#section2\" links to what?",
+      "choices": [
+        "An external page named section2",
+        "An element elsewhere on the same page whose id is section2",
+        "A query parameter named section2",
+        "Nothing, this syntax is invalid"
+      ],
+      "correctIndex": 1,
+      "explanation": "A fragment-only href scrolls to, and links to, an element on the same page whose id matches the fragment.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "OrXXHFOprCeTsprv",
+      "type": "text-answer",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 2,
+      "prompt": "Which rel value tells search engines and crawlers not to pass ranking credit to the linked page, often used for sponsored or user-generated links? (one word)",
+      "correctAnswer": "nofollow",
+      "explanation": "rel=\"nofollow\" is a hint to search engines that the destination shouldn't be endorsed or have link authority passed to it, commonly used on ads and untrusted user content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "u5IfijoySjTneAAv",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 3,
+      "prompt": "Besides http(s):, mailto:, and tel:, which of these is also a valid href scheme supported natively by browsers?",
+      "choices": [
+        "ftp:",
+        "sms:",
+        "Both ftp: and sms: are valid schemes browsers can handle",
+        "Neither, only http(s) is valid in href"
+      ],
+      "correctIndex": 2,
+      "explanation": "Browsers support several URL schemes in href beyond http(s), including ftp: for file transfer links and sms: for prefilling a text message, though actual handling depends on the OS and installed apps.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "IDAdn1Ay5XL8Sb24",
+      "type": "text-answer",
+      "language": "html",
+      "category": "links-navigation",
+      "difficulty": 2,
+      "prompt": "If an anchor element's target attribute is omitted entirely, what value does it effectively behave as, meaning the link opens in the current browsing context? (include the leading underscore)",
+      "correctAnswer": "_self",
+      "explanation": "The implicit default for target is _self, so links open in the same browsing context they were clicked from unless target says otherwise.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+    },
+    {
+      "id": "WKyEa8wtWy2591AI",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 1,
+      "prompt": "Which required attribute of the img element provides a fallback text description of the image's content? (one word)",
+      "correctAnswer": "alt",
+      "explanation": "alt is a required accessibility attribute on img that provides a textual description standing in for the image.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "VVIZM5oForBFbyvQ",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 1,
+      "prompt": "For a purely decorative image that adds no information, what should its alt attribute be set to?",
+      "choices": [
+        "Omitted entirely",
+        "An empty string, alt=\"\"",
+        "The word 'decorative'",
+        "The filename of the image"
+      ],
+      "correctIndex": 1,
+      "explanation": "An empty alt=\"\" tells assistive technology to skip the image entirely, which is correct for purely decorative images that convey no content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "RZzUk1D6iNIb6zLK",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "What is the purpose of the srcset attribute on img?",
+      "choices": [
+        "To provide a fallback image if the src fails",
+        "To offer multiple image resources at different resolutions or widths, letting the browser pick the best one",
+        "To set a CSS background image",
+        "To lazily load the image only after page load"
+      ],
+      "correctIndex": 1,
+      "explanation": "srcset lists a set of candidate image URLs (often with width or pixel-density descriptors), letting the browser choose the most appropriate one for the current viewport and screen density.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "QbfPBi3DldqyunDu",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which value of the img loading attribute defers loading an offscreen image until the user scrolls near it? (one word, the attribute value only)",
+      "correctAnswer": "lazy",
+      "explanation": "loading=\"lazy\" on img (and iframe) tells the browser to defer fetching the resource until it's close to entering the viewport, improving initial page load performance.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "vW4yrW81Aq1fEbVI",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which element lets you specify multiple image sources so the browser can pick the best format or size, falling back to an inner img? (one word)",
+      "correctAnswer": "picture",
+      "explanation": "picture contains one or more source elements offering different formats/sizes plus a required fallback img, letting browsers choose the most suitable resource.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture"
+    },
+    {
+      "id": "d8woPeX9PcWb8pm1",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Inside a picture element, which attribute on source specifies a media condition, like a minimum viewport width, for choosing that source?",
+      "choices": [
+        "media",
+        "sizes",
+        "type",
+        "srcset"
+      ],
+      "correctIndex": 0,
+      "explanation": "The media attribute on source takes a media-query-like condition; the browser uses the first matching source, falling back to the picture's img if none match.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/source"
+    },
+    {
+      "id": "bNjpiEQhK8nDSqXx",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 1,
+      "prompt": "Which element embeds a video player, with built-in playback controls when the controls attribute is set? (one word)",
+      "correctAnswer": "video",
+      "explanation": "video embeds a video resource and, when given the controls attribute, exposes a native play/pause/volume UI.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video"
+    },
+    {
+      "id": "kMM9VThX0k9tgLb7",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 1,
+      "prompt": "Which element embeds an audio player? (one word)",
+      "correctAnswer": "audio",
+      "explanation": "audio embeds sound content, similarly to how video embeds visual media, and also supports the controls attribute.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/audio"
+    },
+    {
+      "id": "tKR69yz8TmeLS1Op",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which element, nested inside video or audio, provides multiple source files (e.g. different formats) with fallback?",
+      "choices": [
+        "source",
+        "track",
+        "media",
+        "alt"
+      ],
+      "correctIndex": 0,
+      "explanation": "source lets you list multiple candidate media files for video/audio; the browser plays the first one whose type it can handle.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/source"
+    },
+    {
+      "id": "gSXt2RMZhYKYcwIB",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which element adds captions or subtitles to a video element? (one word)",
+      "correctAnswer": "track",
+      "explanation": "track, nested inside video, supplies timed text such as subtitles or captions, typically as a WebVTT file referenced by its src attribute.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track"
+    },
+    {
+      "id": "QxeGPva2A0FgB9xO",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which boolean video/audio attribute automatically restarts playback from the beginning once it ends?",
+      "choices": [
+        "repeat",
+        "loop",
+        "restart",
+        "cycle"
+      ],
+      "correctIndex": 1,
+      "explanation": "The loop boolean attribute makes video or audio playback restart automatically when it reaches the end.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video"
+    },
+    {
+      "id": "51DTjBlUH9PrNZ6I",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 3,
+      "prompt": "Why do browsers block autoplay of audio (and video with sound) by default on most sites?",
+      "choices": [
+        "It is a rendering bug",
+        "To prevent unwanted, disruptive sound from playing without direct user interaction",
+        "Because the autoplay attribute was removed from the HTML spec",
+        "Only because of low bandwidth concerns"
+      ],
+      "correctIndex": 1,
+      "explanation": "Browsers restrict autoplaying media with sound as a user-experience and abuse-prevention measure, generally requiring muted playback or prior user interaction with the site.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video"
+    },
+    {
+      "id": "XEDB0ULru2p17fr4",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 1,
+      "prompt": "Which element provides an immediate-mode drawing surface for 2D or WebGL graphics controlled via JavaScript? (one word)",
+      "correctAnswer": "canvas",
+      "explanation": "canvas exposes a bitmap drawing surface that JavaScript can paint onto using the Canvas 2D or WebGL APIs.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas"
+    },
+    {
+      "id": "CpWDKNQyvbF2ulFn",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 3,
+      "prompt": "How does svg differ fundamentally from canvas as a graphics technology in HTML?",
+      "choices": [
+        "They are identical, just different tag names",
+        "svg describes graphics declaratively as a DOM of shape elements, while canvas is an imperative bitmap you paint on with script",
+        "canvas is for vector graphics; svg is for raster images",
+        "svg cannot be styled with CSS"
+      ],
+      "correctIndex": 1,
+      "explanation": "SVG builds a retained, inspectable DOM tree of vector shape elements that CSS and JS can target individually, whereas canvas is a single bitmap surface painted imperatively via script with no per-shape DOM.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas"
+    },
+    {
+      "id": "wZqvr4MS4rJaH8mf",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which attribute pairs with srcset to tell the browser how wide the image will actually be displayed, helping it choose the right candidate?",
+      "choices": [
+        "sizes",
+        "media",
+        "width",
+        "scale"
+      ],
+      "correctIndex": 0,
+      "explanation": "sizes describes the image's rendered display size (often via media-query-like conditions), which the browser combines with srcset's width descriptors to pick the best resource.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "pUAFJWpSEPTFCYbf",
+      "type": "text-answer",
+      "language": "html",
+      "category": "images-media",
+      "difficulty": 2,
+      "prompt": "Which value of the img loading attribute forces the browser to fetch it immediately at normal priority, the opposite of lazy? (one word, the attribute value only)",
+      "correctAnswer": "eager",
+      "explanation": "loading=\"eager\" is the default: it tells the browser to fetch the image right away regardless of whether it's currently in the viewport.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "sozSptQLxEJHwBVJ",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 1,
+      "prompt": "Which element wraps a set of form controls that get submitted together? (one word)",
+      "correctAnswer": "form",
+      "explanation": "form is the container element that groups controls into a single submittable unit, with attributes like action and method controlling submission.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+    },
+    {
+      "id": "vwSDrtqohUmuhVI8",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 1,
+      "prompt": "Which form attribute specifies the URL that form data is submitted to?",
+      "choices": [
+        "action",
+        "target",
+        "href",
+        "src"
+      ],
+      "correctIndex": 0,
+      "explanation": "action holds the URL the form's data is sent to when submitted.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+    },
+    {
+      "id": "WSlmnVErULWHMsg1",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 1,
+      "prompt": "Which form attribute chooses the HTTP method (e.g. GET or POST) used to submit the form?",
+      "choices": [
+        "type",
+        "method",
+        "action",
+        "mode"
+      ],
+      "correctIndex": 1,
+      "explanation": "method sets the HTTP verb used for submission; GET appends data to the URL while POST sends it in the request body.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+    },
+    {
+      "id": "msoxltaTIircdJsS",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which element associates a text caption with a specific form control, improving both usability and accessibility? (one word)",
+      "correctAnswer": "label",
+      "explanation": "label ties descriptive text to a control, either by wrapping it or via its for attribute matching the control's id; clicking the label also focuses/activates the control.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+    },
+    {
+      "id": "8iO3WFg3aKsEECvl",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which attribute on label must match a form control's id to associate them when the label doesn't wrap the control?",
+      "choices": [
+        "for",
+        "id",
+        "name",
+        "target"
+      ],
+      "correctIndex": 0,
+      "explanation": "label's for attribute references the id of the control it describes, creating a programmatic association even when they aren't nested.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+    },
+    {
+      "id": "9dq83Eh0ezFeKORd",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which element groups related form controls together and can render a visible border around them? (one word)",
+      "correctAnswer": "fieldset",
+      "explanation": "fieldset groups a set of related controls, often rendered with a default border, and can be disabled as a whole to disable every control inside it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset"
+    },
+    {
+      "id": "jjZK8tfphJWAMMYN",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which element provides a caption for the group of controls inside a fieldset? (one word)",
+      "correctAnswer": "legend",
+      "explanation": "legend is the dedicated caption element for fieldset, and must be its first child.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/legend"
+    },
+    {
+      "id": "oXHyC6Ct3LBtKNdN",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 1,
+      "prompt": "Which attribute gives a form control the name used as the key when its value is submitted?",
+      "choices": [
+        "id",
+        "name",
+        "label",
+        "value"
+      ],
+      "correctIndex": 1,
+      "explanation": "name provides the key under which a control's value is sent in the submitted form data; id is for DOM/label references and is a separate concern.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "9Vg8WnOnqQfkplJe",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "What does the button element's type=\"submit\" do inside a form, which is also the default type if type is omitted?",
+      "choices": [
+        "Resets all fields to their default values",
+        "Submits the form",
+        "Does nothing until JavaScript is attached",
+        "Opens a new form"
+      ],
+      "correctIndex": 1,
+      "explanation": "A button (or input) with type=\"submit\", which is the implicit default, triggers the form's submission when activated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+    },
+    {
+      "id": "kaACSMEscosTsS3D",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "What does a button with type=\"reset\" do?",
+      "choices": [
+        "Submits the form",
+        "Clears the browser's autofill data permanently",
+        "Resets all of the form's controls back to their initial default values",
+        "Deletes the form from the DOM"
+      ],
+      "correctIndex": 2,
+      "explanation": "type=\"reset\" restores every control in the form to the value it had when the page loaded, discarding any user edits.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+    },
+    {
+      "id": "eRo7qYYOLQZ7mBhI",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 3,
+      "prompt": "Why is button type=\"button\" needed for controls that shouldn't submit the form, such as a 'toggle password visibility' control?",
+      "choices": [
+        "Because button's default type is submit, so an explicit type=\"button\" prevents an accidental form submission",
+        "Because button elements always submit forms no matter what",
+        "type=\"button\" is required for any button to render",
+        "It has no effect either way"
+      ],
+      "correctIndex": 0,
+      "explanation": "Since a button inside a form defaults to type=\"submit\", any button meant only to run script (not submit) should be explicitly given type=\"button\" to avoid triggering submission.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+    },
+    {
+      "id": "oPj6r0jedkYtMV0K",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which multi-line text input element lets users enter free-form text spanning several lines? (one word)",
+      "correctAnswer": "textarea",
+      "explanation": "textarea provides a resizable, multi-line plain-text input area, unlike the single-line input type=\"text\".",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea"
+    },
+    {
+      "id": "6sChDStSz8rGIFCf",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 2,
+      "prompt": "Which attribute lets a browser suggest previously entered values for a field, based on the field's name and type?",
+      "choices": [
+        "autofill",
+        "autocomplete",
+        "suggest",
+        "history"
+      ],
+      "correctIndex": 1,
+      "explanation": "autocomplete hints to the browser whether and how it should offer to fill in a field from the user's stored data.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "Mc4BVuMqbfo9R13K",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-structure",
+      "difficulty": 3,
+      "prompt": "Which form attribute disables the browser's built-in HTML validation entirely when the form is submitted? (one word, the attribute name only)",
+      "correctAnswer": "novalidate",
+      "explanation": "The novalidate boolean attribute on form skips the browser's automatic constraint validation on submission (formnovalidate does the same, but as a per-submit-button override instead).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+    },
+    {
+      "id": "L8bWR0rKcWWlEHPC",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which input type renders a single-line box appropriate for a password, masking the characters typed? (one word, the type value only)",
+      "correctAnswer": "password",
+      "explanation": "type=\"password\" masks entered characters and also signals to browsers/password managers that this is a credential field.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "6rlLBO0FfEwAvuQg",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which input type is optimized for email addresses, offering basic built-in format validation? (one word, the type value only)",
+      "correctAnswer": "email",
+      "explanation": "type=\"email\" tells the browser to validate the value looks like an email address and, on mobile, often shows an @-friendly keyboard.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "2kvASFsQ8z0WJcDf",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which input type restricts entry to numeric values and often shows increment/decrement spinner controls? (one word, the type value only)",
+      "correctAnswer": "number",
+      "explanation": "type=\"number\" constrains the field to numeric input and typically renders spinner arrows for incrementing/decrementing the value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "uquhXz3G0aQ3IDAd",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type renders as a draggable slider rather than a text box, for picking a value within a range?",
+      "choices": [
+        "number",
+        "range",
+        "slider",
+        "meter"
+      ],
+      "correctIndex": 1,
+      "explanation": "type=\"range\" produces a slider control, commonly paired with min, max, and step attributes.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "mHxNWFOCWdnrJi7s",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which input type renders a single checkbox that toggles between checked and unchecked? (one word, the type value only)",
+      "correctAnswer": "checkbox",
+      "explanation": "type=\"checkbox\" produces an independent on/off toggle; multiple checkboxes sharing a name each submit independently when checked.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "C4SFhbOMZpTktJaJ",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which input type lets a user pick exactly one option from a mutually exclusive group sharing the same name? (one word, the type value only)",
+      "correctAnswer": "radio",
+      "explanation": "type=\"radio\" inputs that share the same name form a mutually exclusive group, where selecting one deselects the others.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "Afo16hD8hP1jF7Ts",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type opens the operating system's native date picker and submits a value like 2026-09-18?",
+      "choices": [
+        "datetime",
+        "date",
+        "time",
+        "calendar"
+      ],
+      "correctIndex": 1,
+      "explanation": "type=\"date\" presents a date picker (implementation varies by browser) and normalizes the value to the YYYY-MM-DD format.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "GTrA1EEpDJjym6MG",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type is dedicated to picking a time of day, independent of any date?",
+      "choices": [
+        "date",
+        "datetime-local",
+        "time",
+        "clock"
+      ],
+      "correctIndex": 2,
+      "explanation": "type=\"time\" lets the user pick just an hour and minute, without an associated date.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "V4i3erXY2Av7YGr0",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 3,
+      "prompt": "Which input type combines both a date and a time, without any timezone information, into a single control?",
+      "choices": [
+        "datetime",
+        "datetime-local",
+        "date-time",
+        "timestamp"
+      ],
+      "correctIndex": 1,
+      "explanation": "type=\"datetime-local\" collects a local date and time with no timezone offset; the older type=\"datetime\" (with timezone) was removed from the spec.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "asUt1LLQF3jCIEwv",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type opens a native color-picker swatch and returns a value formatted as a hex color?",
+      "choices": [
+        "color",
+        "swatch",
+        "paint",
+        "hex"
+      ],
+      "correctIndex": 0,
+      "explanation": "type=\"color\" provides a color-picker UI whose value is normalized to a lowercase 7-character hex string like #ff0000.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "JWIyD7u3mSpKyo2X",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type presents a file-selection dialog, letting the user upload one or more files? (one word, the type value only)",
+      "correctAnswer": "file",
+      "explanation": "type=\"file\" opens the OS file picker; combined with the multiple attribute it can accept more than one file, and accept restricts allowed file types.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "AcuVET6ZyyQY0PjF",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type stores a value that is submitted with the form but never rendered or editable by the user? (one word, the type value only)",
+      "correctAnswer": "hidden",
+      "explanation": "type=\"hidden\" carries a value in the form's submitted data without displaying any visible control for it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "9ciG9Lv3g32CgH6D",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type is intended for telephone numbers, showing a phone-style keypad on mobile but performing no built-in format validation?",
+      "choices": [
+        "phone",
+        "tel",
+        "number",
+        "text"
+      ],
+      "correctIndex": 1,
+      "explanation": "type=\"tel\" hints at a phone-number keyboard on mobile devices, but unlike email or url it does not enforce any particular format by default, since phone number formats vary so widely.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "aUjA3PjeEYqvNSzP",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type is meant for entering a web address and validates that the value is a syntactically valid URL? (one word, the type value only)",
+      "correctAnswer": "url",
+      "explanation": "type=\"url\" checks that the entered value parses as a valid absolute URL before the form is considered valid.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "f2v2R2Iy9uOT4WF3",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which input type is styled like a text field but adds a clear ('x') button and is intended for search boxes?",
+      "choices": [
+        "text",
+        "search",
+        "query",
+        "find"
+      ],
+      "correctIndex": 1,
+      "explanation": "type=\"search\" behaves much like plain text but is styled and semantically marked as a search field, and some browsers add a built-in clear control.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "IcNepOR6soVfBgWO",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 1,
+      "prompt": "Which element renders a dropdown list of predefined choices? (one word)",
+      "correctAnswer": "select",
+      "explanation": "select renders a dropdown (or list box, with the multiple attribute) built from nested option elements.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select"
+    },
+    {
+      "id": "T3gCkSt5bcuYdswx",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Inside a select element, which element groups related option elements under a shared, non-selectable label?",
+      "choices": [
+        "optgroup",
+        "fieldset",
+        "group",
+        "legend"
+      ],
+      "correctIndex": 0,
+      "explanation": "optgroup wraps a set of option elements and gives them a shared label, visually grouping related choices in the dropdown.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup"
+    },
+    {
+      "id": "BjpHAKRYlklfN3yN",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-input-types",
+      "difficulty": 2,
+      "prompt": "Which attribute on a checkbox or radio input makes the browser render it in the checked state initially?",
+      "choices": [
+        "value",
+        "selected",
+        "checked",
+        "default"
+      ],
+      "correctIndex": 2,
+      "explanation": "The checked boolean attribute pre-selects a checkbox or radio input when the page loads.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "RpF6LjoDOqDqQa5Z",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 1,
+      "prompt": "Which boolean attribute prevents a form from being submitted until a field has a value? (one word)",
+      "correctAnswer": "required",
+      "explanation": "The required attribute makes a field a constraint that must be satisfied before the browser allows the form to submit.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "D5sRIkeC8wLtO9BS",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which attribute restricts a text-like input's value to match a given regular expression? (one word)",
+      "correctAnswer": "pattern",
+      "explanation": "pattern supplies a JavaScript-flavored regular expression the field's value must fully match to be considered valid.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "qD2tmy2EgpyKwKsS",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "For a number or range input, which attributes together constrain the acceptable numeric range?",
+      "choices": [
+        "low and high",
+        "min and max",
+        "start and end",
+        "floor and ceiling"
+      ],
+      "correctIndex": 1,
+      "explanation": "min and max define the lower and upper bounds a numeric or range input's value must fall within to satisfy the range constraints.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "sb1QzraK3RXVd6MV",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which attribute controls the increment granularity that a number or range input's value must align to? (one word)",
+      "correctAnswer": "step",
+      "explanation": "step defines the legal value intervals (relative to min), so a value must be a multiple of step away from min to be considered valid.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "F155sXZoMZwoOmNq",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 1,
+      "prompt": "Which attribute caps the number of characters a text input or textarea will accept? (one word)",
+      "correctAnswer": "maxlength",
+      "explanation": "maxlength sets the maximum number of characters the user can enter, enforced directly by the browser during typing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "RWUXQR1iOg5OPctY",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which attribute sets a lower bound on the number of characters required for a text field to be valid?",
+      "choices": [
+        "minlength",
+        "min",
+        "required",
+        "length"
+      ],
+      "correctIndex": 0,
+      "explanation": "minlength specifies the fewest characters the value must contain to pass constraint validation; unlike maxlength, it does not stop the user from typing fewer, it only affects validity.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "CcLxUif6suVAlmiY",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 3,
+      "prompt": "Which button attribute lets a specific submit button bypass the form's normal validation for that one submission, without disabling validation for other buttons? (one word)",
+      "correctAnswer": "formnovalidate",
+      "explanation": "formnovalidate, set on a submit button/input, disables constraint validation only for submissions triggered by that particular control, e.g. a 'Save draft' button.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+    },
+    {
+      "id": "I4xHG6r1kq608E9Z",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 3,
+      "prompt": "What is the constraint validation API method that returns whether a form control currently satisfies its constraints, without showing any UI?",
+      "choices": [
+        "reportValidity()",
+        "checkValidity()",
+        "isValid()",
+        "validate()"
+      ],
+      "correctIndex": 1,
+      "explanation": "checkValidity() evaluates a control's (or form's) constraints and returns a boolean, firing an invalid event on failure but without necessarily surfacing UI, unlike reportValidity().",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "sV3vZhD9ejW9o3RU",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which CSS pseudo-classes let you style form fields based on whether they currently satisfy their validation constraints?",
+      "choices": [
+        ":checked and :indeterminate",
+        ":valid and :invalid",
+        ":required and :optional only",
+        ":focus and :hover"
+      ],
+      "correctIndex": 1,
+      "explanation": ":valid and :invalid match form elements based on whether their current value passes or fails constraint validation (required, pattern, min/max, etc.).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "Rz92ZJxfYzaqIhDx",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 1,
+      "prompt": "Which attribute disables user interaction with a form control while still submitting no value for it at all?",
+      "choices": [
+        "disabled",
+        "readonly",
+        "hidden",
+        "inert"
+      ],
+      "correctIndex": 0,
+      "explanation": "A disabled control cannot be focused, edited, or included in the form's submitted data at all.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "RVRqLy0O8xgRoEbN",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which attribute keeps a field's existing value visible and prevents editing, while still submitting that value with the form?",
+      "choices": [
+        "disabled",
+        "readonly",
+        "locked",
+        "frozen"
+      ],
+      "correctIndex": 1,
+      "explanation": "readonly leaves the control focusable and its value gets submitted, but the user cannot change it, unlike disabled which excludes the value from submission entirely.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "48Ju6NoPeO0D6StP",
+      "type": "text-answer",
+      "language": "html",
+      "category": "forms-validation",
+      "difficulty": 2,
+      "prompt": "Which attribute on input restricts which file types a type=\"file\" control will let the user select? (one word)",
+      "correctAnswer": "accept",
+      "explanation": "accept takes a comma-separated list of file extensions or MIME types to filter the choices offered in the file picker.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "Ahic8ctFhgp4IiyD",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 1,
+      "prompt": "Which element defines a single row within a table? (one word)",
+      "correctAnswer": "tr",
+      "explanation": "tr (table row) groups a set of td/th cells that make up one row of the table.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tr"
+    },
+    {
+      "id": "xQ8VS8IALVUj4APg",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 1,
+      "prompt": "Which element defines a standard data cell within a table row?",
+      "choices": [
+        "th",
+        "td",
+        "tr",
+        "cell"
+      ],
+      "correctIndex": 1,
+      "explanation": "td (table data) holds an ordinary data cell's content within a tr.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td"
+    },
+    {
+      "id": "1FNA88rcSxnCC8p2",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 1,
+      "prompt": "Which element defines a header cell, which browsers render bold and centered by default and associate semantically with the data it describes? (one word)",
+      "correctAnswer": "th",
+      "explanation": "th marks a cell as a header for its row and/or column, giving assistive technology a way to associate data cells with the right header.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/th"
+    },
+    {
+      "id": "xgRxI5Pwdzrm9h82",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which attribute on th specifies whether it heades a row, a column, or a group of either?",
+      "choices": [
+        "for",
+        "headers",
+        "scope",
+        "role"
+      ],
+      "correctIndex": 2,
+      "explanation": "scope (with values like row, col, rowgroup, colgroup) tells assistive technology what the header cell applies to, which is especially useful for complex tables.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/th"
+    },
+    {
+      "id": "0DfQnPOMbdYvpiYK",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which attribute makes a table cell visually and semantically span across multiple columns? (one word)",
+      "correctAnswer": "colspan",
+      "explanation": "colspan takes an integer specifying how many columns a cell should span, merging that many column slots into one cell.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td"
+    },
+    {
+      "id": "ne1WJnLn03ovXjY5",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which attribute makes a table cell span across multiple rows?",
+      "choices": [
+        "rowspan",
+        "span",
+        "height",
+        "merge"
+      ],
+      "correctIndex": 0,
+      "explanation": "rowspan takes an integer specifying how many rows a cell should span vertically.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tr"
+    },
+    {
+      "id": "Mar2jiIqZlhQ3bia",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which element provides a title or description for an entire table, and must be its first child? (one word)",
+      "correctAnswer": "caption",
+      "explanation": "caption, placed as the first child of table, provides a descriptive title for the whole table, both visually and for assistive technology.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/caption"
+    },
+    {
+      "id": "wYYpLublqdiVAHhV",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which element groups the header row(s) of a table, separate from its body rows?",
+      "choices": [
+        "header",
+        "thead",
+        "tfoot",
+        "tbody"
+      ],
+      "correctIndex": 1,
+      "explanation": "thead groups the heading rows of a table, letting browsers (e.g. when printing across pages) and CSS treat them distinctly from the body.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/thead"
+    },
+    {
+      "id": "eECXxGLgCGo8NcUY",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which element groups the main data rows of a table, distinct from its header and footer? (one word)",
+      "correctAnswer": "tbody",
+      "explanation": "tbody groups one or more rows representing the primary content of a table.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tbody"
+    },
+    {
+      "id": "63QHtDP9bdE2zBRg",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 2,
+      "prompt": "Which element groups summary or totals rows that appear logically at the end of a table, though it can be placed in the markup right after thead?",
+      "choices": [
+        "tfoot",
+        "tbody",
+        "footer",
+        "summary"
+      ],
+      "correctIndex": 0,
+      "explanation": "tfoot groups a table's footer rows, such as column totals, and browsers render it after tbody's rows regardless of its position in the source.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tfoot"
+    },
+    {
+      "id": "FT6Ce5fuMjeirNOL",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 3,
+      "prompt": "Which element wraps one or more col elements to apply shared styling/sizing to whole columns of a table at once?",
+      "choices": [
+        "colgroup",
+        "colspan",
+        "column",
+        "group"
+      ],
+      "correctIndex": 0,
+      "explanation": "colgroup groups col elements, each of which can target styling (like width) at an entire column without repeating it per cell.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/colgroup"
+    },
+    {
+      "id": "JTuyMHsDGMBgYSh2",
+      "type": "text-answer",
+      "language": "html",
+      "category": "tables",
+      "difficulty": 1,
+      "prompt": "Which three-letter element is the top-level container for an entire HTML table? (one word)",
+      "correctAnswer": "table",
+      "explanation": "table is the root element that contains a table's caption, column groups, head, body, and footer sections.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table"
+    },
+    {
+      "id": "PP4XJU3nBC4oAv0D",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 1,
+      "prompt": "Which attribute uniquely identifies a single element within a document, and must be unique across the whole page?",
+      "choices": [
+        "class",
+        "id",
+        "name",
+        "key"
+      ],
+      "correctIndex": 1,
+      "explanation": "id must be unique within the document and is commonly used as a target for CSS selectors, JavaScript lookups, and fragment links.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/id"
+    },
+    {
+      "id": "zAUguBuQqx9jR7Ee",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 1,
+      "prompt": "Which attribute assigns one or more, space-separated, reusable names to an element for styling or scripting, and may repeat across many elements?",
+      "choices": [
+        "id",
+        "class",
+        "name",
+        "tag"
+      ],
+      "correctIndex": 1,
+      "explanation": "class holds a space-separated list of class names, any of which can be shared by many elements, unlike the required-unique id attribute.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/class"
+    },
+    {
+      "id": "f1ffBgVVxZiJdL9J",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which family of attributes lets you attach custom, non-standard data to an element that scripts can read, without inventing new HTML attributes?",
+      "choices": [
+        "aria-*",
+        "data-*",
+        "custom-*",
+        "meta-*"
+      ],
+      "correctIndex": 1,
+      "explanation": "Any attribute prefixed data- (e.g. data-user-id) is reserved for arbitrary custom data, readable in JavaScript via the dataset property.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/data-*"
+    },
+    {
+      "id": "JvQhAw3Q8WB36Ud9",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which global attribute controls whether, and in what order, an element can be reached by pressing Tab? (one word)",
+      "correctAnswer": "tabindex",
+      "explanation": "tabindex controls keyboard focusability and, when positive, an explicit tab order; tabindex=\"0\" adds an element to the natural tab order without changing it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/tabindex"
+    },
+    {
+      "id": "sMtwgKGnjQEo2gw2",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which global boolean attribute hides an element from rendering and from most assistive technology, without needing any CSS? (one word)",
+      "correctAnswer": "hidden",
+      "explanation": "The hidden boolean attribute tells the browser not to render the element at all, roughly equivalent to display: none, without writing any CSS.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/hidden"
+    },
+    {
+      "id": "JxhWrKoZB2JX0NNR",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 1,
+      "prompt": "Which global attribute provides extra advisory information about an element, most commonly shown as a tooltip on hover?",
+      "choices": [
+        "alt",
+        "title",
+        "label",
+        "info"
+      ],
+      "correctIndex": 1,
+      "explanation": "The title global attribute supplies advisory text, which most browsers show as a hover tooltip, though it should not be relied on as the sole source of essential information.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/title"
+    },
+    {
+      "id": "PJbM7Q1SrblrSWt6",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which global attribute lets users directly edit the content of an element, turning it into a rich-text editing surface? (one word)",
+      "correctAnswer": "contenteditable",
+      "explanation": "contenteditable, set to true (or the empty string), makes an element's contents directly editable by the user in the rendered page.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/contenteditable"
+    },
+    {
+      "id": "vwal3jKQzejVObfV",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which global boolean attribute allows an element to be picked up and moved using the native HTML drag-and-drop API?",
+      "choices": [
+        "movable",
+        "draggable",
+        "sortable",
+        "dnd"
+      ],
+      "correctIndex": 1,
+      "explanation": "draggable=\"true\" opts an element into being a valid source for the HTML Drag and Drop API.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/draggable"
+    },
+    {
+      "id": "HnyADvkxtUuX8KMf",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 3,
+      "prompt": "Which global attribute assigns a single keyboard shortcut key that activates or focuses an element? (one word)",
+      "correctAnswer": "accesskey",
+      "explanation": "accesskey specifies a single character that, combined with a browser- and platform-specific modifier key, activates or focuses the element.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey"
+    },
+    {
+      "id": "4djkWNdRfrCQBFMC",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 2,
+      "prompt": "Which global attribute controls whether a browser's built-in spelling and grammar checker examines an editable element's text?",
+      "choices": [
+        "spellcheck",
+        "autocheck",
+        "lang",
+        "grammar"
+      ],
+      "correctIndex": 0,
+      "explanation": "spellcheck, set to true or false, is a hint for whether the browser should run its spelling/grammar checker over that element's editable text.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/spellcheck"
+    },
+    {
+      "id": "ArnWGhwBhsRRLFHQ",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 3,
+      "prompt": "Which global attribute controls whether an element's text content should be translated when a page is machine-translated? (one word)",
+      "correctAnswer": "translate",
+      "explanation": "translate, with values yes or no, hints to translation tools whether an element's content (e.g. a brand name) should be left untranslated.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/translate"
+    },
+    {
+      "id": "tcozMdant8nXiWqs",
+      "type": "text-answer",
+      "language": "html",
+      "category": "global-attributes",
+      "difficulty": 1,
+      "prompt": "Which global attribute lets you apply inline CSS declarations directly to a single element, e.g. style=\"color: red;\"? (one word)",
+      "correctAnswer": "style",
+      "explanation": "style holds inline CSS declarations that apply only to that one element, taking precedence over most external and internal stylesheet rules.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/style"
+    },
+    {
+      "id": "uhaFVBliyIToGJ1Q",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 1,
+      "prompt": "What is the single most important thing that makes an img element accessible to screen reader users?",
+      "choices": [
+        "A large width and height attribute",
+        "A meaningful alt attribute",
+        "A title attribute",
+        "A caption element wrapping it"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without a meaningful alt attribute, a screen reader has no textual content to announce for the image, so alt is the primary accessibility hook for img.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "Zwez3VcBbD6e3uKB",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute provides an accessible name for an element when there's no visible text to serve that purpose, such as an icon-only button? (include the aria- prefix)",
+      "correctAnswer": "aria-label",
+      "explanation": "aria-label supplies a string used as the element's accessible name, overriding any visible text, which is useful when a control (like an icon button) has no text content of its own.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label"
+    },
+    {
+      "id": "KzTOAshzb9ukZ8ND",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute hides an element from assistive technology (like screen readers) while leaving it fully visible on screen? (include the aria- prefix)",
+      "correctAnswer": "aria-hidden",
+      "explanation": "aria-hidden=\"true\" removes an element from the accessibility tree without affecting its visual rendering, often used for purely decorative icons.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-hidden"
+    },
+    {
+      "id": "1S6xfB2gpBLzHfz3",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute communicates to assistive technology that a collapsible section, like an accordion header, is currently open or closed? (include the aria- prefix)",
+      "correctAnswer": "aria-expanded",
+      "explanation": "aria-expanded, set to true or false, reflects whether the control's associated collapsible content is currently expanded.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-expanded"
+    },
+    {
+      "id": "tVvovXkeGOhHGm5X",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute marks a region of the page so that screen readers announce updates within it automatically, even without focus moving there? (include the aria- prefix)",
+      "correctAnswer": "aria-live",
+      "explanation": "aria-live, with values like polite or assertive, designates a live region whose content updates are automatically announced by assistive technology.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-live"
+    },
+    {
+      "id": "wwU90P0jpgjqmlMj",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 3,
+      "prompt": "What is the first rule of ARIA usage, often summarized as 'no ARIA is better than bad ARIA'?",
+      "choices": [
+        "Always add role attributes to every element",
+        "Prefer a native HTML element or attribute with the semantics you need over adding an ARIA role/attribute to a generic element",
+        "ARIA should replace semantic HTML entirely",
+        "aria-* attributes only work inside forms"
+      ],
+      "correctIndex": 1,
+      "explanation": "Native elements (button, nav, input, etc.) come with built-in semantics, keyboard behavior, and accessible roles for free; ARIA should fill gaps, not replace native semantics that already exist.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "WWPel8XOFDWKWLCR",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute overrides an element's default (or absent) accessible role, e.g. making a div behave like a button to assistive technology? (one word)",
+      "correctAnswer": "role",
+      "explanation": "The role attribute assigns an ARIA role, telling assistive technology what kind of widget or landmark the element represents.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "74KPONu3OujCeECO",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which native element is equivalent to setting role=\"navigation\" for free, without any ARIA attribute at all?",
+      "choices": [
+        "div",
+        "section",
+        "nav",
+        "aside"
+      ],
+      "correctIndex": 2,
+      "explanation": "The nav element has an implicit ARIA role of navigation, so wrapping navigation links in nav gives assistive technology the landmark for free.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/navigation_role"
+    },
+    {
+      "id": "tYrLdwGetDCcdx1s",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 1,
+      "prompt": "Which native element is equivalent to role=\"banner\" when it is a direct child of body?",
+      "choices": [
+        "header",
+        "div",
+        "section",
+        "aside"
+      ],
+      "correctIndex": 0,
+      "explanation": "A header element that isn't scoped inside another sectioning element maps to the banner landmark role, identifying the page's main header.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/banner_role"
+    },
+    {
+      "id": "eP32fNMGyDLJ9YV5",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 3,
+      "prompt": "Why is it problematic to add a click handler to a plain div to make it act like a button, without any further ARIA or attributes?",
+      "choices": [
+        "It isn't, div elements are fully accessible by default",
+        "It has no accessible role, isn't keyboard-focusable, and doesn't respond to Enter/Space, unlike a real button",
+        "div elements cannot have click handlers attached",
+        "It only affects visual styling, not accessibility"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bare div with a click handler has no button role for screen readers, isn't in the tab order, and won't activate on Enter or Space, so a real button (or role=\"button\" plus manual tabindex and key handling) is needed for equivalent accessibility.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "cC6ZKPmuMEGj9dCg",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute associates a form control with one or more elements elsewhere on the page that describe it, such as a hint or error message? (include the aria- prefix)",
+      "correctAnswer": "aria-describedby",
+      "explanation": "aria-describedby references the id(s) of elements providing extra descriptive text (like hint or validation text), read after the accessible name.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-describedby"
+    },
+    {
+      "id": "Z51vTfGPlcpTCCHH",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute lets you provide an accessible name for an element by referencing the id of another visible element, instead of duplicating the text? (include the aria- prefix)",
+      "correctAnswer": "aria-labelledby",
+      "explanation": "aria-labelledby points to the id(s) of element(s) whose text content should be used as this element's accessible name.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby"
+    },
+    {
+      "id": "Nkxx6syAXvRMdYOP",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Why is placeholder text alone not a sufficient substitute for a proper label on an input?",
+      "choices": [
+        "placeholder text is not read by any browser",
+        "placeholder disappears once the user starts typing and is not reliably announced as a persistent accessible name by all assistive tech",
+        "placeholder is a deprecated attribute",
+        "placeholder can only be used on textarea"
+      ],
+      "correctIndex": 1,
+      "explanation": "Placeholder text vanishes once input begins, offers low contrast by default, and support for exposing it as an accessible name is inconsistent, so a real label element (or aria-label) should still be provided.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+    },
+    {
+      "id": "vevgJRysqU2Q96M3",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 3,
+      "prompt": "Which ARIA attribute would you add to a custom slider widget built from div elements to expose its current numeric value to assistive technology?",
+      "choices": [
+        "aria-value",
+        "aria-valuenow (with role=\"slider\")",
+        "aria-current",
+        "aria-selected"
+      ],
+      "correctIndex": 1,
+      "explanation": "A custom slider needs role=\"slider\" plus aria-valuenow (and typically aria-valuemin/aria-valuemax) so assistive technology can report its current position, since native input type=\"range\" provides all of this for free.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "jvfLQj6wt9PSQziM",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 1,
+      "prompt": "Which native form element gives you a labeled group of controls, plus an accessible group name from its legend, without any ARIA?",
+      "choices": [
+        "fieldset with legend",
+        "div with aria-label",
+        "section with h2",
+        "span with role=\"group\""
+      ],
+      "correctIndex": 0,
+      "explanation": "fieldset paired with legend is the native way to group related controls (like a set of radio buttons) and give that group an accessible name, all without ARIA.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset"
+    },
+    {
+      "id": "T8ftJyPYv0iQS18V",
+      "type": "text-answer",
+      "language": "html",
+      "category": "accessibility-aria",
+      "difficulty": 2,
+      "prompt": "Which attribute indicates to assistive technology that a region of the page is currently being updated and its content should be treated as not yet ready? (include the aria- prefix)",
+      "correctAnswer": "aria-busy",
+      "explanation": "aria-busy=\"true\" signals that an element is actively being modified and screen readers should hold off announcing changes until it's set back to false.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy"
+    },
+    {
+      "id": "R6HfPQBGxbxtl8nv",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 1,
+      "prompt": "Which meta attribute combination sets the responsive viewport behavior commonly used on mobile-friendly pages?",
+      "choices": [
+        "name=\"viewport\" content=\"width=device-width, initial-scale=1\"",
+        "name=\"mobile\" content=\"true\"",
+        "name=\"responsive\" content=\"yes\"",
+        "http-equiv=\"viewport\""
+      ],
+      "correctIndex": 0,
+      "explanation": "The viewport meta tag with width=device-width and initial-scale=1 tells mobile browsers to match the layout viewport to the device's width instead of zooming out to a desktop-width layout.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+    },
+    {
+      "id": "8XFmoijes2YgGXI1",
+      "type": "text-answer",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 2,
+      "prompt": "Which meta name is conventionally used to provide a short summary of the page for search engine results snippets? (one word)",
+      "correctAnswer": "description",
+      "explanation": "meta name=\"description\" content=\"...\" supplies a short page summary that search engines often display as the results snippet.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+    },
+    {
+      "id": "V4HcQv4XNiMyjkl1",
+      "type": "text-answer",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 2,
+      "prompt": "Which link relation is used to point the browser to a page's favicon? (one word, the rel value only)",
+      "correctAnswer": "icon",
+      "explanation": "link rel=\"icon\" href=\"...\" tells the browser which image to use as the page/tab icon; the older rel=\"shortcut icon\" form still works but is unnecessary today.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"
+    },
+    {
+      "id": "SXNZ5kUCcAxRUpCN",
+      "type": "text-answer",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 1,
+      "prompt": "Which link relation attaches an external CSS file to a document? (one word, the rel value only)",
+      "correctAnswer": "stylesheet",
+      "explanation": "link rel=\"stylesheet\" href=\"styles.css\" loads and applies an external stylesheet to the document.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"
+    },
+    {
+      "id": "sWVYCoIpt9ZYE51m",
+      "type": "text-answer",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 2,
+      "prompt": "Which attribute on script prevents it from blocking HTML parsing, while still guaranteeing it runs in source order before DOMContentLoaded? (one word)",
+      "correctAnswer": "defer",
+      "explanation": "defer lets the browser keep parsing HTML while the script downloads, then runs it in document order right before DOMContentLoaded fires.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"
+    },
+    {
+      "id": "xR8KCDXsXyGHA9k0",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 2,
+      "prompt": "How does script async differ from script defer?",
+      "choices": [
+        "They are exact synonyms",
+        "async runs the script as soon as it's downloaded, potentially out of order relative to other scripts and before parsing finishes; defer waits and preserves order",
+        "async only works on external scripts, defer only on inline scripts",
+        "defer blocks parsing, async never does"
+      ],
+      "correctIndex": 1,
+      "explanation": "async scripts execute as soon as they finish downloading, interrupting parsing wherever it happens to be and with no guaranteed order relative to other async scripts; defer preserves execution order and always waits until after parsing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"
+    },
+    {
+      "id": "mZMi3qdPE3xJ7gT2",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 3,
+      "prompt": "Which meta http-equiv value can be used to redirect the browser to another URL after a delay, entirely without JavaScript?",
+      "choices": [
+        "http-equiv=\"redirect\"",
+        "http-equiv=\"refresh\"",
+        "http-equiv=\"location\"",
+        "http-equiv=\"forward\""
+      ],
+      "correctIndex": 1,
+      "explanation": "meta http-equiv=\"refresh\" content=\"5;url=https://example.com\" tells the browser to navigate to the given URL after the specified number of seconds.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+    },
+    {
+      "id": "H2hsfWkrC5Gj1Bf8",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 2,
+      "prompt": "Which element, placed in head, provides fallback content shown only when JavaScript is disabled or unsupported?",
+      "choices": [
+        "noscript",
+        "fallback",
+        "template",
+        "script type=\"text/fallback\""
+      ],
+      "correctIndex": 0,
+      "explanation": "noscript's content is only rendered by browsers that have scripting disabled or don't support it, offering a fallback message or content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/noscript"
+    },
+    {
+      "id": "6o0C4w7bAdzGxpyf",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 3,
+      "prompt": "Which link relation hints the browser to establish an early connection to a third-party origin before a resource from it is actually requested?",
+      "choices": [
+        "rel=\"preconnect\"",
+        "rel=\"prefetch\"",
+        "rel=\"preload\"",
+        "rel=\"dns-only\""
+      ],
+      "correctIndex": 0,
+      "explanation": "rel=\"preconnect\" tells the browser to start the connection handshake (DNS, TCP, TLS) to a given origin early, reducing latency once a resource from it is actually needed.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"
+    },
+    {
+      "id": "xobu7g1TPvYjics6",
+      "type": "text-answer",
+      "language": "html",
+      "category": "metadata-head",
+      "difficulty": 3,
+      "prompt": "Which link relation tells the browser to fetch and cache a specific resource early because it will definitely be needed soon, without executing or applying it yet? (one word, the rel value only)",
+      "correctAnswer": "preload",
+      "explanation": "rel=\"preload\" requests the browser fetch a specific resource (with an as attribute describing its type) at high priority well before it's referenced elsewhere, without yet running or applying it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"
+    },
+    {
+      "id": "1ES1iWTECNa5fbqn",
+      "type": "text-answer",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 1,
+      "prompt": "Which element embeds another full HTML document inside the current page, as a nested browsing context? (one word)",
+      "correctAnswer": "iframe",
+      "explanation": "iframe embeds another HTML document within the current page, functioning as its own nested browsing context.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe"
+    },
+    {
+      "id": "1jJ8UMHBhXspthdp",
+      "type": "text-answer",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 2,
+      "prompt": "Which attribute on iframe restricts what the embedded document is allowed to do, such as running scripts or submitting forms? (one word)",
+      "correctAnswer": "sandbox",
+      "explanation": "sandbox applies a set of extra restrictions to an iframe's content; an empty sandbox attribute applies all restrictions, and specific tokens (like allow-scripts) can re-enable individual capabilities.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe"
+    },
+    {
+      "id": "AOYNDeh15FMIbOGK",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 1,
+      "prompt": "Which element is the generic mechanism for embedding external content handled by a plugin or the browser itself, such as a PDF?",
+      "choices": [
+        "embed",
+        "object",
+        "Both embed and object can serve this purpose",
+        "iframe only"
+      ],
+      "correctIndex": 2,
+      "explanation": "Both embed and object can embed external resources like PDFs or other media types handled outside normal HTML rendering; object additionally supports fallback content between its tags.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/object"
+    },
+    {
+      "id": "pTjsBaNwpKAlQQfH",
+      "type": "text-answer",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 2,
+      "prompt": "Which element holds markup that is parsed by the browser but not rendered or executed until JavaScript explicitly clones and inserts its contents? (one word)",
+      "correctAnswer": "template",
+      "explanation": "template's content is inert HTML, parsed and validated but never rendered on its own; scripts typically clone template.content and insert it into the DOM when needed.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template"
+    },
+    {
+      "id": "xe9HIGYGJby3EcOy",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 2,
+      "prompt": "Which script attribute marks the block as JSON or a non-executable data payload rather than JavaScript to run?",
+      "choices": [
+        "type=\"application/json\"",
+        "data=\"json\"",
+        "role=\"data\"",
+        "nonscript"
+      ],
+      "correctIndex": 0,
+      "explanation": "Setting script's type to a non-executable value like application/json prevents the browser from trying to run it as JavaScript, letting it serve purely as embedded structured data that scripts can read.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"
+    },
+    {
+      "id": "xqVbwYewpUQOgXLV",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 3,
+      "prompt": "Why might a developer choose object over img for an SVG image specifically?",
+      "choices": [
+        "object cannot display images at all",
+        "object lets the embedded SVG's own scripts and internal links run and be interacted with, unlike img which treats SVG as a static image",
+        "object is faster to load in every case",
+        "There is no difference between img and object for SVG"
+      ],
+      "correctIndex": 1,
+      "explanation": "Loading an SVG via object (or iframe) preserves its interactivity, letting internal scripts, links, and CSS animations inside the SVG function, whereas img always renders SVG as a flattened, non-interactive image.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/object"
+    },
+    {
+      "id": "WvicwIv0Pl1XRDSE",
+      "type": "text-answer",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 1,
+      "prompt": "Which attribute of script points to an external JavaScript file rather than inlining code between the tags? (one word)",
+      "correctAnswer": "src",
+      "explanation": "src on script specifies the URL of an external script file to fetch and execute, instead of using the element's inline text content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"
+    },
+    {
+      "id": "OlZieTX8DcsmcYm4",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "embedding-scripting",
+      "difficulty": 3,
+      "prompt": "What happens if a script element has both a src attribute and inline text content between its tags?",
+      "choices": [
+        "Both run, inline code first then the external file",
+        "Both run, the external file first then inline code",
+        "The inline content is ignored entirely; only the external file referenced by src executes",
+        "It throws a parse error"
+      ],
+      "correctIndex": 2,
+      "explanation": "When src is present, the browser fetches and executes that external resource and ignores any inline text content the script element might also contain.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"
+    },
+    {
+      "id": "cu7tGz0IEqcWPmsw",
+      "type": "text-answer",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 1,
+      "prompt": "Which element creates a native, disclosure widget that can be toggled open and closed without any JavaScript? (one word)",
+      "correctAnswer": "details",
+      "explanation": "details creates a collapsible disclosure widget; clicking its summary child toggles the open attribute, showing or hiding the rest of its content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"
+    },
+    {
+      "id": "3Xd3PvrhZxB4zVC5",
+      "type": "text-answer",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 1,
+      "prompt": "Inside a details element, which element provides the always-visible label the user clicks to expand or collapse it? (one word)",
+      "correctAnswer": "summary",
+      "explanation": "summary is the visible, clickable label for a details element; if omitted, browsers supply a default label like 'Details'.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/summary"
+    },
+    {
+      "id": "9yvlFSFx7ZHrZfUB",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 2,
+      "prompt": "Which element natively implements a modal or non-modal popup dialog, including its own top-layer rendering and backdrop when shown modally?",
+      "choices": [
+        "dialog",
+        "details",
+        "popover attribute only",
+        "modal"
+      ],
+      "correctIndex": 0,
+      "explanation": "dialog provides a native dialog box; calling its showModal() method renders it modally with a ::backdrop, focus trapping, and top-layer stacking handled by the browser.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog"
+    },
+    {
+      "id": "fBM0lIsugfuQstCM",
+      "type": "text-answer",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 2,
+      "prompt": "Which element visually represents the completion progress of a task, like a file upload, toward a set value? (one word)",
+      "correctAnswer": "progress",
+      "explanation": "progress displays how far a task has advanced toward completion, taking a value and an optional max.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress"
+    },
+    {
+      "id": "TBkSCwCcU36wNBrO",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 2,
+      "prompt": "Which element represents a scalar measurement within a known range, such as disk usage, rather than task completion?",
+      "choices": [
+        "progress",
+        "meter",
+        "gauge",
+        "range"
+      ],
+      "correctIndex": 1,
+      "explanation": "meter represents a fixed-range gauge-style measurement (like disk space used) rather than a task's completion progress, which is what progress is for.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meter"
+    },
+    {
+      "id": "Y8deQOzxGZVRk8bj",
+      "type": "text-answer",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 2,
+      "prompt": "Which element displays the live result of a calculation, often updated by script in response to user input, such as a form's computed total? (one word)",
+      "correctAnswer": "output",
+      "explanation": "output is used to display the result of a calculation or user action, and can be associated with the controls that produced its value via a for attribute.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/output"
+    },
+    {
+      "id": "2MRYCciepXPxxy8K",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 2,
+      "prompt": "Which element defines a set of predefined autocomplete suggestions for a paired text input, without forcing the user to pick only from that list?",
+      "choices": [
+        "select",
+        "datalist",
+        "optgroup",
+        "options"
+      ],
+      "correctIndex": 1,
+      "explanation": "datalist holds a set of option elements offering suggestions; when referenced by an input's list attribute, the user gets autocomplete-style suggestions but can still type any other value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist"
+    },
+    {
+      "id": "cMjRC8xxCWeKiHxz",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html5-interactive-elements",
+      "difficulty": 3,
+      "prompt": "Which attribute on input associates it with a datalist element to supply autocomplete suggestions?",
+      "choices": [
+        "list",
+        "options",
+        "suggestions",
+        "datalist"
+      ],
+      "correctIndex": 0,
+      "explanation": "The list attribute on input takes the id of a datalist element, wiring up its option values as suggestions for that field.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+    },
+    {
+      "id": "uPrp9hbVlFHy6Jhq",
+      "type": "text-answer",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 1,
+      "prompt": "Which named HTML character entity is used to display a literal ampersand character? (include the leading & and trailing ;)",
+      "correctAnswer": "&amp;",
+      "explanation": "&amp; renders as a literal & character; a raw & in text can otherwise start an entity reference and cause ambiguous parsing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "XqTCnNsS6Fmhi2eC",
+      "type": "text-answer",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 1,
+      "prompt": "Which named HTML character entity displays a literal less-than sign without the browser mistaking it for the start of a tag? (include the leading & and trailing ;)",
+      "correctAnswer": "&lt;",
+      "explanation": "&lt; renders as a literal < character, since a bare < in text content would otherwise be interpreted as beginning a tag.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "l5TCfZR92uQwTeJI",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 2,
+      "prompt": "Besides named entities like &amp;, what is the other general syntax for writing a character reference in HTML, useful for characters without a common name?",
+      "choices": [
+        "A backslash escape, like \\u00e9",
+        "A numeric character reference, like &#233; or &#x00e9;",
+        "A percent-encoded sequence, like %E9",
+        "A CSS content property"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTML also supports numeric character references, either decimal (&#233;) or hexadecimal (&#x00e9;), which specify a character by its Unicode code point.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "s5t2kTT7SOlYxGoh",
+      "type": "text-answer",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 2,
+      "prompt": "Which named entity produces a non-breaking space, which prevents a line break at that point and is not collapsed like a normal space? (include the leading & and trailing ;)",
+      "correctAnswer": "&nbsp;",
+      "explanation": "&nbsp; inserts a non-breaking space: it displays as a normal space but browsers won't wrap a line at it, and consecutive ones are not collapsed the way regular whitespace is.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "mYipYFbxJKxDZJiN",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 1,
+      "prompt": "Why can't you always write a literal < character directly in HTML text content?",
+      "choices": [
+        "< is reserved exclusively for CSS",
+        "A bare < can be interpreted as the start of a tag, so it should be escaped as &lt; in text",
+        "< is only invalid inside attributes, never in text",
+        "There is no restriction at all"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because < signals the start of a markup tag to the HTML parser, a literal < intended as text should be written as the &lt; entity to avoid being parsed as markup.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "4fetzTUEHAXA0Kei",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "character-entities-special",
+      "difficulty": 3,
+      "prompt": "Why must attribute values that contain a double quote character be handled carefully, e.g. title=\"She said &quot;hi&quot;\"?",
+      "choices": [
+        "Double quotes are never allowed in attribute values",
+        "An unescaped literal double quote inside a double-quoted attribute value would prematurely terminate that attribute",
+        "&quot; is required even in single-quoted attributes",
+        "This only matters for XML, not HTML"
+      ],
+      "correctIndex": 1,
+      "explanation": "If an attribute's value is delimited with double quotes, a literal unescaped double quote inside it would end the attribute early, so it must be written as &quot; (or the whole attribute switched to single quotes).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "uPeCDRHwi41XJOLl",
+      "type": "text-answer",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 2,
+      "prompt": "Which presentational element, once used to set typeface/size/color directly in markup, has been removed from the HTML5 specification in favor of CSS? (one word)",
+      "correctAnswer": "font",
+      "explanation": "font, which set typeface, size, and color directly in markup, was removed from the HTML5 spec; the same effects should be achieved with CSS instead.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "X9iBG63d1hHjtkku",
+      "type": "text-answer",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 2,
+      "prompt": "Which obsolete element used to center-align its contents, and should now be replaced with CSS text-align or margin auto? (one word)",
+      "correctAnswer": "center",
+      "explanation": "center was a purely presentational element for centering content, removed in favor of CSS-based layout and text alignment.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "7Tow88H5s2fqmO9J",
+      "type": "text-answer",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 2,
+      "prompt": "Which obsolete, non-standard element made its text scroll or slide across the page automatically? (one word)",
+      "correctAnswer": "marquee",
+      "explanation": "marquee was a non-standard, now-obsolete element for automatically scrolling text; it is broadly discouraged for both usability and accessibility reasons.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "riOtNIfGPkL8LjkQ",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 3,
+      "prompt": "Which pair of elements, used to split a browser window into independently scrollable panes, are obsolete in modern HTML5 in favor of techniques like CSS layout or iframe?",
+      "choices": [
+        "frame and frameset",
+        "section and article",
+        "div and span",
+        "iframe and object"
+      ],
+      "correctIndex": 0,
+      "explanation": "frame and frameset, which split the window into a rigid grid of separately navigable panes, are obsolete; iframe remains available for embedding a single external document within the flow of a page.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "NU5Mv17Kc03bfc8P",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 2,
+      "prompt": "The align attribute, once usable directly on elements like img or table to control alignment, is now considered what?",
+      "choices": [
+        "Still the recommended, primary way to align elements",
+        "Obsolete; alignment should be handled with CSS instead",
+        "Only valid inside forms",
+        "Required for accessibility compliance"
+      ],
+      "correctIndex": 1,
+      "explanation": "Presentational attributes like align were removed or deprecated across HTML5 in favor of doing all visual alignment and layout through CSS.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "XKqPnXKANObF4OIs",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "deprecated-obsolete",
+      "difficulty": 3,
+      "prompt": "Why do modern style guides discourage inline event-handler attributes like onclick=\"doSomething()\" directly in HTML markup, even though they still technically work?",
+      "choices": [
+        "Browsers no longer execute them at all",
+        "They mix behavior into markup, complicate Content-Security-Policy that disallows inline scripts, and make code harder to maintain than attaching listeners in JavaScript",
+        "They are invalid HTML and fail validation entirely",
+        "They only function inside iframe elements"
+      ],
+      "correctIndex": 1,
+      "explanation": "While still valid HTML and functional, inline event-handler attributes tightly couple behavior to markup, are typically blocked by a strict Content-Security-Policy, and are generally considered worse practice than using addEventListener in a separate script.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "P9tEpZZRztDeSdkC",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html-history-versions",
+      "difficulty": 2,
+      "prompt": "What best describes the current governance model of the HTML specification?",
+      "choices": [
+        "A single, versioned standard frozen at HTML5 by W3C",
+        "A continuously updated 'living standard' maintained by WHATWG",
+        "A closed specification controlled by one browser vendor",
+        "There is no formal specification; it's set entirely by convention"
+      ],
+      "correctIndex": 1,
+      "explanation": "Since 2019, the WHATWG's HTML Living Standard is the single canonical specification, continuously revised, rather than being versioned into discrete numbered releases like the old HTML5/4.01 model.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "AEDnvMju3TuU3wzi",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html-history-versions",
+      "difficulty": 2,
+      "prompt": "What distinguished XHTML from regular HTML, historically?",
+      "choices": [
+        "XHTML required documents to be well-formed, strict XML, e.g. all tags closed and lowercase",
+        "XHTML allowed more relaxed, forgiving syntax than HTML",
+        "XHTML removed the need for a doctype",
+        "XHTML and HTML are exact synonyms with no differences"
+      ],
+      "correctIndex": 0,
+      "explanation": "XHTML reformulated HTML as an application of XML, requiring strict well-formedness, such as properly closed and nested tags and lowercase element names, which a browser's HTML parser would otherwise tolerate being sloppy about.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides"
+    },
+    {
+      "id": "WxGJgupDhrCpjgds",
+      "type": "text-answer",
+      "language": "html",
+      "category": "html-history-versions",
+      "difficulty": 1,
+      "prompt": "Which two-letter void element inserts a line break and, being a void element, never has a closing tag? (one word)",
+      "correctAnswer": "br",
+      "explanation": "br is a void element: it never has content or a closing tag, unlike container elements such as div, span, or p.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br"
+    },
+    {
+      "id": "8y3NAp935k0u7KUu",
+      "type": "multiple-choice",
+      "language": "html",
+      "category": "html-history-versions",
+      "difficulty": 3,
+      "prompt": "Is writing a void element with a trailing slash, like a self-closing br in XML style, required in plain HTML (not XHTML)?",
+      "choices": [
+        "Yes, omitting the slash is a parse error",
+        "No, HTML's parser treats void elements as self-closing regardless of a trailing slash; the slash is optional and purely stylistic",
+        "Only required for br specifically",
+        "It changes the element into a different tag entirely"
+      ],
+      "correctIndex": 1,
+      "explanation": "In HTML's parsing algorithm, void elements like br, img, and hr are inherently self-closing; an optional trailing slash is permitted for familiarity with XML/XHTML but has no effect on parsing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br"
+    }
+  ]
+}
