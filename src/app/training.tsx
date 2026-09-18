@@ -8,17 +8,26 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
 import { listInstalledPacks } from "@/data/install-pack";
-import { filterQuestions, getCategories } from "@/data/questions";
+import { filterQuestions, getCategories, getLanguages } from "@/data/questions";
 import type { Pack } from "@/data/validate-pack";
 import { useTheme } from "@/hooks/use-theme";
 
-type Language = "all" | "javascript" | "typescript";
+// Languages people are likely to see; anything else falls back to a
+// capitalized version of the raw value so an unlisted pack language still
+// renders reasonably instead of being skipped.
+const LANGUAGE_LABELS: Record<string, string> = {
+  javascript: "JavaScript",
+  typescript: "TypeScript",
+  html: "HTML",
+  css: "CSS",
+};
 
-const LANGUAGE_OPTIONS: { label: string; value: Language }[] = [
-  { label: "All", value: "all" },
-  { label: "JavaScript", value: "javascript" },
-  { label: "TypeScript", value: "typescript" },
-];
+function formatLanguageLabel(language: string): string {
+  return (
+    LANGUAGE_LABELS[language] ??
+    `${language[0].toUpperCase()}${language.slice(1)}`
+  );
+}
 
 const DIFFICULTY_OPTIONS: { label: string; value: number }[] = [
   { label: "Easy", value: 1 },
@@ -72,7 +81,7 @@ export default function TrainingScreen() {
   const [selectedPackId, setSelectedPackId] = useState<string | null>(null);
   const [packMenuOpen, setPackMenuOpen] = useState(false);
 
-  const [language, setLanguage] = useState<Language>("all");
+  const [language, setLanguage] = useState<string>("all");
   const [difficulties, setDifficulties] = useState<number[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [count, setCount] = useState(10);
@@ -106,10 +115,32 @@ export default function TrainingScreen() {
     [baseQuestions],
   );
 
+  const packLanguages = useMemo(
+    () => getLanguages(baseQuestions),
+    [baseQuestions],
+  );
+
+  // With zero or one language across the pack's questions, the filter can't
+  // narrow anything down, so it's just noise — hide it entirely.
+  const showLanguageFilter = packLanguages.length > 1;
+
+  const languageOptions = useMemo(
+    () => [
+      { label: "All", value: "all" },
+      ...packLanguages.map((value) => ({
+        label: formatLanguageLabel(value),
+        value,
+      })),
+    ],
+    [packLanguages],
+  );
+
   function selectPack(packId: string) {
     setSelectedPackId(packId);
     setPackMenuOpen(false);
-    // Categories are pack-specific; drop any that the new pack doesn't have.
+    // Languages and categories are pack-specific; drop any selection the new
+    // pack doesn't have.
+    setLanguage("all");
     setCategories([]);
   }
 
@@ -236,19 +267,21 @@ export default function TrainingScreen() {
 
           {selectedPack && (
             <>
-              <View style={styles.section}>
-                <ThemedText type="smallBold">Language</ThemedText>
-                <View style={styles.pillRow}>
-                  {LANGUAGE_OPTIONS.map((option) => (
-                    <FilterPill
-                      key={option.value}
-                      label={option.label}
-                      selected={language === option.value}
-                      onPress={() => setLanguage(option.value)}
-                    />
-                  ))}
+              {showLanguageFilter && (
+                <View style={styles.section}>
+                  <ThemedText type="smallBold">Language</ThemedText>
+                  <View style={styles.pillRow}>
+                    {languageOptions.map((option) => (
+                      <FilterPill
+                        key={option.value}
+                        label={option.label}
+                        selected={language === option.value}
+                        onPress={() => setLanguage(option.value)}
+                      />
+                    ))}
+                  </View>
                 </View>
-              </View>
+              )}
 
               <View style={styles.section}>
                 <ThemedText type="smallBold">Difficulty</ThemedText>
