@@ -34,7 +34,16 @@ export const CURATED_PACKS: CuratedPack[] = [
     description:
       "200 multiple-choice and text-answer questions covering core HTML: document structure, semantic elements, text formatting, lists, links, images and media, forms and validation, tables, global attributes, accessibility/ARIA, metadata, embedding, HTML5 interactive elements, character entities, deprecated markup, and HTML's history and versioning.",
     author: "James Zedd",
-    url: "https://gist.githubusercontent.com/james-zedd/3817803ddfa6188b961ad4c5d31db313/raw/3318bb6c9b87bfebcb317404cf9ea736b90bf5a6/html-fundamentals.json",
+    url: "https://gist.githubusercontent.com/james-zedd/3817803ddfa6188b961ad4c5d31db313/raw/html-fundamentals.json",
     version: "1.1.0",
+  },
+  {
+    id: "css-scss-fundamentals",
+    name: "CSS & SCSS Fundamentals",
+    description:
+      "240 multiple-choice and text-answer questions covering core CSS and SCSS, with deep coverage of flexbox and grid: selectors, the cascade and specificity, the box model, positioning, typography, colors, units, custom properties, transitions and transforms, responsive design, and SCSS variables, nesting, mixins, @extend, control flow, modules, functions, and maps.",
+    author: "James Zedd",
+    url: "https://gist.githubusercontent.com/james-zedd/f11bdb4ce3766aedddef7a54f47fb1d6/raw/css-scss-fundamentals.json",
+    version: "1.0.0",
   },
 ];

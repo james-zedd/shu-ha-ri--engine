@@ -49,9 +49,17 @@ function parseEntry(value: unknown): CuratedPack | null {
   if (!name || !description || !author) return null;
 
   if (!isAllowedPackUrl(entry.url)) return null;
-  if (typeof entry.version !== "string" || !isSemver(entry.version)) return null;
+  if (typeof entry.version !== "string" || !isSemver(entry.version))
+    return null;
 
-  return { id, name, description, author, url: entry.url, version: entry.version };
+  return {
+    id,
+    name,
+    description,
+    author,
+    url: entry.url,
+    version: entry.version,
+  };
 }
 
 /**
@@ -93,7 +101,10 @@ export async function fetchCuratedPacks(
       signal: controller.signal,
     });
   } catch {
-    return { ok: false, reason: "Could not reach the curated packs directory." };
+    return {
+      ok: false,
+      reason: "Could not reach the curated packs directory.",
+    };
   } finally {
     clearTimeout(timeout);
   }
