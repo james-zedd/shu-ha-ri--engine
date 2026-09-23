@@ -1,0 +1,3659 @@
+{
+  "id": "css-scss-fundamentals",
+  "name": "CSS & SCSS Fundamentals",
+  "description": "240 multiple-choice and text-answer questions covering core CSS and SCSS, with deep coverage of flexbox and grid: selectors, the cascade and specificity, the box model, positioning, typography, colors, units, custom properties, transitions and transforms, responsive design, and SCSS variables, nesting, mixins, @extend, control flow, modules, functions, and maps.",
+  "author": "James Zedd",
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "updatedAt": "2026-09-23",
+  "questions": [
+    {
+      "id": "u8jzPde0IgxLd6Gn",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 1,
+      "prompt": "Which combinator selects only elements that are a direct child of another element?",
+      "choices": [
+        "A space, the descendant combinator",
+        "The > child combinator",
+        "The + adjacent sibling combinator",
+        "The ~ general sibling combinator"
+      ],
+      "correctIndex": 1,
+      "explanation": "The child combinator > matches only elements that are immediate children of the first element, whereas a space matches descendants at any depth.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Child_combinator"
+    },
+    {
+      "id": "cfBAepfJBd0Kh8oO",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "What does the + combinator match, as in <pre>h2 + p { margin-top: 0; }</pre>",
+      "choices": [
+        "Every p that follows an h2 anywhere later",
+        "Only the first p immediately following an h2, sharing the same parent",
+        "Every p inside an h2",
+        "Every p that precedes an h2"
+      ],
+      "correctIndex": 1,
+      "explanation": "The adjacent sibling combinator + matches only the element that comes immediately after the first one, with both sharing a parent.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Next-sibling_combinator"
+    },
+    {
+      "id": "OL8dKLzdocJ2isAj",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "What does the ~ combinator match, as in <pre>h2 ~ p { color: gray; }</pre>",
+      "choices": [
+        "Only the single p right after the h2",
+        "All p siblings that come after the h2, sharing the same parent",
+        "All p elements on the page",
+        "All p elements before the h2"
+      ],
+      "correctIndex": 1,
+      "explanation": "The general sibling combinator ~ matches every following sibling that matches the selector, not just the immediately adjacent one.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Subsequent-sibling_combinator"
+    },
+    {
+      "id": "IhKtJ0RlgLKOmxgJ",
+      "type": "text-answer",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 1,
+      "prompt": "Which single character is the CSS universal selector, matching elements of any type? (one character)",
+      "correctAnswer": "*",
+      "explanation": "The universal selector * matches any element, and is commonly seen in resets like * { box-sizing: border-box; }.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Universal_selectors"
+    },
+    {
+      "id": "TeKdNnFRIBXuDL7D",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "What does the attribute selector <pre>[class*=\"btn\"]</pre> match?",
+      "choices": [
+        "Elements whose class attribute exactly equals btn",
+        "Elements whose class attribute value contains the substring btn anywhere",
+        "Elements whose class starts with btn",
+        "Elements whose class ends with btn"
+      ],
+      "correctIndex": 1,
+      "explanation": "The *= operator matches when the attribute's value contains the given substring anywhere within it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors"
+    },
+    {
+      "id": "xtpYlSXpfKtHF4vU",
+      "type": "text-answer",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "In an attribute selector, which single character before the equals sign matches values that BEGIN with the given string? (one character)",
+      "correctAnswer": "^",
+      "explanation": "[href^=\"https\"] anchors the match to the start of the attribute's value, mirroring the ^ start anchor from regular expressions.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors"
+    },
+    {
+      "id": "CsMehGAkWvj7FAc9",
+      "type": "text-answer",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "In an attribute selector, which single character before the equals sign matches values that END with the given string, e.g. matching .pdf links? (one character)",
+      "correctAnswer": "$",
+      "explanation": "[href$=\".pdf\"] matches elements whose href value ends with .pdf, mirroring the $ end anchor used in regular expressions.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors"
+    },
+    {
+      "id": "QeWJKY40uvSwMFLZ",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 3,
+      "prompt": "What is the key difference between :is() and :where()?",
+      "choices": [
+        "They are identical aliases",
+        ":is() takes the specificity of its most specific argument, while :where() always contributes zero specificity",
+        ":where() only works inside media queries",
+        ":is() cannot accept multiple selectors"
+      ],
+      "correctIndex": 1,
+      "explanation": ":is() and :where() both match any selector in their list, but :where() always has zero specificity, making its rules trivially easy to override.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:where"
+    },
+    {
+      "id": "De1f8rESQedUStPK",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 1,
+      "prompt": "What does a comma do between selectors, as in <pre>h1, h2, h3 { margin: 0; }</pre>",
+      "choices": [
+        "Requires an element to match all three selectors at once",
+        "Applies the rule to elements matching any of the listed selectors",
+        "Creates a descendant relationship",
+        "It is invalid CSS"
+      ],
+      "correctIndex": 1,
+      "explanation": "A comma forms a selector list: the declaration block applies to every element matching any selector in the list.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Selector_list"
+    },
+    {
+      "id": "R0CsTy4Qwb8DwkNh",
+      "type": "text-answer",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 1,
+      "prompt": "Which single character prefixes a class selector in CSS? (one character)",
+      "correctAnswer": ".",
+      "explanation": "A leading dot selects by class, as in .card, while a leading # selects by id.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Class_selectors"
+    },
+    {
+      "id": "FdnXsiVpzz63FfkC",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 2,
+      "prompt": "What does <pre>li:not(.active)</pre> match?",
+      "choices": [
+        "Every li that has the active class",
+        "Every li that does not have the active class",
+        "Nothing, :not() cannot take a class",
+        "The first li without the active class"
+      ],
+      "correctIndex": 1,
+      "explanation": "The :not() negation pseudo-class matches elements that do NOT match the selector inside it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:not"
+    },
+    {
+      "id": "zJr4i0B3JrTAwR4y",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "selectors",
+      "difficulty": 3,
+      "prompt": "Given <pre>.menu a { color: red; }\n.menu > a { color: blue; }</pre> which anchors get blue?",
+      "choices": [
+        "All anchors inside .menu at any depth",
+        "Only anchors that are direct children of .menu",
+        "No anchors, the rules conflict",
+        "Only the first anchor in .menu"
+      ],
+      "correctIndex": 1,
+      "explanation": "The second rule uses the child combinator, so it only targets anchors that are immediate children of .menu; deeper anchors keep the red from the descendant rule.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Child_combinator"
+    },
+    {
+      "id": "9ojfljoQoaF1Llqs",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 1,
+      "prompt": "Which of these selector types carries the highest specificity weight?",
+      "choices": [
+        "An element/type selector like div",
+        "A class selector like .card",
+        "An id selector like #header",
+        "A universal selector *"
+      ],
+      "correctIndex": 2,
+      "explanation": "Specificity is counted in ID, CLASS, TYPE columns; an id selector outweighs any number of class or type selectors.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"
+    },
+    {
+      "id": "ajAIxNKu8iS2G8NP",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 2,
+      "prompt": "Which rule wins: a selector with one id, or a selector with ten classes?",
+      "choices": [
+        "The ten classes, since there are more of them",
+        "The single id, because specificity columns are compared left to right and never carry over",
+        "Whichever appears last in the stylesheet",
+        "Neither, the declaration is dropped"
+      ],
+      "correctIndex": 1,
+      "explanation": "Specificity columns do not carry: one ID (1,0,0) beats ten classes (0,10,0) because the ID column is compared first and ten never rolls over into it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"
+    },
+    {
+      "id": "RVdD53X83RZJzzzz",
+      "type": "text-answer",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 1,
+      "prompt": "Which flag, appended to a declaration, overrides normal specificity and cascade order? (include the exclamation mark)",
+      "correctAnswer": "!important",
+      "explanation": "An !important declaration is moved into a higher-priority cascade origin, beating normal declarations regardless of specificity.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction"
+    },
+    {
+      "id": "gEOzdmenCkhvMdga",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 1,
+      "prompt": "Two rules have identical specificity and both apply. Which one takes effect?",
+      "choices": [
+        "The one declared first",
+        "The one declared last in source order",
+        "Neither applies",
+        "The one with the shorter selector"
+      ],
+      "correctIndex": 1,
+      "explanation": "When origin, importance, and specificity all tie, the cascade falls back to source order and the later declaration wins.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction"
+    },
+    {
+      "id": "KjIg8xNbe3nNyjOq",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 2,
+      "prompt": "Which of these properties is inherited by descendants by default?",
+      "choices": [
+        "margin",
+        "border",
+        "color",
+        "padding"
+      ],
+      "correctIndex": 2,
+      "explanation": "Typography-related properties such as color, font-family, and line-height inherit by default; box properties like margin, padding, and border do not.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction"
+    },
+    {
+      "id": "9wMxEhh2FDEEtfjg",
+      "type": "text-answer",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 2,
+      "prompt": "Which CSS-wide keyword explicitly takes a property's computed value from its parent element? (one word)",
+      "correctAnswer": "inherit",
+      "explanation": "The inherit keyword forces a property to take its parent's computed value, even for properties that do not inherit by default.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/inherit"
+    },
+    {
+      "id": "VvVqE1SkHbn88Hxj",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 3,
+      "prompt": "What does the unset keyword do?",
+      "choices": [
+        "Always resets to the browser default",
+        "Acts as inherit for inherited properties and initial for non-inherited ones",
+        "Removes the element from the page",
+        "Is a synonym for revert"
+      ],
+      "correctIndex": 1,
+      "explanation": "unset is context-sensitive: it behaves like inherit on properties that inherit, and like initial on properties that do not.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/unset"
+    },
+    {
+      "id": "SI6bWHtP3fS2qHx6",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 3,
+      "prompt": "Why might a team wrap reset rules in :where(), as in <pre>:where(ul, ol) { padding: 0; }</pre>",
+      "choices": [
+        "It makes the selector faster",
+        "Because :where() contributes zero specificity, so any later author rule overrides it easily",
+        "It forces the rule to apply with !important",
+        "It applies the rule only to the first matching element"
+      ],
+      "correctIndex": 1,
+      "explanation": ":where() zeroes out the specificity of its contents, which makes base/reset styles effortless to override rather than requiring escalating selectors.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:where"
+    },
+    {
+      "id": "kwXoIIXGvOoNZYW2",
+      "type": "text-answer",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 3,
+      "prompt": "Which at-rule lets you declare explicit precedence buckets so a later group of rules beats an earlier one regardless of specificity? (include the @ symbol)",
+      "correctAnswer": "@layer",
+      "explanation": "Cascade layers order whole groups of rules: a declaration in a later layer wins over one in an earlier layer no matter how specific the earlier selector is.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer"
+    },
+    {
+      "id": "mZp0zVZomHFwUbbY",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "cascade-specificity",
+      "difficulty": 3,
+      "prompt": "How does a pseudo-element like ::before count toward specificity?",
+      "choices": [
+        "It counts as an id",
+        "It counts as a class",
+        "It counts as a type/element selector",
+        "It adds no specificity at all"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pseudo-elements count in the same column as type selectors, while pseudo-classes such as :hover count in the class column.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"
+    },
+    {
+      "id": "rEqmSM9wCZ7Uw9xf",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 1,
+      "prompt": "Under the default box model, what does setting width: 300px on an element actually size?",
+      "choices": [
+        "The content box only, with padding and border added on top",
+        "The content plus padding",
+        "The content plus padding plus border",
+        "The content plus padding, border, and margin"
+      ],
+      "correctIndex": 0,
+      "explanation": "The default box-sizing is content-box, so width sizes only the content area and any padding and border increase the element's rendered size.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing"
+    },
+    {
+      "id": "ogoEmvnEN5N1aE6P",
+      "type": "text-answer",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 1,
+      "prompt": "Which box-sizing value makes width and height include the element's padding and border? (one word, the value only)",
+      "correctAnswer": "border-box",
+      "explanation": "box-sizing: border-box makes the declared width/height cover content, padding, and border, which is why it is so common in CSS resets.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing"
+    },
+    {
+      "id": "wZPf1Qh6yYTWmE4l",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 2,
+      "prompt": "What is the initial value of box-sizing?",
+      "choices": [
+        "border-box",
+        "content-box",
+        "padding-box",
+        "auto"
+      ],
+      "correctIndex": 1,
+      "explanation": "box-sizing defaults to content-box; border-box must be opted into, typically via a universal reset rule.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing"
+    },
+    {
+      "id": "BYOvfZ8UzDzV8fUk",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 2,
+      "prompt": "Two stacked block elements have margin-bottom: 20px and margin-top: 30px. What is the resulting gap?",
+      "choices": [
+        "50px",
+        "30px",
+        "20px",
+        "0px"
+      ],
+      "correctIndex": 1,
+      "explanation": "Adjacent vertical margins collapse into a single margin equal to the larger of the two, so 30px wins rather than the two summing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Mastering_margin_collapsing"
+    },
+    {
+      "id": "kibjL5DZPjN0MEQ7",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 3,
+      "prompt": "In which situation do vertical margins NOT collapse?",
+      "choices": [
+        "Between two adjacent block siblings",
+        "Between a parent and its first child",
+        "Between flex items inside a flex container",
+        "Between empty blocks"
+      ],
+      "correctIndex": 2,
+      "explanation": "Margin collapsing is a block-layout behavior; margins of flex items (and grid items) never collapse with each other.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Mastering_margin_collapsing"
+    },
+    {
+      "id": "wjJJibaZUPgHV7iB",
+      "type": "text-answer",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 1,
+      "prompt": "Which property creates space INSIDE an element, between its content and its border? (one word)",
+      "correctAnswer": "padding",
+      "explanation": "padding is the space between the content box and the border; margin is the space outside the border.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding"
+    },
+    {
+      "id": "3m03nbqnsGpWLuqI",
+      "type": "text-answer",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 1,
+      "prompt": "Which property creates space OUTSIDE an element's border, separating it from neighbours? (one word)",
+      "correctAnswer": "margin",
+      "explanation": "margin sits outside the border and separates the element from surrounding boxes; unlike padding it can collapse and can be negative.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin"
+    },
+    {
+      "id": "A1id6Vw5DQL05HA0",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 2,
+      "prompt": "How does outline differ from border?",
+      "choices": [
+        "outline can only be dotted",
+        "outline is drawn outside the border and does not affect layout or take up space",
+        "outline is applied only to form controls",
+        "There is no difference"
+      ],
+      "correctIndex": 1,
+      "explanation": "An outline is painted outside the border edge without occupying layout space, so adding one never shifts surrounding content, which is why it suits focus indicators.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/outline"
+    },
+    {
+      "id": "64GiIjHGb3CXlMaX",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 2,
+      "prompt": "Are negative margin values valid CSS?",
+      "choices": [
+        "No, margins must be zero or positive",
+        "Yes, negative margins are valid and pull an element toward or over its neighbours",
+        "Only on absolutely positioned elements",
+        "Only in flex containers"
+      ],
+      "correctIndex": 1,
+      "explanation": "Negative margins are legal and commonly used to pull elements outward or overlap neighbours; negative padding, by contrast, is invalid.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin"
+    },
+    {
+      "id": "ZjljENUhJduRHHJE",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 3,
+      "prompt": "If an element has both width: 600px and max-width: 400px, what width is used?",
+      "choices": [
+        "600px",
+        "400px",
+        "1000px",
+        "The declaration is invalid"
+      ],
+      "correctIndex": 1,
+      "explanation": "max-width clamps the used width after width is resolved, so the smaller max-width wins; min-width in turn overrides max-width if they conflict.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/max-width"
+    },
+    {
+      "id": "YXg4JdpmrcXgGCJb",
+      "type": "text-answer",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 2,
+      "prompt": "Which overflow value clips overflowing content and adds scrollbars only when they are actually needed? (one word, the value only)",
+      "correctAnswer": "auto",
+      "explanation": "overflow: auto shows scrollbars only when content actually overflows, whereas scroll always reserves the scrollbar area and hidden clips with no scrolling.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow"
+    },
+    {
+      "id": "W56eCuNGMGmSrCGI",
+      "type": "text-answer",
+      "language": "css",
+      "category": "box-model",
+      "difficulty": 1,
+      "prompt": "What is the default value of the overflow property? (one word)",
+      "correctAnswer": "visible",
+      "explanation": "overflow defaults to visible, meaning content that exceeds the box is painted outside it rather than being clipped.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow"
+    },
+    {
+      "id": "ZEG8pSH4487q7J58",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 1,
+      "prompt": "How does display: inline-block differ from display: inline?",
+      "choices": [
+        "It cannot sit on the same line as text",
+        "It flows inline with surrounding content but honours width, height, and vertical padding/margins",
+        "It is identical to inline",
+        "It forces a line break after the element"
+      ],
+      "correctIndex": 1,
+      "explanation": "inline-block participates in inline flow like inline, but unlike inline it respects width/height and vertical box properties.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"
+    },
+    {
+      "id": "m1CiAhzCueQpBenQ",
+      "type": "text-answer",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 1,
+      "prompt": "Which position value is the initial value, leaving an element in normal document flow and ignoring top/left offsets? (one word)",
+      "correctAnswer": "static",
+      "explanation": "position: static is the default; offsets like top/left and z-index have no effect on a static element.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position"
+    },
+    {
+      "id": "tYh5Xj8TPQxjq4i9",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "An absolutely positioned element is offset relative to what?",
+      "choices": [
+        "Always the viewport",
+        "Always the document body",
+        "Its nearest ancestor with a position other than static, falling back to the initial containing block",
+        "Its immediate parent, always"
+      ],
+      "correctIndex": 2,
+      "explanation": "position: absolute resolves against the nearest positioned ancestor (relative, absolute, fixed, or sticky); with none, it falls back to the initial containing block.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position"
+    },
+    {
+      "id": "DoV8gz4FkQ1okTBG",
+      "type": "text-answer",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "Which position value keeps an element in flow until a scroll threshold is crossed, then pins it in place? (one word)",
+      "correctAnswer": "sticky",
+      "explanation": "position: sticky behaves like relative until its specified offset threshold is reached during scrolling, then behaves like fixed within its containing block.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position"
+    },
+    {
+      "id": "zvAmwufUxbvJDCTb",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "What is position: fixed normally positioned relative to?",
+      "choices": [
+        "The nearest positioned ancestor",
+        "The viewport, so it stays put while the page scrolls",
+        "The document body's height",
+        "Its parent's padding box"
+      ],
+      "correctIndex": 1,
+      "explanation": "A fixed element is positioned relative to the viewport and does not move when the page scrolls, unless an ancestor creates a containing block via transform, filter, or will-change.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position"
+    },
+    {
+      "id": "yvHNsG9eh6Yo4gfq",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "On which elements does z-index have an effect?",
+      "choices": [
+        "Every element",
+        "Only positioned elements, plus flex and grid items",
+        "Only elements with display: block",
+        "Only elements inside an iframe"
+      ],
+      "correctIndex": 1,
+      "explanation": "z-index applies to positioned elements (anything other than static) and additionally to flex and grid items, which can be layered without being positioned.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/z-index"
+    },
+    {
+      "id": "rc5XlrWi0B26R08q",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 3,
+      "prompt": "Which of these creates a new stacking context even without setting position?",
+      "choices": [
+        "color: red",
+        "opacity less than 1",
+        "margin: auto",
+        "overflow: auto"
+      ],
+      "correctIndex": 1,
+      "explanation": "An opacity below 1 creates a stacking context, as do transform, filter, will-change, isolation: isolate, and being a flex/grid item with a z-index.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioning/Understanding_z-index/Stacking_context"
+    },
+    {
+      "id": "zjI6GKFSufrdZSlB",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "What happens to the space an element occupied when you offset it with position: relative and top: 20px?",
+      "choices": [
+        "The space collapses and following content moves up",
+        "The original space is preserved in flow; the element is only painted shifted",
+        "The element is removed from the document",
+        "Following siblings shift down by 20px"
+      ],
+      "correctIndex": 1,
+      "explanation": "A relatively positioned element is visually offset but still reserves its original space in normal flow, which is why relative offsets can cause overlap rather than reflow.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position"
+    },
+    {
+      "id": "5er8bOfZqfM2oeq3",
+      "type": "text-answer",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 1,
+      "prompt": "Which display value removes an element from the page entirely, reserving no space for it? (one word)",
+      "correctAnswer": "none",
+      "explanation": "display: none removes the element from the layout and the accessibility tree; visibility: hidden hides it while still reserving its space.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"
+    },
+    {
+      "id": "hDavJA76rNicHTp8",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "How does visibility: hidden differ from display: none?",
+      "choices": [
+        "They are identical",
+        "visibility: hidden keeps the element's space reserved in layout, while display: none removes it from flow",
+        "visibility: hidden also removes the element from the DOM",
+        "display: none keeps the element focusable"
+      ],
+      "correctIndex": 1,
+      "explanation": "visibility: hidden makes an element invisible but still laid out, whereas display: none removes it from layout entirely.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility"
+    },
+    {
+      "id": "hkqdlm7tOtHWnsCG",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 2,
+      "prompt": "Why does setting width and height on a plain inline element like a span have no effect?",
+      "choices": [
+        "Inline boxes ignore width and height by definition; their size comes from their content",
+        "The properties are misspelled",
+        "Only ids can be sized",
+        "Inline elements require position: absolute first"
+      ],
+      "correctIndex": 0,
+      "explanation": "Non-replaced inline boxes ignore width/height; switching to inline-block or block makes those properties apply.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"
+    },
+    {
+      "id": "RlrwZbqcabUGJmGE",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "display-positioning",
+      "difficulty": 3,
+      "prompt": "What is a common modern replacement for using float-based layout and clearfix hacks?",
+      "choices": [
+        "Using display: inline on everything",
+        "Using flexbox or grid layout",
+        "Using position: absolute for all children",
+        "Using tables"
+      ],
+      "correctIndex": 1,
+      "explanation": "Floats were repurposed for page layout before dedicated layout modes existed; flexbox and grid now handle those cases without clearfix workarounds, leaving float for its original job of wrapping text around media.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/float"
+    },
+    {
+      "id": "p7CgQ0PBQFI14zGt",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 1,
+      "prompt": "What does display: flex do to an element's children?",
+      "choices": [
+        "Nothing; it only affects the element itself",
+        "It makes the element a flex container, and its direct children become flex items laid out along the main axis",
+        "It makes every descendant at any depth a flex item",
+        "It removes the children from flow"
+      ],
+      "correctIndex": 1,
+      "explanation": "display: flex establishes a flex formatting context: only the element's DIRECT children become flex items, arranged along the main axis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout"
+    },
+    {
+      "id": "Snovm14TUOizwd1i",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What is the difference between display: flex and display: inline-flex?",
+      "choices": [
+        "Their children are laid out differently",
+        "They lay out children identically; the difference is whether the container itself is block-level or inline-level",
+        "inline-flex disables flex-wrap",
+        "inline-flex only works with text"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both establish identical flex layout inside; the keyword only changes the container's own outer display type, block-level versus inline-level.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"
+    },
+    {
+      "id": "aeOV4qBkdfQ1y3GQ",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 1,
+      "prompt": "With the default flex-direction: row, which axis is the main axis?",
+      "choices": [
+        "Horizontal (inline) axis",
+        "Vertical (block) axis",
+        "Both at once",
+        "It depends on the number of items"
+      ],
+      "correctIndex": 0,
+      "explanation": "flex-direction: row makes the main axis horizontal (in a left-to-right writing mode), so justify-content distributes items horizontally and align-items works vertically.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout"
+    },
+    {
+      "id": "sMpSscDlkrCaqx9v",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "You set flex-direction: column. Which property now controls vertical distribution of items?",
+      "choices": [
+        "align-items",
+        "justify-content",
+        "align-content",
+        "vertical-align"
+      ],
+      "correctIndex": 1,
+      "explanation": "justify-content always works along the MAIN axis. In a column container the main axis is vertical, so justify-content distributes items vertically and align-items handles horizontal alignment.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"
+    },
+    {
+      "id": "Jupc94tnwlavyfEr",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 1,
+      "prompt": "Which property sets whether flex items are laid out in a row or a column? (the property name only)",
+      "correctAnswer": "flex-direction",
+      "explanation": "flex-direction accepts row (default), row-reverse, column, and column-reverse, and determines which axis is the main axis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-direction"
+    },
+    {
+      "id": "GPmpGXafq0fjzLcz",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What is the default value of flex-wrap, the value that forces all items onto a single line? (one word)",
+      "correctAnswer": "nowrap",
+      "explanation": "flex-wrap defaults to nowrap, which keeps all items on one line; they shrink (or overflow) instead of wrapping.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap"
+    },
+    {
+      "id": "bttOofL9H2WjQ5TY",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Which shorthand property sets flex-direction and flex-wrap together? (the property name only)",
+      "correctAnswer": "flex-flow",
+      "explanation": "flex-flow is the shorthand for flex-direction and flex-wrap, e.g. flex-flow: row wrap.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-flow"
+    },
+    {
+      "id": "4MyWuUFjsUNPjc01",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Which justify-content value places equal space BETWEEN items with no space at the container's outer edges? (one word, the value only)",
+      "correctAnswer": "space-between",
+      "explanation": "space-between pushes the first item to the main start and the last to the main end, distributing remaining space between items only.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"
+    },
+    {
+      "id": "T5GOBUSZGi6HWGK1",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "How do space-around and space-evenly differ?",
+      "choices": [
+        "They are identical",
+        "space-around gives each item equal space on both sides, so edge gaps are half the size of gaps between items; space-evenly makes all gaps identical",
+        "space-evenly removes edge spacing entirely",
+        "space-around only works in column direction"
+      ],
+      "correctIndex": 1,
+      "explanation": "With space-around each item carries half-size space on each side, so adjacent items' halves double up and edge gaps look half as large; space-evenly makes every gap, including edges, exactly equal.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"
+    },
+    {
+      "id": "0Zb0RLZ5TR9SPofb",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "With a single-line flex container, what does align-items control?",
+      "choices": [
+        "Distribution along the main axis",
+        "Alignment of items along the cross axis",
+        "The order of items",
+        "Whether items wrap"
+      ],
+      "correctIndex": 1,
+      "explanation": "align-items aligns items on the CROSS axis within the flex line; justify-content handles the main axis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-items"
+    },
+    {
+      "id": "ciOx9gy1CJdObOIR",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Why do flex items stretch to equal height by default in a row container?",
+      "choices": [
+        "Because of flex-grow: 1",
+        "Because align-items behaves as stretch by default",
+        "Because justify-content defaults to stretch",
+        "Because of flex-basis: auto"
+      ],
+      "correctIndex": 1,
+      "explanation": "The initial align-items value behaves as stretch, so items with an auto cross size expand to fill the line's height. Setting a height or align-self on the item opts out.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-items"
+    },
+    {
+      "id": "pFqaDZeV7G5IfQHe",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "Why does align-content often appear to do nothing?",
+      "choices": [
+        "It is deprecated",
+        "It only has an effect when the container is multi-line, i.e. flex-wrap allows wrapping and items actually occupy more than one line",
+        "It only works with position: absolute",
+        "It requires flex-direction: column"
+      ],
+      "correctIndex": 1,
+      "explanation": "align-content distributes the flex LINES within the container's cross axis, so with nowrap (or a single line) there is nothing to distribute and it has no visible effect.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-content"
+    },
+    {
+      "id": "VVEqZe2qpUWnoVPD",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Which property overrides align-items for one specific flex item? (the property name only)",
+      "correctAnswer": "align-self",
+      "explanation": "align-self sets cross-axis alignment for an individual item, overriding the container's align-items value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-self"
+    },
+    {
+      "id": "F2yeE6RsXcNOPmeM",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "Does justify-self work on flex items?",
+      "choices": [
+        "Yes, it aligns a single item on the main axis",
+        "No, it is ignored in flex layout; main-axis alignment of a single item is done with auto margins",
+        "Yes, but only with flex-wrap: wrap",
+        "Yes, it is a synonym for align-self"
+      ],
+      "correctIndex": 1,
+      "explanation": "justify-self has no effect in flexbox because main-axis space is distributed collectively; to push one item, use an auto margin such as margin-left: auto.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-self"
+    },
+    {
+      "id": "jvqPVStNKiaEdFrR",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What is the effect of margin-left: auto on a flex item in a row container?",
+      "choices": [
+        "It centres the item vertically",
+        "It absorbs all free main-axis space on that side, pushing the item (and any following items) to the right",
+        "It has no effect in flexbox",
+        "It makes the item wrap onto a new line"
+      ],
+      "correctIndex": 1,
+      "explanation": "Auto margins on a flex item absorb free space in that direction, which is the idiomatic way to push one item (like a logout button) to the far end of a bar.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout"
+    },
+    {
+      "id": "gSnRFsTHsDDDXh5J",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What does the order property do to a flex item?",
+      "choices": [
+        "Changes its size",
+        "Changes only its visual position in the flex line, leaving DOM and tab order unchanged",
+        "Removes it from the layout",
+        "Reverses the whole container"
+      ],
+      "correctIndex": 1,
+      "explanation": "order rearranges items visually but does NOT change DOM order, so keyboard tab sequence and screen reader order still follow the source, which is an accessibility hazard when overused.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/order"
+    },
+    {
+      "id": "mtf7EbsDe0G9Cryn",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 1,
+      "prompt": "What is the default value of flex-grow, meaning items do not absorb free space unless you opt in? (a single number)",
+      "correctAnswer": "0",
+      "explanation": "flex-grow defaults to 0: items stay at their base size and leave free space unclaimed until you set a positive grow factor.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-grow"
+    },
+    {
+      "id": "687neLfjVHq8xiM0",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What is the default value of flex-shrink, the reason flex items squeeze instead of overflowing? (a single number)",
+      "correctAnswer": "1",
+      "explanation": "flex-shrink defaults to 1, so items give up space proportionally when the container is too narrow, rather than overflowing it.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-shrink"
+    },
+    {
+      "id": "OGr4hTxoF54Fzbka",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "Three items have flex-grow: 1, 2, and 1 with 400px of free space. How is that space distributed?",
+      "choices": [
+        "Equally, about 133px each",
+        "100px, 200px, 100px, proportional to the grow factors",
+        "400px to the item with grow: 2 only",
+        "It is split by content width"
+      ],
+      "correctIndex": 1,
+      "explanation": "Free space is divided in proportion to the grow factors: with a total of 4 shares, the items receive 1/4, 2/4, and 1/4, i.e. 100px, 200px, and 100px added to their base sizes.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-grow"
+    },
+    {
+      "id": "8FRCztUjAwyuh1va",
+      "type": "text-answer",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Which property sets a flex item's initial main-axis size before free space is distributed? (the property name only)",
+      "correctAnswer": "flex-basis",
+      "explanation": "flex-basis sets the item's starting size along the main axis; grow and shrink then adjust from that baseline. It defaults to auto, which falls back to the item's width/height.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-basis"
+    },
+    {
+      "id": "uWv1zh87mTa5Vsqx",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "What does the shorthand flex: 1 expand to?",
+      "choices": [
+        "flex: 1 1 auto",
+        "flex: 1 0 auto",
+        "flex: 1 1 0%",
+        "flex: 1 1 100%"
+      ],
+      "correctIndex": 2,
+      "explanation": "A single unitless number sets flex-grow, and the shorthand defaults flex-shrink to 1 and flex-basis to 0%. Because the basis is 0, items with flex: 1 end up EQUAL in size regardless of content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"
+    },
+    {
+      "id": "ezy3Lex7BWr2drgd",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "Why do items with flex: auto end up different widths while items with flex: 1 end up equal?",
+      "choices": [
+        "flex: auto disables growing",
+        "flex: auto is 1 1 auto, so content size is the starting point and only leftover space is shared; flex: 1 is 1 1 0%, which ignores content size",
+        "flex: 1 applies only to the first item",
+        "They behave identically"
+      ],
+      "correctIndex": 1,
+      "explanation": "flex: auto keeps each item's content-based basis before distributing free space, so wider content stays wider; flex: 1 zeroes the basis so the shared space is the item's entire size.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"
+    },
+    {
+      "id": "1QsO7jprBGumXxY9",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "What does flex: none expand to?",
+      "choices": [
+        "0 1 auto",
+        "1 1 auto",
+        "0 0 auto, making the item fully inflexible at its content size",
+        "0 0 0%"
+      ],
+      "correctIndex": 2,
+      "explanation": "flex: none is 0 0 auto: the item neither grows nor shrinks and stays at its content-based size, useful for icons or fixed-width sidebars.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"
+    },
+    {
+      "id": "B4bZWOz648JJnUfd",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "A flex item with a long unbroken string refuses to shrink below its content width and overflows. What is the usual cause and fix?",
+      "choices": [
+        "flex-shrink is 0; set it to 1",
+        "The item's automatic minimum size (min-width: auto) prevents shrinking; set min-width: 0 (or overflow: hidden)",
+        "The container needs flex-wrap: wrap",
+        "Set flex-basis: 100%"
+      ],
+      "correctIndex": 1,
+      "explanation": "Flex items get an automatic minimum size equal to their min-content size, so long words or wide children block shrinking. Setting min-width: 0 (min-height: 0 in a column) releases that floor. This is the single most common flexbox overflow bug.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/min-width"
+    },
+    {
+      "id": "7UACNWiP3sFd67Ji",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "In a flex-direction: column container, which property must you usually set to 0 to let a scrollable child shrink properly?",
+      "choices": [
+        "min-width",
+        "min-height",
+        "max-height",
+        "flex-basis"
+      ],
+      "correctIndex": 1,
+      "explanation": "The automatic minimum size applies along the MAIN axis, so in a column container the blocking property is min-height: auto, and min-height: 0 is the fix.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/min-height"
+    },
+    {
+      "id": "kEAvstqVVPqzPptE",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 2,
+      "prompt": "Does the gap property work in flexbox?",
+      "choices": [
+        "No, gap is grid-only; use margins",
+        "Yes, gap (and row-gap/column-gap) adds spacing between flex items without edge margins",
+        "Only when flex-wrap: wrap is set",
+        "Only in column direction"
+      ],
+      "correctIndex": 1,
+      "explanation": "gap works in flex layout and is preferable to margins because it spaces items without adding unwanted space at the container's outer edges.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap"
+    },
+    {
+      "id": "JQzhkPkenG5ZFJoC",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "With flex-direction: row-reverse, where does justify-content: flex-start place items?",
+      "choices": [
+        "On the left, as usual",
+        "On the right, because reversing the direction swaps the main start and main end edges",
+        "Centred",
+        "It becomes invalid"
+      ],
+      "correctIndex": 1,
+      "explanation": "row-reverse flips the main axis so main-start is on the right; flex-start therefore packs items to the right edge.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-direction"
+    },
+    {
+      "id": "6vWCBiJmpflvJfup",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "flexbox",
+      "difficulty": 3,
+      "prompt": "What is the correct way to perfectly centre a single child both horizontally and vertically using flexbox?",
+      "choices": [
+        "<pre>.parent { display: flex; }</pre>",
+        "<pre>.parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}</pre>",
+        "<pre>.parent { display: flex; text-align: center; }</pre>",
+        "<pre>.parent { display: flex; vertical-align: middle; }</pre>"
+      ],
+      "correctIndex": 1,
+      "explanation": "justify-content centres along the main axis and align-items along the cross axis; together they centre the child in both dimensions regardless of its size.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout"
+    },
+    {
+      "id": "xqZKm4bV3AyAVHny",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 1,
+      "prompt": "What fundamentally distinguishes grid layout from flexbox?",
+      "choices": [
+        "Grid is older and less supported",
+        "Grid is designed for two-dimensional layout (rows AND columns together), while flexbox handles one dimension at a time",
+        "Grid cannot use gap",
+        "Flexbox cannot align items"
+      ],
+      "correctIndex": 1,
+      "explanation": "Grid controls rows and columns simultaneously, making it right for overall page structure; flexbox distributes items along a single axis, making it right for components like toolbars.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout"
+    },
+    {
+      "id": "rvWdFrK9xiRGHOY3",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 1,
+      "prompt": "Which property defines the explicit column tracks of a grid container? (the property name only)",
+      "correctAnswer": "grid-template-columns",
+      "explanation": "grid-template-columns lists the size of each column track, e.g. grid-template-columns: 200px 1fr 1fr.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "2nfr5pyzPCB9t203",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "In <pre>grid-template-columns: 200px 1fr 2fr;</pre> with a 1000px container and no gaps, how wide is the last column?",
+      "choices": [
+        "400px",
+        "533px",
+        "500px",
+        "800px"
+      ],
+      "correctIndex": 1,
+      "explanation": "fr distributes only the FREE space, so the fixed 200px is subtracted first, leaving 800px. That is split into three shares (1fr + 2fr), making 1fr about 267px and the 2fr track about 533px. Treating fr as a share of the FULL container is a common miscalculation.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fr"
+    },
+    {
+      "id": "9bicBTW5ZE9LFaez",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What exactly does the fr unit distribute?",
+      "choices": [
+        "A percentage of the container's total size",
+        "A share of the FREE space left after fixed-size tracks and gaps are subtracted",
+        "A fraction of the viewport width",
+        "A fraction of the largest item's size"
+      ],
+      "correctIndex": 1,
+      "explanation": "An fr is a fraction of the leftover space, so fixed tracks and gaps are subtracted first. This is why 1fr tracks are not always equal to each other's content or to a simple percentage.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fr"
+    },
+    {
+      "id": "7770H2DCpYgojjHR",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 1,
+      "prompt": "What does <pre>grid-template-columns: repeat(3, 1fr);</pre> produce?",
+      "choices": [
+        "One column repeated on three rows",
+        "Three equal-width columns",
+        "Three rows",
+        "A 3x3 grid"
+      ],
+      "correctIndex": 1,
+      "explanation": "repeat(3, 1fr) is shorthand for 1fr 1fr 1fr, producing three columns that share the free space equally.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/repeat"
+    },
+    {
+      "id": "g80USP2W5DfJXcaY",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What does minmax(200px, 1fr) mean for a track?",
+      "choices": [
+        "The track is always exactly 200px",
+        "The track is never smaller than 200px and never larger than a 1fr share",
+        "The track alternates between the two values",
+        "The track grows to 200px maximum"
+      ],
+      "correctIndex": 1,
+      "explanation": "minmax() sets a floor and ceiling for a track, so the track sits between 200px and its 1fr share of free space.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/minmax"
+    },
+    {
+      "id": "ioK6cPTt9iOqHOBS",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What is the difference between repeat(auto-fill, ...) and repeat(auto-fit, ...)?",
+      "choices": [
+        "They are identical",
+        "auto-fill keeps empty tracks that fit in the row; auto-fit collapses empty tracks to zero so the remaining items stretch to fill the space",
+        "auto-fit creates more tracks than auto-fill always",
+        "auto-fill only works with fixed sizes"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both create as many tracks as fit, but auto-fit collapses the empty leftovers to 0 width, letting existing items expand. With few items, auto-fill leaves visible empty columns while auto-fit does not.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "WhgetH8LmyqoYMaa",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What layout does <pre>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</pre> create?",
+      "choices": [
+        "Exactly three responsive columns",
+        "A responsive grid that fits as many at-least-200px columns as possible and stretches them to fill the row, with no media queries",
+        "A single column that is 200px wide",
+        "A grid that always overflows"
+      ],
+      "correctIndex": 1,
+      "explanation": "This is the classic responsive grid idiom: tracks are at least 200px, as many fit as possible, and auto-fit plus 1fr lets them expand to consume the row, all without media queries.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "ItDr9uP14pEHpJpb",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "Which property lets you name rectangular regions of a grid as an ASCII-art style template? (the property name only)",
+      "correctAnswer": "grid-template-areas",
+      "explanation": "grid-template-areas defines named areas in a visual, row-by-row string form that items then reference with grid-area.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas"
+    },
+    {
+      "id": "9ATPtdbmF4RPAfqo",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "In grid-template-areas, what does a period (.) represent?",
+      "choices": [
+        "A named area called dot",
+        "An empty cell that no item is assigned to",
+        "A line break",
+        "An invalid token"
+      ],
+      "correctIndex": 1,
+      "explanation": "One or more periods denote an empty grid cell in the template, leaving that slot unoccupied.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas"
+    },
+    {
+      "id": "QB7xoFcSvTAxRzma",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What constraint applies to areas declared in grid-template-areas?",
+      "choices": [
+        "Each area must be a single cell",
+        "Each named area must form a complete rectangle",
+        "Areas must be listed alphabetically",
+        "Areas cannot span rows"
+      ],
+      "correctIndex": 1,
+      "explanation": "Named areas must be rectangular; an L-shaped or disjoint arrangement makes the whole template invalid.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas"
+    },
+    {
+      "id": "ZsV2GenFmtX0moDo",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What is the correct order of values in the four-value grid-area shorthand?",
+      "choices": [
+        "column-start / row-start / column-end / row-end",
+        "row-start / column-start / row-end / column-end",
+        "top / right / bottom / left",
+        "start / end / span / order"
+      ],
+      "correctIndex": 1,
+      "explanation": "grid-area takes row-start / column-start / row-end / column-end. Mixing up the row/column order is a very common source of misplaced items.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-area"
+    },
+    {
+      "id": "qW4sg8NFNl5oFA6Q",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What does <pre>grid-column: 1 / 3;</pre> do?",
+      "choices": [
+        "Places the item in columns 1 and 3 only",
+        "Starts the item at column line 1 and ends at column line 3, spanning two tracks",
+        "Creates three columns",
+        "Spans three columns"
+      ],
+      "correctIndex": 1,
+      "explanation": "Grid placement references LINES, not tracks: lines 1 to 3 enclose two column tracks.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-column"
+    },
+    {
+      "id": "d8Mj7zdnbMjAdTdl",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What does the span keyword do in <pre>grid-column: span 2;</pre>",
+      "choices": [
+        "Places the item in column 2",
+        "Makes the item occupy two column tracks starting from its auto-placed position",
+        "Creates two new columns",
+        "Spans all columns"
+      ],
+      "correctIndex": 1,
+      "explanation": "span lets you declare a size in tracks without pinning the item to specific line numbers, leaving the start position to auto-placement.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-column"
+    },
+    {
+      "id": "zC5T4uUhf7kvmlP7",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What does the line number -1 refer to in grid placement?",
+      "choices": [
+        "The first line",
+        "The last line of the EXPLICIT grid",
+        "The last line including implicit tracks",
+        "An invalid value"
+      ],
+      "correctIndex": 1,
+      "explanation": "Negative line numbers count backwards from the end of the explicit grid, so grid-column: 1 / -1 stretches an item across every explicit column. Note that -1 does not reach into implicitly created tracks.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-row"
+    },
+    {
+      "id": "HVDctQUy1xvCkgaf",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What is the difference between the explicit and the implicit grid?",
+      "choices": [
+        "The implicit grid is invalid CSS",
+        "The explicit grid is what grid-template-* defines; the implicit grid is the extra tracks the browser creates for items placed outside it",
+        "The explicit grid only has columns",
+        "They are the same thing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Any content that does not fit the declared tracks causes the browser to generate implicit tracks, which are sized by grid-auto-rows/grid-auto-columns rather than the template.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout"
+    },
+    {
+      "id": "rfwA94hJ9WnywX0t",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "Which property sizes the rows the browser creates automatically when items overflow the explicit grid? (the property name only)",
+      "correctAnswer": "grid-auto-rows",
+      "explanation": "grid-auto-rows sets the size of implicitly created row tracks; its default of auto is why unexpected extra rows size themselves to content.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-auto-rows"
+    },
+    {
+      "id": "0ZBfdTEmxI6CmuxV",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What is the default value of grid-auto-flow, and what does it do?",
+      "choices": [
+        "column \u2014 items fill down each column first",
+        "row \u2014 items fill across each row before creating a new row",
+        "dense \u2014 gaps are backfilled",
+        "none \u2014 items must be placed manually"
+      ],
+      "correctIndex": 1,
+      "explanation": "grid-auto-flow defaults to row, so auto-placed items fill left-to-right across each row before moving to the next.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-auto-flow"
+    },
+    {
+      "id": "5EbOApZOXzcycDeZ",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What does grid-auto-flow: dense do?",
+      "choices": [
+        "Makes tracks narrower",
+        "Backfills earlier holes in the grid with later items that fit, which can change visual order relative to the DOM",
+        "Removes gaps between tracks",
+        "Forces all items to the same size"
+      ],
+      "correctIndex": 1,
+      "explanation": "dense packing lets the algorithm move smaller later items back into earlier gaps. It eliminates holes but decouples visual order from source order, which harms keyboard and screen reader users.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-auto-flow"
+    },
+    {
+      "id": "6dqmVe5Mvxrv99Nc",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 1,
+      "prompt": "Which shorthand property sets the spacing between grid tracks, with row-gap and column-gap as its longhands? (one word, the property name only)",
+      "correctAnswer": "gap",
+      "explanation": "gap replaced the older grid-gap naming and adds space only between tracks, never at the container's outer edge.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap"
+    },
+    {
+      "id": "qVTSu7rtaUWM6ZO8",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "In <pre>gap: 10px 20px;</pre> which value is the column gap?",
+      "choices": [
+        "10px",
+        "20px",
+        "Both are 10px",
+        "gap cannot take two values"
+      ],
+      "correctIndex": 1,
+      "explanation": "The two-value form is gap: row-gap column-gap, so rows get 10px and columns get 20px.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap"
+    },
+    {
+      "id": "8eb0ogET9D9XyYq6",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What does justify-items control in a grid container?",
+      "choices": [
+        "The position of the whole grid inside its container",
+        "How items are aligned within their own grid area along the inline (row) axis",
+        "Which column items go into",
+        "The gap size"
+      ],
+      "correctIndex": 1,
+      "explanation": "justify-items aligns each item inside its own cell along the inline axis; align-items does the same along the block axis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-items"
+    },
+    {
+      "id": "B0Fi7FlaZ7Vt0SXj",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What is the crucial difference between justify-items and justify-content in grid?",
+      "choices": [
+        "They are aliases",
+        "justify-items positions each item inside its own grid area; justify-content positions the entire grid's track group within the container when the tracks do not fill it",
+        "justify-content only works in flexbox",
+        "justify-items only works on the first row"
+      ],
+      "correctIndex": 1,
+      "explanation": "The *-items properties align content INSIDE cells; the *-content properties distribute the grid's tracks as a whole within leftover container space. Confusing the two is a classic grid pitfall.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"
+    },
+    {
+      "id": "Mpu3uDxYYMfGmzWk",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "In the shorthand place-items: center start, which axis does center apply to?",
+      "choices": [
+        "The inline (horizontal) axis",
+        "The block (vertical) axis, because place-items takes align-items first, then justify-items",
+        "Both axes",
+        "Neither; the order is invalid"
+      ],
+      "correctIndex": 1,
+      "explanation": "place-items is align-items followed by justify-items, so the first value controls the block axis. place-content and place-self follow the same align-then-justify order.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/place-items"
+    },
+    {
+      "id": "pAePcEJIukB4geqN",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "Which property aligns one individual grid item within its own area on the block axis, overriding the container's align-items? (the property name only)",
+      "correctAnswer": "align-self",
+      "explanation": "align-self overrides the container's align-items for a single item, along the block (column) axis.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-self"
+    },
+    {
+      "id": "fngAFTCloiADN5Rp",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What does the auto value in <pre>grid-template-columns: auto 1fr auto;</pre> produce?",
+      "choices": [
+        "Three equal columns",
+        "Outer columns sized to their content, with the middle column taking the remaining space",
+        "Three content-sized columns",
+        "An invalid track list"
+      ],
+      "correctIndex": 1,
+      "explanation": "auto tracks size to their content (between min-content and max-content), so this pattern creates content-sized rails around a flexible centre column.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "VI2XQWhX1ssrKrxq",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "Why can a 1fr track overflow its container when it holds wide content, and what is the common fix?",
+      "choices": [
+        "fr units are broken; use percentages",
+        "Because 1fr has an automatic minimum of auto (min-content); use minmax(0, 1fr) to allow it to shrink further",
+        "Because gap is too large; remove gap",
+        "Because the grid needs overflow: hidden on every item"
+      ],
+      "correctIndex": 1,
+      "explanation": "1fr is effectively minmax(auto, 1fr), so its min-content floor prevents shrinking past wide content like long words or tables. minmax(0, 1fr) removes that floor. This mirrors the flexbox min-width: auto gotcha.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/minmax"
+    },
+    {
+      "id": "VqmCplppjs46Lmue",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What does min-content sizing mean for a track?",
+      "choices": [
+        "The smallest size without any content",
+        "The largest minimum size the content needs, e.g. the width of the longest unbreakable word",
+        "Zero",
+        "The same as max-content"
+      ],
+      "correctIndex": 1,
+      "explanation": "min-content is the smallest size the content can take without overflowing, typically driven by the longest word; max-content is the size it would take with no wrapping at all.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/min-content"
+    },
+    {
+      "id": "zqpGHoPZgPDcgaE4",
+      "type": "text-answer",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "Which grid-template-columns/rows value makes a nested grid adopt its PARENT's track definitions, so its children align to the outer grid's lines? (one word, the value only)",
+      "correctAnswer": "subgrid",
+      "explanation": "subgrid makes a nested grid inherit the parent's tracks, so deeply nested content such as card titles can align across sibling cards instead of each card sizing independently.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "0o1C6xc4sohdmM0L",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "What happens when two grid items are explicitly placed in the same cell?",
+      "choices": [
+        "The second is ignored",
+        "They overlap, and painting order is decided by DOM order and z-index",
+        "The grid creates an extra row automatically",
+        "It is a CSS error"
+      ],
+      "correctIndex": 1,
+      "explanation": "Grid permits deliberate overlapping; later DOM items paint on top by default, and z-index can reorder them, which is how hero image overlays are commonly built.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout"
+    },
+    {
+      "id": "m7exG3lCMqXXQ8ag",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "When you name an area in grid-template-areas, what implicit line names do you also get?",
+      "choices": [
+        "None",
+        "Lines named <area>-start and <area>-end on both axes",
+        "Lines named 1 through 4",
+        "Only a single line named after the area"
+      ],
+      "correctIndex": 1,
+      "explanation": "Naming an area called main implicitly creates main-start and main-end lines on both axes, which other items can then reference directly in grid-column/grid-row.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas"
+    },
+    {
+      "id": "OMTNwncxvjcnqcMU",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 2,
+      "prompt": "How do you define custom grid line names?",
+      "choices": [
+        "With quotes, as in \"sidebar\"",
+        "With square brackets in the track list, as in <pre>grid-template-columns: [full-start] 1fr [content-start] 3fr [content-end] 1fr [full-end];</pre>",
+        "With the name() function",
+        "Line names are not supported"
+      ],
+      "correctIndex": 1,
+      "explanation": "Square brackets between track sizes declare named lines, letting items be placed semantically, e.g. grid-column: content-start / content-end.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"
+    },
+    {
+      "id": "P6n0a0uARxlNtenc",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 3,
+      "prompt": "What does the grid-template shorthand set?",
+      "choices": [
+        "Only the columns",
+        "grid-template-rows, grid-template-columns, and grid-template-areas together",
+        "The gap and the tracks",
+        "grid-auto-rows and grid-auto-columns"
+      ],
+      "correctIndex": 1,
+      "explanation": "grid-template is the shorthand for the three explicit-grid properties; it resets grid-template-areas to none if you omit the area strings.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template"
+    },
+    {
+      "id": "YFJEeAgYzQJjOIfP",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "grid",
+      "difficulty": 1,
+      "prompt": "Which display value creates a grid container that itself flows inline with surrounding text?",
+      "choices": [
+        "display: grid",
+        "display: inline-grid",
+        "display: grid-inline",
+        "display: flow-grid"
+      ],
+      "correctIndex": 1,
+      "explanation": "inline-grid establishes identical grid layout inside the container while making the container itself inline-level.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"
+    },
+    {
+      "id": "kzSrAsQtA9dtVK4w",
+      "type": "text-answer",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 1,
+      "prompt": "Which property sets the typeface (and its fallback stack) for an element? (the property name only)",
+      "correctAnswer": "font-family",
+      "explanation": "font-family takes a prioritized list of typefaces, ending in a generic family such as sans-serif as the final fallback.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family"
+    },
+    {
+      "id": "AAb3XZxPmzUzn8aB",
+      "type": "text-answer",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 2,
+      "prompt": "Which numeric font-weight value corresponds to normal (non-bold) text? (a single number)",
+      "correctAnswer": "400",
+      "explanation": "400 is normal and 700 is bold on the 1-1000 numeric weight scale.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-weight"
+    },
+    {
+      "id": "5kBh0fzK4xDXkiad",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 3,
+      "prompt": "Why is a unitless line-height such as 1.5 generally preferred over 1.5em?",
+      "choices": [
+        "Unitless values render faster",
+        "A unitless value is inherited as a ratio and recalculated against each descendant's own font-size, while a length inherits the already-computed value",
+        "em values are invalid on line-height",
+        "There is no difference"
+      ],
+      "correctIndex": 1,
+      "explanation": "With a length, children inherit the computed pixel value, which can crowd text whose font-size differs. A unitless number inherits the multiplier itself, so each element computes its own sensible spacing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height"
+    },
+    {
+      "id": "JjPZ6zfKN7xVGkjw",
+      "type": "text-answer",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 1,
+      "prompt": "Which property horizontally aligns the inline content inside a block? (the property name only)",
+      "correctAnswer": "text-align",
+      "explanation": "text-align controls the horizontal alignment of inline-level content within its containing block.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-align"
+    },
+    {
+      "id": "skHk7egyFWZY9Zmt",
+      "type": "text-answer",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 2,
+      "prompt": "Which property adjusts the horizontal space between characters? (the property name only)",
+      "correctAnswer": "letter-spacing",
+      "explanation": "letter-spacing adds (or with negative values removes) space between characters; word-spacing does the same between words.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/letter-spacing"
+    },
+    {
+      "id": "i18c6EudM7Oyf5TN",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 2,
+      "prompt": "Which text-transform value renders text in all capital letters without changing the underlying content?",
+      "choices": [
+        "capitalize",
+        "uppercase",
+        "full-width",
+        "small-caps"
+      ],
+      "correctIndex": 1,
+      "explanation": "text-transform: uppercase changes only the visual rendering; the DOM text and what a screen reader may announce come from the source.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-transform"
+    },
+    {
+      "id": "S05kOY2oNzN2m1El",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 2,
+      "prompt": "Which property removes the underline from a link?",
+      "choices": [
+        "text-style: none",
+        "text-decoration: none",
+        "font-decoration: none",
+        "underline: none"
+      ],
+      "correctIndex": 1,
+      "explanation": "text-decoration (or its longhand text-decoration-line) controls underlines, overlines, and line-throughs.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration"
+    },
+    {
+      "id": "Kncz8HkywhjpU05m",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 2,
+      "prompt": "What does white-space: nowrap do?",
+      "choices": [
+        "Collapses all whitespace and prevents text from wrapping to a new line",
+        "Preserves every space and line break exactly",
+        "Wraps text at every character",
+        "Removes whitespace entirely"
+      ],
+      "correctIndex": 0,
+      "explanation": "nowrap collapses sequences of whitespace like normal but suppresses line wrapping, so text runs on one line until an explicit break.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/white-space"
+    },
+    {
+      "id": "c4J1WRcQ1uhyMDJ2",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 3,
+      "prompt": "Which two parts are REQUIRED in the font shorthand?",
+      "choices": [
+        "font-style and font-weight",
+        "font-size and font-family",
+        "font-weight and font-family",
+        "line-height and font-size"
+      ],
+      "correctIndex": 1,
+      "explanation": "The font shorthand requires at least a size and a family; omitting either makes the declaration invalid, and any unspecified sub-properties reset to their initial values.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font"
+    },
+    {
+      "id": "OXtPAtLpByQxCGCl",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "typography-text",
+      "difficulty": 3,
+      "prompt": "What does font-display: swap achieve for a web font loaded via @font-face?",
+      "choices": [
+        "It prevents the font from loading",
+        "It shows a fallback font immediately and swaps in the web font once it arrives, avoiding invisible text",
+        "It swaps between two web fonts on hover",
+        "It compresses the font file"
+      ],
+      "correctIndex": 1,
+      "explanation": "font-display: swap gives the font face a near-zero block period, so text renders in a fallback right away rather than staying invisible (FOIT) while the font downloads.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face/font-display"
+    },
+    {
+      "id": "baNFDpCWNX0D1lZE",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 2,
+      "prompt": "What do the three numbers in hsl(210, 100%, 50%) represent?",
+      "choices": [
+        "Red, green, blue",
+        "Hue angle, saturation, lightness",
+        "Hex, shade, opacity",
+        "Height, size, luminance"
+      ],
+      "correctIndex": 1,
+      "explanation": "HSL expresses colour as a hue angle on the colour wheel plus saturation and lightness percentages, which makes generating tints and shades far more intuitive than hex.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hsl"
+    },
+    {
+      "id": "zgeiwBxfZCGGQccO",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 2,
+      "prompt": "In the 8-digit hex colour #3366ccaa, what does the final pair aa represent?",
+      "choices": [
+        "A brightness multiplier",
+        "The alpha (opacity) channel",
+        "A colour profile",
+        "Nothing; it is invalid"
+      ],
+      "correctIndex": 1,
+      "explanation": "A 4th channel in 8-digit hex is alpha, where 00 is fully transparent and ff fully opaque.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color"
+    },
+    {
+      "id": "if7UuXUGfdWG5yP8",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 2,
+      "prompt": "What is the difference between background-size: cover and contain?",
+      "choices": [
+        "They are identical",
+        "cover scales the image to fill the box, cropping overflow; contain scales it to fit entirely, possibly leaving empty space",
+        "cover always stretches and distorts the image",
+        "contain repeats the image"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both preserve aspect ratio: cover guarantees full coverage at the cost of cropping, while contain guarantees the whole image is visible at the cost of letterboxing.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background-size"
+    },
+    {
+      "id": "Yib2eNUS0hmi4Fs9",
+      "type": "text-answer",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 1,
+      "prompt": "Which background-repeat value stops a background image from tiling? (one word, the value only)",
+      "correctAnswer": "no-repeat",
+      "explanation": "Background images tile by default in both directions; background-repeat: no-repeat paints a single copy.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background-repeat"
+    },
+    {
+      "id": "Z6YkRYU7oe1wNWqk",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 2,
+      "prompt": "Which property positions a background image within its box, accepting values like center or 50% 20%?",
+      "choices": [
+        "background-align",
+        "background-position",
+        "background-origin",
+        "object-position"
+      ],
+      "correctIndex": 1,
+      "explanation": "background-position sets the image's placement, with the first value on the horizontal axis and the second on the vertical.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background-position"
+    },
+    {
+      "id": "u5Nr50DjqG96EnLq",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 3,
+      "prompt": "In CSS, what type of value is linear-gradient(to right, red, blue)?",
+      "choices": [
+        "A colour",
+        "An image, so it belongs in background-image rather than background-color",
+        "A filter",
+        "A transform"
+      ],
+      "correctIndex": 1,
+      "explanation": "Gradients are generated images, which is why they are set via background-image (or the background shorthand) and cannot be assigned to background-color.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/linear-gradient"
+    },
+    {
+      "id": "NGpuxcmlzkO7rRu5",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 3,
+      "prompt": "What does the currentColor keyword resolve to?",
+      "choices": [
+        "The browser's default text colour",
+        "The computed value of the element's own color property",
+        "The parent's background colour",
+        "Transparent"
+      ],
+      "correctIndex": 1,
+      "explanation": "currentColor mirrors the element's color value, which makes it ideal for borders and SVG fills that should follow the text colour automatically.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value"
+    },
+    {
+      "id": "ykYYqhXHdO2x93CJ",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "colors-backgrounds",
+      "difficulty": 2,
+      "prompt": "Which single declaration can set background colour, image, position, size, and repeat at once?",
+      "choices": [
+        "background",
+        "background-all",
+        "bg",
+        "background-shorthand"
+      ],
+      "correctIndex": 0,
+      "explanation": "background is the shorthand for the whole family; any sub-property you omit is reset to its initial value.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background"
+    },
+    {
+      "id": "HLS45gqIO2zVZxqy",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 2,
+      "prompt": "What is the difference between em and rem?",
+      "choices": [
+        "They are identical",
+        "em is relative to the element's own (or parent's) font-size and compounds when nested; rem is always relative to the root element's font-size",
+        "rem is an absolute unit",
+        "em only works on font-size"
+      ],
+      "correctIndex": 1,
+      "explanation": "Nested em values multiply, which can cause runaway sizing; rem always resolves against the root font-size, keeping scales predictable.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length"
+    },
+    {
+      "id": "xKjxvWfColNV9ds0",
+      "type": "text-answer",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 1,
+      "prompt": "Which length unit is always relative to the ROOT element's font size? (one word, the unit only)",
+      "correctAnswer": "rem",
+      "explanation": "rem stands for root em and resolves against the html element's font-size regardless of nesting depth.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length"
+    },
+    {
+      "id": "HqtO93L7Q5uUaVco",
+      "type": "text-answer",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 2,
+      "prompt": "Which two-letter unit equals 1% of the VIEWPORT's height, regardless of any ancestor's size? (the unit only)",
+      "correctAnswer": "vh",
+      "explanation": "vh and vw are viewport-percentage units, so 50vh is half the viewport height no matter how the element is nested.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length"
+    },
+    {
+      "id": "jsNOBAGx5diFoNPc",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 3,
+      "prompt": "A percentage value's meaning depends on the property. What is width: 50% relative to?",
+      "choices": [
+        "The viewport width",
+        "The containing block's width",
+        "The element's own content width",
+        "The root font size"
+      ],
+      "correctIndex": 1,
+      "explanation": "Percentages resolve against a property-specific reference; for width it is the containing block's width, while for line-height it is the element's own font-size.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/percentage"
+    },
+    {
+      "id": "bdaKwtgHwIoALtLi",
+      "type": "text-answer",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 2,
+      "prompt": "Which CSS function lets you mix units in one arithmetic expression, as in 100% minus 40px? (the function name only, without parentheses)",
+      "correctAnswer": "calc",
+      "explanation": "calc() performs arithmetic across different unit types at computed-value time, which a static length cannot do.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/calc"
+    },
+    {
+      "id": "nxN1Ekia7ZpTjCge",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 3,
+      "prompt": "What does clamp(1rem, 2.5vw, 2rem) produce?",
+      "choices": [
+        "A random value in the range",
+        "A value that tracks 2.5vw but is never below 1rem or above 2rem",
+        "Always 2.5vw",
+        "Three separate declarations"
+      ],
+      "correctIndex": 1,
+      "explanation": "clamp(MIN, PREFERRED, MAX) gives fluid sizing with hard bounds, and is the standard way to do fluid typography without media queries.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp"
+    },
+    {
+      "id": "Oj3QYrzZq9adP0J5",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 2,
+      "prompt": "Which of these is an absolute length unit?",
+      "choices": [
+        "em",
+        "rem",
+        "px",
+        "vw"
+      ],
+      "correctIndex": 2,
+      "explanation": "px is absolute in CSS terms; em, rem, ch, and the viewport units are all relative to something else.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length"
+    },
+    {
+      "id": "wMPLCM7HUFpk5acd",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "units-values",
+      "difficulty": 3,
+      "prompt": "What does the ch unit measure?",
+      "choices": [
+        "The character count of the text",
+        "The advance width of the 0 (zero) glyph in the current font",
+        "The line height",
+        "A fixed 8 pixels"
+      ],
+      "correctIndex": 1,
+      "explanation": "ch is based on the width of the zero character, which makes it handy for setting readable measure such as max-width: 65ch.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length"
+    },
+    {
+      "id": "Ibzlpkd6XgaNJQ8m",
+      "type": "text-answer",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 1,
+      "prompt": "Which two-character prefix begins a CSS custom property name, as in --brand-color? (two characters)",
+      "correctAnswer": "--",
+      "explanation": "Custom properties are always written with a leading double hyphen, e.g. --brand-color: #c42828.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_CSS_custom_properties"
+    },
+    {
+      "id": "jAmHMPGPPA0NlGte",
+      "type": "text-answer",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 1,
+      "prompt": "Which CSS function substitutes a custom property's value into a declaration, as in color: ___(--brand)? (the function name only, without parentheses)",
+      "correctAnswer": "var",
+      "explanation": "Custom properties are read with var(), which also accepts a fallback as its second argument: var(--brand, #333).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var"
+    },
+    {
+      "id": "tOd4UYETIay2BV6D",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 2,
+      "prompt": "What does the second argument do in var(--gap, 16px)?",
+      "choices": [
+        "Adds 16px to the variable",
+        "Supplies a fallback used when --gap is not defined",
+        "Limits the maximum value",
+        "Declares --gap as 16px globally"
+      ],
+      "correctIndex": 1,
+      "explanation": "The fallback is used if the custom property is missing or invalid, which avoids broken declarations when a token is not set.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var"
+    },
+    {
+      "id": "fVPClogqoPchv5V7",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 2,
+      "prompt": "Do CSS custom properties inherit?",
+      "choices": [
+        "No, they are always global",
+        "Yes, they inherit like normal inherited properties, so they can be redefined per subtree",
+        "Only when declared on :root",
+        "Only inside media queries"
+      ],
+      "correctIndex": 1,
+      "explanation": "Custom properties inherit, which is what makes theming by scope possible: redefining --bg on a component overrides it for that subtree only.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_CSS_custom_properties"
+    },
+    {
+      "id": "S82qTdrOJRBRY6Hq",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 2,
+      "prompt": "Why are custom properties commonly declared on the :root selector?",
+      "choices": [
+        "It is the only valid place for them",
+        ":root matches the html element, so values declared there inherit down to the whole document as global defaults",
+        "It makes them load faster",
+        "It prevents them from being overridden"
+      ],
+      "correctIndex": 1,
+      "explanation": ":root is the document's top-level element, so custom properties defined there are inherited everywhere, serving as global design tokens.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:root"
+    },
+    {
+      "id": "sP795nf4Gakq5p1V",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "custom-properties",
+      "difficulty": 3,
+      "prompt": "What is a key runtime advantage of CSS custom properties over preprocessor variables?",
+      "choices": [
+        "They compile faster",
+        "They are live in the browser, so they can be changed at runtime by JavaScript or redefined inside a media query or a class",
+        "They support loops",
+        "They cannot be overridden"
+      ],
+      "correctIndex": 1,
+      "explanation": "Preprocessor variables are resolved at build time and disappear from the output, while custom properties remain in the cascade and can be reassigned dynamically, which is what powers runtime theme switching.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_CSS_custom_properties"
+    },
+    {
+      "id": "m8kV6um4yvMpy62O",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 2,
+      "prompt": "In the shorthand <pre>transition: opacity 0.3s ease-in 0.1s;</pre> what is 0.1s?",
+      "choices": [
+        "The duration",
+        "The delay before the transition starts",
+        "The number of iterations",
+        "The timing function"
+      ],
+      "correctIndex": 1,
+      "explanation": "In the transition shorthand the FIRST time value is the duration and the second is the delay.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition"
+    },
+    {
+      "id": "6SQ1IEE1HSa2bB9U",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 2,
+      "prompt": "Which property lists which CSS properties should transition? (the property name only)",
+      "correctAnswer": "transition-property",
+      "explanation": "transition-property names the properties to animate; the keyword all transitions every animatable property that changes.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition-property"
+    },
+    {
+      "id": "oK4tYnzNLeK6kjcb",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 1,
+      "prompt": "Which at-rule defines the intermediate waypoints of a CSS animation? (include the @ symbol)",
+      "correctAnswer": "@keyframes",
+      "explanation": "@keyframes defines named waypoints using from/to or percentage selectors, which the animation-name property then references.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes"
+    },
+    {
+      "id": "hgN7kwjSbbciSPOc",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 3,
+      "prompt": "What does animation-fill-mode: forwards do?",
+      "choices": [
+        "Plays the animation in reverse",
+        "Keeps the element at the final keyframe's computed styles after the animation ends",
+        "Repeats the animation forever",
+        "Delays the animation start"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without a fill mode the element snaps back to its pre-animation styles when the animation finishes; forwards retains the last keyframe's values.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-fill-mode"
+    },
+    {
+      "id": "SeVce2LWxm090I5Q",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 1,
+      "prompt": "Which animation-iteration-count value makes an animation repeat endlessly? (one word, the value only)",
+      "correctAnswer": "infinite",
+      "explanation": "animation-iteration-count accepts a number or the keyword infinite for endless repetition.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-iteration-count"
+    },
+    {
+      "id": "e43W6T8ygpnnhcc8",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 3,
+      "prompt": "Why does a transition on display: none to display: block typically not animate?",
+      "choices": [
+        "Transitions only work on colours",
+        "display was historically not an animatable property, so the change is discrete rather than interpolated",
+        "The duration must exceed one second",
+        "display can only be animated with @keyframes"
+      ],
+      "correctIndex": 1,
+      "explanation": "Discrete properties like display jump between values rather than interpolating, which is why fades are usually built with opacity plus visibility instead. Modern engines add transition-behavior: allow-discrete to make such swaps work.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition"
+    },
+    {
+      "id": "26ZWOf0WOOsEgigY",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 2,
+      "prompt": "What does the timing function ease-in-out describe?",
+      "choices": [
+        "A constant speed throughout",
+        "A curve that starts slowly, speeds up, then slows down at the end",
+        "An instant jump at the halfway point",
+        "Two separate animations"
+      ],
+      "correctIndex": 1,
+      "explanation": "Timing functions shape the rate of change over time; linear is constant, while the ease family front-loads or back-loads the acceleration.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition-timing-function"
+    },
+    {
+      "id": "WPnsuvBqbwq7sdTW",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transitions-animations",
+      "difficulty": 3,
+      "prompt": "Which media feature should gate large motion effects, so users prone to motion sickness get a calmer experience? (the feature name only)",
+      "correctAnswer": "prefers-reduced-motion",
+      "explanation": "Honouring prefers-reduced-motion: reduce lets you disable or soften animation for users who experience motion sickness or vestibular disorders.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion"
+    },
+    {
+      "id": "x6uX9MGE2sNVbYAb",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transforms",
+      "difficulty": 1,
+      "prompt": "Which transform function moves an element without affecting the layout of its neighbours? (the function name only, without parentheses)",
+      "correctAnswer": "translate",
+      "explanation": "translate() visually offsets an element during painting; because transforms do not affect layout, surrounding elements do not reflow.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform"
+    },
+    {
+      "id": "BHXgwETdIKnT30fK",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transforms",
+      "difficulty": 2,
+      "prompt": "What does transform-origin control?",
+      "choices": [
+        "The order transform functions run in",
+        "The point an element is rotated, scaled, or skewed around, defaulting to its centre",
+        "Which axis is used",
+        "The transform's duration"
+      ],
+      "correctIndex": 1,
+      "explanation": "transform-origin moves the anchor point; setting it to top left, for example, makes rotation pivot around that corner instead of the centre.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-origin"
+    },
+    {
+      "id": "0skBaHmsWWdawFgF",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "transforms",
+      "difficulty": 3,
+      "prompt": "Besides moving the element, what side effect does applying a transform have?",
+      "choices": [
+        "It disables inheritance",
+        "It creates a new stacking context and a containing block for fixed and absolutely positioned descendants",
+        "It forces display: block",
+        "It removes the element from the accessibility tree"
+      ],
+      "correctIndex": 1,
+      "explanation": "A transformed element becomes a containing block for its positioned descendants, which is the usual reason a position: fixed child unexpectedly scrolls with a transformed ancestor.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform"
+    },
+    {
+      "id": "SY0l9FLw91GqK8ks",
+      "type": "text-answer",
+      "language": "css",
+      "category": "transforms",
+      "difficulty": 3,
+      "prompt": "Which property gives 3D transforms their sense of depth by setting the distance from the viewer to the z=0 plane? (one word)",
+      "correctAnswer": "perspective",
+      "explanation": "perspective controls how pronounced 3D foreshortening looks; smaller values create a more dramatic effect.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective"
+    },
+    {
+      "id": "0n8SoFkh8OXfFYSJ",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 1,
+      "prompt": "What does <pre>@media (min-width: 768px) { ... }</pre> mean?",
+      "choices": [
+        "Apply the rules only when the viewport is narrower than 768px",
+        "Apply the rules when the viewport is 768px wide or wider",
+        "Set the page width to 768px",
+        "Apply only on printers"
+      ],
+      "correctIndex": 1,
+      "explanation": "min-width is a floor: the block applies from that width upward, which is the basis of mobile-first CSS.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"
+    },
+    {
+      "id": "YgOuwgz7z54VfB4P",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 2,
+      "prompt": "In a mobile-first approach, which query type carries the progressive enhancements?",
+      "choices": [
+        "max-width queries layered over desktop defaults",
+        "min-width queries layered over mobile defaults",
+        "Only print queries",
+        "orientation queries"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mobile-first writes base styles for the smallest screen and adds min-width queries to enhance upward, which generally yields simpler overrides than starting desktop-first with max-width.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"
+    },
+    {
+      "id": "bxntqB5IGky4Oo8D",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 2,
+      "prompt": "What does the print media type target?",
+      "choices": [
+        "Screens with high pixel density",
+        "Paged output such as printers and print preview",
+        "Screen readers",
+        "Mobile devices"
+      ],
+      "correctIndex": 1,
+      "explanation": "@media print lets you strip navigation, expand link URLs, and otherwise tune the document for paper.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"
+    },
+    {
+      "id": "iIMWSWMPcwLuHj31",
+      "type": "text-answer",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 2,
+      "prompt": "Which media feature detects that a user has requested a dark UI at the operating-system level? (the feature name only)",
+      "correctAnswer": "prefers-color-scheme",
+      "explanation": "@media (prefers-color-scheme: dark) reflects the operating system preference, letting a site ship a dark theme with no toggle.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme"
+    },
+    {
+      "id": "CQJVukDCSXqLoivD",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 2,
+      "prompt": "Which media feature tests whether the viewport is wider than it is tall?",
+      "choices": [
+        "aspect",
+        "orientation",
+        "resolution",
+        "display-mode"
+      ],
+      "correctIndex": 1,
+      "explanation": "@media (orientation: landscape) matches when the viewport's width exceeds its height.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"
+    },
+    {
+      "id": "P4SpGmrtWT01NjUj",
+      "type": "text-answer",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 3,
+      "prompt": "Which at-rule applies styles based on the size of a parent CONTAINER rather than the viewport? (include the @ symbol)",
+      "correctAnswer": "@container",
+      "explanation": "@container queries let a component respond to the space it is actually given, so the same card can adapt in a narrow sidebar and a wide main column without viewport-based guesswork.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@container"
+    },
+    {
+      "id": "pUuMHwkpu9mq9Ugk",
+      "type": "text-answer",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 3,
+      "prompt": "Which property must be declared on an ancestor to make it a query container before @container can work? (the property name only)",
+      "correctAnswer": "container-type",
+      "explanation": "An element only becomes a query container once container-type is set (e.g. inline-size); without it, @container has nothing to measure against.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-type"
+    },
+    {
+      "id": "9QgmyjjYtUtBrmgO",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "responsive-media-queries",
+      "difficulty": 3,
+      "prompt": "What does the modern range syntax <pre>@media (400px <= width <= 700px)</pre> express?",
+      "choices": [
+        "Two unrelated queries",
+        "A single query matching viewport widths from 400px through 700px inclusive",
+        "A width of exactly 400px",
+        "Invalid syntax"
+      ],
+      "correctIndex": 1,
+      "explanation": "Media Queries Level 4 allows mathematical comparison operators, which read more naturally than combining min-width and max-width.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"
+    },
+    {
+      "id": "6grn4yDcaz2YBSoG",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 2,
+      "prompt": "What distinguishes a pseudo-element (::) from a pseudo-class (:)?",
+      "choices": [
+        "Nothing; the syntax is interchangeable",
+        "A pseudo-class targets a state of an existing element, while a pseudo-element creates or targets a sub-part that is not in the DOM",
+        "Pseudo-elements only work on links",
+        "Pseudo-classes cannot be combined"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pseudo-classes such as :hover describe an element's state; pseudo-elements such as ::before address a rendered sub-part that has no markup of its own.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Pseudo-elements"
+    },
+    {
+      "id": "OsDbjqMVzaVp62BS",
+      "type": "text-answer",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 2,
+      "prompt": "Which property must be set for ::before or ::after to render at all? (one word, the property name only)",
+      "correctAnswer": "content",
+      "explanation": "Generated content boxes only exist when the content property is set, even if only to an empty string: content: \"\".",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before"
+    },
+    {
+      "id": "KLVPA2oQUP44XPSL",
+      "type": "text-answer",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 1,
+      "prompt": "Which pseudo-class matches an element while the pointer is over it? (include the leading colon)",
+      "correctAnswer": ":hover",
+      "explanation": ":hover applies while the user designates the element with a pointing device, and is commonly paired with :focus-visible for keyboard parity.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:hover"
+    },
+    {
+      "id": "2oRlPhDBuqOSg5Ap",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 3,
+      "prompt": "Which elements does :nth-child(2n+1) match?",
+      "choices": [
+        "The second child only",
+        "Every odd-numbered child: 1st, 3rd, 5th, and so on",
+        "Every even-numbered child",
+        "The last two children"
+      ],
+      "correctIndex": 1,
+      "explanation": "With n counting from 0, the expression yields 1, 3, 5, ..., which is equivalent to the odd keyword.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:nth-child"
+    },
+    {
+      "id": "YzTTOkq2BEDbN2AH",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 3,
+      "prompt": "How do :nth-child(2) and :nth-of-type(2) differ?",
+      "choices": [
+        "They are identical",
+        ":nth-child counts ALL siblings regardless of type; :nth-of-type counts only siblings of the same element type",
+        ":nth-of-type only works on lists",
+        ":nth-child ignores the first sibling"
+      ],
+      "correctIndex": 1,
+      "explanation": "If a div precedes two paragraphs, p:nth-child(2) matches the FIRST paragraph (it is the 2nd child overall) while p:nth-of-type(2) matches the second paragraph. This trips people up constantly.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:nth-of-type"
+    },
+    {
+      "id": "RQ73l5PuXay1F6gc",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 3,
+      "prompt": "Why does p:first-child sometimes match nothing even though paragraphs exist?",
+      "choices": [
+        "first-child is deprecated",
+        "Because it only matches when the paragraph is literally the first child of its parent; if any other element precedes it, use :first-of-type",
+        "Because paragraphs cannot be first children",
+        "Because it needs a combinator"
+      ],
+      "correctIndex": 1,
+      "explanation": ":first-child is a constraint on position among all siblings, not among paragraphs, so a preceding heading makes it fail. :first-of-type is the type-scoped alternative.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:first-of-type"
+    },
+    {
+      "id": "qInkTY88mHwg2KDI",
+      "type": "multiple-choice",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 3,
+      "prompt": "What advantage does :focus-visible have over :focus?",
+      "choices": [
+        "It works on more elements",
+        "It applies the focus ring only when the browser judges it useful, typically for keyboard rather than mouse interaction",
+        "It is faster to match",
+        "It also matches hover"
+      ],
+      "correctIndex": 1,
+      "explanation": ":focus-visible preserves a visible focus indicator for keyboard users while avoiding rings on mouse clicks, replacing the old harmful pattern of outline: none.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:focus-visible"
+    },
+    {
+      "id": "nTEGbOY1xHvAV8Dn",
+      "type": "text-answer",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 2,
+      "prompt": "Which pseudo-element styles the hint text inside an empty input? (include the leading double colon)",
+      "correctAnswer": "::placeholder",
+      "explanation": "::placeholder targets the placeholder text; note it should not be relied on as a label substitute.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::placeholder"
+    },
+    {
+      "id": "RlzGW7hUNwOdqryz",
+      "type": "text-answer",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 2,
+      "prompt": "Which pseudo-class matches a checkbox or radio input that is currently ticked? (include the leading colon)",
+      "correctAnswer": ":checked",
+      "explanation": ":checked matches checked checkboxes/radios and selected options, and is the basis of CSS-only toggle patterns.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:checked"
+    },
+    {
+      "id": "daeA6AOSRwLqgotV",
+      "type": "text-answer",
+      "language": "css",
+      "category": "pseudo-classes-elements",
+      "difficulty": 2,
+      "prompt": "Which pseudo-class matches the document's root element and carries class-level specificity, making it the conventional home for global custom properties? (include the leading colon)",
+      "correctAnswer": ":root",
+      "explanation": ":root matches html in an HTML document but counts in the class column rather than the type column, so it outranks a bare html selector.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:root"
+    },
+    {
+      "id": "z89HoZ9zDnki7XeZ",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 1,
+      "prompt": "Which single character begins a Sass variable name? (one character)",
+      "correctAnswer": "$",
+      "explanation": "Sass variables are declared and referenced with a leading dollar sign, e.g. $primary-color: #c42828.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "ZOmEPJUo09jwQO10",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 2,
+      "prompt": "What does the !default flag do in <pre>$radius: 4px !default;</pre>",
+      "choices": [
+        "Marks the variable as required",
+        "Assigns the value only if the variable is currently undefined or null, letting importers configure it",
+        "Makes the variable global",
+        "Prevents the variable from being changed"
+      ],
+      "correctIndex": 1,
+      "explanation": "!default is how libraries expose configurable defaults: a consumer who sets $radius before loading the module wins, otherwise the fallback applies.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "Y0ADsWJPiX1EwY2o",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 2,
+      "prompt": "What is the scope of a variable declared inside a selector block in SCSS?",
+      "choices": [
+        "Global, like all Sass variables",
+        "Local to that block and its nested blocks",
+        "Local to the file only",
+        "It is invalid to declare variables inside a block"
+      ],
+      "correctIndex": 1,
+      "explanation": "Variables declared inside a block are local; those declared at the top level of a stylesheet are global.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "rTyRqBRlEaZUZrwp",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 3,
+      "prompt": "What does the !global flag do when assigning inside a nested block?",
+      "choices": [
+        "Exports the variable to other files automatically",
+        "Makes the assignment modify the global variable rather than creating a local shadow",
+        "Prevents the variable from being overridden",
+        "Converts it to a CSS custom property"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without !global, assigning to an existing name inside a block creates a local shadow that disappears at the end of the block.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "PtuEFBNOfQ5xj7t2",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 3,
+      "prompt": "What is the key runtime difference between a Sass variable and a CSS custom property?",
+      "choices": [
+        "They behave identically",
+        "Sass variables are resolved at compile time and vanish from the output; custom properties live in the browser and can change at runtime",
+        "Custom properties compile faster",
+        "Sass variables can be read by JavaScript"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because Sass variables are substituted during compilation, they cannot respond to a media query toggle or be rewritten by JavaScript, which is exactly what CSS custom properties are for.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "ydf0K5uY8iH1wOLa",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 2,
+      "prompt": "In Sass, are $my-var and $my_var treated as different variables?",
+      "choices": [
+        "Yes, they are completely separate",
+        "No, hyphens and underscores are interchangeable in Sass identifiers",
+        "Only inside mixins",
+        "Underscores are invalid in variable names"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sass treats hyphens and underscores as equivalent in identifier names, a compatibility holdover that also applies to mixin and function names.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "Qan8ePsqMgLj2olX",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 2,
+      "prompt": "How do you use a Sass variable inside a string or a selector name?",
+      "choices": [
+        "Just write the variable inline",
+        "Wrap it in interpolation: #{$name}",
+        "Use var($name)",
+        "Use @include $name"
+      ],
+      "correctIndex": 1,
+      "explanation": "Interpolation #{} injects a value where Sass would otherwise read plain text, such as inside selectors, property names, or quoted strings.",
+      "source": "https://sass-lang.com/documentation/interpolation/"
+    },
+    {
+      "id": "CwYjn5zYIkN5SMYf",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-variables",
+      "difficulty": 2,
+      "prompt": "Which flag lets a stylesheet author override a library's variable value before the library is loaded? (include the exclamation mark)",
+      "correctAnswer": "!default",
+      "explanation": "Marking a variable !default means the library only supplies the value when the consumer has not already configured one.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "Q55JYO1tmFSnHfV1",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 1,
+      "prompt": "Which single character refers to the parent selector inside a nested SCSS rule? (one character)",
+      "correctAnswer": "&",
+      "explanation": "The & placeholder is replaced with the compiled parent selector, which is what makes patterns like &:hover and &--modifier possible.",
+      "source": "https://sass-lang.com/documentation/style-rules/parent-selector/"
+    },
+    {
+      "id": "CQ4hJhqAo0iEFJdE",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 2,
+      "prompt": "What CSS does this compile to? <pre>.card {\n  .title { color: red; }\n}</pre>",
+      "choices": [
+        ".card.title { color: red; }",
+        ".card .title { color: red; }",
+        ".card > .title { color: red; }",
+        ".title { color: red; }"
+      ],
+      "correctIndex": 1,
+      "explanation": "Plain nesting produces a DESCENDANT selector; you need & to concatenate without a space.",
+      "source": "https://sass-lang.com/documentation/style-rules/"
+    },
+    {
+      "id": "D5jSFpFkIM3Vak1u",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 2,
+      "prompt": "What does this compile to? <pre>.btn {\n  &--primary { color: blue; }\n}</pre>",
+      "choices": [
+        ".btn .btn--primary",
+        ".btn--primary",
+        ".btn > --primary",
+        "It is a syntax error"
+      ],
+      "correctIndex": 1,
+      "explanation": "& concatenates directly with the suffix, producing .btn--primary. This is the standard way to write BEM modifiers in SCSS.",
+      "source": "https://sass-lang.com/documentation/style-rules/parent-selector/"
+    },
+    {
+      "id": "DSKFQs1DxBA9RelO",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 3,
+      "prompt": "What does this produce? <pre>.title {\n  .dark-theme & { color: white; }\n}</pre>",
+      "choices": [
+        ".title .dark-theme",
+        ".dark-theme .title { color: white; }",
+        ".title.dark-theme",
+        "Invalid; & must come first"
+      ],
+      "correctIndex": 1,
+      "explanation": "Placing & on the right lets you scope a component by an ancestor context, compiling to .dark-theme .title.",
+      "source": "https://sass-lang.com/documentation/style-rules/parent-selector/"
+    },
+    {
+      "id": "xOPbbNcRV7vZgGEF",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 2,
+      "prompt": "Which of these is the main practical drawback of deep nesting?",
+      "choices": [
+        "It fails to compile beyond three levels",
+        "It generates long, highly specific selectors that are hard to override and bloat the output",
+        "It disables variables",
+        "It prevents the use of mixins"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each nesting level adds specificity and selector length, so teams commonly cap nesting at two or three levels to keep the cascade manageable.",
+      "source": "https://sass-lang.com/documentation/style-rules/"
+    },
+    {
+      "id": "W5jcnTAOivg3QxvE",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 3,
+      "prompt": "What does the nested-properties syntax <pre>font: {\n  family: serif;\n  size: 14px;\n}</pre> compile to?",
+      "choices": [
+        "font: serif 14px;",
+        "font-family: serif; font-size: 14px;",
+        "A syntax error",
+        "font { family: serif }"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sass lets you nest hyphenated property namespaces, expanding font: { family: ... } into font-family and so on.",
+      "source": "https://sass-lang.com/documentation/style-rules/declarations/"
+    },
+    {
+      "id": "XHJX6nsBvBqJd0ss",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 2,
+      "prompt": "Can media queries be nested inside a selector in SCSS?",
+      "choices": [
+        "No, they must be top level",
+        "Yes, and Sass bubbles the query outward so the selector is repeated inside the @media block",
+        "Only with @include",
+        "Only if the selector has no other declarations"
+      ],
+      "correctIndex": 1,
+      "explanation": "Nesting @media inside a rule keeps responsive tweaks next to the component they affect; Sass hoists the at-rule and re-emits the selector inside it.",
+      "source": "https://sass-lang.com/documentation/at-rules/css/"
+    },
+    {
+      "id": "w0FzvGr3GwnPFYhv",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 2,
+      "prompt": "What does <pre>.menu {\n  > li { margin: 0; }\n}</pre> compile to?",
+      "choices": [
+        ".menu li",
+        ".menu > li { margin: 0; }",
+        "li > .menu",
+        "Invalid syntax"
+      ],
+      "correctIndex": 1,
+      "explanation": "Combinators can lead a nested selector, producing .menu > li and limiting the rule to direct children.",
+      "source": "https://sass-lang.com/documentation/style-rules/"
+    },
+    {
+      "id": "muTtiLOfYczUJ4zI",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 1,
+      "prompt": "Inside a .btn rule, what do you write to target that same selector's hover state, compiling to .btn:hover? (exact syntax, no braces)",
+      "correctAnswer": "&:hover",
+      "explanation": "&:hover concatenates the pseudo-class onto the parent selector, producing .btn:hover from inside .btn.",
+      "source": "https://sass-lang.com/documentation/style-rules/parent-selector/"
+    },
+    {
+      "id": "Kdztgacm06EMXQdY",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-nesting",
+      "difficulty": 3,
+      "prompt": "Now that browsers support native CSS nesting, what is still true of SCSS nesting?",
+      "choices": [
+        "They are byte-for-byte identical in behaviour",
+        "SCSS nesting is resolved at compile time and outputs flat CSS, so it works in any browser regardless of native nesting support",
+        "SCSS nesting no longer works",
+        "Native nesting supports & but SCSS does not"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because Sass flattens nesting during compilation, output remains compatible everywhere, whereas native CSS nesting depends on browser support at runtime.",
+      "source": "https://sass-lang.com/documentation/style-rules/"
+    },
+    {
+      "id": "G6INyNjORSSM4Rfn",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 1,
+      "prompt": "Which at-rule DEFINES a reusable block of declarations in Sass? (include the @ symbol)",
+      "correctAnswer": "@mixin",
+      "explanation": "@mixin declares a named, optionally parameterized block of styles that other rules pull in with @include.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "cQODOWlgQl3cAXg6",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 1,
+      "prompt": "Which at-rule USES a previously defined mixin? (include the @ symbol)",
+      "correctAnswer": "@include",
+      "explanation": "@include invokes a mixin, optionally passing arguments, and inserts its declarations at that point.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "7Pax30iYtJTq3tlA",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 2,
+      "prompt": "How do you give a mixin parameter a default value?",
+      "choices": [
+        "@mixin box($pad = 8px)",
+        "@mixin box($pad: 8px)",
+        "@mixin box($pad default 8px)",
+        "Defaults are not supported"
+      ],
+      "correctIndex": 1,
+      "explanation": "A colon assigns the default, so @include box() uses 8px while @include box(16px) overrides it.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "cubBKPL76dFKHc0h",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 3,
+      "prompt": "What do keyword arguments let you do when including a mixin?",
+      "choices": [
+        "Pass arguments in any order by naming them, e.g. @include box($pad: 4px)",
+        "Skip the mixin entirely",
+        "Define new variables globally",
+        "Convert a mixin into a function"
+      ],
+      "correctIndex": 0,
+      "explanation": "Naming arguments makes calls self-documenting and lets you set a later optional parameter without supplying the earlier ones.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "XZAKS6zCeaRyML8Q",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 3,
+      "prompt": "Which at-rule, placed inside a mixin, marks where a block of styles passed in at the include site gets injected? (include the @ symbol)",
+      "correctAnswer": "@content",
+      "explanation": "@content creates a slot for a caller-supplied block, which is how a responsive mixin wraps arbitrary declarations inside a media query.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "jEXAJgfPEn5jOaBa",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 3,
+      "prompt": "What does the ... syntax mean in <pre>@mixin shadows($shadows...) { }</pre>",
+      "choices": [
+        "It marks the mixin as private",
+        "It accepts an arbitrary number of arguments, collected into a list",
+        "It spreads the mixin across files",
+        "It is a comment"
+      ],
+      "correctIndex": 1,
+      "explanation": "An argument list (rest parameter) lets a mixin take any number of values, and the same syntax at the call site spreads a list into individual arguments.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "aRQh92fn3hiEbrUK",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 2,
+      "prompt": "What is the fundamental difference between a mixin and a function in Sass?",
+      "choices": [
+        "Functions are faster",
+        "A mixin outputs CSS declarations; a function computes and RETURNS a single value for use in a declaration",
+        "Mixins cannot take arguments",
+        "Functions can only be used at the top level"
+      ],
+      "correctIndex": 1,
+      "explanation": "Use @mixin when you want to emit styles and @function when you want to calculate a value, e.g. a spacing scale lookup.",
+      "source": "https://sass-lang.com/documentation/at-rules/function/"
+    },
+    {
+      "id": "pCUVl7dxXVTS2jUW",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 3,
+      "prompt": "What is the main output trade-off of using a mixin many times?",
+      "choices": [
+        "It produces no output at all",
+        "Its declarations are duplicated at every include site, which can enlarge the compiled CSS",
+        "It merges all callers into one selector",
+        "It increases specificity"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mixins copy their body into each caller. @extend instead groups selectors to share one rule, trading duplication for selector complexity.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "fsOJTFDQ74q69dTc",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 3,
+      "prompt": "What does using ($breakpoint) in <pre>@include respond using ($bp) { ... }</pre> allow?",
+      "choices": [
+        "Renaming the mixin",
+        "The mixin to pass arguments INTO the content block it receives",
+        "Loading an external module",
+        "Declaring a global variable"
+      ],
+      "correctIndex": 1,
+      "explanation": "A mixin can pass values to its @content block, and the caller binds them with using (...), enabling patterns where the block needs the resolved breakpoint value.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "ada4PR0NfyttUMk9",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-mixins",
+      "difficulty": 2,
+      "prompt": "Which is a legitimate use case that favours a mixin over a plain CSS class?",
+      "choices": [
+        "Applying styles conditionally based on an argument, such as a themed button variant generated from a colour parameter",
+        "Storing a single colour value",
+        "Importing a file",
+        "Naming a breakpoint"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mixins shine when the emitted declarations depend on arguments; a static set of styles with no parameters is often better expressed as a class or a placeholder.",
+      "source": "https://sass-lang.com/documentation/at-rules/mixin/"
+    },
+    {
+      "id": "31FMdux8KUCERkj9",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 1,
+      "prompt": "Which at-rule makes one selector inherit another's styles by grouping them in the output? (include the @ symbol)",
+      "correctAnswer": "@extend",
+      "explanation": "@extend adds the extending selector to the extended rule's selector list, so both share one block of declarations.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "Zhx9PkOZAEyXYC8r",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 2,
+      "prompt": "Which single character begins a Sass placeholder selector? (one character)",
+      "correctAnswer": "%",
+      "explanation": "A placeholder such as %button-base is written with a leading percent sign and only appears in output when something extends it.",
+      "source": "https://sass-lang.com/documentation/style-rules/placeholder-selectors/"
+    },
+    {
+      "id": "YWKvsrdNPTZ0Mv3M",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 2,
+      "prompt": "What happens to a placeholder selector that is never extended?",
+      "choices": [
+        "It compiles to an empty rule",
+        "It produces no output at all",
+        "It raises a compile error",
+        "It becomes a class"
+      ],
+      "correctIndex": 1,
+      "explanation": "Placeholders are omitted from the compiled CSS unless extended, which makes them ideal for shared bases that should not ship as standalone classes.",
+      "source": "https://sass-lang.com/documentation/style-rules/placeholder-selectors/"
+    },
+    {
+      "id": "Ua1jM1tLB4pyyRyM",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 3,
+      "prompt": "How does @extend's output differ from a mixin's?",
+      "choices": [
+        "They produce identical CSS",
+        "@extend groups selectors into one shared rule, while a mixin duplicates the declarations for each caller",
+        "@extend duplicates more than a mixin",
+        "@extend cannot be used with classes"
+      ],
+      "correctIndex": 1,
+      "explanation": "@extend trades duplicated declarations for longer selector lists; a mixin trades longer output for simple, predictable selectors.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "X5oZCsSauqrBkL60",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 3,
+      "prompt": "Why does @extend fail across a media query boundary?",
+      "choices": [
+        "Media queries disable Sass",
+        "A selector can only be extended within the same stylesheet context; Sass cannot merge selectors that live in different @media blocks",
+        "@extend requires a placeholder",
+        "Because of specificity"
+      ],
+      "correctIndex": 1,
+      "explanation": "Since the extended rule lives outside the query, Sass would have to duplicate it, which it refuses to do; a mixin is the usual workaround.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "W4Ycs1jZ43Kjr2ZZ",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 3,
+      "prompt": "What risk comes with chained or heavily used @extend?",
+      "choices": [
+        "It slows the browser's paint",
+        "It can generate very long, unexpected selector lists that are hard to reason about and may reorder specificity",
+        "It disables source maps",
+        "It duplicates every declaration"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because every extender is appended to the original rule's selector list, extending widely used bases can produce sprawling selectors and subtle cascade surprises.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "JRX6FwIfIJFZymYW",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 3,
+      "prompt": "What does the !optional flag do on an @extend?",
+      "choices": [
+        "Makes the extension apply only in production",
+        "Suppresses the error that would otherwise occur if the extended selector does not exist",
+        "Marks the placeholder as private",
+        "Applies the extend only once"
+      ],
+      "correctIndex": 1,
+      "explanation": "Without !optional, extending a selector that was never defined is a compile error.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "U7otMdRzDTn7qLWa",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-extend-placeholders",
+      "difficulty": 2,
+      "prompt": "If .btn extends %base and .link also extends %base, what does the output look like?",
+      "choices": [
+        "Two separate rules with duplicated declarations",
+        "One rule whose selector list is .btn, .link carrying the shared declarations",
+        "Only the first extend is emitted",
+        "A %base rule plus two empty rules"
+      ],
+      "correctIndex": 1,
+      "explanation": "Extenders are collected into the shared rule's selector list, which is precisely the output-size advantage @extend offers over a mixin.",
+      "source": "https://sass-lang.com/documentation/at-rules/extend/"
+    },
+    {
+      "id": "YyDIfIZwXeozLH5q",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 1,
+      "prompt": "Which at-rule applies styles conditionally in Sass? (include the @ symbol)",
+      "correctAnswer": "@if",
+      "explanation": "@if evaluates an expression and emits its block only when the result is truthy, and can be chained with @else if and @else.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/if/"
+    },
+    {
+      "id": "41HuEGLmmnmflZSs",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 2,
+      "prompt": "What is the exact Sass keyword sequence for a chained conditional branch, written as two words after an @if? (include the @ symbol)",
+      "correctAnswer": "@else if",
+      "explanation": "Sass writes @else if as two words, unlike the single-word elseif or elif forms found in some other languages.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/if/"
+    },
+    {
+      "id": "xKKwzXH2jpc7Fx3g",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 1,
+      "prompt": "Which at-rule iterates over each item in a list or map? (include the @ symbol)",
+      "correctAnswer": "@each",
+      "explanation": "@each loops over a list's values, or a map's key/value pairs, which is the usual way to generate a family of utility classes.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/each/"
+    },
+    {
+      "id": "xODYfjuMbwrHMbgc",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 2,
+      "prompt": "How do you loop over both keys and values of a map?",
+      "choices": [
+        "@each $key in $map",
+        "@each $key, $value in $map",
+        "@for $key in $map",
+        "@each $map as $key"
+      ],
+      "correctIndex": 1,
+      "explanation": "Listing two variables destructures each pair, binding the key and its value on every iteration.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/each/"
+    },
+    {
+      "id": "n33KFLKnq7XrBg8C",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 1,
+      "prompt": "Which at-rule counts through a numeric range in Sass? (include the @ symbol)",
+      "correctAnswer": "@for",
+      "explanation": "@for runs a counter across a range, e.g. @for $i from 1 through 5, typically to generate numbered utility classes.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/for/"
+    },
+    {
+      "id": "XL0M9iq1cvmlyfbd",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 3,
+      "prompt": "What is the difference between @for $i from 1 through 3 and @for $i from 1 to 3?",
+      "choices": [
+        "They are identical",
+        "through INCLUDES the final number (1,2,3); to EXCLUDES it (1,2)",
+        "to includes the end and through excludes it",
+        "to counts backwards"
+      ],
+      "correctIndex": 1,
+      "explanation": "through is inclusive of the upper bound while to stops one short, an easy off-by-one to get wrong.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/for/"
+    },
+    {
+      "id": "cJx3TDF8265e3MOz",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 2,
+      "prompt": "When is @while the right choice over @for?",
+      "choices": [
+        "Always; @for is deprecated",
+        "When the number of iterations is not known up front and depends on a condition re-evaluated each pass",
+        "When looping over a map",
+        "When generating exactly ten classes"
+      ],
+      "correctIndex": 1,
+      "explanation": "@while repeats until its condition is falsy, which suits algorithmic loops; the Sass docs note @each and @for are clearer for most real cases.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/while/"
+    },
+    {
+      "id": "7hT9fquKoPf96QGz",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 3,
+      "prompt": "Which values are FALSY in Sass?",
+      "choices": [
+        "0 and the empty string",
+        "false and null only",
+        "Empty lists and 0",
+        "Only false"
+      ],
+      "correctIndex": 1,
+      "explanation": "Unlike JavaScript, Sass treats everything except false and null as truthy, including 0 and empty strings.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/if/"
+    },
+    {
+      "id": "lC2kx9pUolc8q8wd",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 3,
+      "prompt": "What does this @each form do? <pre>@each $name, $glyph in (ok: \"\u2713\", no: \"\u2717\") { }</pre>",
+      "choices": [
+        "Iterates the map, binding each key to $name and each value to $glyph",
+        "Loops twice over the same key",
+        "Raises an error because maps need map.get",
+        "Iterates only the keys"
+      ],
+      "correctIndex": 0,
+      "explanation": "A map literal can be iterated directly, with the two loop variables destructuring key and value on every pass.",
+      "source": "https://sass-lang.com/documentation/at-rules/control/each/"
+    },
+    {
+      "id": "5J5b16dqYGTVPWEd",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-control-flow",
+      "difficulty": 3,
+      "prompt": "A variable first assigned inside an @each loop body is visible where?",
+      "choices": [
+        "Everywhere in the stylesheet",
+        "Only within that loop's scope, unless it already existed in an outer scope or is assigned with !global",
+        "Only in the next iteration",
+        "Nowhere; loops cannot assign variables"
+      ],
+      "correctIndex": 1,
+      "explanation": "Flow-control blocks create scope like any other block, so new variables declared inside them do not leak out.",
+      "source": "https://sass-lang.com/documentation/variables/"
+    },
+    {
+      "id": "gjuWa8mRVtLLCWPg",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 1,
+      "prompt": "Which single character begins the filename of a Sass partial, signalling it should not be compiled to its own CSS file? (one character)",
+      "correctAnswer": "_",
+      "explanation": "A file named _buttons.scss is a partial: it is meant to be loaded by another stylesheet rather than compiled standalone.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "EuxqyhxEykCpZj6R",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 1,
+      "prompt": "Which modern at-rule loads another Sass stylesheet as a module, replacing the deprecated @import? (include the @ symbol)",
+      "correctAnswer": "@use",
+      "explanation": "@use loads a stylesheet's members under a namespace and, crucially, only evaluates it once no matter how many files load it.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "5aDT6mZck71oe7N3",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 2,
+      "prompt": "After <pre>@use \"buttons\";</pre> how do you reference a variable $height from that file?",
+      "choices": [
+        "$height",
+        "buttons.$height",
+        "@buttons.height",
+        "$buttons-height"
+      ],
+      "correctIndex": 1,
+      "explanation": "By default, @use namespaces members under the file's basename, so members are accessed as namespace.$variable or namespace.mixin().",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "x4ViXC9g77y1bOeC",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 2,
+      "prompt": "What does <pre>@use \"buttons\" as *;</pre> do?",
+      "choices": [
+        "Loads every file in the folder",
+        "Loads the module without a namespace, so its members are used unprefixed",
+        "Exports the module to other files",
+        "Makes all members private"
+      ],
+      "correctIndex": 1,
+      "explanation": "The as * form drops the namespace, which is convenient but reintroduces the name-collision risk that namespacing was designed to prevent.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "vu0oEhOxjvoVdlTC",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "What does the with clause do in <pre>@use \"theme\" with ($primary: #c42828);</pre>",
+      "choices": [
+        "Passes arguments to a mixin",
+        "Configures the module's !default variables at load time",
+        "Restricts which members are visible",
+        "Renames the namespace"
+      ],
+      "correctIndex": 1,
+      "explanation": "with configures a module's !default variables as it loads, and a module can only be configured once, on its first @use.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "J4jC3jrAApjbrK1s",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "What is @forward used for?",
+      "choices": [
+        "Loading a module for use in the current file",
+        "Re-exporting another module's members so files that load THIS file can see them, which is how index files build a public API",
+        "Forwarding compilation errors",
+        "Deferring evaluation"
+      ],
+      "correctIndex": 1,
+      "explanation": "@forward does not make members available to the current file (you would also need @use for that); it exposes them to downstream consumers.",
+      "source": "https://sass-lang.com/documentation/at-rules/forward/"
+    },
+    {
+      "id": "vZkqFguD5EhjGdO5",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "Why was @import deprecated in Sass in favour of @use?",
+      "choices": [
+        "It was too slow to parse",
+        "@import dumps everything into one global scope and re-evaluates a file each time it is imported, causing collisions and duplicated output",
+        "@import could not load partials",
+        "@import only worked with CSS files"
+      ],
+      "correctIndex": 1,
+      "explanation": "The module system fixed global-namespace pollution and repeated evaluation; @use loads a file exactly once and namespaces its members.",
+      "source": "https://sass-lang.com/documentation/at-rules/import/"
+    },
+    {
+      "id": "YQ7nJE1shqWmxBqp",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "If three files each @use \"colors\", how many times is colors evaluated?",
+      "choices": [
+        "Three times, once per file",
+        "Once; the module is loaded a single time and shared",
+        "Once per compilation target",
+        "It depends on @forward"
+      ],
+      "correctIndex": 1,
+      "explanation": "Single evaluation is a core guarantee of the module system and the main reason @use avoids the duplicated output that plagued @import.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "7pgysA5kd1UsjObC",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "How do you mark a member as private to its module?",
+      "choices": [
+        "Wrap it in @private",
+        "Start its name with a hyphen or underscore, e.g. $-internal-gap",
+        "Declare it inside a mixin",
+        "Use !private"
+      ],
+      "correctIndex": 1,
+      "explanation": "Names beginning with - or _ are module-private: usable inside the defining file but invisible to files that @use it.",
+      "source": "https://sass-lang.com/documentation/at-rules/use/"
+    },
+    {
+      "id": "ZGvGiCaY18HslxBc",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-modules-partials",
+      "difficulty": 3,
+      "prompt": "What do the show and hide clauses on @forward control?",
+      "choices": [
+        "Whether the CSS is minified",
+        "Which of the forwarded module's members are exposed to downstream consumers",
+        "Source map generation",
+        "The load order of partials"
+      ],
+      "correctIndex": 1,
+      "explanation": "@forward \"src/list\" hide list-reset lets an index file publish a curated public API while keeping internals unexposed.",
+      "source": "https://sass-lang.com/documentation/at-rules/forward/"
+    },
+    {
+      "id": "6AnrKli1lHXoTlmM",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 1,
+      "prompt": "Which at-rule defines a custom Sass function that returns a value? (include the @ symbol)",
+      "correctAnswer": "@function",
+      "explanation": "@function declares a named routine whose body ends in @return, producing a value usable in any declaration.",
+      "source": "https://sass-lang.com/documentation/at-rules/function/"
+    },
+    {
+      "id": "f1f4MUFWrlniNQTO",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 2,
+      "prompt": "Which at-rule hands back the result of a custom Sass function? (include the @ symbol)",
+      "correctAnswer": "@return",
+      "explanation": "@return ends the function and produces its value; a function without a reachable @return is an error.",
+      "source": "https://sass-lang.com/documentation/at-rules/function/"
+    },
+    {
+      "id": "ZmLtmaeSUHA1U6dH",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 3,
+      "prompt": "What is the modern, recommended way to divide two numbers in Sass?",
+      "choices": [
+        "$a / $b",
+        "math.div($a, $b) after @use \"sass:math\"",
+        "$a % $b",
+        "divide($a, $b)"
+      ],
+      "correctIndex": 1,
+      "explanation": "Slash division was deprecated because / is ambiguous with CSS shorthand separators (as in font: 12px/1.5); math.div() is unambiguous.",
+      "source": "https://sass-lang.com/documentation/modules/math/"
+    },
+    {
+      "id": "Zwvs1O38FfaA6WEi",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 2,
+      "prompt": "Before calling a built-in like math.div() or map.get(), what must the file do?",
+      "choices": [
+        "Nothing; built-ins are always global",
+        "Load the built-in module, e.g. @use \"sass:math\";",
+        "Define the function manually",
+        "Import the file over HTTP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Built-in modules such as sass:math, sass:color, sass:map, sass:list, sass:string, and sass:meta must be loaded with @use before their namespaced members are available.",
+      "source": "https://sass-lang.com/documentation/modules/"
+    },
+    {
+      "id": "3QrplK1xckSxKM2a",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 3,
+      "prompt": "Why are darken() and lighten() discouraged in modern Sass?",
+      "choices": [
+        "They are slower than alternatives",
+        "They adjust lightness in a way that often produces muddy or unintuitive results; color.adjust() and color.scale() are preferred",
+        "They only work on hex colours",
+        "They were removed entirely in Sass 1.0"
+      ],
+      "correctIndex": 1,
+      "explanation": "The legacy shortcuts shift HSL lightness by a fixed amount regardless of the starting colour; the color module's scale/adjust give proportional, more predictable results.",
+      "source": "https://sass-lang.com/documentation/modules/color/"
+    },
+    {
+      "id": "wH7C9HehwTp0136u",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 2,
+      "prompt": "What does interpolation #{} accomplish in a Sass expression?",
+      "choices": [
+        "Escapes a string literally",
+        "Injects a value into places where Sass expects plain text, such as selectors, property names, or quoted strings",
+        "Performs arithmetic",
+        "Comments out code"
+      ],
+      "correctIndex": 1,
+      "explanation": "Interpolation converts an expression's value into raw text, which is essential for building selectors or media query conditions dynamically.",
+      "source": "https://sass-lang.com/documentation/interpolation/"
+    },
+    {
+      "id": "XT3yKW5ds3g9UFCG",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 3,
+      "prompt": "What does the + operator do with two quoted strings in Sass?",
+      "choices": [
+        "Adds their lengths",
+        "Concatenates them",
+        "Raises a type error",
+        "Compares them"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sass overloads + for string concatenation, with the result taking the quoting style of the left operand.",
+      "source": "https://sass-lang.com/documentation/operators/numeric/"
+    },
+    {
+      "id": "bHZIibp9foNlkgtq",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-functions-operators",
+      "difficulty": 3,
+      "prompt": "What does the Sass expression 10px * 2px evaluate to?",
+      "choices": [
+        "20px",
+        "20px*px, an invalid unit for CSS, because units multiply too",
+        "20",
+        "An error at parse time"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sass tracks units through arithmetic, so multiplying two lengths yields square pixels, which CSS cannot use. Multiply a length by a UNITLESS number instead.",
+      "source": "https://sass-lang.com/documentation/operators/numeric/"
+    },
+    {
+      "id": "J09bbg7SVmqb1MOK",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 2,
+      "prompt": "Which is the correct syntax for a Sass map?",
+      "choices": [
+        "$sizes: [small 4px, large 8px];",
+        "$sizes: (small: 4px, large: 8px);",
+        "$sizes: {small: 4px};",
+        "$sizes: small=4px;"
+      ],
+      "correctIndex": 1,
+      "explanation": "Maps are written as comma-separated key: value pairs inside parentheses.",
+      "source": "https://sass-lang.com/documentation/values/maps/"
+    },
+    {
+      "id": "DHpSCgw3gTlcrhDF",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 2,
+      "prompt": "Which built-in function retrieves a value from a map by key, assuming @use \"sass:map\"? (give the namespaced name, e.g. module.function)",
+      "correctAnswer": "map.get",
+      "explanation": "map.get($map, $key) returns the value for that key, or null when the key is absent.",
+      "source": "https://sass-lang.com/documentation/values/maps/"
+    },
+    {
+      "id": "LGWrhhhz4iILo3oj",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 3,
+      "prompt": "What does map.set() return?",
+      "choices": [
+        "Nothing; it mutates the map in place",
+        "A NEW map with the pair added or replaced, because Sass maps are immutable",
+        "A boolean indicating success",
+        "The removed value"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sass values are immutable, so map.set returns a modified copy; you must reassign it to keep the change.",
+      "source": "https://sass-lang.com/documentation/values/maps/"
+    },
+    {
+      "id": "QKDVzk80b8OySAM1",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 2,
+      "prompt": "Which separators can a Sass list use?",
+      "choices": [
+        "Only commas",
+        "Spaces, commas, or slashes",
+        "Only spaces",
+        "Semicolons"
+      ],
+      "correctIndex": 1,
+      "explanation": "Lists may be space-, comma-, or slash-separated, mirroring the variety of CSS value syntaxes they need to represent.",
+      "source": "https://sass-lang.com/documentation/values/lists/"
+    },
+    {
+      "id": "MHcz8dXxvzp1vTB1",
+      "type": "text-answer",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 3,
+      "prompt": "What index does the FIRST element of a Sass list have? (a single number)",
+      "correctAnswer": "1",
+      "explanation": "Sass lists are 1-indexed, so list.nth($list, 1) returns the first element, unlike arrays in most programming languages.",
+      "source": "https://sass-lang.com/documentation/values/lists/"
+    },
+    {
+      "id": "KZ6u0z2JduHj9R7w",
+      "type": "multiple-choice",
+      "language": "scss",
+      "category": "scss-maps-lists",
+      "difficulty": 3,
+      "prompt": "What does map.merge($a, $b) do when both maps share a key?",
+      "choices": [
+        "Raises an error",
+        "Returns a new map where the value from $b wins for shared keys",
+        "Keeps the value from $a",
+        "Concatenates the two values"
+      ],
+      "correctIndex": 1,
+      "explanation": "map.merge combines the pairs with the second map taking precedence, which is the standard way to let consumers override a default theme map.",
+      "source": "https://sass-lang.com/documentation/values/maps/"
+    }
+  ]
+}
