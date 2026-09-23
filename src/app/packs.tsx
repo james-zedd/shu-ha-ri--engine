@@ -1,6 +1,12 @@
 import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { PackActions } from "@/components/pack-actions";
@@ -41,31 +47,54 @@ function derivePackStatus(
 export default function PacksScreen() {
   const [state, setState] = useState<DirectoryState>({ status: "loading" });
   const [installed, setInstalled] = useState<Pack[]>([]);
+  const [fetching, setFetching] = useState(false);
+
+  // Tracked as a ref, not just the `fetching` state, because setState is
+  // async: two taps in the same tick would both pass a state-based check and
+  // race two responses against each other.
+  const inFlight = useRef(false);
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   const refreshInstalled = useCallback(() => {
     setInstalled(listInstalledPacks());
   }, []);
 
-  useEffect(() => {
-    let active = true;
+  // Deliberately does not reset to the "loading" state: on a re-focus the
+  // already-loaded cards stay on screen instead of flashing a spinner, and
+  // the initial load still shows one because that is the initial state.
+  const loadDirectory = useCallback(async () => {
+    if (inFlight.current) return;
+    inFlight.current = true;
+    setFetching(true);
 
-    fetchCuratedPacks().then((result) => {
-      if (!active) return;
-      setState(
-        result.ok
-          ? { status: "loaded", packs: result.packs }
-          : { status: "error", reason: result.reason },
-      );
-    });
+    const result = await fetchCuratedPacks();
 
-    return () => {
-      active = false;
-    };
+    inFlight.current = false;
+    if (!mounted.current) return;
+    setFetching(false);
+    setState(
+      result.ok
+        ? { status: "loaded", packs: result.packs }
+        : { status: "error", reason: result.reason },
+    );
   }, []);
 
-  // Re-read installed packs whenever the screen regains focus, so a pack
-  // installed or deleted here (or elsewhere) stays reflected in each card.
-  useFocusEffect(refreshInstalled);
+  // Both run whenever the screen regains focus: installed packs so a pack
+  // added or deleted elsewhere stays reflected in each card, and the
+  // directory so a failed fetch recovers on reopen rather than sticking.
+  useFocusEffect(
+    useCallback(() => {
+      refreshInstalled();
+      loadDirectory();
+    }, [refreshInstalled, loadDirectory]),
+  );
 
   return (
     <ThemedView style={styles.container}>
@@ -75,9 +104,24 @@ export default function PacksScreen() {
         {state.status === "loading" ? (
           <ActivityIndicator style={styles.loading} />
         ) : state.status === "error" ? (
-          <ThemedText themeColor="textSecondary">
-            {state.reason} Pull down or reopen this screen to try again.
-          </ThemedText>
+          <View style={styles.errorBlock}>
+            <ThemedText themeColor="textSecondary">{state.reason}</ThemedText>
+            <View style={styles.retryRow}>
+              <Pressable
+                onPress={loadDirectory}
+                disabled={fetching}
+                style={({ pressed }) => pressed && styles.pressed}
+              >
+                <ThemedView
+                  type={fetching ? "backgroundElement" : "backgroundSelected"}
+                  style={styles.retryButton}
+                >
+                  <ThemedText type="smallBold">Retry</ThemedText>
+                </ThemedView>
+              </Pressable>
+              {fetching && <ActivityIndicator size="small" />}
+            </View>
+          </View>
         ) : state.packs.length === 0 ? (
           <ThemedText themeColor="textSecondary">
             No curated packs are available yet.
@@ -123,6 +167,23 @@ const styles = StyleSheet.create({
   },
   loading: {
     marginTop: Spacing.four,
+  },
+  errorBlock: {
+    gap: Spacing.three,
+    alignItems: "flex-start",
+  },
+  retryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.two,
+  },
+  retryButton: {
+    borderRadius: Spacing.two,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+  },
+  pressed: {
+    opacity: 0.7,
   },
   list: {
     gap: Spacing.three,
