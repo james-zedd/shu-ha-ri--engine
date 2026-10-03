@@ -41,7 +41,7 @@ This app is provided free of charge. There is no user registration, no ads, in-a
 ## Runtime Environment
 
 - **Expo SDK 57**, **Node.js v22+**, and **npm** (this repo uses `package-lock.json`, not yarn/pnpm).
-- **Expo Go is not supported.** This app depends on `expo-dev-client` and native-only APIs (`@expo/ui`, `expo-router/unstable-native-tabs`, Reanimated 4 + Worklets), so you'll need a custom development build via `npx expo run:ios` / `npx expo run:android`, or an EAS development build.
+- **Expo Go is not supported.** This app depends on `expo-dev-client` and native-only APIs (Reanimated 4 + Worklets, `expo-symbols`), so you'll need a custom development build via `npx expo run:ios` / `npx expo run:android`, or an EAS development build.
 - **iOS:** latest Xcode. CocoaPods is only needed if you build the dev client locally via `npx expo run:ios` (it runs `pod install` as part of that); not needed if you install a dev client built via EAS Build instead.
 - **Android:** latest Android Studio / SDK.
 - **EAS CLI ≥ 21.2.0** if running cloud builds (pinned in `eas.json`).
