@@ -1,8 +1,9 @@
-import {
-  NotoSansJP_400Regular,
-  NotoSansJP_900Black,
-  useFonts,
-} from "@expo-google-fonts/noto-sans-jp";
+// Import each weight by subpath, not from the package root. The root index.js
+// require()s all nine weights, and Metro bundles every require()d asset whether
+// or not it is referenced — collapsing these adds ~37MB of unused fonts.
+import { NotoSansJP_400Regular } from "@expo-google-fonts/noto-sans-jp/400Regular";
+import { NotoSansJP_900Black } from "@expo-google-fonts/noto-sans-jp/900Black";
+import { useFonts } from "@expo-google-fonts/noto-sans-jp/useFonts";
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
