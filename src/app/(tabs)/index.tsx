@@ -1,9 +1,8 @@
 import Constants from "expo-constants";
 import { Link } from "expo-router";
-import { Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Logo } from "@/components/logo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
@@ -15,7 +14,11 @@ export default function HomeScreen() {
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <Logo size={240} />
+          {/* <Logo size={240} /> */}
+          <Image
+            source={require("@/assets/images/logo.png")}
+            style={{ width: 240, height: 144 }}
+          />
         </ThemedView>
 
         <ThemedView style={styles.actions}>
