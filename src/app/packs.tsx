@@ -13,7 +13,7 @@ import { PackActions } from "@/components/pack-actions";
 import { PackCard, type PackCardStatus } from "@/components/pack-card";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { Spacing } from "@/constants/theme";
+import { MaxContentWidth, Spacing } from "@/constants/theme";
 import type { CuratedPack } from "@/data/curated-packs-list";
 import { fetchCuratedPacks } from "@/data/fetch-curated-packs";
 import { listInstalledPacks } from "@/data/install-pack";
@@ -159,9 +159,12 @@ export default function PacksScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
   },
   safeArea: {
     flex: 1,
+    width: "100%",
+    maxWidth: MaxContentWidth,
     paddingHorizontal: Spacing.three,
     gap: Spacing.two,
   },
