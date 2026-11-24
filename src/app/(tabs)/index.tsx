@@ -6,17 +6,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 
 const appVersion = Constants.expoConfig?.version;
 
 export default function HomeScreen() {
+  const isDark = useColorScheme() === "dark";
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
           {/* <Logo size={240} /> */}
           <Image
-            source={require("@/assets/images/logo.png")}
+            source={
+              isDark
+                ? require("@/assets/images/logo-dark.png")
+                : require("@/assets/images/logo.png")
+            }
             style={{ width: 240, height: 144 }}
           />
         </ThemedView>
