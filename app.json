@@ -45,8 +45,7 @@
           "image": "./assets/images/shuhari-engine-logo__01.png",
           "imageWidth": 470
         }
-      ],
-      "expo-web-browser"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
