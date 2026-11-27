@@ -3,7 +3,7 @@
     "name": "Shu Ha Ri Engine",
     "slug": "shu-ha-ri--engine",
     "owner": "zedd-enterprises",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "shuhariengine",
