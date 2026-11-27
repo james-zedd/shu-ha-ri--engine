@@ -1,21 +1,39 @@
 import Constants from "expo-constants";
 import { Link } from "expo-router";
-import { Pressable, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Image, Pressable, StyleSheet } from "react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-import { Logo } from "@/components/logo";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 
 const appVersion = Constants.expoConfig?.version;
 
+// Narrower than MaxContentWidth: a column of buttons looks stretched at 800,
+// which is about the full width of an iPad in portrait.
+const HomeMaxWidth = 480;
+
 export default function HomeScreen() {
+  const isDark = useColorScheme() === "dark";
+  const insets = useSafeAreaInsets();
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <Logo size={240} />
+          {/* <Logo size={240} /> */}
+          <Image
+            source={
+              isDark
+                ? require("@/assets/images/logo-dark.png")
+                : require("@/assets/images/logo.png")
+            }
+            style={{ width: 240, height: 144 }}
+          />
         </ThemedView>
 
         <ThemedView style={styles.actions}>
@@ -80,7 +98,11 @@ export default function HomeScreen() {
           </Link>
         </ThemedView>
         {appVersion && (
-          <ThemedView style={styles.versionSection}>
+          // Absolute positioning ignores the SafeAreaView's padding, so offset
+          // by the bottom inset to keep the version above the system nav bar.
+          <ThemedView
+            style={[styles.versionSection, { bottom: insets.bottom }]}
+          >
             <ThemedText
               type="small"
               themeColor="textDimmed"
@@ -108,9 +130,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: Spacing.six,
     paddingTop: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-    marginVertical: "auto",
+    paddingBottom: Spacing.three,
+    maxWidth: HomeMaxWidth,
   },
   heroSection: {
     alignItems: "center",
@@ -119,7 +140,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 20,
     position: "absolute",
-    bottom: 0,
   },
   versionText: {
     textAlign: "center",

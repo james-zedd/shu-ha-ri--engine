@@ -6,9 +6,13 @@ import { NotoSansJP_900Black } from "@expo-google-fonts/noto-sans-jp/900Black";
 import { useFonts } from "@expo-google-fonts/noto-sans-jp/useFonts";
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useColorScheme } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
+import { useEffect, useState } from "react";
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
+import { loadAppearancePreference } from "@/hooks/use-appearance-preference";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useTheme } from "@/hooks/use-theme";
 
 SplashScreen.preventAutoHideAsync();
@@ -20,11 +24,23 @@ export default function RootLayout() {
     NotoSansJP_400Regular,
     NotoSansJP_900Black,
   });
+  const [appearanceLoaded, setAppearanceLoaded] = useState(false);
 
-  if (!fontsLoaded && !fontError) return null;
+  useEffect(() => {
+    loadAppearancePreference().finally(() => setAppearanceLoaded(true));
+  }, []);
+
+  // Keep the root view (visible behind screen transitions and the keyboard) in sync
+  // with the active scheme, including when the in-app override changes it.
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(theme.background);
+  }, [theme.background]);
+
+  if ((!fontsLoaded && !fontError) || !appearanceLoaded) return null;
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <StatusBar style="auto" />
       <AnimatedSplashOverlay />
       <Stack
         screenOptions={{
